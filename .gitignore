@@ -1,3 +1,5 @@
 /Diamonds
 .htaccess
 *.html
+.idea/
+*.pyc
