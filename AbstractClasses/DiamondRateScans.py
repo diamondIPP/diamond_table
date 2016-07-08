@@ -11,7 +11,7 @@ from Utils import *
 
 
 class DiaScans:
-    def __init__(self, diamond):
+    def __init__(self, diamond=None):
         self.Selection = []
         self.Name = None
         self.scale_factors = OrderedDict()
@@ -33,6 +33,8 @@ class DiaScans:
         return parser
 
     def load_diamond(self, dia):
+        if dia is None:
+            return None
         try:
             return self.Parser.get('ALIASES', dia)
         except NoOptionError:
@@ -83,13 +85,14 @@ class DiaScans:
 
     # endregion
 
-    def find_diamond_runplans(self):
+    def find_diamond_runplans(self, dia=None):
+        dia = self.DiamondName if dia is None else dia
         runplans = {}
         for tc, item in self.RunPlans.iteritems():
             runplans[tc] = {}
             for rp, runs in item['rate_scan'].iteritems():
                 for ch in [1, 2]:
-                    if all(self.DiamondName == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs):
+                    if all(dia == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs):
                         bias = self.RunInfos[tc][str(runs[0])]['dia{0}hv'.format(ch)]
                         if all(self.RunInfos[tc][str(run)]['dia{0}hv'.format(ch)] == bias for run in runs):
                             if bias not in runplans[tc]:
@@ -113,7 +116,7 @@ class DiaScans:
 
 if __name__ == '__main__':
     main_parser = ArgumentParser()
-    main_parser.add_argument('dia', nargs='?', default='S129')
+    main_parser.add_argument('dia', nargs='?', default=None)
     args = main_parser.parse_args()
     print_banner('STARTING DIAMOND RATE SCAN COLLECTION OF DIAMOND {0}'.format(args.dia))
 
