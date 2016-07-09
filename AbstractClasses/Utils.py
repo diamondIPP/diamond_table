@@ -80,10 +80,22 @@ def make_rp_string(string):
     return string[1:] if string[0] == '0' else string
 
 
+def make_tc_str(tc, txt=True):
+    return datetime.strptime(tc, '%Y%m').strftime('%B %Y' if txt else '%b%y')
+
+
+def make_bias_str(bias):
+    return '{sign}{val}'.format(sign='+' if int(bias) > 0 else '', val=int(bias))
+
+
 def load_parser(path):
     p = ConfigParser()
     p.read(path)
     return p
+
+
+def sup(txt):
+    return '<sup>{0}</sup>'.format(txt)
 
 
 def do_nothing():
