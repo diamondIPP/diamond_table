@@ -103,7 +103,7 @@ class DiaScans:
     def get_runs(self, rp, tc):
         return self.RunPlans[tc]['rate_scan'][rp]
 
-    def get_diamonds(self):
+    def get_diamonds(self, old=False):
         dias = []
         for tc, item in self.RunPlans.iteritems():
             for runs in item['rate_scan'].itervalues():
