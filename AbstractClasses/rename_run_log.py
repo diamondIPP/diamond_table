@@ -10,8 +10,8 @@ new_runinfo = {}
 
 def find_for_in_comment(info, new_info):
     for name in ['for1', 'for2']:
-        if not name in info:
-            for cmt in info['user comments'].split('\r\n'):
+        if name not in info or info[name] == 0:
+            for cmt in info['comments'].split('\r\n'):
                 cmt = cmt.replace(':', '')
                 cmt = cmt.split(' ')
                 if str(cmt[0].lower()) == name:
