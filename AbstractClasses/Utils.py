@@ -3,10 +3,11 @@
 # created on May 19th 2016 by M. Reichmann
 # --------------------------------------------------------
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from termcolor import colored
 import os
 from ConfigParser import ConfigParser
+from json import load
 
 
 # ==============================================
@@ -84,17 +85,51 @@ def make_rp_string(string):
 
 
 def make_tc_str(tc, txt=True):
-    return datetime.strptime(tc, '%Y%m').strftime('%B %Y' if txt else '%b%y')
+    if tc[0].isdigit():
+        return datetime.strptime(tc, '%Y%m').strftime('%B %Y' if txt else '%b%y')
+    else:
+        return datetime.strptime(tc, '%b%y').strftime('%Y%m')
 
 
 def make_bias_str(bias):
     return '{sign}{val}'.format(sign='+' if int(bias) > 0 else '', val=int(bias))
 
 
+def make_proc_str(data):
+    if data[0].startswith('Irr'):
+        return '{0} to {1:1.0g}'.format(data[0], data[1])
+    elif data[0].startswith('Bui'):
+        return 'Built into {0}'.format(data[1])
+
+
 def load_parser(path):
     p = ConfigParser()
     p.read(path)
     return p
+
+
+def load_json(path):
+    if file_exists(path):
+        f = open(path)
+        j = load(f)
+        f.close()
+        return j
+    else:
+        return {}
+
+
+def conv_time(time_str, delta=1, strg=True):
+    t = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ') + timedelta(hours=delta)
+    return t.strftime('%b %d{0} %H:%M:%S').format(nth(t.day)) if strg else t
+
+
+def dig_str(value, form='5.1f'):
+    return ('{0:' + form + '}').format(value) if value is not None else ''
+
+
+def nth(d):
+    nth.ext = ['th', 'st', 'nd', 'rd'] + ['th'] * 16
+    return sup(nth.ext[int(d) % 20])
 
 
 def sup(txt):
