@@ -37,7 +37,8 @@ for key, item in sorted(runinfo.iteritems()):
         item['dia2hv'] = item.pop('hv dia2')
         item['dia1'] = item.pop('diamond 1')
         item['dia2'] = item.pop('diamond 2')
-    except KeyError:
+    except KeyError as err:
+        print err
         pass
 f.seek(0)
 dump(new_runinfo, f, indent=2)
