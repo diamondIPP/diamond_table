@@ -27,6 +27,10 @@ for key, item in sorted(runinfo.iteritems()):
         new_runinfo[new_key] = runinfo[key]
     find_for_in_comment(item, new_runinfo[new_key])
     try:
+        item['measuredflux'] = item.pop('measured flux')
+        item['comments'] = item.pop('user comments')
+        item['starttime0'] = datetime.strptime('{dat} {tim}'.format(dat=item['begin date'], tim=item.pop('start time')), '%m/%d/%Y %H:%M:%S').strftime('%Y-%m-%dT%H:%M:%SZ')
+        item['endtime'] = datetime.strptime('{dat} {tim}'.format(dat=item.pop('begin date'), tim=item.pop('stop time')), '%m/%d/%Y %H:%M:%S').strftime('%Y-%m-%dT%H:%M:%SZ')
         item['maskfile'] = item.pop('mask')
         item['runtype'] = item.pop('type')
         item['dia1hv'] = item.pop('hv dia1')
