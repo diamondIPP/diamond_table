@@ -15,8 +15,7 @@ def find_for_in_comment(info, new_info):
                 cmt = cmt.replace(':', '')
                 cmt = cmt.split(' ')
                 if str(cmt[0].lower()) == name:
-                    new_runinfo[name] = int(cmt[1])
-
+                    new_info[name] = int(cmt[1])
 
 for key, item in runinfo.iteritems():
     new_key = str(key.split('00')[-1])
