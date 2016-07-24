@@ -11,6 +11,7 @@ from glob import glob
 from Utils import *
 from DiamondRateScans import DiaScans
 from shutil import copy
+from numpy import mean
 from os import remove
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 
@@ -302,8 +303,32 @@ class DiamondTable:
         if not file_exists(file_path) and len(glob('{path}/*'.format(path=path))) > 1:
             copy('{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'index_php')), file_path)
 
-    def build_run_table(self):
-        pass
+    @staticmethod
+    def calc_flux(info):
+        if 'for1' not in info or info['for1'] == 0:
+            if 'measuredflux' in info:
+                return str('{0:5.0f}'.format(info['measuredflux'] * 2.48))
+        f = open('{path}/masks/{mask}'.format(path=get_dir(), mask=info['maskfile']), 'r')
+        data = []
+        for line in f:
+            if len(line) > 3:
+                line = line.split()
+                data.append([int(line[2])] + [int(line[3])])
+        f.close()
+        pixel_size = 0.01 * 0.015
+        area = [(data[1][0] - data[0][0]) * (data[1][1] - data[0][1]) * pixel_size, (data[3][0] - data[2][0]) * (data[3][1] - data[2][1]) * pixel_size]
+        flux = [info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(2)]
+        return str('{0:5.0f}'.format(mean(flux)))
+
+    @staticmethod
+    def calc_duration(info1, info2=None):
+        endinfo = info2 if info2 is not None else info1
+        dur = conv_time(endinfo['endtime'], strg=False) - conv_time(info1['starttime0'], strg=False)
+        return str(dur)
+
+    def translate_dia(self, dia):
+        dic = load_parser('{dir}/AbstractClasses/OldDiamondAliases.cfg'.format(dir=self.Dir))
+        return dic.get('ALIASES', dia)
 
 
 def get_dir():
