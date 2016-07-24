@@ -51,16 +51,27 @@ class DiamondTable:
 
     def build_diamond_table(self, scvd=True):
         header = self.build_header()
-        dias = [name.split('/')[-1] for name in glob('{dat}/*'.format(dat=self.DataPath)) if (name.split('/')[-1].startswith('S') if scvd else not name.split('/')[-1].startswith('S'))]
+        scdias = loads(self.Config.get('General', 'single_crystal'))
+        dias = [name.split('/')[-1] for name in glob('{dat}/*'.format(dat=self.DataPath)) if (name.split('/')[-1] in scdias if scvd else name.split('/')[-1] not in scdias)]
         for ex in self.Exclude:
             dias.remove(ex) if ex in dias else do_nothing()
         rows = []
         for dia in sorted(dias):
             row = [dia]
+            proc = load_json('{dir}/{dia}/Processing.json'.format(dir=self.DataPath, dia=dia))
             # test campaigns
+            last_tc = make_tc_str(self.TestCampaigns[0])
             for tc in self.TestCampaigns:
-                path = '{dat}{dia}/BeamTests/{tc}/index.html'.format(dat=self.DataPath, tc=tc, dia=dia)
-                row.append(make_link('/'.join(path.split('/')[3:])) if file_exists(path) else '')
+                tc_str = make_tc_str(tc)
+                row_size = len(row)
+                for key, value in proc.iteritems():
+                    if last_tc < key < tc_str:
+                        row.append(make_proc_str(value))
+                if row_size == len(row):
+                    row.append('')
+                target = 'Diamonds/{dia}/BeamTests/{tc}/index.html'.format(tc=tc, dia=dia)
+                row.append(make_link(target, path=self.Dir, use_name=False))
+                last_tc = make_tc_str(tc)
             # other stuff
             for col in self.OtherCols:
                 path = '{dat}{dia}/{col}/'.format(dat=self.DataPath, col=col, dia=dia)
