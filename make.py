@@ -106,52 +106,52 @@ class DiamondTable:
         return header_row + [col for col in self.OtherCols]
     # endregion
 
+    # =====================================================
+    # region RUN PLANS
     def create_runplan_overview(self):
-        dias = self.DiaScans.get_diamonds()
-        for dia in dias:
-            path = '{dat}{dia}'.format(dat=self.DataPath, dia=dia)
-            create_dir(path)
-            create_dir('{path}/BeamTests'.format(path=path))
-            for col in self.OtherCols:
-                create_dir('{path}/{col}'.format(path=path, col=col))
-            self.make_runplan_folders(dia)
-
-    def make_runplan_folders(self, dia):
-        rps = self.DiaScans.find_diamond_runplans(dia)
-        path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
-        for tc, item in rps.iteritems():
-            tc_string = datetime.strptime(tc, '%Y%m').strftime('%b%y')
-            sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
-            create_dir(sub_path)
-            runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
-            if runplans:
-                self.build_runplan_table(sub_path, item, tc)
-            for rp in runplans:
-                rp_path = '{path}/RunPlan{rp}'.format(path=sub_path, rp=make_rp_string(rp))
-                create_dir(rp_path)
-                file_path = '{path}/{file}'.format(path=rp_path, file=self.Config.get('General', 'index_php'))
-                if not file_exists(file_path):
-                    copy('{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'index_php')), file_path)
+        for dia in self.Diamonds:
+            rps = self.DiaScans.find_diamond_runplans(dia)
+            path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
+            for tc, item in rps.iteritems():
+                tc_string = datetime.strptime(tc, '%Y%m').strftime('%b%y')
+                sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
+                create_dir(sub_path)
+                runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
+                if runplans:
+                    self.build_runplan_table(sub_path, item, tc)
+                for rp in runplans:
+                    rp_path = '{path}/RunPlan{rp}'.format(path=sub_path, rp=make_rp_string(rp))
+                    create_dir(rp_path)
+                    self.copy_index_php(rp_path)
 
     def build_runplan_table(self, path, rp_dict, tc):
         html_file = '{path}/index.html'.format(path=path)
         f = open(html_file, 'w')
-        tc_str = datetime.strptime(tc, '%Y%m').strftime('%B %Y')
-        tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=tc_str)
+        tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
         write_html_header(f, tit)
-        header = ['Run Plans']
-        rows = [['Runs'], ['Bias [V]']]
-        rps = {rp: bias for bias, rps in rp_dict.iteritems() for rp in rps}
-        for rp, bias in sorted(rps.iteritems()):
+        header = ['Run Plans', 'Runs', 'Bias V', 'Leakage Current', 'Pulser', 'Pulse Height', 'Pedestal', 'Start', 'Duration']
+        rows = []
+        rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
+        for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems())):
             runs = self.DiaScans.get_runs(rp, tc)
-            header.append(make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp))))
-            # todo make link here
-            rows[0].append('{first}-{last}'.format(first=runs[0], last=runs[-1]))
-            rows[1].append(str(int(bias)))
+            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path)])
+            name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
+            rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]
+            rows[i] += [make_bias_str(bias)]
+            rows[i] += [make_link('RunPlan{rp}/PhPulserCurrent.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
+            info = z.DiaScans.RunInfos[tc][str(runs[0])]
+            rows[i] += [make_link('RunPlan{rp}/CombinedPulserPulseHeights.png'.format(rp=make_rp_string(rp)), info['pulser'] if 'pulser' in info else '', path=path)]
+            rows[i] += [make_link('RunPlan{rp}/CombinedPulseHeights.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
+            rows[i] += [make_link('RunPlan{rp}/Pedestal_Flux.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
+            runs = z.DiaScans.get_runs(rp, tc)
+            rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]
+            rows[i] += [self.calc_duration(z.DiaScans.RunInfos[tc][str(runs[0])], z.DiaScans.RunInfos[tc][str(runs[-1])])]
 
         f.write(HTML.table(rows, header_row=header))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
+
+    # endregion
 
     def copy_pics(self):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
