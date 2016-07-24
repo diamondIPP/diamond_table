@@ -28,6 +28,15 @@ class DiamondTable:
 
         self.DiaScans = DiaScans()
         self.Diamonds = self.DiaScans.get_diamonds()
+        self.create_diamond_folders()
+
+    def create_diamond_folders(self):
+        for dia in self.Diamonds:
+            path = '{dat}{dia}'.format(dat=self.DataPath, dia=dia)
+            create_dir(path)
+            create_dir('{path}/BeamTests'.format(path=path))
+            for col in self.OtherCols:
+                create_dir('{path}/{col}'.format(path=path, col=col))
 
     @staticmethod
     def load_parser():
