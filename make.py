@@ -40,6 +40,8 @@ class DiamondTable:
         self.create_runplan_overview()
         self.create_run_overview()
 
+    # =====================================================
+    # region OVERVIEW
     def create_overview(self):
         html_file = 'index.html'
         f = open(html_file, 'w')
@@ -102,6 +104,7 @@ class DiamondTable:
         for date in self.TestCampaigns:
             header_row += ['Proc.', date]
         return header_row + [col for col in self.OtherCols]
+    # endregion
 
     def create_runplan_overview(self):
         dias = self.DiaScans.get_diamonds()
