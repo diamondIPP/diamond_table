@@ -94,7 +94,8 @@ class DiamondTable:
 
     def build_header(self):
         header_row = ['Diamond']
-        header_row += [date for date in self.TestCampaigns]
+        for date in self.TestCampaigns:
+            header_row += ['Proc.', date]
         return header_row + [col for col in self.OtherCols]
 
     def create_runplan_overview(self):
