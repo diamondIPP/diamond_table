@@ -64,6 +64,9 @@ class DiamondTable:
         # poly chrystal
         f.write('\n<h3>Poly Crystal Diamonds:</h3>\n')
         f.write(self.build_diamond_table(scvd=False))
+        # run overview
+        f.write('\n<h3>Full Run Overview:</h3>\n')
+        f.write(self.build_run_overview())
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
@@ -95,6 +98,18 @@ class DiamondTable:
                 path = '{dat}{dia}/{col}/'.format(dat=self.DataPath, col=col, dia=dia)
                 row.append(self.build_col(col, path))
             rows.append(row)
+        return HTML.table(rows, header_row=header)
+
+    def build_run_overview(self):
+        header = ['Test Campaign', 'Tested Diamonds']
+        rows = []
+        for tc in self.TestCampaigns:
+            path = '{dir}/BeamTests/{dat}'.format(dir=self.Dir, dat=tc)
+            create_dir(path)
+            dias = str(list(z.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
+            if dias:
+                file_path = '{dir}/index.html'.format(dir=path)
+                rows.append([make_link(file_path, make_tc_str(tc, txt=0), path=file_path), dias])
         return HTML.table(rows, header_row=header)
 
     @staticmethod
