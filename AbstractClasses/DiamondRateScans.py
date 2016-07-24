@@ -3,9 +3,8 @@
 # created on June 24th 2016 by M. Reichmann
 # --------------------------------------------------------
 
-from ConfigParser import ConfigParser, NoOptionError
+from ConfigParser import NoOptionError
 from argparse import ArgumentParser
-from json import load
 from collections import OrderedDict
 from Utils import *
 
@@ -103,9 +102,12 @@ class DiaScans:
     def get_runs(self, rp, tc):
         return self.RunPlans[tc]['rate_scan'][rp]
 
-    def get_diamonds(self, old=False):
+    def get_diamonds(self, single_tc=None):
         dias = []
         for tc, item in self.RunPlans.iteritems():
+            if single_tc is not None:
+                if tc != single_tc:
+                    continue
             for runs in item['rate_scan'].itervalues():
                 for ch in [1, 2]:
                     dia0 = self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)])
