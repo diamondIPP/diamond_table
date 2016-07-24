@@ -10,6 +10,7 @@ from glob import glob
 from Utils import *
 from DiamondRateScans import DiaScans
 from shutil import copy
+from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 
 
 class DiamondTable:
@@ -131,17 +132,38 @@ class DiamondTable:
         f.close()
 
     def copy_pics(self):
+        widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
+        n = len(glob('/home/testbeam/testing/micha/myPadAnalysis/Res*/*/*/png/*'))
+        pbar = ProgressBar(widgets=widgets, maxval=n).start()
+        k = 1
+        used_runs = {}
         for dia in self.DiaScans.get_diamonds():
             rps = self.DiaScans.find_diamond_runplans(dia)
             for tc, item in rps.iteritems():
+                used_runs[tc] = {dia: []}
                 runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
+                path = '/home/testbeam/Desktop/psiresults/Diamonds/{0}/BeamTests/{1}'.format(dia, make_tc_str(tc, 0))
                 for rp in runplans:
-                    tc_str = datetime.strptime(tc, '%Y%m').strftime('%b%y')
-                    dst = '/home/testbeam/Desktop/psiresults/Diamonds/{0}/BeamTests/{1}/RunPlan{2}'.format(dia, tc_str, rp[1:] if rp[0] == '0' else rp)
-                    for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Results{0}/{1}/runplan{2}/png/*'.format(tc, dia, rp)):
+                    rp_path = '{path}/RunPlan{rp}'.format(path=path, rp=make_rp_string(rp))
+                    for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Results{0}/{1}/runplan{2}/png/*'.format(tc, self.translate_dia(dia), rp)):
+                        pbar.update(k)
+                        k += 1
                         pic = name.split('/')[-1]
-                        if not file_exists('{path}/{file}'.format(path=dst, file=pic)):
-                            copy(name, dst)
+                        if not file_exists('{path}/{file}'.format(path=rp_path, file=pic)):
+                            copy(name, rp_path)
+                    runs = self.DiaScans.get_runs(rp, tc)
+                    for run in runs:
+                        if run in used_runs[tc][dia]:
+                            continue
+                        used_runs[tc][dia].append(run)
+                        run_path = '{path}/{run}'.format(path=path, run=run)
+                        for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Results{0}/{1}/{2}/png/*'.format(tc, self.translate_dia(dia), str(run).zfill(3))):
+                            pbar.update(k)
+                            k += 1
+                            pic = name.split('/')[-1]
+                            if not file_exists('{path}/{file}'.format(path=run_path, file=pic)):
+                                copy(name, run_path)
+        pbar.finish()
 
     def create_run_overview(self):
         pass
