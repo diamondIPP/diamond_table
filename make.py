@@ -35,6 +35,11 @@ class DiamondTable:
         p.read('conf.ini')
         return p
 
+    def build_everything(self):
+        self.create_overview()
+        self.create_runplan_overview()
+        self.create_run_overview()
+
     def create_overview(self):
         html_file = 'index.html'
         f = open(html_file, 'w')
