@@ -5,7 +5,8 @@
 import sys
 sys.path.append('AbstractClasses')
 import HTML
-from json import loads
+from json import loads, dump
+import pickle
 from glob import glob
 from Utils import *
 from DiamondRateScans import DiaScans
@@ -23,6 +24,7 @@ class DiamondTable:
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
+        self.Data = load_json('{dir}/AbstractClasses/data.json'.format(dir=self.Dir))
 
         self.DiaScans = DiaScans()
         # self.copy_pics()
@@ -164,6 +166,66 @@ class DiamondTable:
                             if not file_exists('{path}/{file}'.format(path=run_path, file=pic)):
                                 copy(name, run_path)
         pbar.finish()
+
+    @staticmethod
+    def copy_pickles():
+        picdirs = ['Ph_fit', 'Pulser', 'Pedestal']
+        widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
+        n = len([i for lst in [glob('/home/testbeam/testing/micha/myPadAnalysis/Configuration/Individual_Configs/{0}/*'.format(picdir)) for picdir in picdirs] for i in lst])
+        pbar = ProgressBar(widgets=widgets, maxval=n).start()
+        k = 1
+        for picdir in picdirs:
+            dst = '/home/testbeam/Desktop/psiresults/Pickles/{0}/'.format(picdir)
+            for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Configuration/Individual_Configs/{0}/*'.format(picdir)):
+                pbar.update(k)
+                k += 1
+                pic = name.strip('/')[-1]
+                if not file_exists('{path}/{file}'.format(path=dst, file=pic)):
+                    copy(name, dst)
+        pbar.finish()
+
+    def get_pickle(self, run, tc, ch, dia):
+        ch = 0 if ch == 1 else 3
+        pickle_dirs = ['Ph_fit', 'Pedestal', 'Pulser']
+        file_names = '{tc}_{run}_{ch}_20000_eventwise_b2/{tc}_{run}_{ch}_ab2_fwhm_all_cuts/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn'.format(tc=tc, run=run, ch=ch, dia=dia).split('/')
+        pars = [0, 1, 1]
+        data = []
+        for i, (dir_, name) in enumerate(zip(pickle_dirs, file_names)):
+            path = '{dir}/Pickles/{pic}/{f}.pickle'.format(dir=self.Dir, pic=dir_, f=name)
+            if not file_exists(path):
+                data.append(None)
+                if i:
+                    data.append(None)
+                continue
+            f = open(path)
+            p = pickle.load(f)
+            data.append(p.Parameter(pars[i]))
+            if i:
+                data.append(p.Parameter(pars[i] + 1))
+            f.close()
+        return data
+
+    def create_pickle_data(self):
+        path = '{dir}/AbstractClasses/data.json'.format(dir=self.Dir)
+        f = open(path, 'w')
+        data = {}
+        for dia in self.DiaScans.get_diamonds():
+            rps = self.DiaScans.find_diamond_runplans(dia)
+            for tc, item in rps.iteritems():
+                if tc not in data:
+                    data[tc] = {}
+                rps = {rp: ch for rps in item.itervalues() for rp, ch in rps.iteritems()}
+                for rp, ch in sorted(rps.iteritems()):
+                    runs = self.DiaScans.get_runs(rp, tc)
+                    for run in runs:
+                        values = self.get_pickle(run, tc, ch, self.translate_dia(dia))
+                        if run not in data[tc]:
+                            data[tc][run] = {}
+                        data[tc][run][ch] = values
+        f.seek(0)
+        dump(data, f, indent=2)
+        f.truncate()
+        f.close()
 
     def create_run_overview(self):
         pass
