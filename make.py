@@ -27,7 +27,7 @@ class DiamondTable:
         self.Data = load_json('{dir}/AbstractClasses/data.json'.format(dir=self.Dir))
 
         self.DiaScans = DiaScans()
-        # self.copy_pics()
+        self.Diamonds = self.DiaScans.get_diamonds()
 
     @staticmethod
     def load_parser():
