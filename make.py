@@ -335,7 +335,6 @@ def get_dir():
     return os.path.dirname(os.path.realpath('__file__'))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     z = DiamondTable()
-    z.create_overview()
-    z.create_runplan_overview()
+    z.build_everything()
