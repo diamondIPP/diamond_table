@@ -11,6 +11,7 @@ from glob import glob
 from Utils import *
 from DiamondRateScans import DiaScans
 from shutil import copy
+from os import remove
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 
 
@@ -294,6 +295,12 @@ class DiamondTable:
         f.close()
     # endregion
 
+    def copy_index_php(self, path):
+        file_path = '{path}/{file}'.format(path=path, file=self.Config.get('General', 'index_php'))
+        if file_exists(file_path) and len(glob('{path}/*'.format(path=path))) <= 2:
+            remove(file_path)
+        if not file_exists(file_path) and len(glob('{path}/*'.format(path=path))) > 1:
+            copy('{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'index_php')), file_path)
 
     def build_run_table(self):
         pass
