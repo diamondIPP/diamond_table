@@ -256,8 +256,44 @@ class DiamondTable:
         f.truncate()
         f.close()
 
+    # =====================================================
+    # region RUNS
     def create_run_overview(self):
-        pass
+        for dia in self.Diamonds:
+            rps = self.DiaScans.find_diamond_runplans(dia)
+            for tc, item in rps.iteritems():
+                rps = {rp: ch for rps in item.itervalues() for rp, ch in rps.iteritems()}
+                for rp, ch in sorted(rps.iteritems()):
+                    path = '{dat}{dia}/BeamTests/{tc}'.format(dat=self.DataPath, dia=dia, tc=make_tc_str(tc, 0))
+                    runs = self.DiaScans.get_runs(rp, tc)
+                    self.build_run_table(path, rp, tc, dia, runs, ch)
+                    for run in runs:
+                        run_path = '{path}/{run}'.format(path=path, run=run)
+                        create_dir(run_path)
+                        self.copy_index_php(run_path)
+
+    def build_run_table(self, path, rp, tc, dia, runs, ch):
+        html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
+        f = open(html_file, 'w')
+        tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
+        write_html_header(f, tit)
+        header = ['Run', 'Type', 'HV [V]', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Pulse Height [au]', 'Pedestal [au]', 'Sigma', 'Pulser [au]', 'Sigma', 'Start Time', 'Duration', 'Comments']
+        rows = []
+        file_names = ['PulseHeight20000', 'Pedestal_aball_cuts', 'PulserDistributionFit']
+        for i, run in enumerate(runs):
+            info = self.DiaScans.RunInfos[tc][str(run)]
+            data = self.Data[tc][str(run)][str(ch)]
+            run_path = '../{run}'.format(run=run)
+            rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])
+            rows[i] += [info['runtype'], make_bias_str(info['dia{ch}hv'.format(ch=ch)]), self.calc_flux(info)]
+            links = [make_link('{path}/{name}.png'.format(path=run_path, name=name), dig_str(data[j]), path=path) for j, name in zip([0, 1, 3], file_names)]
+            rows[i] += [links[0], links[1], dig_str(data[2]), links[2], dig_str(data[4])]
+            rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]
+        f.write(HTML.table(rows, header_row=header))
+        f.write('\n\n\n</body>\n</html>\n')
+        f.close()
+    # endregion
+
 
     def build_run_table(self):
         pass
