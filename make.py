@@ -14,6 +14,7 @@ from shutil import copy
 from numpy import mean
 from os import remove
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
+from collections import OrderedDict
 
 
 class DiamondTable:
@@ -106,11 +107,32 @@ class DiamondTable:
         for tc in self.TestCampaigns:
             path = '{dir}/BeamTests/{dat}'.format(dir=self.Dir, dat=tc)
             create_dir(path)
+            self.build_full_run_table(tc, path)
             dias = str(list(z.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
             if dias:
                 target = 'BeamTests/{tc}/index.html'.format(tc=tc)
                 rows.append([make_link(target, make_tc_str(tc, txt=0), path=self.Dir), dias])
         return HTML.table(rows, header_row=header)
+
+    def build_full_run_table(self, tc, path):
+        html_file = '{path}/index.html'.format(path=path)
+        f = open(html_file, 'w')
+        tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, txt=False))
+        write_html_header(f, tit)
+        header = ['Run', 'Type', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
+        rows = []
+        if make_tc_str(tc) not in z.DiaScans.RunInfos:
+            return
+        runs = z.DiaScans.RunInfos[make_tc_str(tc)]
+        sorted_runs = OrderedDict(sorted({int(run): data for run, data in runs.iteritems()}.iteritems()))
+        for i, (run, data) in enumerate(sorted_runs.iteritems()):
+            rows.append([run])
+            rows[i] += [self.get_runtype(data), self.calc_flux(data), conv_time(data['starttime0']), self.calc_duration(data)]
+            rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
+            rows[i] += [data['comments'][:100].replace('\\u03bc', '&mu').encode('utf-8')]
+        f.write(HTML.table(rows, header_row=header))
+        f.write('\n\n\n</body>\n</html>\n')
+        f.close()
 
     @staticmethod
     def get_runtype(info):
