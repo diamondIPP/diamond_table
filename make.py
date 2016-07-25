@@ -66,7 +66,7 @@ class DiamondTable:
         f.write(self.build_diamond_table(scvd=False))
         # run overview
         f.write('\n<h3>Full Run Overview:</h3>\n')
-        f.write(self.build_run_overview())
+        f.write(self.build_tc_table())
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
@@ -100,7 +100,7 @@ class DiamondTable:
             rows.append(row)
         return HTML.table(rows, header_row=header)
 
-    def build_run_overview(self):
+    def build_tc_table(self):
         header = ['Test Campaign', 'Tested Diamonds']
         rows = []
         for tc in self.TestCampaigns:
