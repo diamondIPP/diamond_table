@@ -108,8 +108,8 @@ class DiamondTable:
             create_dir(path)
             dias = str(list(z.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
             if dias:
-                file_path = '{dir}/index.html'.format(dir=path)
-                rows.append([make_link(file_path, make_tc_str(tc, txt=0), path=file_path), dias])
+                target = 'BeamTests/{tc}/index.html'.format(tc=tc)
+                rows.append([make_link(target, make_tc_str(tc, txt=0), path=self.Dir), dias])
         return HTML.table(rows, header_row=header)
 
     @staticmethod
