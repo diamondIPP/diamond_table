@@ -113,6 +113,16 @@ class DiamondTable:
         return HTML.table(rows, header_row=header)
 
     @staticmethod
+    def get_runtype(info):
+        data = info['runtype']
+        if 'signal' in data:
+            return 'signal'
+        elif 'pedes' in data:
+            return 'pedestal'
+        else:
+            return data[:10]
+
+    @staticmethod
     def get_manufacturer(path):
         f_path = '{path}info.conf'.format(path=path)
         if file_exists(f_path):
