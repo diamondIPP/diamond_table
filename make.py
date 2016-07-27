@@ -119,7 +119,7 @@ class DiamondTable:
         f = open(html_file, 'w')
         tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, txt=False))
         write_html_header(f, tit)
-        header = ['Run', 'Type', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
+        header = ['Run', 'Type', 'Flux [kHz/cm{0}]'.format(sup(2)), 'FS11', 'FSH13', 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
         rows = []
         if make_tc_str(tc) not in z.DiaScans.RunInfos:
             return
@@ -127,7 +127,7 @@ class DiamondTable:
         sorted_runs = OrderedDict(sorted({int(run): data for run, data in runs.iteritems()}.iteritems()))
         for i, (run, data) in enumerate(sorted_runs.iteritems()):
             rows.append([run])
-            rows[i] += [self.get_runtype(data), self.calc_flux(data), conv_time(data['starttime0']), self.calc_duration(data)]
+            rows[i] += [self.get_runtype(data), self.calc_flux(data), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.calc_duration(data)]
             rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
             rows[i] += [data['comments'][:100].replace('\\u03bc', '&mu').encode('utf-8')]
         f.write(HTML.table(rows, header_row=header))
