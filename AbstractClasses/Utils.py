@@ -95,11 +95,18 @@ def make_bias_str(bias):
     return '{sign}{val}'.format(sign='+' if int(bias) > 0 else '', val=int(bias))
 
 
-def make_proc_str(data):
-    if data[0].startswith('Irr'):
-        return '{0} to {1:1.0g}'.format(data[0], data[1])
-    elif data[0].startswith('Bui'):
-        return 'Built into {0}'.format(data[1])
+def make_info_str(last_tc, tc_str, info):
+    out = ['', '']
+    for tc, value in info.iteritems():
+        if last_tc < tc <= tc_str:
+            for key, val in value.iteritems():
+                if key == 'Irradiation':
+                    out[0] = 'to {0:1.0g}'.format(val)
+                elif key == 'Built':
+                    out[0] = 'to {0}'.format(val)
+                if key == 'BoardNumber':
+                    out[1] = center(val)
+    return out
 
 
 def load_parser(path):
