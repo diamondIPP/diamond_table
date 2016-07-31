@@ -62,33 +62,39 @@ class DiamondTable:
         # single crystal
         f.write('<h3>Single Crystal Diamonds:</h3>\n')
         f.write(self.build_diamond_table())
+        f.write('* Board Number\n\n')
         # poly chrystal
         f.write('\n<h3>Poly Crystal Diamonds:</h3>\n')
         f.write(self.build_diamond_table(scvd=False))
+        f.write('* Board Number\n\n')
+        # silicon pad
+        f.write('\n<h3>Silicon Detectors:</h3>\n')
+        f.write(self.build_diamond_table(si=True))
+        f.write('* Board Number\n\n')
         # run overview
         f.write('\n<h3>Full Run Overview:</h3>\n')
         f.write(self.build_tc_table())
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
-    def build_diamond_table(self, scvd=True):
+    def build_diamond_table(self, scvd=True, si=False):
         header = self.build_header()
         scdias = loads(self.Config.get('General', 'single_crystal'))
         dias = [name.split('/')[-1] for name in glob('{dat}/*'.format(dat=self.DataPath)) if (name.split('/')[-1] in scdias if scvd else name.split('/')[-1] not in scdias)]
         for ex in self.Exclude:
             dias.remove(ex) if ex in dias else do_nothing()
         rows = []
+        dias = ['Si-xxx'] if si else dias
         for dia in sorted(dias):
             row = [dia]
-            proc = load_json('{dir}/{dia}/Processing.json'.format(dir=self.DataPath, dia=dia))
+            proc = load_json('{dir}/{dia}/info.json'.format(dir=self.DataPath, dia=dia))
             # test campaigns
             last_tc = make_tc_str(self.TestCampaigns[0])
             for tc in self.TestCampaigns:
                 tc_str = make_tc_str(tc)
                 row_size = len(row)
-                for key, value in proc.iteritems():
-                    if last_tc < key < tc_str:
-                        row.append(make_proc_str(value))
+                for value in make_info_str(last_tc, tc_str, proc):
+                    row.append(value)
                 if row_size == len(row):
                     row.append('')
                 target = 'Diamonds/{dia}/BeamTests/{tc}/index.html'.format(tc=tc, dia=dia)
@@ -160,7 +166,7 @@ class DiamondTable:
     def build_header(self):
         header_row = ['Diamond']
         for date in self.TestCampaigns:
-            header_row += ['Proc.', date]
+            header_row += ['Proc.', 'BN*', date]
         return header_row + [col for col in self.OtherCols]
     # endregion
 
