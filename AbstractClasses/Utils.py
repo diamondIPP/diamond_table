@@ -136,5 +136,9 @@ def sup(txt):
     return '<sup>{0}</sup>'.format(txt)
 
 
+def center(txt):
+    return '<div align="center">{0}</div>'.format(txt)
+
+
 def do_nothing():
     pass
