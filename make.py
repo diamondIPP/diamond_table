@@ -84,7 +84,7 @@ class DiamondTable:
         for ex in self.Exclude:
             dias.remove(ex) if ex in dias else do_nothing()
         rows = []
-        dias = ['Si-xxx'] if si else dias
+        dias = ['SiD1'] if si else dias
         for dia in sorted(dias):
             row = [dia]
             proc = load_json('{dir}/{dia}/info.json'.format(dir=self.DataPath, dia=dia))
@@ -265,7 +265,7 @@ class DiamondTable:
             for tc, item in rps.iteritems():
                 used_runs[tc] = {dia: []}
                 runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
-                path = '/home/testbeam/Desktop/psiresults/Diamonds/{0}/BeamTests/{1}'.format(dia, make_tc_str(tc, 0))
+                path = '/home/testbeam/Desktop/psi/Diamonds/{0}/BeamTests/{1}'.format(dia, make_tc_str(tc, 0))
                 for rp in runplans:
                     rp_path = '{path}/RunPlan{rp}'.format(path=path, rp=make_rp_string(rp))
                     for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Results{0}/{1}/runplan{2}/png/*'.format(tc, self.translate_dia(dia), rp)):
@@ -296,7 +296,7 @@ class DiamondTable:
         pbar = ProgressBar(widgets=widgets, maxval=n).start()
         k = 1
         for picdir in picdirs:
-            dst = '/home/testbeam/Desktop/psiresults/Pickles/{0}/'.format(picdir)
+            dst = '/home/testbeam/Desktop/psi/Pickles/{0}/'.format(picdir)
             for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Configuration/Individual_Configs/{0}/*'.format(picdir)):
                 pbar.update(k)
                 k += 1
