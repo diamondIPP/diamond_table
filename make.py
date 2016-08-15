@@ -360,15 +360,18 @@ class DiamondTable:
         if 'for1' not in info or info['for1'] == 0:
             if 'measuredflux' in info:
                 return str('{0:5.0f}'.format(info['measuredflux'] * 2.48))
-        f = open('{path}/masks/{mask}'.format(path=get_dir(), mask=info['maskfile']), 'r')
-        data = []
-        for line in f:
-            if len(line) > 3:
-                line = line.split()
-                data.append([int(line[2])] + [int(line[3])])
-        f.close()
         pixel_size = 0.01 * 0.015
-        area = [(data[1][0] - data[0][0]) * (data[1][1] - data[0][1]) * pixel_size, (data[3][0] - data[2][0]) * (data[3][1] - data[2][1]) * pixel_size]
+        if info['maskfile'] == 'None':
+            area = [4160 * pixel_size, 4160 * pixel_size]
+        else:
+            f = open('{path}/masks/{mask}'.format(path=get_dir(), mask=info['maskfile']), 'r')
+            data = []
+            for line in f:
+                if len(line) > 3:
+                    line = line.split()
+                    data.append([int(line[2])] + [int(line[3])])
+            f.close()
+            area = [(data[1][0] - data[0][0]) * (data[1][1] - data[0][1]) * pixel_size, (data[3][0] - data[2][0]) * (data[3][1] - data[2][1]) * pixel_size]
         flux = [info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(2)]
         return str('{0:5.0f}'.format(mean(flux)))
 
