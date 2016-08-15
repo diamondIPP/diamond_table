@@ -379,7 +379,7 @@ class DiamondTable:
     def calc_duration(info1, info2=None):
         endinfo = info2 if info2 is not None else info1
         dur = conv_time(endinfo['endtime'], strg=False) - conv_time(info1['starttime0'], strg=False)
-        dur += timedelta(days=1) if dur < timedelta(0) else dur
+        dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
         return str(dur)
 
     def translate_dia(self, dia):
