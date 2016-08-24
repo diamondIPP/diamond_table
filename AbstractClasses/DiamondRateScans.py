@@ -78,7 +78,8 @@ class DiaScans:
     def show_runplans(self):
         for tc in self.RunPlans:
             print_small_banner(tc)
-            for rp, runs in sorted(self.RunPlans[tc]['rate_scan'].iteritems()):
+            for rp, info in sorted(self.RunPlans[tc].iteritems()):
+                runs = info['runs']
                 dias = [self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]) for ch in [1, 2]]
                 print rp.ljust(5), '{0}-{1}'.format(str(runs[0]).zfill(3), str(runs[-1]).zfill(3)), dias[0].ljust(11), dias[1].ljust(11)
 
@@ -89,7 +90,8 @@ class DiaScans:
         runplans = {}
         for tc, item in self.RunPlans.iteritems():
             runplans[tc] = {}
-            for rp, runs in item['rate_scan'].iteritems():
+            for rp, info in item.iteritems():
+                runs = info['runs']
                 for ch in [1, 2]:
                     if all(dia == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs):
                         bias = self.RunInfos[tc][str(runs[0])]['dia{0}hv'.format(ch)]
@@ -100,7 +102,7 @@ class DiaScans:
         return runplans
 
     def get_runs(self, rp, tc):
-        return self.RunPlans[tc]['rate_scan'][rp]
+        return self.RunPlans[tc][rp]['runs']
 
     def get_diamonds(self, single_tc=None):
         dias = []
@@ -108,7 +110,8 @@ class DiaScans:
             if single_tc is not None:
                 if tc != single_tc:
                     continue
-            for runs in item['rate_scan'].itervalues():
+            for info in item.itervalues():
+                runs = info['runs']
                 for ch in [1, 2]:
                     dia0 = self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)])
                     if all(dia0 == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs):

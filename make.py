@@ -193,12 +193,13 @@ class DiamondTable:
         f = open(html_file, 'w')
         tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
         write_html_header(f, tit)
-        header = ['Run Plans', 'Runs', 'Bias V', 'Leakage Current', 'Pulser', 'Pulse Height', 'Pedestal', 'Start', 'Duration']
+        header = ['Nr.', 'Type', 'Runs', 'Bias V', 'Leakage Current', 'Pulser', 'Pulse Height', 'Pedestal', 'Start', 'Duration']
         rows = []
         rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
         for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems())):
             runs = self.DiaScans.get_runs(rp, tc)
-            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path)])
+            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
+            rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]
             name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
             rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]
             rows[i] += [make_bias_str(bias)]
@@ -242,7 +243,7 @@ class DiamondTable:
         file_names = ['PulseHeight20000', 'Pedestal_aball_cuts', 'PulserDistributionFit']
         for i, run in enumerate(runs):
             info = self.DiaScans.RunInfos[tc][str(run)]
-            data = self.Data[tc][str(run)][str(ch)]
+            data = self.Data[tc][str(run)][str(ch)] if str(run) in self.Data[tc] else [None] * 5
             run_path = '../{run}'.format(run=run)
             rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])
             rows[i] += [info['runtype'], make_bias_str(info['dia{ch}hv'.format(ch=ch)]), self.calc_flux(info)]
