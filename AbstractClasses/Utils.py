@@ -51,8 +51,9 @@ def list_dirs(path):
     return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
 
 
-def make_link(target, name='Results', new_tab=False, path=None, use_name=True):
+def make_link(target, name='Results', new_tab=False, path=None, use_name=True, center=False):
     tab = ' target="_blank"' if new_tab else ''
+    name = center_txt(name) if center else name
     if path is not None:
         return '<a href={tar}{tab}>{nam}</a>'.format(tar=target, nam=name, tab=tab) if file_exists('{path}/{tgt}'.format(path=path, tgt=target.strip('.'))) else (name if use_name else '')
     else:
@@ -105,7 +106,7 @@ def make_info_str(last_tc, tc_str, info):
                 elif key == 'Built':
                     out[0] = 'to {0}'.format(val)
                 if key == 'BoardNumber':
-                    out[1] = center(val)
+                    out[1] = center_txt(val)
     return out
 
 
@@ -143,7 +144,7 @@ def sup(txt):
     return '<sup>{0}</sup>'.format(txt)
 
 
-def center(txt):
+def center_txt(txt):
     return '<div align="center">{0}</div>'.format(txt)
 
 
