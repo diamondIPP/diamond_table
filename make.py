@@ -254,6 +254,11 @@ class DiamondTable:
         f.close()
     # endregion
 
+    def copy_logs(self):
+        for tc in self.DiaScans.RunPlans:
+            copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/AbstractClasses/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
+        copy('/home/testbeam/testing/micha/myPadAnalysis/Runinfos/run_plans.json', '{dir}/AbstractClasses/'.format(dir=self.Dir))
+
     def copy_pics(self):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
         n = len(glob('/home/testbeam/testing/micha/myPadAnalysis/Res*/*/*/png/*'))
