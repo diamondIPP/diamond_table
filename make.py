@@ -58,19 +58,20 @@ class DiamondTable:
         html_file = 'index.html'
         f = open(html_file, 'w')
         write_html_header(f, 'ETH Diamonds Overview')
+        self.build_board_table()
 
         # single crystal
         f.write('<h3>Single Crystal Diamonds:</h3>\n')
         f.write(self.build_diamond_table())
-        f.write('* Board Number\n\n')
+        f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
         # poly chrystal
         f.write('\n<h3>Poly Crystal Diamonds:</h3>\n')
         f.write(self.build_diamond_table(scvd=False))
-        f.write('* Board Number\n\n')
+        f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
         # silicon pad
         f.write('\n<h3>Silicon Detectors:</h3>\n')
         f.write(self.build_diamond_table(si=True))
-        f.write('* Board Number\n\n')
+        f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
         # run overview
         f.write('\n<h3>Full Run Overview:</h3>\n')
         f.write(self.build_tc_table())
@@ -89,7 +90,7 @@ class DiamondTable:
             row = [dia]
             proc = load_json('{dir}/{dia}/info.json'.format(dir=self.DataPath, dia=dia))
             # test campaigns
-            last_tc = make_tc_str(self.TestCampaigns[0])
+            last_tc = '201500'
             for tc in self.TestCampaigns:
                 tc_str = make_tc_str(tc)
                 row_size = len(row)
@@ -168,6 +169,19 @@ class DiamondTable:
         for date in self.TestCampaigns:
             header_row += ['Proc.', 'BN*', date]
         return header_row + [col for col in self.OtherCols]
+
+    def build_board_table(self):
+        f = open('{dir}/BoardNumbers/bn.json'.format(dir=self.Dir))
+        info = load(f)
+        f.close()
+        f = open('{dir}/BoardNumbers/bn.html'.format(dir=self.Dir), 'w')
+        write_html_header(f, 'Diamond Amplifier Boards')
+        header = ['Board Number', 'Pulser Type']
+        rows = sorted([[center_txt(str(bn)), typ] for typ, bns in info.iteritems() for bn in bns])
+        f.write(HTML.table(rows, header_row=header))
+        f.write('\n\n\n</body>\n</html>\n')
+        f.close()
+
     # endregion
 
     # =====================================================
