@@ -207,19 +207,22 @@ class DiamondTable:
         f = open(html_file, 'w')
         tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
         write_html_header(f, tit)
-        header = ['Nr.', 'Type', 'Runs', 'Bias V', 'Leakage Current', 'Pulser', 'Pulse Height', 'Pedestal', 'Start', 'Duration']
+        header = ['Nr.', 'Type', 'Diamond<br>Attenuator', 'Pulser<br>Attenuator', 'Runs', 'Bias V', 'Leakage<br>Current', 'Pulser', 'Pulser<br>Ped.', 'Signal', 'Signal<br>Ped.', 'Start', 'Duration']
         rows = []
         rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
         for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems())):
             runs = self.DiaScans.get_runs(rp, tc)
             rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
             rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]
+            rows[i] += [self.DiaScans.RunPlans[tc][rp]['attenuators']['dia{ch}'.format(ch=ch)]] if 'attenuators' in self.DiaScans.RunPlans[tc][rp] else ['']
+            rows[i] += [self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser'.format(ch=ch)]] if 'attenuators' in self.DiaScans.RunPlans[tc][rp] else ['']
             name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
             rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]
             rows[i] += [make_bias_str(bias)]
             rows[i] += [make_link('RunPlan{rp}/PhPulserCurrent.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
             info = z.DiaScans.RunInfos[tc][str(runs[0])]
             rows[i] += [make_link('RunPlan{rp}/CombinedPulserPulseHeights.png'.format(rp=make_rp_string(rp)), info['pulser'] if 'pulser' in info else '', path=path)]
+            rows[i] += [make_link('RunPlan{rp}/Pedestal_FluxPulserBeamOn.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
             rows[i] += [make_link('RunPlan{rp}/CombinedPulseHeights.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
             rows[i] += [make_link('RunPlan{rp}/Pedestal_Flux.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
             runs = z.DiaScans.get_runs(rp, tc)
