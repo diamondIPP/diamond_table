@@ -85,6 +85,11 @@ def make_rp_string(string):
     return string[1:] if string[0] == '0' else string
 
 
+def make_runplan_string(nr):
+    nr = str(nr)
+    return nr.zfill(2) if len(nr) <= 2 else nr.zfill(4)
+
+
 def make_tc_str(tc, txt=True):
     if tc[0].isdigit():
         return datetime.strptime(tc, '%Y%m').strftime('%B %Y' if txt else '%b%y')
