@@ -274,14 +274,14 @@ class DiamondTable:
             copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/AbstractClasses/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
         copy('/home/testbeam/testing/micha/myPadAnalysis/Runinfos/run_plans.json', '{dir}/AbstractClasses/'.format(dir=self.Dir))
 
-    def copy_pics(self):
+    def copy_pics(self, copy_all=False, rp=None):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
         n = len(glob('/home/testbeam/testing/micha/myPadAnalysis/Res*/*/*/png/*'))
         pbar = ProgressBar(widgets=widgets, maxval=n).start()
         k = 1
         used_runs = {}
         for dia in self.DiaScans.get_diamonds():
-            rps = self.DiaScans.find_diamond_runplans(dia)
+            rps = self.DiaScans.find_diamond_runplans(dia) if rp is None else {'201608': {'bla': {make_runplan_string(rp): 'bla'}}}
             for tc, item in rps.iteritems():
                 used_runs[tc] = {dia: []}
                 runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
@@ -292,7 +292,7 @@ class DiamondTable:
                         pbar.update(k)
                         k += 1
                         pic = name.split('/')[-1]
-                        if not file_exists('{path}/{file}'.format(path=rp_path, file=pic)):
+                        if not file_exists('{path}/{file}'.format(path=rp_path, file=pic)) or copy_all:
                             copy(name, rp_path)
                     runs = self.DiaScans.get_runs(rp, tc)
                     for run in runs:
@@ -304,7 +304,7 @@ class DiamondTable:
                             pbar.update(k)
                             k += 1
                             pic = name.split('/')[-1]
-                            if not file_exists('{path}/{file}'.format(path=run_path, file=pic)):
+                            if not file_exists('{path}/{file}'.format(path=run_path, file=pic)) or copy_all:
                                 copy(name, run_path)
         pbar.finish()
 
