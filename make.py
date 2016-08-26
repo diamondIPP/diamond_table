@@ -136,7 +136,7 @@ class DiamondTable:
             rows.append([run])
             rows[i] += [self.get_runtype(data), self.calc_flux(data), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.calc_duration(data)]
             rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
-            rows[i] += [data['comments'][:100].replace('\\u03bc', '&mu').encode('utf-8')]
+            rows[i] += [data['comments'][:100]]
         f.write(HTML.table(rows, header_row=header))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
