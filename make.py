@@ -255,7 +255,7 @@ class DiamondTable:
         f = open(html_file, 'w')
         tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
         write_html_header(f, tit)
-        header = ['Run', 'Type', 'HV [V]', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Pulse Height [au]', 'Pedestal [au]', 'Sigma', 'Pulser [au]', 'Sigma', 'Start Time', 'Duration', 'Comments']
+        header = ['Run', 'Type', 'HV [V]', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Distr.', 'PH [au]', 'Ped. [au]', 'Sigma', 'Pul. [au]', 'Sigma', 'Ped. [au]', 'Start Time', 'Duration', 'Comments']
         rows = []
         file_names = ['PulseHeight20000', 'Pedestal_aball_cuts', 'PulserDistributionFit']
         for i, run in enumerate(runs):
@@ -264,8 +264,10 @@ class DiamondTable:
             run_path = '../{run}'.format(run=run)
             rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])
             rows[i] += [info['runtype'], make_bias_str(info['dia{ch}hv'.format(ch=ch)]), self.calc_flux(info)]
+            rows[i] += [make_link('{path}/SignalDistribution.png'.format(path=run_path), 'Plot', path=path, use_name=False)]
             links = [make_link('{path}/{name}.png'.format(path=run_path, name=name), dig_str(data[j]), path=path) for j, name in zip([0, 1, 3], file_names)]
             rows[i] += [links[0], links[1], dig_str(data[2]), links[2], dig_str(data[4])]
+            rows[i] += [make_link('{path}/Pedestal_abPulserBeamOn.png'.format(path=run_path), 'Plot', path=path, use_name=False)]
             rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]
         f.write(HTML.table(rows, header_row=header))
         f.write('\n\n\n</body>\n</html>\n')
