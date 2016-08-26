@@ -3266,7 +3266,7 @@
   }, 
   "347": {
     "accepted_pulserrate": 0, 
-    "comments": "huge spikes during the beam offtime in curretn for II6 94!! up to 70 \u03bcA\r\nramping II6-94 to -800V due to constant high leakage current (after roughly a million events)\r\ncurrent goes down to 5\u03bcA in average but still spiking to 20", 
+    "comments": "huge spikes during the beam offtime in curretn for II6 94!! up to 70 uA\r\nramping II6-94 to -800V due to constant high leakage current (after roughly a million events)\r\ncurrent goes down to 5uA in average but still spiking to 20", 
     "dia1": "II6-96", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
