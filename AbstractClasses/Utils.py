@@ -163,5 +163,18 @@ def add_bkg(table, color='black'):
         lines[i] = lines[i].replace('<TH>', '<TH bgcolor=white>')
     return '\n'.join(lines)
 
+
+class FitRes:
+    def __init__(self, fit_obj):
+        self.Pars = list(fit_obj.Parameters())
+        self.Errors = list(fit_obj.Errors())
+
+    def Parameter(self, arg):
+        return self.Pars[arg]
+
+    def ParError(self, arg):
+        return self.Errors[arg]
+
+
 def do_nothing():
     pass
