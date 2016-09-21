@@ -73,11 +73,11 @@ def create_dir(path):
         os.mkdir(path)
 
 
-def write_html_header(f, name):
+def write_html_header(f, name, bkg=None):
     f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n')
     f.write('<html>\n<head>\n<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">\n')
     f.write('<title> {tit} </title>\n'.format(tit=name))
-    f.write('</head>\n<body>\n\n\n')
+    f.write('</head>\n<body{bkg}>\n\n\n'.format(bkg='' if bkg is None else ' bgcolor=' + bkg))
     f.write('<h1>{tit}</h1>\n'.format(tit=name))
 
 
