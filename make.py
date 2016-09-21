@@ -27,11 +27,15 @@ class DiamondTable:
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
-        self.Data = load_json('{dir}/AbstractClasses/data.json'.format(dir=self.Dir))
-
+        try:
+            self.Data = load_json('{dir}/AbstractClasses/data.json'.format(dir=self.Dir))
+        except ValueError:
+            self.Data = {}
         self.DiaScans = DiaScans()
         self.Diamonds = self.DiaScans.get_diamonds()
         self.create_diamond_folders()
+
+        self.BkgCol = 'lightgrey'
 
     def create_diamond_folders(self):
         for dia in self.Diamonds:
@@ -57,7 +61,7 @@ class DiamondTable:
     def create_overview(self):
         html_file = 'index.html'
         f = open(html_file, 'w')
-        write_html_header(f, 'ETH Diamonds Overview')
+        write_html_header(f, 'ETH Diamonds Overview', bkg=self.BkgCol)
         self.build_board_table()
 
         # single crystal
@@ -106,7 +110,7 @@ class DiamondTable:
                 path = '{dat}{dia}/{col}/'.format(dat=self.DataPath, col=col, dia=dia)
                 row.append(self.build_col(col, path))
             rows.append(row)
-        return HTML.table(rows, header_row=header)
+        return add_bkg(HTML.table(rows, header_row=header), 'lightgrey')
 
     def build_tc_table(self):
         header = ['Test Campaign', 'Tested Diamonds']
@@ -119,13 +123,13 @@ class DiamondTable:
             if dias:
                 target = 'BeamTests/{tc}/index.html'.format(tc=tc)
                 rows.append([make_link(target, make_tc_str(tc, txt=0), path=self.Dir), dias])
-        return HTML.table(rows, header_row=header)
+        return add_bkg(HTML.table(rows, header_row=header))
 
     def build_full_run_table(self, tc, path):
         html_file = '{path}/index.html'.format(path=path)
         f = open(html_file, 'w')
         tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, txt=False))
-        write_html_header(f, tit)
+        write_html_header(f, tit, bkg=self.BkgCol)
         header = ['Run', 'Type', 'Flux [kHz/cm{0}]'.format(sup(2)), 'FS11', 'FSH13', 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
         rows = []
         if make_tc_str(tc) not in z.DiaScans.RunInfos:
@@ -137,7 +141,7 @@ class DiamondTable:
             rows[i] += [self.get_runtype(data), self.calc_flux(data), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.calc_duration(data)]
             rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
             rows[i] += [data['comments'][:100]]
-        f.write(HTML.table(rows, header_row=header))
+        f.write(add_bkg(HTML.table(rows, header_row=header), self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
@@ -175,10 +179,10 @@ class DiamondTable:
         info = load(f)
         f.close()
         f = open('{dir}/BoardNumbers/bn.html'.format(dir=self.Dir), 'w')
-        write_html_header(f, 'Diamond Amplifier Boards')
+        write_html_header(f, 'Diamond Amplifier Boards', bkg=self.BkgCol)
         header = ['Board Number', 'Pulser Type']
         rows = sorted([[center_txt(str(bn)), typ] for typ, bns in info.iteritems() for bn in bns])
-        f.write(HTML.table(rows, header_row=header))
+        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
@@ -206,7 +210,7 @@ class DiamondTable:
         html_file = '{path}/index.html'.format(path=path)
         f = open(html_file, 'w')
         tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
-        write_html_header(f, tit)
+        write_html_header(f, tit, bkg=self.BkgCol)
         header = ['Nr.', 'Type', 'Diamond<br>Attenuator', 'Pulser<br>Attenuator', 'Runs', 'Bias V', 'Leakage<br>Current', 'Pulser', 'Pulser<br>Ped.', 'Signal', 'Signal<br>Ped.', 'Start', 'Duration']
         rows = []
         rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
@@ -229,7 +233,7 @@ class DiamondTable:
             rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]
             rows[i] += [self.calc_duration(z.DiaScans.RunInfos[tc][str(runs[0])], z.DiaScans.RunInfos[tc][str(runs[-1])])]
 
-        f.write(HTML.table(rows, header_row=header))
+        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
     # endregion
@@ -254,7 +258,7 @@ class DiamondTable:
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
         f = open(html_file, 'w')
         tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
-        write_html_header(f, tit)
+        write_html_header(f, tit, bkg=self.BkgCol)
         header = ['Run', 'Type', 'HV [V]', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Distr.', 'PH [au]', 'Ped. [au]', 'Sigma', 'Pul. [au]', 'Sigma', 'Ped. [au]', 'Start Time', 'Duration', 'Comments']
         rows = []
         file_names = ['PulseHeight20000', 'Pedestal_aball_cuts', 'PulserDistributionFit']
@@ -269,7 +273,7 @@ class DiamondTable:
             rows[i] += [links[0], links[1], dig_str(data[2]), links[2], dig_str(data[4])]
             rows[i] += [make_link('{path}/Pedestal_abPulserBeamOn.png'.format(path=run_path), 'Plot', path=path, use_name=False)]
             rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]
-        f.write(HTML.table(rows, header_row=header))
+        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
     # endregion
@@ -286,7 +290,7 @@ class DiamondTable:
         k = 1
         used_runs = {}
         for dia in self.DiaScans.get_diamonds():
-            rps = self.DiaScans.find_diamond_runplans(dia) if rp is None else {'201608': {'bla': {make_runplan_string(rp): 'bla'}}}
+            rps = self.DiaScans.find_diamond_runplans(dia) if rp is None else {make_tc_str(tc): {'bla': {make_runplan_string(rp): 'bla'}} for tc in self.TestCampaigns}
             for tc, item in rps.iteritems():
                 used_runs[tc] = {dia: []}
                 runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
@@ -299,7 +303,7 @@ class DiamondTable:
                         pic = name.split('/')[-1]
                         if not file_exists('{path}/{file}'.format(path=rp_path, file=pic)) or copy_all:
                             copy(name, rp_path)
-                    runs = self.DiaScans.get_runs(rp, tc)
+                    runs = self.DiaScans.get_runs(rp, tc) if rp in self.DiaScans.RunPlans[tc] else []
                     for run in runs:
                         if run in used_runs[tc][dia]:
                             continue
@@ -364,7 +368,10 @@ class DiamondTable:
                 for rp, ch in sorted(rps.iteritems()):
                     runs = self.DiaScans.get_runs(rp, tc)
                     for run in runs:
-                        values = self.get_pickle(run, tc, ch, self.translate_dia(dia))
+                        try:
+                            values = self.get_pickle(run, tc, ch, self.translate_dia(dia))
+                        except ReferenceError:
+                            values = [None] * 5
                         if run not in data[tc]:
                             data[tc][run] = {}
                         data[tc][run][ch] = values
