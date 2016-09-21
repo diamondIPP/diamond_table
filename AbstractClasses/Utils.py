@@ -153,5 +153,15 @@ def center_txt(txt):
     return '<div align="center">{0}</div>'.format(txt)
 
 
+def add_bkg(table, color='black'):
+    lines = table.split('\n')
+    for i, line in enumerate(lines):
+        if '&n' in line:
+            lines[i] = line.replace('<TD>&n', '<TD bgcolor={col}>&n'.format(col=color))
+        else:
+            lines[i] = line.replace('<TD>', '<TD bgcolor=white>')
+        lines[i] = lines[i].replace('<TH>', '<TH bgcolor=white>')
+    return '\n'.join(lines)
+
 def do_nothing():
     pass
