@@ -284,14 +284,14 @@ class DiamondTable:
             copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/AbstractClasses/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
         copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/AbstractClasses/'.format(dir=self.Dir))
 
-    def copy_pics(self, copy_all=False, rp=None):
+    def copy_pics(self, copy_all=False, runplan=None):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
         n = len(glob('/home/testbeam/testing/micha/myPadAnalysis/Res*/*/*/png/*'))
         pbar = ProgressBar(widgets=widgets, maxval=n).start()
         k = 1
         used_runs = {}
         for dia in self.DiaScans.get_diamonds():
-            rps = self.DiaScans.find_diamond_runplans(dia) if rp is None else {make_tc_str(tc): {'bla': {make_runplan_string(rp): 'bla'}} for tc in self.TestCampaigns}
+            rps = self.DiaScans.find_diamond_runplans(dia) if runplan is None else {make_tc_str(tc): {'bla': {make_runplan_string(runplan): 'bla'}} for tc in self.TestCampaigns}
             for tc, item in rps.iteritems():
                 used_runs[tc] = {dia: []}
                 runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
@@ -338,7 +338,7 @@ class DiamondTable:
     def get_pickle(self, run, tc, ch, dia):
         ch = 0 if ch == 1 else 3
         pickle_dirs = ['Ph_fit', 'Pedestal', 'Pulser']
-        file_names = '{tc}_{run}_{ch}_20000_eventwise_b2/{tc}_{run}_{ch}_ab2_fwhm_all_cuts/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn'.format(tc=tc, run=run, ch=ch, dia=dia).split('/')
+        file_names = '{tc}_{run}_{ch}_10000_eventwise_b2/{tc}_{run}_{ch}_ab2_fwhm_all_cuts/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn'.format(tc=tc, run=run, ch=ch, dia=dia).split('/')
         pars = [0, 1, 1]
         data = []
         for i, (dir_, name) in enumerate(zip(pickle_dirs, file_names)):
