@@ -24,6 +24,7 @@ class DiamondTable:
 
         self.Dir = get_dir()
         self.DataPath = '{dir}/{file}'.format(dir=get_dir(), file=self.Config.get('General', 'data_directory'))
+        self.AnaDir = self.Config.get('General', 'analysis_dir')
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
@@ -281,7 +282,7 @@ class DiamondTable:
     def copy_logs(self):
         for tc in self.DiaScans.RunPlans:
             copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/AbstractClasses/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
-        copy('/home/testbeam/testing/micha/myPadAnalysis/Runinfos/run_plans.json', '{dir}/AbstractClasses/'.format(dir=self.Dir))
+        copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/AbstractClasses/'.format(dir=self.Dir))
 
     def copy_pics(self, copy_all=False, rp=None):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
