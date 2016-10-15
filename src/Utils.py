@@ -6,6 +6,7 @@
 from datetime import datetime, timedelta
 from termcolor import colored
 import os
+from os.path import dirname, realpath
 from ConfigParser import ConfigParser
 from json import load
 

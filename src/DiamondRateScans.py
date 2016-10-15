@@ -28,7 +28,7 @@ class DiaScans:
     @staticmethod
     def load_diamond_parser():
         parser = ConfigParser()
-        parser.read('AbstractClasses/DiamondAliases.cfg')
+        parser.read('src/DiamondAliases.cfg')
         return parser
 
     def load_diamond(self, dia):
@@ -56,7 +56,7 @@ class DiaScans:
 
     @staticmethod
     def load_all_runplans():
-        f = open('AbstractClasses/run_plans.json', 'r')
+        f = open('src/run_plans.json', 'r')
         runplans = load(f)
         f.close()
         return runplans
@@ -64,7 +64,7 @@ class DiaScans:
     def load_runinfos(self):
         run_infos = {}
         for tc in self.RunPlans:
-            file_path = 'AbstractClasses/run_log{tc}.json'.format(tc=tc)
+            file_path = 'src/run_log{tc}.json'.format(tc=tc)
             f = open(file_path)
             run_infos[tc] = load(f)
             f.close()
