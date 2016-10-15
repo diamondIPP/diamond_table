@@ -10,7 +10,8 @@ from Utils import *
 
 
 class DiaScans:
-    def __init__(self, diamond=None):
+    def __init__(self, prog_dir, diamond=None):
+        self.Dir = prog_dir
         self.Selection = []
         self.Name = None
         self.scale_factors = OrderedDict()
@@ -25,10 +26,9 @@ class DiaScans:
     # ==========================================================================
     # region INIT
 
-    @staticmethod
-    def load_diamond_parser():
+    def load_diamond_parser(self):
         parser = ConfigParser()
-        parser.read('src/DiamondAliases.cfg')
+        parser.read('{dir}/data/DiamondAliases.cfg'.format(dir=self.Dir))
         return parser
 
     def load_diamond(self, dia):
@@ -54,9 +54,8 @@ class DiaScans:
         else:
             return tcs
 
-    @staticmethod
-    def load_all_runplans():
-        f = open('src/run_plans.json', 'r')
+    def load_all_runplans(self):
+        f = open('{dir}/data/run_plans.json'.format(dir=self.Dir), 'r')
         runplans = load(f)
         f.close()
         return runplans
@@ -64,7 +63,7 @@ class DiaScans:
     def load_runinfos(self):
         run_infos = {}
         for tc in self.RunPlans:
-            file_path = 'src/run_log{tc}.json'.format(tc=tc)
+            file_path = '{dir}/data/run_log{tc}.json'.format(tc=tc, dir=self.Dir)
             f = open(file_path)
             run_infos[tc] = load(f)
             f.close()
@@ -81,7 +80,7 @@ class DiaScans:
             for rp, info in sorted(self.RunPlans[tc].iteritems()):
                 runs = info['runs']
                 dias = [self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]) for ch in [1, 2]]
-                print rp.ljust(5), '{0}-{1}'.format(str(runs[0]).zfill(3), str(runs[-1]).zfill(3)), dias[0].ljust(11), dias[1].ljust(11)
+                print rp.ljust(5), '{0}-{1}'.format(str(runs[0]).zfill(3), str(runs[-1]).zfill(3)), str(dias[0]).ljust(11), str(dias[1]).ljust(11)
 
     # endregion
 
