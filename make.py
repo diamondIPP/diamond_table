@@ -3,7 +3,7 @@
 
 
 import sys
-sys.path.append('AbstractClasses')
+sys.path.append('src')
 import HTML
 from json import loads, dump
 import pickle
@@ -14,7 +14,7 @@ from shutil import copy
 from numpy import mean
 from os import remove
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
-from collections import OrderedDict
+from RunTable import RunTable
 
 
 class DiamondTable:
@@ -29,14 +29,16 @@ class DiamondTable:
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
         try:
-            self.Data = load_json('{dir}/AbstractClasses/data.json'.format(dir=self.Dir))
+            self.Data = load_json('{dir}/src/data.json'.format(dir=self.Dir))
         except ValueError:
             self.Data = {}
-        self.DiaScans = DiaScans()
+        self.DiaScans = DiaScans(self.Dir)
         self.Diamonds = self.DiaScans.get_diamonds()
         self.create_diamond_folders()
 
         self.BkgCol = 'lightgrey'
+
+        self.RunTable = RunTable()
 
     def create_diamond_folders(self):
         for dia in self.Diamonds:
@@ -55,7 +57,7 @@ class DiamondTable:
     def build_everything(self):
         self.create_overview()
         self.create_runplan_overview()
-        self.create_run_overview()
+        self.RunTable.create_overview()
 
     # =====================================================
     # region OVERVIEW
@@ -66,6 +68,7 @@ class DiamondTable:
         self.build_board_table()
 
         # single crystal
+        f.write('<h3>{ln}\n</h4>'.format(ln=make_link('Diamonds/OLD/index.php', 'Tested before 2015')))
         f.write('<h3>Single Crystal Diamonds:</h3>\n')
         f.write(self.build_diamond_table())
         f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
@@ -119,42 +122,12 @@ class DiamondTable:
         for tc in self.TestCampaigns:
             path = '{dir}/BeamTests/{dat}'.format(dir=self.Dir, dat=tc)
             create_dir(path)
-            self.build_full_run_table(tc, path)
+            self.RunTable.build_full_table(tc, path)
             dias = str(list(z.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
             if dias:
                 target = 'BeamTests/{tc}/index.html'.format(tc=tc)
                 rows.append([make_link(target, make_tc_str(tc, txt=0), path=self.Dir), dias])
         return add_bkg(HTML.table(rows, header_row=header))
-
-    def build_full_run_table(self, tc, path):
-        html_file = '{path}/index.html'.format(path=path)
-        f = open(html_file, 'w')
-        tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, txt=False))
-        write_html_header(f, tit, bkg=self.BkgCol)
-        header = ['Run', 'Type', 'Flux [kHz/cm{0}]'.format(sup(2)), 'FS11', 'FSH13', 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
-        rows = []
-        if make_tc_str(tc) not in z.DiaScans.RunInfos:
-            return
-        runs = z.DiaScans.RunInfos[make_tc_str(tc)]
-        sorted_runs = OrderedDict(sorted({int(run): data for run, data in runs.iteritems()}.iteritems()))
-        for i, (run, data) in enumerate(sorted_runs.iteritems()):
-            rows.append([run])
-            rows[i] += [self.get_runtype(data), self.calc_flux(data), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.calc_duration(data)]
-            rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
-            rows[i] += [data['comments'][:100]]
-        f.write(add_bkg(HTML.table(rows, header_row=header), self.BkgCol))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
-
-    @staticmethod
-    def get_runtype(info):
-        data = info['runtype']
-        if 'signal' in data:
-            return 'signal'
-        elif 'pedes' in data:
-            return 'pedestal'
-        else:
-            return data[:10]
 
     @staticmethod
     def get_manufacturer(path):
@@ -239,50 +212,10 @@ class DiamondTable:
         f.close()
     # endregion
 
-    # =====================================================
-    # region RUNS
-    def create_run_overview(self):
-        for dia in self.Diamonds:
-            rps = self.DiaScans.find_diamond_runplans(dia)
-            for tc, item in rps.iteritems():
-                rps = {rp: ch for rps in item.itervalues() for rp, ch in rps.iteritems()}
-                for rp, ch in sorted(rps.iteritems()):
-                    path = '{dat}{dia}/BeamTests/{tc}'.format(dat=self.DataPath, dia=dia, tc=make_tc_str(tc, 0))
-                    runs = self.DiaScans.get_runs(rp, tc)
-                    self.build_run_table(path, rp, tc, dia, runs, ch)
-                    for run in runs:
-                        run_path = '{path}/{run}'.format(path=path, run=run)
-                        create_dir(run_path)
-                        self.copy_index_php(run_path)
-
-    def build_run_table(self, path, rp, tc, dia, runs, ch):
-        html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
-        f = open(html_file, 'w')
-        tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
-        write_html_header(f, tit, bkg=self.BkgCol)
-        header = ['Run', 'Type', 'HV [V]', 'Flux [kHz/cm{0}]'.format(sup(2)), 'Distr.', 'PH [au]', 'Ped. [au]', 'Sigma', 'Pul. [au]', 'Sigma', 'Ped. [au]', 'Start Time', 'Duration', 'Comments']
-        rows = []
-        file_names = ['PulseHeight20000', 'Pedestal_aball_cuts', 'PulserDistributionFit']
-        for i, run in enumerate(runs):
-            info = self.DiaScans.RunInfos[tc][str(run)]
-            data = self.Data[tc][str(run)][str(ch)] if str(run) in self.Data[tc] else [None] * 5
-            run_path = '../{run}'.format(run=run)
-            rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])
-            rows[i] += [info['runtype'], make_bias_str(info['dia{ch}hv'.format(ch=ch)]), self.calc_flux(info)]
-            rows[i] += [make_link('{path}/SignalDistribution.png'.format(path=run_path), 'Plot', path=path, use_name=False)]
-            links = [make_link('{path}/{name}.png'.format(path=run_path, name=name), dig_str(data[j]), path=path) for j, name in zip([0, 1, 3], file_names)]
-            rows[i] += [links[0], links[1], dig_str(data[2]), links[2], dig_str(data[4])]
-            rows[i] += [make_link('{path}/Pedestal_abPulserBeamOn.png'.format(path=run_path), 'Plot', path=path, use_name=False)]
-            rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]
-        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
-    # endregion
-
     def copy_logs(self):
         for tc in self.DiaScans.RunPlans:
-            copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/AbstractClasses/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
-        copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/AbstractClasses/'.format(dir=self.Dir))
+            copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/src/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
+        copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/src/'.format(dir=self.Dir))
 
     def copy_pics(self, copy_all=False, runplan=None):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
@@ -357,7 +290,7 @@ class DiamondTable:
         return data
 
     def create_pickle_data(self):
-        path = '{dir}/AbstractClasses/data.json'.format(dir=self.Dir)
+        path = '{dir}/src/data.json'.format(dir=self.Dir)
         f = open(path, 'w')
         data = {}
         for dia in self.DiaScans.get_diamonds():
@@ -416,7 +349,7 @@ class DiamondTable:
         return str(dur)
 
     def translate_dia(self, dia):
-        dic = load_parser('{dir}/AbstractClasses/OldDiamondAliases.cfg'.format(dir=self.Dir))
+        dic = load_parser('{dir}/src/OldDiamondAliases.cfg'.format(dir=self.Dir))
         return dic.get('ALIASES', dia)
 
 
