@@ -1,0 +1,4 @@
+Thickness=544micron 4.7  x4.7  mm
+23-nov-10  run 10411     full chg@0.2 V/micron  side A  0.7 nA @700V dist OK
+30-nov-10  run 10412     full chg@0.2 V/micron  side B  0.3 nA @1 KV dist OK
+13-may-11 at RU pixel testing
