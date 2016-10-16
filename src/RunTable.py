@@ -41,9 +41,12 @@ class RunTable(Table):
                   'Flux<br>[kHz/cm{0}]'.format(sup(2)),
                   'Distr.',
                   'Pulse Height [au]',
-                  'Pedestal<br>(Sigma) [au]',
-                  'Pul. [au]',
-                  'Ped. [au]',
+                  'Pedestal [au]',
+                  'Noise [1&sigma;]',
+                  'Pulser<br>Pulse Height [au]',
+                  'Pulser &sigma;',
+                  'Pulser<br>Pedestal [au]',
+                  'Pulser<br>Noise [1&sigma;]',
                   'Start Time',
                   'Duration',
                   'Comments']
@@ -51,18 +54,22 @@ class RunTable(Table):
         i = 0
         for run in runs:
             info = self.DiaScans.RunInfos[tc][str(run)]
-            # data = self.Data[tc][str(run)][str(ch)] if str(run) in self.Data[tc] else [None] * 5
-            data = self.get_new_pickle(run, tc, ch, dia)
-            if not hasattr(data[0], 'Pars'):
-                continue
-            data = [(data[l].Parameter(j), data[l].ParError(j) if not l else data[l].Parameter(2)) if data[l] is not None else (None, None) for l, j in enumerate([0, 1, 1])]
+            data = {tag: self.get_pickle(run, tc, ch, dia, tag, form) for tag, form in zip(['PH', 'Pedestal', 'Pulser', 'PulserPed'], ['2.2f', '2.2f', '2.2f', '2.2f'])}
             run_path = '../{run}'.format(run=run)
-            file_names = ['{path}/{name}.png'.format(name=name, path=run_path) for name in ['PulseHeight10000', 'Pedestal_aball_cuts', 'PulserDistributionFit']]
-            rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])
-            rows[i] += [info['runtype'], make_bias_str(info['dia{ch}hv'.format(ch=ch)]), center_txt(self.calc_flux(info))]  # HV and Flux
-            rows[i] += [center_txt(make_link('{path}/SignalDistribution.png'.format(path=run_path), 'Plot', path=path, use_name=False))]  # Distribution
-            rows[i] += [center_txt(make_link(file_names[n], '{0} &plusmn {1}'.format(*[dig_str(data[n][k], '5.2f') for k in xrange(2)]))) for n in xrange(3)]   # PH / Ped / Pulser
-            rows[i] += [make_link('{path}/Pedestal_abPulserBeamOn.png'.format(path=run_path), 'Plot', path=path, use_name=False)]
+            file_name = '{path}/{{0}}.png'.format(path=run_path)
+
+            rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])  # Run
+            rows[i] += [info['runtype']]                                                        # Type
+            rows[i] += [make_bias_str(info['dia{ch}hv'.format(ch=ch)])]                         # HV
+            rows[i] += [center_txt(self.calc_flux(info))]                                       # Flux
+            rows[i] += [center_txt(make_link('{path}/SignalDistribution.png'.format(path=run_path), 'Plot', path=path, use_name=False))]                                # Distribution
+            rows[i] += [center_txt(make_link(file_name.format('PulseHeight10000'), '{0} ({1})'.format(data['PH'].Parameter(0), data['PH'].ParError(0))))]               # PH
+            rows[i] += [center_txt(make_link(file_name.format('Pedestal_aball_cuts'), data['Pedestal'].Parameter(1)))]                                                  # Pedestal
+            rows[i] += [center_txt(make_link(file_name.format('Pedestal_aball_cuts'), data['Pedestal'].Parameter(2)))]                                                  # Noise
+            rows[i] += [center_txt(make_link(file_name.format('PulserDistributionFit'), '{0} ({1})'.format(data['Pulser'].Parameter(1), data['Pulser'].ParError(1))))]  # Pulser
+            rows[i] += [center_txt(make_link(file_name.format('PulserDistributionFit'), data['Pulser'].Parameter(2)))]                                                  # Pulser Sigma
+            rows[i] += [center_txt(make_link(file_name.format('Pedestal_abPulserBeamOn'), data['PulserPed'].Parameter(1)))]                                             # Pulser Pedestal
+            rows[i] += [center_txt(make_link(file_name.format('Pedestal_abPulserBeamOn'), data['PulserPed'].Parameter(2)))]                                             # Pulser Ped Noise
             rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]
             i += 1
         f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
