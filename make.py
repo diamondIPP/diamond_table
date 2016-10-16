@@ -93,7 +93,10 @@ class DiamondTable:
         for ex in self.Exclude:
             dias.remove(ex) if ex in dias else do_nothing()
         rows = []
-        dias = ['SiD1'] if si else dias
+        si_diodes = loads(self.Config.get('General', 'si-diodes'))
+        for diode in si_diodes:
+            dias.remove(diode) if diode in dias else do_nothing()
+        dias = si_diodes if si else dias
         for dia in sorted(dias):
             row = [dia]
             proc = load_json('{dir}/{dia}/info.json'.format(dir=self.DataPath, dia=dia))
