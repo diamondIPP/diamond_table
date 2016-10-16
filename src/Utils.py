@@ -6,7 +6,6 @@
 from datetime import datetime, timedelta
 from termcolor import colored
 import os
-from os.path import dirname, realpath
 from ConfigParser import ConfigParser
 from json import load
 
@@ -166,15 +165,20 @@ def add_bkg(table, color='black'):
 
 
 class FitRes:
-    def __init__(self, fit_obj):
-        self.Pars = list(fit_obj.Parameters())
-        self.Errors = list(fit_obj.Errors())
+    def __init__(self, fit_obj=None, form=''):
+        self.Pars = list(fit_obj.Parameters()) if fit_obj is not None else [None]
+        self.Errors = list(fit_obj.Errors()) if fit_obj is not None else [None]
+        self.Format = form
 
     def Parameter(self, arg):
-        return self.Pars[arg]
+        if arg >= len(self.Pars):
+            return ''
+        return self.Pars[arg] if not self.Format else dig_str(self.Pars[arg], self.Format)
 
     def ParError(self, arg):
-        return self.Errors[arg]
+        if arg >= len(self.Errors):
+            return ''
+        return self.Errors[arg] if not self.Format else dig_str(self.Errors[arg], self.Format)
 
 
 def do_nothing():
