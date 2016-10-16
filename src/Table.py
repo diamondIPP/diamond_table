@@ -11,6 +11,7 @@ from os import remove
 from shutil import copy
 from glob import glob
 from numpy import mean
+from os.path import dirname, realpath
 import pickle
 
 
@@ -89,43 +90,22 @@ class Table:
         else:
             return data[:10]
 
-    def get_pickle(self, run, tc, ch, dia):
+    def get_pickle(self, run, tc, ch, dia, tag, form=''):
         ch = 0 if ch == 1 else 3
-        pickle_dirs = ['Ph_fit', 'Pedestal', 'Pulser']
-        file_names = '{tc}_{run}_{ch}_10000_eventwise_b2/{tc}_{run}_{ch}_ab2_fwhm_all_cuts/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn'.format(tc=tc, run=run, ch=ch, dia=dia).split('/')
-        pars = [0, 1, 1]
-        data = []
-        for i, (dir_, name) in enumerate(zip(pickle_dirs, file_names)):
-            path = '{dir}/Pickles/{pic}/{f}.pickle'.format(dir=self.Dir, pic=dir_, f=name)
-            if not file_exists(path):
-                data.append(None)
-                if i:
-                    data.append(None)
-                continue
-            f = open(path)
-            p = pickle.load(f)
-            data.append(p.Parameter(pars[i]))
-            if i:
-                data.append(p.Parameter(pars[i] + 1))
-            f.close()
-        return data
-
-    def get_new_pickle(self, run, tc, ch, dia):
-        ch = 0 if ch == 1 else 3
-        dia = self.translate_dia(dia)
-        pickle_dirs = ['Ph_fit', 'Pedestal', 'Pulser']
-        file_names = '{tc}_{run}_{ch}_10000_eventwise_b2/{tc}_{run}_{ch}_ab2_fwhm_all_cuts/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn'.format(tc=tc, run=run, ch=ch, dia=dia).split('/')
-        data = []
-        for dir_, name in zip(pickle_dirs, file_names):
-            path = '{dir}/Pickles/{pic}/{f}.pickle'.format(dir=self.Dir, pic=dir_, f=name)
-            if not file_exists(path):
-                data.append(None)
-            else:
-                f = open(path)
-                p = pickle.load(f)
-                data.append(p)
-                f.close()
-        return data
+        file_name_dic = {'PH': 'Ph_fit/{tc}_{run}_{ch}_10000_eventwise_b2',
+                         'Pedestal': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_all_cuts',
+                         'Pulser': 'Pulser/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn',
+                         'PulserPed': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_PulserBeamOn'}
+        path = '{dir}/Pickles/{f}.pickle'.format(dir=self.Dir, f=file_name_dic[tag])
+        path = path.format(tc=tc, run=run, ch=ch, dia=self.translate_dia(dia))
+        if not file_exists(path):
+            log_warning('did not find {p}'.format(p=path))
+            return FitRes()
+        f = open(path)
+        fit_res = pickle.load(f)
+        fit_res.Format = form
+        f.close()
+        return fit_res
 
     def translate_dia(self, dia):
         dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
