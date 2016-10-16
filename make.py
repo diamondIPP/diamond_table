@@ -352,7 +352,7 @@ class DiamondTable:
         return str(dur)
 
     def translate_dia(self, dia):
-        dic = load_parser('{dir}/src/OldDiamondAliases.cfg'.format(dir=self.Dir))
+        dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
         return dic.get('ALIASES', dia)
 
 
