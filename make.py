@@ -217,8 +217,8 @@ class DiamondTable:
 
     def copy_logs(self):
         for tc in self.DiaScans.RunPlans:
-            copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/src/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
-        copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/src/'.format(dir=self.Dir))
+            copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/data/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
+        copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/data/'.format(dir=self.Dir))
 
     def copy_pics(self, copy_all=False, runplan=None):
         widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
