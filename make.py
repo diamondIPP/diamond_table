@@ -3,18 +3,17 @@
 
 
 import sys
+
 sys.path.append('src')
 import HTML
-from json import loads, dump
-import pickle
+from json import loads
 from glob import glob
 from Utils import *
-from DiamondRateScans import DiaScans
 from shutil import copy
-from numpy import mean
-from os import remove
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from RunTable import RunTable
+from Table import Table
+from os.path import basename, join
 
 
 class DiamondTable:
