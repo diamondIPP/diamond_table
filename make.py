@@ -131,18 +131,32 @@ class DiamondTable(Table):
                 rows.append([make_link(target, make_tc_str(tc, txt=0), path=self.Dir), dias])
         return add_bkg(HTML.table(rows, header_row=header))
 
-    @staticmethod
-    def get_manufacturer(path):
-        f_path = '{path}info.conf'.format(path=path)
-        if file_exists(f_path):
+    def get_manufacturer(self, dia):
+        info_path = join(self.DataPath, dia, 'info.conf')
+        f_path = join(self.DataPath, dia, 'Manufacturer', 'info.conf')
+
+        if file_exists(info_path):
+            conf = load_parser(info_path)
+            return make_link(conf.get('Manufacturer', 'url'), conf.get('Manufacturer', 'name'), new_tab=True, center=True)
+        elif file_exists(f_path):
             conf = load_parser(f_path)
-            return make_link(conf.get('MAIN', 'url'), conf.get('MAIN', 'name'), new_tab=True)
+            return make_link(conf.get('MAIN', 'url'), conf.get('MAIN', 'name'), new_tab=True, center=True)
         else:
             return ''
 
-    def build_col(self, col, path):
+    def get_thickness(self, dia):
+        info_path = join(self.DataPath, dia, 'info.conf')
+        if file_exists(info_path):
+            conf = load_parser(info_path)
+            return center_txt(conf.get('Thickness', 'value')) if 'Thickness' in conf.sections() else center_txt('??')
+        else:
+            return center_txt('??')
+
+    def build_col(self, col, dia):
         if col == 'Manufacturer':
-            return self.get_manufacturer(path)
+            return self.get_manufacturer(dia)
+        if col == 'Thickness':
+            return self.get_thickness(dia)
 
     def build_header(self):
         header_row = ['Diamond']
