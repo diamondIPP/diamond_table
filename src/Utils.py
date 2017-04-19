@@ -91,6 +91,7 @@ def make_runplan_string(nr):
 
 
 def make_tc_str(tc, txt=True):
+    tc = str(tc)
     if tc[0].isdigit():
         return datetime.strptime(tc, '%Y%m').strftime('%B %Y' if txt else '%b%y')
     else:
@@ -99,20 +100,6 @@ def make_tc_str(tc, txt=True):
 
 def make_bias_str(bias):
     return '{sign}{val}'.format(sign='+' if int(bias) > 0 else '', val=int(bias))
-
-
-def make_info_str(last_tc, tc_str, info):
-    out = ['', '']
-    for tc, value in info.iteritems():
-        if last_tc < tc <= tc_str:
-            for key, val in value.iteritems():
-                if key == 'Irradiation':
-                    out[0] = 'to {0:1.0g}'.format(val)
-                elif key == 'Built':
-                    out[0] = 'to {0}'.format(val)
-                if key == 'BoardNumber':
-                    out[1] = center_txt(val)
-    return out
 
 
 def load_parser(path):
@@ -156,11 +143,11 @@ def center_txt(txt):
 def add_bkg(table, color='black'):
     lines = table.split('\n')
     for i, line in enumerate(lines):
-        if '&n' in line:
+        if '&n' in line or '"></TD>' in line:
             lines[i] = line.replace('<TD>&n', '<TD bgcolor={col}>&n'.format(col=color))
         else:
-            lines[i] = line.replace('<TD>', '<TD bgcolor=white>')
-        lines[i] = lines[i].replace('<TH>', '<TH bgcolor=white>')
+            lines[i] = line.replace('<TD', '<TD bgcolor=white ')
+        lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
     return '\n'.join(lines)
 
 
