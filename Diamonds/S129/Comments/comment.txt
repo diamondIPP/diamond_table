@@ -1,0 +1,5 @@
+T=528 micron 4.7 mm2
+22-mar-12  run 10459     full chg@>.1 V/micron  side A  0.65nA @500V dist OK
+23-mar-12  run 10460     full chg@>.1 V/micron  side B  0.15nA @ 1KV dist OK
+11-dec-12  run 20518   look at 500V-->0 signal
+15-nov-13 Sent to HK for eventual PSI beamtest control sample
