@@ -44,19 +44,19 @@ class DiamondTable(Table):
         # single crystal
         f.write('<h3>{ln}\n</h4>'.format(ln=make_link('Diamonds/OLD/index.php', 'Tested before 2015')))
         f.write('<h3>Single Crystal Diamonds:</h3>\n')
-        f.write(self.build_diamond_table())
-        f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
+        f.write(self.build_diamond_table(scvd=True))
         # poly chrystal
         f.write('\n<h3>Poly Crystal Diamonds:</h3>\n')
-        f.write(self.build_diamond_table(scvd=False))
-        f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
+        f.write(self.build_diamond_table())
         # silicon pad
         f.write('\n<h3>Silicon Detectors:</h3>\n')
         f.write(self.build_diamond_table(si=True))
-        f.write('* {ln}\n\n'.format(ln=make_link('BoardNumbers/bn.html', 'Board Number')))
         # run overview
         f.write('\n<h3>Full Run Overview:</h3>\n')
         f.write(self.build_tc_table())
+        f.write('<br/>*<br/>    BN  = Board Number\n')
+        f.write('<br/>          Irr = Irradiation \n')
+        f.write('<br/>          T   = Thickness \n\n')
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
