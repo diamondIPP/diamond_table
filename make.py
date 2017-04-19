@@ -62,6 +62,15 @@ class DiamondTable(Table):
 
     def build_diamond_table(self, scvd=True, si=False):
         header = self.build_header()
+    def get_col_titles(self):
+        cols = []
+        for col in self.OtherCols:
+            if col == 'Thickness':
+                cols.append('T* [&mu;m]')
+            else:
+                cols.append(col)
+        return cols
+
         scdias = loads(self.Config.get('General', 'single_crystal'))
         dias = [name.split('/')[-1] for name in glob('{dat}/*'.format(dat=self.DataPath)) if (name.split('/')[-1] in scdias if scvd else name.split('/')[-1] not in scdias)]
         for ex in self.Exclude:
