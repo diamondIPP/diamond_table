@@ -11,8 +11,9 @@ from os import remove
 from shutil import copy
 from glob import glob
 from numpy import mean
-from os.path import dirname, realpath
+from os.path import dirname, realpath, join
 import pickle
+from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 
 
 def get_program_dir():
@@ -23,28 +24,40 @@ class Table:
 
     def __init__(self):
 
+        # program directory
         self.Dir = get_program_dir()
-        self.ConfigFileName = 'conf.ini'
-        self.Config = self.load_parser()
 
+        # config
+        self.ConfigFileName = 'conf.ini'
+        self.Config = self.load_config()
+
+        # directories
         self.DataPath = '{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'data_directory'))
         self.AnaDir = self.Config.get('General', 'analysis_dir')
+        self.AnaPickleDir = '{ana}/Configuration/Individual_Configs'.format(ana=self.AnaDir)
+        self.PickleDir = '{dir}/Pickles'.format(dir=self.Dir)
+
+        # info
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
-
-        try:
-            self.Data = load_json('{dir}/data/data.json'.format(dir=self.Dir))
-        except ValueError:
-            self.Data = {}
         self.DiaScans = DiaScans(self.Dir)
         self.Diamonds = self.DiaScans.get_diamonds()
 
+        # settings
         self.BkgCol = 'lightgrey'
 
-    def load_parser(self):
+        # progressbar
+        self.Widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
+        self.ProgressBar = None
+
+    def start_pbar(self, n):
+        self.ProgressBar = ProgressBar(widgets=self.Widgets, maxval=n)
+        self.ProgressBar.start()
+
+    def load_config(self):
         p = ConfigParser()
-        p.read('{dir}/{file}'.format(dir=self.Dir, file=self.ConfigFileName))
+        p.read(join(self.Dir, self.ConfigFileName))
         return p
 
     def copy_index_php(self, path):
@@ -59,8 +72,9 @@ class Table:
             if 'measuredflux' in info:
                 return str('{0:5.0f}'.format(info['measuredflux'] * 2.48))
         pixel_size = 0.01 * 0.015
-        if info['maskfile'] == 'None':
-            area = [4160 * pixel_size, 4160 * pixel_size]
+        mask = info['maskfile']
+        if mask or 'no mask' in mask.lower():
+            area = [52 * 80 * pixel_size] * 2
         else:
             f = open('{path}/masks/{mask}'.format(path=self.Dir, mask=info['maskfile']), 'r')
             data = []
@@ -90,14 +104,14 @@ class Table:
         else:
             return data[:10]
 
-    def get_pickle(self, run, tc, ch, dia, tag, form=''):
+    def get_pickle(self, run, tc, ch, tag, form=''):
         ch = 0 if ch == 1 else 3
         file_name_dic = {'PH': 'Ph_fit/{tc}_{run}_{ch}_10000_eventwise_b2',
                          'Pedestal': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_all_cuts',
-                         'Pulser': 'Pulser/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn',
+                         'Pulser': 'Pulser/HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn',
                          'PulserPed': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_PulserBeamOn'}
         path = '{dir}/Pickles/{f}.pickle'.format(dir=self.Dir, f=file_name_dic[tag])
-        path = path.format(tc=tc, run=run, ch=ch, dia=self.translate_dia(dia))
+        path = path.format(tc=tc, run=run, ch=ch)
         if not file_exists(path):
             log_warning('did not find {p}'.format(p=path))
             return FitRes()
@@ -110,6 +124,9 @@ class Table:
     def translate_dia(self, dia):
         dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
         return dic.get('ALIASES', dia)
+
+    def translate_old_dia(self, dia):
+        return self.DiaScans.Parser.get('ALIASES', dia)
 
 if __name__ == '__main__':
     z = Table()
