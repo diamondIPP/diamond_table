@@ -285,89 +285,35 @@ class DiamondTable(Table):
                     copy(name, dst)
         pbar.finish()
 
-    def get_pickle(self, run, tc, ch, dia):
-        ch = 0 if ch == 1 else 3
-        pickle_dirs = ['Ph_fit', 'Pedestal', 'Pulser']
-        file_names = '{tc}_{run}_{ch}_10000_eventwise_b2/{tc}_{run}_{ch}_ab2_fwhm_all_cuts/HistoFit_{tc}_{run}_{dia}_ped_corr_BeamOn'.format(tc=tc, run=run, ch=ch, dia=dia).split('/')
-        pars = [0, 1, 1]
-        data = []
-        for i, (dir_, name) in enumerate(zip(pickle_dirs, file_names)):
-            path = '{dir}/Pickles/{pic}/{f}.pickle'.format(dir=self.Dir, pic=dir_, f=name)
-            if not file_exists(path):
-                data.append(None)
-                if i:
-                    data.append(None)
-                continue
-            f = open(path)
-            p = pickle.load(f)
-            data.append(p.Parameter(pars[i]))
-            if i:
-                data.append(p.Parameter(pars[i] + 1))
-            f.close()
-        return data
+    def copy_rp_pickle(self, rp, tc):
+        pic_dic = {'Ph_fit': '', 'Pulser': 'HistoFit_', 'Pedestal': ''}
+        rp = make_runplan_string(rp)
+        runs = self.DiaScans.RunPlans[str(tc)][rp]['runs']
+        files = []
+        for picdir, name in pic_dic.iteritems():
+            for run in runs:
+                files += glob('{dir}/{sdir}/{n}{tc}_{r}*'.format(dir=self.AnaPickleDir, sdir=picdir, n=name, tc=tc, r=run))
+        self.start_pbar(len(files))
+        for i, f in enumerate(files, 1):
+            copy(f, '{dir}/{sdir}'.format(dir=self.PickleDir, sdir=f.split('/')[-2]))
+            self.ProgressBar.update(i)
 
-    def create_pickle_data(self):
-        path = '{dir}/src/data.json'.format(dir=self.Dir)
-        f = open(path, 'w')
-        data = {}
-        for dia in self.DiaScans.get_diamonds():
-            rps = self.DiaScans.find_diamond_runplans(dia)
-            for tc, item in rps.iteritems():
-                if tc not in data:
-                    data[tc] = {}
-                rps = {rp: ch for rps in item.itervalues() for rp, ch in rps.iteritems()}
-                for rp, ch in sorted(rps.iteritems()):
-                    runs = self.DiaScans.get_runs(rp, tc)
-                    for run in runs:
-                        try:
-                            values = self.get_pickle(run, tc, ch, self.translate_dia(dia))
-                        except ReferenceError:
-                            values = [None] * 5
-                        if run not in data[tc]:
-                            data[tc][run] = {}
-                        data[tc][run][ch] = values
-        f.seek(0)
-        dump(data, f, indent=2)
-        f.truncate()
-        f.close()
-
-    def copy_index_php(self, path):
-        file_path = '{path}/{file}'.format(path=path, file=self.Config.get('General', 'index_php'))
-        if file_exists(file_path) and len(glob('{path}/*'.format(path=path))) <= 2:
-            remove(file_path)
-        if not file_exists(file_path) and len(glob('{path}/*'.format(path=path))) > 1:
-            copy('{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'index_php')), file_path)
-
-    @staticmethod
-    def calc_flux(info):
-        if 'for1' not in info or info['for1'] == 0:
-            if 'measuredflux' in info:
-                return str('{0:5.0f}'.format(info['measuredflux'] * 2.48))
-        pixel_size = 0.01 * 0.015
-        if info['maskfile'] == 'None':
-            area = [4160 * pixel_size, 4160 * pixel_size]
-        else:
-            f = open('{path}/masks/{mask}'.format(path=get_dir(), mask=info['maskfile']), 'r')
-            data = []
-            for line in f:
-                if len(line) > 3:
-                    line = line.split()
-                    data.append([int(line[2])] + [int(line[3])])
-            f.close()
-            area = [(data[1][0] - data[0][0]) * (data[1][1] - data[0][1]) * pixel_size, (data[3][0] - data[2][0]) * (data[3][1] - data[2][1]) * pixel_size]
-        flux = [info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(2)]
-        return str('{0:5.0f}'.format(mean(flux)))
-
-    @staticmethod
-    def calc_duration(info1, info2=None):
-        endinfo = info2 if info2 is not None else info1
-        dur = conv_time(endinfo['endtime'], strg=False) - conv_time(info1['starttime0'], strg=False)
-        dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
-        return str(dur)
-
-    def translate_dia(self, dia):
-        dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
-        return dic.get('ALIASES', dia)
+    def copy_rp_pics(self, rp, tc, copy_all=False):
+        rp = make_runplan_string(rp)
+        runs = self.DiaScans.RunPlans[str(tc)][rp]['runs']
+        anadir = '{dir}/Results{tc}/*'.format(dir=self.AnaDir, tc=tc)
+        files = [i for lst in [glob('{dir}/{r}/png/*'.format(dir=anadir, r=run)) for run in runs] for i in lst] + glob('{dir}/runplan{rp}/png/*'.format(dir=anadir, rp=rp))
+        this_dir = '{dir}/Diamonds/*/BeamTests/{tc}'.format(dir=self.Dir, tc=make_tc_str(tc, 0))
+        existing_files = [i for lst in [glob('{dir}/{r}/*'.format(dir=this_dir, r=run)) for run in runs] for i in lst] + glob('{dir}/RunPlan{rp}/*'.format(dir=this_dir, rp=make_rp_string(rp)))
+        self.start_pbar(len(files))
+        for i, f in enumerate(files, 1):
+            if not basename(f) in [basename(ef) for ef in existing_files] or copy_all:
+                r_string = f.split('/')[-3]
+                dia = self.translate_old_dia(f.split('/')[-4])
+                sub_dir = 'RunPlan{r}'.format(r=make_rp_string(r_string.strip('runplan'))) if 'runplan' in f else r_string
+                # print basename(f), '{dir}/{sdir}'.format(dir=this_dir.replace('*', dia), sdir=sub_dir)
+                copy(f, '{dir}/{sdir}'.format(dir=this_dir.replace('*', dia), sdir=sub_dir))
+            self.ProgressBar.update(i)
 
 
 def get_dir():
