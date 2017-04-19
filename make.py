@@ -60,8 +60,6 @@ class DiamondTable(Table):
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
-    def build_diamond_table(self, scvd=True, si=False):
-        header = self.build_header()
     def get_col_titles(self):
         cols = []
         for col in self.OtherCols:
@@ -71,16 +69,16 @@ class DiamondTable(Table):
                 cols.append(col)
         return cols
 
+    def get_diamond_names(self, scvd=False, si=False):
+        all_dias = sorted([basename(name) for name in glob('{dat}/*'.format(dat=self.DataPath))])
         scdias = loads(self.Config.get('General', 'single_crystal'))
-        dias = [name.split('/')[-1] for name in glob('{dat}/*'.format(dat=self.DataPath)) if (name.split('/')[-1] in scdias if scvd else name.split('/')[-1] not in scdias)]
-        for ex in self.Exclude:
-            dias.remove(ex) if ex in dias else do_nothing()
-        rows = []
         si_diodes = loads(self.Config.get('General', 'si-diodes'))
-        for diode in si_diodes:
-            dias.remove(diode) if diode in dias else do_nothing()
-        dias = si_diodes if si else dias
-        for dia in sorted(dias):
+        if scvd:
+            return [dia for dia in all_dias if dia in scdias and dia not in self.Exclude]
+        elif si:
+            return [dia for dia in all_dias if dia in si_diodes and dia not in self.Exclude]
+        else:
+            return [dia for dia in all_dias if dia not in scdias + self.Exclude + si_diodes]
             row = [dia]
             proc = load_json('{dir}/{dia}/info.json'.format(dir=self.DataPath, dia=dia))
             # test campaigns
