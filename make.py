@@ -91,17 +91,15 @@ class DiamondTable(Table):
                 row.append(self.build_col(col, dia))
             rows.append(row)
             # test campaigns
-            last_tc = '201500'
             for tc in self.TestCampaigns:
                 tc_str = make_tc_str(tc)
-                row += self.make_info_str(last_tc, tc_str, dia)
+                row += self.make_info_str(tc_str, dia)
                 if not row[-1].startswith('#cs'):
                     target = join('Diamonds', dia, 'BeamTests', tc, 'index.html')
                     row.append(make_link(target, path=self.Dir, use_name=False))
-                last_tc = make_tc_str(tc)
         return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
 
-    def make_info_str(self, last_tc, tc_str, dia):
+    def make_info_str(self, tc_str, dia):
         info = ConfigParser()
         info.read(join(self.DataPath, dia, 'info.conf'))
         out = [''] * 3
@@ -228,6 +226,7 @@ class DiamondTable(Table):
         f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
+
     # endregion
 
     def copy_logs(self):
