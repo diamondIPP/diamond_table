@@ -101,6 +101,22 @@ class DiamondTable(Table):
                 last_tc = make_tc_str(tc)
         return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
 
+    def make_info_str(self, last_tc, tc_str, dia):
+        info = ConfigParser()
+        info.read(join(self.DataPath, dia, 'info.conf'))
+        out = [''] * 3
+        if tc_str not in info.sections():
+            return ['#cs4#']
+        options = info.options(tc_str)
+
+        typ = '{0}'.format(info.get(tc_str, 'type')) if 'type' in options else ''
+        out[0] = center_txt(typ)
+        out[1] = center_txt('{0:.1e}'.format(float(info.get(tc_str, 'irradiation')))) if 'irradiation' in options else center_txt('0')
+        if 'boardnumber' in options:
+            out[2] = center_txt(info.get(tc_str, 'boardnumber'))
+        else:
+            out[2] = center_txt('-' if 'pix' in typ else '?')
+        return out
 
     def build_tc_table(self):
         header = ['Test Campaign', 'Tested Diamonds']
