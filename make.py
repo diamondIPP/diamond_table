@@ -159,10 +159,12 @@ class DiamondTable(Table):
             return self.get_thickness(dia)
 
     def build_header(self):
-        header_row = ['Diamond']
+        header_row = ['#rs2#Diamond'] + ['#rs2#{c}'.format(c=col) for col in self.get_col_titles()]
+        second_row = []
         for date in self.TestCampaigns:
-            header_row += ['Proc.', 'BN*', date]
-        return header_row + [col for col in self.OtherCols]
+            header_row += ['#cs4#{d}'.format(d=date)]
+            second_row += [center_txt(txt) for txt in ['Type', 'Irr* [neq]', make_link(join('BoardNumbers', 'bn.html'), 'BN*'), 'Data']]
+        return header_row, second_row
 
     def build_board_table(self):
         f = open('{dir}/BoardNumbers/bn.json'.format(dir=self.Dir))
