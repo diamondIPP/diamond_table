@@ -16,26 +16,9 @@ from Table import Table
 from os.path import basename, join
 
 
-class DiamondTable:
-    
+class DiamondTable(Table):
     def __init__(self):
-        self.Config = self.load_parser()
-
-        self.Dir = get_dir()
-        self.DataPath = '{dir}/{file}'.format(dir=get_dir(), file=self.Config.get('General', 'data_directory'))
-        self.AnaDir = self.Config.get('General', 'analysis_dir')
-        self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
-        self.OtherCols = loads(self.Config.get("Other", "columns"))
-        self.Exclude = loads(self.Config.get("General", "exclude"))
-        try:
-            self.Data = load_json('{dir}/src/data.json'.format(dir=self.Dir))
-        except ValueError:
-            self.Data = {}
-        self.DiaScans = DiaScans(self.Dir)
-        self.Diamonds = self.DiaScans.get_diamonds()
-        self.create_diamond_folders()
-
-        self.BkgCol = 'lightgrey'
+        Table.__init__(self)
 
         self.RunTable = RunTable()
 
@@ -44,14 +27,6 @@ class DiamondTable:
             path = '{dat}{dia}'.format(dat=self.DataPath, dia=dia)
             create_dir(path)
             create_dir('{path}/BeamTests'.format(path=path))
-            for col in self.OtherCols:
-                create_dir('{path}/{col}'.format(path=path, col=col))
-
-    @staticmethod
-    def load_parser():
-        p = ConfigParser()
-        p.read('conf.ini')
-        return p
 
     def build_everything(self):
         self.create_overview()
