@@ -79,26 +79,28 @@ class DiamondTable(Table):
             return [dia for dia in all_dias if dia in si_diodes and dia not in self.Exclude]
         else:
             return [dia for dia in all_dias if dia not in scdias + self.Exclude + si_diodes]
+
+    def build_diamond_table(self, scvd=False, si=False):
+        header, first_row = self.build_header()
+        rows = [first_row]
+        dias = self.get_diamond_names(scvd, si)
+        for dia in dias:
             row = [dia]
-            proc = load_json('{dir}/{dia}/info.json'.format(dir=self.DataPath, dia=dia))
+            # general information
+            for col in self.OtherCols:
+                row.append(self.build_col(col, dia))
+            rows.append(row)
             # test campaigns
             last_tc = '201500'
             for tc in self.TestCampaigns:
                 tc_str = make_tc_str(tc)
-                row_size = len(row)
-                for value in make_info_str(last_tc, tc_str, proc):
-                    row.append(value)
-                if row_size == len(row):
-                    row.append('')
-                target = 'Diamonds/{dia}/BeamTests/{tc}/index.html'.format(tc=tc, dia=dia)
-                row.append(make_link(target, path=self.Dir, use_name=False))
+                row += self.make_info_str(last_tc, tc_str, dia)
+                if not row[-1].startswith('#cs'):
+                    target = join('Diamonds', dia, 'BeamTests', tc, 'index.html')
+                    row.append(make_link(target, path=self.Dir, use_name=False))
                 last_tc = make_tc_str(tc)
-            # other stuff
-            for col in self.OtherCols:
-                path = '{dat}{dia}/{col}/'.format(dat=self.DataPath, col=col, dia=dia)
-                row.append(self.build_col(col, path))
-            rows.append(row)
-        return add_bkg(HTML.table(rows, header_row=header), 'lightgrey')
+        return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
+
 
     def build_tc_table(self):
         header = ['Test Campaign', 'Tested Diamonds']
