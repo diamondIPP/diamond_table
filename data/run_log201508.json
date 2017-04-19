@@ -1755,7 +1755,7 @@
   "270": {
     "accepted_pulserrate": 0, 
     "comments": "first run of voltage scan", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -50.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1783,7 +1783,7 @@
   "271": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -100.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1811,7 +1811,7 @@
   "272": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -200.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1839,7 +1839,7 @@
   "287": {
     "accepted_pulserrate": 0, 
     "comments": "Included Scintillator", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -200.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1867,7 +1867,7 @@
   "288": {
     "accepted_pulserrate": 0, 
     "comments": "increased mask in analog telescope", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -200.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1895,7 +1895,7 @@
   "289": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -400.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1923,7 +1923,7 @@
   "291": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -500.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1950,8 +1950,8 @@
   }, 
   "292": {
     "accepted_pulserrate": 0, 
-    "comments": "lonely shift :(\r\nVoltage is increasing in absolute value again --> see current plots for II6-94\r\nweird behaviour for  II6-96 as well (jumps to -5 nA and the back to normal\r\nmaking longer run to check to voltage behavior\r\n", 
-    "dia1": "II6-96", 
+    "comments": "lonely shift :(\r\nVoltage is increasing in absolute value again --> see current plots for II6-94\r\nweird behaviour for  II6-95 as well (jumps to -5 nA and the back to normal\r\nmaking longer run to check to voltage behavior\r\n", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -1979,7 +1979,7 @@
   "293": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2007,7 +2007,7 @@
   "294": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2035,7 +2035,7 @@
   "295": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2063,7 +2063,7 @@
   "296": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2091,7 +2091,7 @@
   "297": {
     "accepted_pulserrate": 0, 
     "comments": "Coincidence started to look bad. Adjust timing delay so online rate is ~1 kHz", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2119,7 +2119,7 @@
   "298": {
     "accepted_pulserrate": 0, 
     "comments": "Adjust online rate to 770 Hz to improve correlations", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2147,7 +2147,7 @@
   "300": {
     "accepted_pulserrate": 0, 
     "comments": "restarting the rate scan at the lowest rate, although we are still in beam development\r\n\r\nComputer pim1 got really slow - end run after 5.36M events", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2175,7 +2175,7 @@
   "302": {
     "accepted_pulserrate": 0, 
     "comments": "restart without closing beam at the same rate\r\nChecking whether data is still the same", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2203,7 +2203,7 @@
   "303": {
     "accepted_pulserrate": 0, 
     "comments": "Forgot to close the beam \r\neudaq crashed", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2231,7 +2231,7 @@
   "304": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2259,7 +2259,7 @@
   "305": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2287,7 +2287,7 @@
   "306": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2315,7 +2315,7 @@
   "307": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2343,7 +2343,7 @@
   "308": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2371,7 +2371,7 @@
   "309": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2399,7 +2399,7 @@
   "310": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2427,7 +2427,7 @@
   "311": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2455,7 +2455,7 @@
   "312": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2483,7 +2483,7 @@
   "313": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2511,7 +2511,7 @@
   "314": {
     "accepted_pulserrate": 0, 
     "comments": "restartet without closing beam - continue run", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "0", 
     "dia2": "II6-94", 
@@ -2539,7 +2539,7 @@
   "315": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2567,7 +2567,7 @@
   "316": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2595,7 +2595,7 @@
   "317": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2623,7 +2623,7 @@
   "318": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2651,7 +2651,7 @@
   "319": {
     "accepted_pulserrate": 0, 
     "comments": "REF10 lost correlation within the run", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2679,7 +2679,7 @@
   "320": {
     "accepted_pulserrate": 0, 
     "comments": "Scanninf behaviour without closing the beam:\r\n5 min 280/130\r\nchange 280 --> 220\r\n5 min 220/130\r\nchanged 130-->45\r\n5min 220/45\r\nchanged 220-->105\r\n5 min 105/45\r\nchanged 105-->65\r\n> 5 min 65/45\r\nchanged 65 --> 75\r\n> 5 min 75/45\r\nchanged 75 --> 85\r\n> 5 min 85/45\r\nchanged 85 --> 95\r\n> 5 min 95/45\r\nchanged 95 --> 100\r\n> 5 min 100/45\r\nchanged 100 --> 105\r\n> 5 min 105/45\r\n", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -600.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2707,7 +2707,7 @@
   "321": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -800.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2735,7 +2735,7 @@
   "322": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -800.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2763,7 +2763,7 @@
   "323": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -800.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2791,7 +2791,7 @@
   "324": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -800.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2819,7 +2819,7 @@
   "325": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -800.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2847,7 +2847,7 @@
   "327": {
     "accepted_pulserrate": 0, 
     "comments": "stopped last run due to incorrect shutter settings...", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -800.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2875,7 +2875,7 @@
   "328": {
     "accepted_pulserrate": 0, 
     "comments": "EUDAQ must have crashed (main window) in the last 20min;\r\nThe cause was probably memory overflow on pim1;\r\nrestarting pim1 and then the run;", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2903,7 +2903,7 @@
   "330": {
     "accepted_pulserrate": 0, 
     "comments": "this is run 328 continued (pim crashed due to memory overlfow probably because of the pixel producer)\r\n", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2931,7 +2931,7 @@
   "332": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2959,7 +2959,7 @@
   "333": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -2987,7 +2987,7 @@
   "334": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3015,7 +3015,7 @@
   "335": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3043,7 +3043,7 @@
   "337": {
     "accepted_pulserrate": 0, 
     "comments": "cms pixel died", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3071,7 +3071,7 @@
   "339": {
     "accepted_pulserrate": 0, 
     "comments": "restart of TB before this run due to crashing of analog CMSpixel producer", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3099,7 +3099,7 @@
   "340": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3127,7 +3127,7 @@
   "341": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3155,7 +3155,7 @@
   "342": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3183,7 +3183,7 @@
   "343": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3211,7 +3211,7 @@
   "344": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3239,7 +3239,7 @@
   "345": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3267,7 +3267,7 @@
   "347": {
     "accepted_pulserrate": 0, 
     "comments": "huge spikes during the beam offtime in curretn for II6 94!! up to 70 uA\r\nramping II6-94 to -800V due to constant high leakage current (after roughly a million events)\r\ncurrent goes down to 5uA in average but still spiking to 20", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3295,7 +3295,7 @@
   "348": {
     "accepted_pulserrate": 0, 
     "comments": "followup:\r\nthe online monitor shows that 94 has probably died during this run or the end of the previous one;\r\nthe signal is everything but stable although the current seems normal (30nA) there was a ~12 and later ~30nA jump;", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3323,7 +3323,7 @@
   "349": {
     "accepted_pulserrate": 0, 
     "comments": "followup:\r\ndiamond 94 dead according to online monitor;\r\nIt probably died in the run before the previous one;", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3351,7 +3351,7 @@
   "350": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "5", 
     "dia2": "II6-94", 
@@ -3379,7 +3379,7 @@
   "351": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3407,7 +3407,7 @@
   "352": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1100.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3435,7 +3435,7 @@
   "353": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1200.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3463,7 +3463,7 @@
   "354": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3491,7 +3491,7 @@
   "355": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1400.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3519,7 +3519,7 @@
   "356": {
     "accepted_pulserrate": 0, 
     "comments": "EUDAQ restarted before this run - RAM memory of pim1 was 80% full already", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1500.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3547,7 +3547,7 @@
   "358": {
     "accepted_pulserrate": 0, 
     "comments": "Stop the run to go back to 1500 V", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1200.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3575,7 +3575,7 @@
   "359": {
     "accepted_pulserrate": 0, 
     "comments": "run stopped because the telescope was completely misalligned\r\n", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1500.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3602,8 +3602,8 @@
   }, 
   "362": {
     "accepted_pulserrate": 0, 
-    "comments": "Pumping diamond within the beam\r\nChange voltage up to -1500V for II6-96", 
-    "dia1": "II6-96", 
+    "comments": "Pumping diamond within the beam\r\nChange voltage up to -1500V for II6-95", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3631,7 +3631,7 @@
   "363": {
     "accepted_pulserrate": 0, 
     "comments": "Stop the run to make an access to restart analog test board, because DUT 7 shows low efficiency since the run 356", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3659,7 +3659,7 @@
   "364": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1500.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3687,7 +3687,7 @@
   "365": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1500.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3715,7 +3715,7 @@
   "366": {
     "accepted_pulserrate": 0, 
     "comments": "making a run with lights ON to check if light influences on pulse height and on current", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1500.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3743,7 +3743,7 @@
   "367": {
     "accepted_pulserrate": 0, 
     "comments": "run to turned down the voltage", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1500.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3770,8 +3770,8 @@
   }, 
   "369": {
     "accepted_pulserrate": 0, 
-    "comments": "Increasing voltage on II6-96 from 0V to -1000V and stay there for half and hour\r\nMemory on Pim1 got pretty full\r\ndecided to restart eudaq \r\n\r\nthe scan is continued in run 370", 
-    "dia1": "II6-96", 
+    "comments": "Increasing voltage on II6-95 from 0V to -1000V and stay there for half and hour\r\nMemory on Pim1 got pretty full\r\ndecided to restart eudaq \r\n\r\nthe scan is continued in run 370", 
+    "dia1": "II6-95", 
     "dia1hv": 0.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3798,8 +3798,8 @@
   }, 
   "370": {
     "accepted_pulserrate": 0, 
-    "comments": "Continuing measurement of run 369\r\nstarted HV6/II6-96 @ -1000V \r\nincreased to -1100V\r\n30 min running\r\nincreasing to -1200V\r\n30 min running\r\nincreasing to -1300V\r\n30 min running\r\nincreasing to -1400V\r\n30 min running\r\nincreasing to -1500V\r\n30 min running\r\nrun stopped, because CMSPixel crashed", 
-    "dia1": "II6-96", 
+    "comments": "Continuing measurement of run 369\r\nstarted HV6/II6-95 @ -1000V \r\nincreased to -1100V\r\n30 min running\r\nincreasing to -1200V\r\n30 min running\r\nincreasing to -1300V\r\n30 min running\r\nincreasing to -1400V\r\n30 min running\r\nincreasing to -1500V\r\n30 min running\r\nrun stopped, because CMSPixel crashed", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3827,7 +3827,7 @@
   "371": {
     "accepted_pulserrate": 0, 
     "comments": "continue measurements of previous runs after CMSPixel crashed and restarted\r\nchanging voltage of 96  from (-) 1300->1400->1500->1400->1300", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -8888.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3855,7 +3855,7 @@
   "373": {
     "accepted_pulserrate": 0, 
     "comments": "ref empty -> stop\r\ntest run, ignore", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -400.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3911,7 +3911,7 @@
   "384": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3939,7 +3939,7 @@
   "385": {
     "accepted_pulserrate": 0, 
     "comments": "trash data", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3967,7 +3967,7 @@
   "386": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -3995,7 +3995,7 @@
   "387": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4023,7 +4023,7 @@
   "388": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4051,7 +4051,7 @@
   "389": {
     "accepted_pulserrate": 0, 
     "comments": "returned back to 65 from 105 on FS11", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4107,7 +4107,7 @@
   "390": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4135,7 +4135,7 @@
   "391": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4163,7 +4163,7 @@
   "392": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4191,7 +4191,7 @@
   "393": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4219,7 +4219,7 @@
   "394": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4247,7 +4247,7 @@
   "395": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4275,7 +4275,7 @@
   "396": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4303,7 +4303,7 @@
   "397": {
     "accepted_pulserrate": 0, 
     "comments": "", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1300.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
@@ -4331,7 +4331,7 @@
   "398": {
     "accepted_pulserrate": 0, 
     "comments": "Run with changing collimator settings:\r\n\r\nFS13 from 0.5 to 130 at 0.035 mm/s\r\n\r\nthen increased FS11: 70, 75, 80, 90, 120, 200, 280\r\n\r\nsee google docs; spreadsheet: Run Plan, tab: collimator scan \r\n\r\nhttps://docs.google.com/spreadsheets/d/1rK5v8G3FC9B0E1EvxwDix8S6197AO-bIr7eolXNhFZo/edit#gid=2055391978\r\n", 
-    "dia1": "II6-96", 
+    "dia1": "II6-95", 
     "dia1hv": -1000.0, 
     "dia1supply": "6", 
     "dia2": "II6-94", 
