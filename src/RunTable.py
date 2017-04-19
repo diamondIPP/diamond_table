@@ -54,7 +54,7 @@ class RunTable(Table):
         i = 0
         for run in runs:
             info = self.DiaScans.RunInfos[tc][str(run)]
-            data = {tag: self.get_pickle(run, tc, ch, dia, tag, form) for tag, form in zip(['PH', 'Pedestal', 'Pulser', 'PulserPed'], ['2.2f', '2.2f', '2.2f', '2.2f'])}
+            data = {tag: self.get_pickle(run, tc, ch, tag, form) for tag, form in zip(['PH', 'Pedestal', 'Pulser', 'PulserPed'], ['2.2f', '2.2f', '2.2f', '2.2f'])}
             run_path = '../{run}'.format(run=run)
             file_name = '{path}/{{0}}.png'.format(path=run_path)
 
