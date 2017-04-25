@@ -147,10 +147,12 @@ class TableCell (object):
             attribs_str += ' %s="%s"' % (attr, self.attribs[attr])
         if self.text:
             text = str(self.text)
+            print text
             if text.startswith('#'):
                 data = text.split('#')
                 att = data[1][2:]
                 text = data[2]
+                print data
                 if data[1].startswith('cs'):
                     attribs_str += ' colspan="{att}"'.format(att=att)
                 elif data[1].startswith('rs'):
@@ -422,6 +424,7 @@ def link(text, url):
 
 def table(*args, **kwargs):
     'return HTML code for a table as a string. See Table class for parameters.'
+    print 'test'
     return str(Table(*args, **kwargs))
 
 def list(*args, **kwargs):
