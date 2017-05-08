@@ -149,7 +149,7 @@ class DiamondTable(Table):
 
         if file_exists(info_path):
             conf = load_parser(info_path)
-            return make_link(conf.get('Manufacturer', 'url'), conf.get('Manufacturer', 'name'), new_tab=True, center=True)
+            return make_link(conf.get('Manufacturer', 'url'), name=conf.get('Manufacturer', 'name'), new_tab=True, center=True)
         elif file_exists(f_path):
             conf = load_parser(f_path)
             return make_link(conf.get('MAIN', 'url'), conf.get('MAIN', 'name'), new_tab=True, center=True)
@@ -175,7 +175,7 @@ class DiamondTable(Table):
         second_row = []
         for date in self.TestCampaigns:
             header_row += ['#cs4#{d}'.format(d=date)]
-            second_row += [center_txt(txt) for txt in ['Type', 'Irr* [neq]', make_link(join('BoardNumbers', 'bn.html'), 'BN*'), 'Data']]
+            second_row += [center_txt(txt) for txt in [add_spacings('Type', 2), 'Irr* [neq]', make_link(join('BoardNumbers', 'bn.html'), 'BN*'), 'Data Set*']]
         return header_row, second_row
 
     def build_board_table(self):
@@ -199,6 +199,8 @@ class DiamondTable(Table):
             rps = self.DiaScans.find_diamond_runplans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, item in rps.iteritems():
+                if tc < '201508':
+                    continue
                 tc_string = datetime.strptime(tc, '%Y%m').strftime('%b%y')
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
                 create_dir(sub_path)
