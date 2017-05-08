@@ -91,7 +91,7 @@ class DiamondTable(Table):
         rows = [first_row]
         dias = self.get_diamond_names(scvd, si)
         for dia in dias:
-            row = [dia]
+            row = [make_link(join('Diamonds', dia, 'index.html'), name=dia, path=self.Dir, use_name=True)]
             # general information
             for col in self.OtherCols:
                 row.append(self.build_col(col, dia))
