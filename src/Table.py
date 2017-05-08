@@ -122,11 +122,11 @@ class Table:
         return fit_res
 
     def translate_dia(self, dia):
-        dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
-        return dic.get('ALIASES', dia)
+        return self.DiaScans.Parser.get('ALIASES', dia.lower())
 
     def translate_old_dia(self, dia):
-        return self.DiaScans.Parser.get('ALIASES', dia)
+        dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
+        return dic.get('ALIASES', dia)
 
 if __name__ == '__main__':
     z = Table()
