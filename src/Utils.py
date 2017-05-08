@@ -151,7 +151,7 @@ def add_spacings(txt, n=1):
 def add_bkg(table, color='black'):
     lines = table.split('\n')
     for i, line in enumerate(lines):
-        if '&n' in line or '"></TD>' in line:
+        if ('&n' in line or '"></TD>' in line) and len(line) < 24:
             lines[i] = line.replace('<TD>&n', '<TD bgcolor={col}>&n'.format(col=color))
         else:
             lines[i] = line.replace('<TD', '<TD bgcolor=white ')
