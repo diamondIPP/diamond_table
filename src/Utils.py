@@ -140,6 +140,14 @@ def center_txt(txt):
     return '<div align="center">{0}</div>'.format(txt)
 
 
+def right_txt(txt):
+    return '<div align="right">{0}</div>'.format(txt)
+
+
+def add_spacings(txt, n=1):
+    return '{s}{txt}{s}'.format(txt=txt, s=' &nbsp ' * n)
+
+
 def add_bkg(table, color='black'):
     lines = table.split('\n')
     for i, line in enumerate(lines):
