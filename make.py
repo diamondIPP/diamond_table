@@ -222,8 +222,8 @@ class DiamondTable(Table):
         rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Ped.', 'Noise [&sigma;]']]]
         rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
 
-        def make_pic_link(pic_name, txt, use_name=True, ftype='pdf'):
-            return [make_link(join(rp_dir, '{p}.{t}'.format(p=pic_name, t=ftype)), txt, path=path, center=True, use_name=use_name)]
+        def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
+            return [make_link(join(rp_dir, '{p}.{t}'.format(p=pic_name, t=ftype)), text, path=path, center=True, use_name=use_name)]
 
         for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
             runs = self.DiaScans.get_runs(rp, tc)
@@ -235,7 +235,7 @@ class DiamondTable(Table):
             rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=False)                # Diamond Attenuators
             rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=True)                 # Pulser Attenuators
             rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]     # Runs
-            rows[i] += [right_txt(make_bias_str(bias))]                                                                    # Bias
+            rows[i] += [right_txt(make_bias_str(bias))]                                                         # Bias
             rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
             rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
             rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
