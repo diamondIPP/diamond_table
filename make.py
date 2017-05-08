@@ -102,8 +102,16 @@ class DiamondTable(Table):
                 row += self.make_info_str(tc_str, dia)
                 if not row[-1].startswith('#cs'):
                     target = join('Diamonds', dia, 'BeamTests', tc, 'index.html')
-                    row.append(make_link(target, path=self.Dir, use_name=False))
+                    row.append(make_link(target, path=self.Dir, name=self.make_set_string(tc, dia)))
         return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
+
+    def make_set_string(self, tc, dia):
+        start_runs = [str(run_plan['runs'][0]) for run_plan in self.DiaScans.RunPlans[make_tc_str(tc)].itervalues()]
+        info = self.DiaScans.RunInfos[make_tc_str(tc)]
+        dia_set = []
+        for tup in [tuple(self.RunTable.translate_dia(info[run][d]) for d in ['dia1', 'dia2']) for run in start_runs]:
+            dia_set += [tup] if tup not in dia_set else []
+        return center_txt(' / '.join(['{i}{j}'.format(i=i, j='f' if not tup.index(dia) else 'b') for i, tup in enumerate(dia_set, 1) if dia in tup]))
 
     def make_info_str(self, tc_str, dia):
         info = ConfigParser()
