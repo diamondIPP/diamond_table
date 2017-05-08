@@ -66,10 +66,11 @@ class DiamondTable(Table):
         return string
 
     def get_col_titles(self):
+        dic = {'Thickness': 'T* [&mu;m]', 'Manufacturer': add_spacings('Manufacturer')}
         cols = []
         for col in self.OtherCols:
-            if col == 'Thickness':
-                cols.append('T* [&mu;m]')
+            if col in dic:
+                cols.append(dic[col])
             else:
                 cols.append(col)
         return cols
