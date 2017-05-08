@@ -51,13 +51,13 @@ def list_dirs(path):
     return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
 
 
-def make_link(target, name='Results', new_tab=False, path=None, use_name=True, center=False):
+def make_link(target, name='Results', new_tab=False, path='', use_name=True, center=False):
     tab = ' target="_blank"' if new_tab else ''
     name = center_txt(name) if center else name
-    if path is not None:
-        return '<a href={tar}{tab}>{nam}</a>'.format(tar=target, nam=name, tab=tab) if file_exists('{path}/{tgt}'.format(path=path, tgt=target.strip('.'))) else (name if use_name else '')
-    else:
+    if file_exists(join(path, target.strip('./'))) or not path:
         return '<a href={tar}{tab}>{nam}</a>'.format(tar=target, nam=name, tab=tab)
+    else:
+        return name if use_name else ''
 
 
 def folder_exists(path):
