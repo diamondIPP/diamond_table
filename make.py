@@ -217,29 +217,38 @@ class DiamondTable(Table):
         f = open(html_file, 'w')
         tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
         write_html_header(f, tit, bkg=self.BkgCol)
-        header = ['Nr.', 'Type', 'Diamond<br>Attenuator', 'Pulser<br>Attenuator', 'Runs', 'Bias V', 'Leakage<br>Current', 'Pulser', 'Pulser<br>Ped.', 'Signal', 'Signal<br>Ped.', 'Start', 'Duration']
-        rows = []
+        header = ['#rs2#Nr.', '#rs2#Type', '#rs2#Diamond<br>Attenuator', '#rs2#Pulser<br>Attenuator', '#rs2#Runs', '#rs2#Bias [V]', '#rs2#Leakage<br>Current',
+                  '#cs4#Pulser', '#cs3#Signal', '#rs2#Start', '#rs2#Duration']
+        rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Ped.', 'Noise [&sigma;]']]]
         rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
-        for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems())):
+
+        def make_pic_link(pic_name, txt, use_name=True, ftype='pdf'):
+            return [make_link(join(rp_dir, '{p}.{t}'.format(p=pic_name, t=ftype)), txt, path=path, center=True, use_name=use_name)]
+
+        for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
             runs = self.DiaScans.get_runs(rp, tc)
-            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
-            rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]
-            rows[i] += [self.DiaScans.RunPlans[tc][rp]['attenuators']['dia{ch}'.format(ch=ch)]] if 'attenuators' in self.DiaScans.RunPlans[tc][rp] else ['']
-            rows[i] += [self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser'.format(ch=ch)]] if 'attenuators' in self.DiaScans.RunPlans[tc][rp] else ['']
-            name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
-            rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]
-            rows[i] += [make_bias_str(bias)]
-            rows[i] += [make_link('RunPlan{rp}/PhPulserCurrent.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
             info = z.DiaScans.RunInfos[tc][str(runs[0])]
-            rows[i] += [make_link('RunPlan{rp}/CombinedPulserPulseHeights.png'.format(rp=make_rp_string(rp)), info['pulser'] if 'pulser' in info else '', path=path)]
-            rows[i] += [make_link('RunPlan{rp}/Pedestal_FluxPulserBeamOn.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
-            rows[i] += [make_link('RunPlan{rp}/CombinedPulseHeights.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
-            rows[i] += [make_link('RunPlan{rp}/Pedestal_Flux.png'.format(rp=make_rp_string(rp)), 'Plot', path=path, use_name=False)]
-            runs = z.DiaScans.get_runs(rp, tc)
-            rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]
-            rows[i] += [self.calc_duration(z.DiaScans.RunInfos[tc][str(runs[0])], z.DiaScans.RunInfos[tc][str(runs[-1])])]
+            rp_dir = 'RunPlan{rp}'.format(rp=make_rp_string(rp))
+            name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
+            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
+            rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]                                                 # Run Plan Type
+            rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=False)                # Diamond Attenuators
+            rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=True)                 # Pulser Attenuators
+            rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]     # Runs
+            rows[i] += [right_txt(make_bias_str(bias))]                                                                    # Bias
+            rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
+            rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
+            rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
+            rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                                 # Pulser Pulse Height (corrected)
+            rows[i] += make_pic_link('PedestalMeanFluxPulserBeamOn', 'Plot', use_name=False)                    # Pulser Pedestal
+            rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))                     # Signal Pulse Height
+            rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
+            rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
+            rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
+            rows[i] += [self.calc_duration(info, z.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
 
         f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
+        f.write(self.create_home_button(path))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
