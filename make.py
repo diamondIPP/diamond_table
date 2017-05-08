@@ -14,6 +14,7 @@ from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from RunTable import RunTable
 from Table import Table
 from os.path import basename, join
+from numpy import mean
 
 
 class DiamondTable(Table):
@@ -259,6 +260,21 @@ class DiamondTable(Table):
             return [info['attenuators']['{k}{ch}'.format(k=key, ch='' if key in info['attenuators'] else ch)]]
         else:
             return ['']
+
+    def get_pulser_mean(self, runs, tc, rp, ch):
+        if tc < '201505':
+            return center_txt('?')
+        try:
+            att_string = 'None'
+            if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:
+                att_string = self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser' if 'pulser' in self.DiaScans.RunPlans[tc][rp]['attenuators'] else 'pulser{c}'.format(c=ch)]
+            attenuations = att_string.split('+') if att_string.lower() not in ['unknown', 'none'] else ['0']
+            db = sum(int(att.lower().split('db')[0]) for att in attenuations)
+            att = 10 ** (db / 20.)
+            pulser_mean = mean([self.get_pickle(run, tc, ch, 'Pulser').Parameter(1) for run in runs])
+            return center_txt('{:2.2f}'.format(pulser_mean * att))
+        except Exception:
+            return center_txt('?')
 
     # endregion
 
