@@ -54,11 +54,16 @@ class DiamondTable(Table):
         # run overview
         f.write('\n<h3>Full Run Overview:</h3>\n')
         f.write(self.build_tc_table())
-        f.write('<br/>*<br/>    BN  = Board Number\n')
-        f.write('<br/>          Irr = Irradiation \n')
-        f.write('<br/>          T   = Thickness \n\n')
+        f.write(self.build_legend())
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
+
+    def build_legend(self):
+        string = '<br/>*<br/>    BN  = Board Number\n'
+        string += '<br/>         Irr = Irradiation \n'
+        string += '<br/>         T   = Thickness \n'
+        string += '<br/>         Data Set = Example "1f": Results of the front (f) diamond the first (1) measured set of diamonds during the beam test campaign \n\n'
+        return string
 
     def get_col_titles(self):
         cols = []
