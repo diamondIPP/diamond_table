@@ -276,6 +276,24 @@ class DiamondTable(Table):
         except Exception:
             return center_txt('?')
 
+    def get_pickle_mean(self, runs, tc, ch, name, par):
+        if tc < '201508':
+            return center_txt('?')
+        try:
+            signal, sigma = calc_mean([self.get_pickle(run, tc, ch, name).Parameter(par) for run in runs])
+        except (TypeError, ValueError, ReferenceError):
+            return center_txt('?')
+        return center_txt('{:2.2f} ({:.2f})'.format(signal, sigma))
+
+    def get_noise(self, runs, tc, ch):
+        return self.get_pickle_mean(runs, tc, ch, 'Pedestal', 2)
+
+    def get_signal(self, runs, tc, ch):
+        return self.get_pickle_mean(runs, tc, ch, 'PH', 0)
+
+    def get_pulser(self, runs, tc, ch):
+        return self.get_pickle_mean(runs, tc, ch, 'Pulser', 1)
+
     # endregion
 
     def copy_logs(self):
