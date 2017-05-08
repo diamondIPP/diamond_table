@@ -382,6 +382,12 @@ class DiamondTable(Table):
                 copy(f, '{dir}/{sdir}'.format(dir=this_dir.replace('*', dia), sdir=sub_dir))
             self.ProgressBar.update(i)
 
+    @staticmethod
+    def create_home_button(path):
+        n_dirs = len(path.split('/')) - 3
+        back = '../' * n_dirs
+        return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
+
 
 def get_dir():
     return os.path.dirname(os.path.realpath('__file__'))
