@@ -252,6 +252,14 @@ class DiamondTable(Table):
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
+    @staticmethod
+    def get_attenuators(info, ch, pulser=False):
+        if 'attenuators' in info:
+            key = 'pulser' if pulser else 'dia'
+            return [info['attenuators']['{k}{ch}'.format(k=key, ch='' if key in info['attenuators'] else ch)]]
+        else:
+            return ['']
+
     # endregion
 
     def copy_logs(self):
