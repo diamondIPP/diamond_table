@@ -8,6 +8,8 @@ from termcolor import colored
 import os
 from ConfigParser import ConfigParser
 from json import load
+from os.path import join
+from math import sqrt
 
 
 # ==============================================
@@ -157,6 +159,14 @@ def add_bkg(table, color='black'):
             lines[i] = line.replace('<TD', '<TD bgcolor=white ')
         lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
     return '\n'.join(lines)
+
+
+def calc_mean(l):
+    l = [float(i) for i in l]
+    mean_ = sum(l) / len(l)
+    mean2 = sum(map(lambda x: x ** 2, l)) / len(l)
+    sigma = sqrt(mean2 - mean_ ** 2)
+    return mean_, sigma
 
 
 class FitRes:
