@@ -100,8 +100,15 @@ def make_tc_str(tc, txt=True):
         return datetime.strptime(tc, '%b%y').strftime('%Y%m' if txt else '%B %Y')
 
 
-def make_bias_str(bias):
-    return '{sign}{val}'.format(sign='+' if int(bias) > 0 else '', val=int(bias))
+def make_bias_str(biases):
+    if type(biases) is not list:
+        return ('{v:+2.0f}'.format(v=biases))
+    if len(biases) == 1:
+        return ('{v:+2.0f}'.format(v=biases[0]))
+    elif len(biases) < 4:
+        return ' &#8594; '.join('{v:+2.0f}'.format(v=bias) for bias in sorted(biases, reverse=True, key=abs))
+    else:
+        return '{min:+4.0f} ... {max:+4.0f}'.format(min=biases[0], max=biases[-1])
 
 
 def load_parser(path):
