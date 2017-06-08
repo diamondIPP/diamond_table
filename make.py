@@ -197,23 +197,22 @@ class DiamondTable(Table):
     # region RUN PLANS
     def create_runplan_overview(self):
         for dia in self.Diamonds:
-            rps = self.DiaScans.find_diamond_runplans(dia)
+            rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
-            for tc, item in rps.iteritems():
+            for tc, plans in rps.iteritems():
                 if tc < '201508':
                     continue
                 tc_string = datetime.strptime(tc, '%Y%m').strftime('%b%y')
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
                 create_dir(sub_path)
-                runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
-                if runplans:
-                    self.build_runplan_table(sub_path, item, tc)
-                for rp in runplans:
+                # runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
+                self.build_runplan_table(sub_path, plans, tc)
+                for rp, ch in plans:
                     rp_path = '{path}/RunPlan{rp}'.format(path=sub_path, rp=make_rp_string(rp))
                     create_dir(rp_path)
                     self.copy_index_php(rp_path)
 
-    def build_runplan_table(self, path, rp_dict, tc):
+    def build_runplan_table(self, path, plans, tc):
         html_file = '{path}/index.html'.format(path=path)
         f = open(html_file, 'w')
         tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
@@ -221,12 +220,13 @@ class DiamondTable(Table):
         header = ['#rs2#Nr.', '#rs2#Type', '#rs2#Diamond<br>Attenuator', '#rs2#Pulser<br>Attenuator', '#rs2#Runs', '#rs2#Bias [V]', '#rs2#Leakage<br>Current',
                   '#cs4#Pulser', '#cs3#Signal', '#rs2#Start', '#rs2#Duration']
         rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Ped.', 'Noise [&sigma;]']]]
-        rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
+        # rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
             return [make_link(join(rp_dir, '{p}.{t}'.format(p=pic_name, t=ftype)), text, path=path, center=True, use_name=use_name)]
 
-        for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
+        # for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
+        for i, (rp, ch) in enumerate(plans, 1):
             runs = self.DiaScans.get_runs(rp, tc)
             info = z.DiaScans.RunInfos[tc][str(runs[0])]
             rp_dir = 'RunPlan{rp}'.format(rp=make_rp_string(rp))
@@ -236,7 +236,7 @@ class DiamondTable(Table):
             rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=False)                # Diamond Attenuators
             rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=True)                 # Pulser Attenuators
             rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]     # Runs
-            rows[i] += [right_txt(make_bias_str(bias))]                                                         # Bias
+            rows[i] += [right_txt(make_bias_str(self.DiaScans.get_biases(rp, tc, ch)))]                         # Bias
             rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
             rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
             rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
@@ -395,4 +395,4 @@ def get_dir():
 
 if __name__ == '__main__':
     z = DiamondTable()
-    z.build_everything()
+    # z.build_everything()
