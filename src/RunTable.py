@@ -17,10 +17,8 @@ class RunTable(Table):
 
     def create_overview(self):
         for dia in self.Diamonds:
-            rps = self.DiaScans.find_diamond_runplans(dia)
-            for tc, item in rps.iteritems():
-                rps = {rp: ch for rps in item.itervalues() for rp, ch in rps.iteritems()}
-                for rp, ch in sorted(rps.iteritems()):
+            for tc, plans in self.DiaScans.find_dia_run_plans(dia).iteritems():
+                for rp, ch in plans:
                     path = '{dat}{dia}/BeamTests/{tc}'.format(dat=self.DataPath, dia=dia, tc=make_tc_str(tc, 0))
                     runs = self.DiaScans.get_runs(rp, tc)
                     self.build_table(path, rp, tc, dia, runs, ch)
@@ -30,8 +28,9 @@ class RunTable(Table):
                         self.copy_index_php(run_path)
 
     def build_table(self, path, rp, tc, dia, runs, ch):
-        if not tc == '201610':
+        if not tc == '201510' or not dia == 'II6-97':
             return
+        print rp
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
         f = open(html_file, 'w')
         tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
