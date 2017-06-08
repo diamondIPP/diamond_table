@@ -100,8 +100,25 @@ class DiaScans:
                             runplans[tc][bias][rp] = ch
         return runplans
 
+    def find_dia_run_plans(self, dia):
+        runplans = {}
+        for tc, dic in self.RunPlans.iteritems():
+            plans = []
+            for rp, info in dic.iteritems():
+                runs = info['runs']
+                if not dia in [self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in info['runs'] for ch in [1, 2]]:
+                    continue
+                ch = next(ch for ch in [1, 2] if dia == self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]))
+                plans.append((rp, ch))
+            runplans[tc] = sorted(plans)
+        return OrderedDict(sorted(runplans.iteritems()))
+
     def get_runs(self, rp, tc):
         return self.RunPlans[tc][rp]['runs']
+
+    def get_biases(self, rp, tc, ch):
+        runs = self.get_runs(rp, tc)
+        return sorted(list(set([self.RunInfos[tc][str(run)]['dia{c}hv'.format(c=ch)] for run in runs])), key=abs)
 
     def get_diamonds(self, single_tc=None):
         dias = []
