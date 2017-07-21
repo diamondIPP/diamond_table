@@ -28,41 +28,35 @@ class RunTable(Table):
                         self.copy_index_php(run_path)
 
     def build_table(self, path, rp, tc, dia, runs, ch):
-        if not tc == '201510' or not dia == 'II6-97':
+        if not tc == '201508' or not dia == 'II6-79':
             return
         print rp
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
         f = open(html_file, 'w')
         tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
         write_html_header(f, tit, bkg=self.BkgCol)
-        header = ['Run',
-                  'Type',
-                  'HV [V]',
-                  'Flux<br>[kHz/cm{0}]'.format(sup(2)),
-                  'Distr.',
-                  'Pulse Height [au]',
-                  'Pedestal [au]',
-                  'Noise [1&sigma;]',
-                  'Pulser<br>Pulse Height [au]',
-                  'Pulser &sigma;',
-                  'Pulser<br>Pedestal [au]',
-                  'Pulser<br>Noise [1&sigma;]',
-                  'Start Time',
-                  'Duration',
-                  'Comments']
+
+        header = ['#rs2#Run',
+                  '#rs2#Type',
+                  '#rs2#HV [V]',
+                  '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
+                  '#cs4#Signal',
+                  '#cs4#Pulser',
+                  '#rs2#Start Time',
+                  '#rs2#Duration',
+                  '#rs2#Comments']
 
         def make_entry(plot_name, value, value2=None):
             value2 = ' ({0})'.format(value2) if value2 is not None else ''
             return [center_txt(make_link(file_name.format(plot_name), '{0}{1}'.format(value, value2), path=path))]
 
-        rows = []
-        i = 0
-        for run in runs:
+        rows = [[center_txt(txt) for txt in ['Distr.', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma',
+                                             'Pedestal [au]', 'Noise [1&sigma;]']]]
+        for i, run in enumerate(runs, 1):
             info = self.DiaScans.RunInfos[tc][str(run)]
             data = {tag: self.get_pickle(run, tc, ch, tag, form) for tag, form in zip(['PH', 'Pedestal', 'Pulser', 'PulserPed'], ['2.2f', '2.2f', '2.2f', '2.2f'])}
             run_path = '../{run}'.format(run=run)
             file_name = '{path}/{{0}}.png'.format(path=run_path)
-
             rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])                                              # Run
             rows[i] += [info['runtype']]                                                                                                    # Type
             rows[i] += [make_bias_str(info['dia{ch}hv'.format(ch=ch)])]                                                                     # HV
@@ -76,7 +70,6 @@ class RunTable(Table):
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(1))                                                # Pulser Pedestal
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(2))                                                # Pulser Ped Noise
             rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]                                     # comments
-            i += 1
         f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
