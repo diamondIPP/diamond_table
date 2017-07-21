@@ -37,6 +37,7 @@ class DiamondTable(Table):
     # =====================================================
     # region OVERVIEW
     def create_overview(self):
+        self.create_diamond_folders()
         html_file = 'index.html'
         f = open(html_file, 'w')
         write_html_header(f, 'ETH Diamonds Overview', bkg=self.BkgCol)
@@ -59,7 +60,8 @@ class DiamondTable(Table):
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
-    def build_legend(self):
+    @staticmethod
+    def build_legend():
         string = '<br/>*<br/>    BN  = Board Number\n'
         string += '<br/>         Irr = Irradiation \n'
         string += '<br/>         T   = Thickness \n'
@@ -280,7 +282,7 @@ class DiamondTable(Table):
         if tc < '201508':
             return center_txt('?')
         try:
-            signal, sigma = calc_mean([self.get_pickle(run, tc, ch, name).Parameter(par) for run in runs])
+            signal, sigma = calc_mean([float(self.get_pickle(run, tc, ch, name).Parameter(par)) for run in runs])
         except (TypeError, ValueError, ReferenceError):
             return center_txt('?')
         return center_txt('{:2.2f} ({:.2f})'.format(signal, sigma))
@@ -297,8 +299,8 @@ class DiamondTable(Table):
     # endregion
 
     def copy_logs(self):
-        for tc in self.DiaScans.RunPlans:
-            copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/data/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
+        # for tc in self.DiaScans.RunPlans:
+        #     copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/data/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
         copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/data/'.format(dir=self.Dir))
 
     def copy_pics(self, copy_all=False, runplan=None):
