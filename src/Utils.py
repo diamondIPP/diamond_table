@@ -102,9 +102,9 @@ def make_tc_str(tc, txt=True):
 
 def make_bias_str(biases):
     if type(biases) is not list:
-        return ('{v:+2.0f}'.format(v=biases))
+        return '{v:+2.0f}'.format(v=biases)
     if len(biases) == 1:
-        return ('{v:+2.0f}'.format(v=biases[0]))
+        return '{v:+2.0f}'.format(v=biases[0])
     elif len(biases) < 4:
         return ' &#8594; '.join('{v:+2.0f}'.format(v=bias) for bias in sorted(biases, reverse=True, key=abs))
     else:
@@ -178,9 +178,27 @@ def calc_mean(l):
 
 class FitRes:
     def __init__(self, fit_obj=None, form=''):
-        self.Pars = list(fit_obj.Parameters()) if fit_obj is not None else [None]
-        self.Errors = list(fit_obj.Errors()) if fit_obj is not None else [None]
+        self.Pars = self.load_pars(fit_obj)
+        self.Errors = self.load_errors(fit_obj)
         self.Format = form
+
+    @staticmethod
+    def load_pars(fit_obj):
+        if fit_obj is None:
+            return [None]
+        if hasattr(fit_obj, 'Pars'):
+            return fit_obj.Pars
+        else:
+            return list(fit_obj.Parameters())
+
+    @staticmethod
+    def load_errors(fit_obj):
+        if fit_obj is None:
+            return [None]
+        elif hasattr(fit_obj, 'Errors'):
+            return fit_obj.Errors
+        else:
+            return list(fit_obj.Errors())
 
     def Parameter(self, arg):
         if arg >= len(self.Pars):
