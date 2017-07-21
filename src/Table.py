@@ -116,8 +116,7 @@ class Table:
             log_warning('did not find {p}'.format(p=path))
             return FitRes()
         f = open(path)
-        fit_res = pickle.load(f)
-        fit_res.Format = form
+        fit_res = FitRes(pickle.load(f), form)
         f.close()
         return fit_res
 

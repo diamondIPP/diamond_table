@@ -106,7 +106,8 @@ class DiaScans:
             plans = []
             for rp, info in dic.iteritems():
                 runs = info['runs']
-                if not dia in [self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in info['runs'] for ch in [1, 2]]:
+                all_dias = set([self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in info['runs'] for ch in [1, 2]])
+                if dia not in all_dias or len(all_dias) > 2:
                     continue
                 ch = next(ch for ch in [1, 2] if dia == self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]))
                 plans.append((rp, ch))
