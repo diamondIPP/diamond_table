@@ -162,9 +162,14 @@ def add_bkg(table, color='black'):
     for i, line in enumerate(lines):
         if ('&n' in line or '"></TD>' in line) and len(line) < 24:
             lines[i] = line.replace('<TD>&n', '<TD bgcolor={col}>&n'.format(col=color))
+        elif color in line:
+            line = line.replace(color, '')
+            lines[i] = line.replace('<TD', '<TD bgcolor={col} '.format(col=color))
+            lines[i] = line.replace('<TH', '<TH bgcolor={col} '.format(col=color))
         else:
             lines[i] = line.replace('<TD', '<TD bgcolor=white ')
-        lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
+        if not 'bgcolor' in lines[i]:
+            lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
     return '\n'.join(lines)
 
 
