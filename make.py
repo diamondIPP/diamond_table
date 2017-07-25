@@ -109,7 +109,7 @@ class DiamondTable(Table):
         return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
 
     def make_set_string(self, tc, dia):
-        start_runs = [str(run_plan['runs'][0]) for run_plan in self.DiaScans.RunPlans[make_tc_str(tc)].itervalues()]
+        start_runs = [str(r) for r in sorted(run_plan['runs'][0] for run_plan in self.DiaScans.RunPlans[make_tc_str(tc)].itervalues())]
         info = self.DiaScans.RunInfos[make_tc_str(tc)]
         dia_set = []
         for tup in [tuple(self.RunTable.translate_dia(info[run][d]) for d in ['dia1', 'dia2']) for run in start_runs]:
