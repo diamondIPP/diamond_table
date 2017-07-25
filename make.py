@@ -14,7 +14,12 @@ from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from RunTable import RunTable
 from Table import Table
 from os.path import basename, join
+from os import system
 from numpy import mean
+from datetime import datetime
+
+this_year = datetime.now().year
+start_year = 2015
 
 
 class DiamondTable(Table):
@@ -38,7 +43,11 @@ class DiamondTable(Table):
     # region OVERVIEW
     def create_overview(self):
         self.create_diamond_folders()
-        html_file = 'index.html'
+        for year in xrange(start_year, this_year + 1):
+            self.create_year_overview(year)
+
+    def create_year_overview(self, year):
+        html_file = 'index{y}.html'.format(y=year)
         f = open(html_file, 'w')
         write_html_header(f, 'ETH Diamonds Overview', bkg=self.BkgCol)
         self.build_board_table()
@@ -46,19 +55,21 @@ class DiamondTable(Table):
         # single crystal
         f.write('<h3>{ln}\n</h4>'.format(ln=make_link('Diamonds/OLD/index.php', 'Tested before 2015')))
         f.write('<h3>Single Crystal Diamonds:</h3>\n')
-        f.write(self.build_diamond_table(scvd=True))
+        f.write(self.build_diamond_table(year, scvd=True))
         # poly chrystal
         f.write('\n<h3>Poly Crystal Diamonds:</h3>\n')
-        f.write(self.build_diamond_table())
+        f.write(self.build_diamond_table(year))
         # silicon pad
         f.write('\n<h3>Silicon Detectors:</h3>\n')
-        f.write(self.build_diamond_table(si=True))
+        f.write(self.build_diamond_table(year, si=True))
         # run overview
         f.write('\n<h3>Full Run Overview:</h3>\n')
         f.write(self.build_tc_table())
         f.write(self.build_legend())
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
+        if year == this_year:
+            system('cp {f} index.html'.format(f=html_file))
 
     @staticmethod
     def build_legend():
@@ -89,8 +100,8 @@ class DiamondTable(Table):
         else:
             return [dia for dia in all_dias if dia not in scdias + self.Exclude + si_diodes]
 
-    def build_diamond_table(self, scvd=False, si=False):
-        header, first_row = self.build_header()
+    def build_diamond_table(self, year, scvd=False, si=False):
+        header, first_row = self.build_header(year)
         rows = [first_row]
         dias = self.get_diamond_names(scvd, si)
         for dia in dias:
@@ -101,11 +112,12 @@ class DiamondTable(Table):
             rows.append(row)
             # test campaigns
             for tc in self.TestCampaigns:
-                tc_str = make_tc_str(tc)
-                row += self.make_info_str(tc_str, dia)
-                if not row[-1].startswith('#cs'):
-                    target = join('Diamonds', dia, 'BeamTests', tc, 'index.html')
-                    row.append(make_link(target, path=self.Dir, name=self.make_set_string(tc, dia)))
+                if str(year)[2:] in tc:
+                    tc_str = make_tc_str(tc)
+                    row += self.make_info_str(tc_str, dia)
+                    if not row[-1].startswith('#cs'):
+                        target = join('Diamonds', dia, 'BeamTests', tc, 'index.html')
+                        row.append(make_link(target, path=self.Dir, name=self.make_set_string(tc, dia)))
         return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
 
     def make_set_string(self, tc, dia):
@@ -173,12 +185,15 @@ class DiamondTable(Table):
         if col == 'Thickness':
             return self.get_thickness(dia)
 
-    def build_header(self):
+    def build_header(self, year):
         header_row = ['#rs2#Diamond'] + ['#rs2#{c}'.format(c=col) for col in self.get_col_titles()]
+        header_row += self.create_year_button(year - 1)
         second_row = []
         for date in self.TestCampaigns:
-            header_row += ['#cs4#{d}'.format(d=date)]
-            second_row += [center_txt(txt) for txt in [add_spacings('Type', 2), 'Irr* [neq]', make_link(join('BoardNumbers', 'bn.html'), 'BN*'), 'Data Set*']]
+            if str(year)[2:] in date:
+                header_row += ['#cs4#{d}'.format(d=date)]
+                second_row += [center_txt(txt) for txt in [add_spacings('Type', 2), 'Irr* [neq]', make_link(join('BoardNumbers', 'bn.html'), 'BN*'), 'Data Set*']]
+        header_row += self.create_year_button(year + 1, before=False)
         return header_row, second_row
 
     def build_board_table(self):
@@ -389,6 +404,12 @@ class DiamondTable(Table):
         n_dirs = len(path.split('/')) - 3
         back = '../' * n_dirs
         return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
+
+    @staticmethod
+    def create_year_button(year, before=True):
+        y_str = '{b}{y}{a}'.format(b='<< ' if before else '', y=year, a=' >>' if not before else '')
+        btn_string = '#rs30#lightgrey</br> <button onclick="location.href={t}" type="button"> {s} </button>'.format(t="'index{y}.html'".format(y=year), s=y_str)
+        return [btn_string] if start_year <= year <= this_year else []
 
 
 def get_dir():
