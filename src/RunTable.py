@@ -28,9 +28,10 @@ class RunTable(Table):
                         self.copy_index_php(run_path)
 
     def build_table(self, path, rp, tc, dia, runs, ch):
-        if not tc == '201508' or not dia == 'II6-79':
+        # if not tc == '201508' or not dia == 'II6-79':
+        if not tc > '201612':
             return
-        print rp
+        print tc, rp
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
         f = open(html_file, 'w')
         tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
@@ -40,7 +41,8 @@ class RunTable(Table):
                   '#rs2#Type',
                   '#rs2#HV [V]',
                   '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
-                  '#cs4#Signal',
+                  '#rs2#Hit<br>Map',
+                  '#cs5#Signal',
                   '#cs4#Pulser',
                   '#rs2#Start Time',
                   '#rs2#Duration',
@@ -50,7 +52,7 @@ class RunTable(Table):
             value2 = ' ({0})'.format(value2) if value2 is not None else ''
             return [center_txt(make_link(file_name.format(plot_name), '{0}{1}'.format(value, value2), path=path))]
 
-        rows = [[center_txt(txt) for txt in ['Distr.', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma',
+        rows = [[center_txt(txt) for txt in ['Distr.', '2DMap', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma',
                                              'Pedestal [au]', 'Noise [1&sigma;]']]]
         for i, run in enumerate(runs, 1):
             info = self.DiaScans.RunInfos[tc][str(run)]
@@ -61,7 +63,9 @@ class RunTable(Table):
             rows[i] += [info['runtype']]                                                                                                    # Type
             rows[i] += [make_bias_str(info['dia{ch}hv'.format(ch=ch)])]                                                                     # HV
             rows[i] += [center_txt(self.calc_flux(info))]                                                                                   # Flux
-            rows[i] += [center_txt(make_link('{path}/SignalDistribution.png'.format(path=run_path), 'Plot', path=path, use_name=False))]    # Distribution
+            rows[i] += [center_txt(make_link('{path}/HitMap.pdf'.format(path=run_path), 'Plot', path=path, use_name=False))]                # Hit Map
+            rows[i] += [center_txt(make_link('{path}/SignalDistribution.pdf'.format(path=run_path), 'Plot', path=path, use_name=False))]    # Distribution
+            rows[i] += [center_txt(make_link('{path}/SignalMap2D.pdf'.format(path=run_path), 'Plot', path=path, use_name=False))]           # Signal Map
             rows[i] += make_entry('PulseHeight10000', data['PH'].Parameter(0), data['PH'].ParError(0))                                      # PH
             rows[i] += make_entry('Pedestal_aball_cuts', data['Pedestal'].Parameter(1))                                                     # Pedestal
             rows[i] += make_entry('Pedestal_aball_cuts', data['Pedestal'].Parameter(2))                                                     # Pedestal Noise
@@ -77,7 +81,7 @@ class RunTable(Table):
     def build_full_table(self, tc, path):
         html_file = '{path}/index.html'.format(path=path)
         f = open(html_file, 'w')
-        tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, txt=False))
+        tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, long_=False))
         write_html_header(f, tit, bkg=self.BkgCol)
         header = ['Run', 'Type', 'Flux<br>[kHz/cm{0}]'.format(sup(2)), 'FS11', 'FSH13', 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
         rows = []
