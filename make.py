@@ -155,7 +155,7 @@ class DiamondTable(Table):
             dias = str(list(z.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
             if dias:
                 target = 'BeamTests/{tc}/index.html'.format(tc=tc)
-                rows.append([make_link(target, make_tc_str(tc, txt=0), path=self.Dir), dias])
+                rows.append([make_link(target, make_tc_str(tc, long_=0), path=self.Dir), dias])
         return add_bkg(HTML.table(rows, header_row=header))
 
     def get_manufacturer(self, dia):
@@ -186,7 +186,7 @@ class DiamondTable(Table):
             return self.get_thickness(dia)
 
     def build_header(self, year):
-        header_row = ['#rs2#Diamond'] + ['#rs2#{c}'.format(c=col) for col in self.get_col_titles()]
+        header_row = ['#rs2#{d}'.format(d=add_spacings('Diamond'))] + ['#rs2#{c}'.format(c=col) for col in self.get_col_titles()]
         header_row += self.create_year_button(year - 1)
         second_row = []
         for date in self.TestCampaigns:
@@ -217,12 +217,11 @@ class DiamondTable(Table):
             rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, plans in rps.iteritems():
-                if tc < '201508':
+                if tc < '201705':
                     continue
-                tc_string = datetime.strptime(tc, '%Y%m').strftime('%b%y')
+                tc_string = make_tc_str(tc, long_=False)
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
                 create_dir(sub_path)
-                # runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
                 self.build_runplan_table(sub_path, plans, tc)
                 for rp, ch in plans:
                     rp_path = '{path}/RunPlan{rp}'.format(path=sub_path, rp=make_rp_string(rp))
@@ -248,6 +247,7 @@ class DiamondTable(Table):
             info = z.DiaScans.RunInfos[tc][str(runs[0])]
             rp_dir = 'RunPlan{rp}'.format(rp=make_rp_string(rp))
             name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
+            volt_scan = self.DiaScans.RunPlans[tc][rp]['type'] == 'voltage scan'
             rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
             rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]                                                 # Run Plan Type
             rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=False)                # Diamond Attenuators
@@ -256,10 +256,10 @@ class DiamondTable(Table):
             rows[i] += [right_txt(make_bias_str(self.DiaScans.get_biases(rp, tc, ch)))]                         # Bias
             rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
             rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
-            rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
+            rows[i] += make_pic_link(*(['PulserVoltageScan', 'Plot', False] if volt_scan else ['CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch)]))  # Pulser Pulse Height
             rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                                 # Pulser Pulse Height (corrected)
-            rows[i] += make_pic_link('PedestalMeanFluxPulserBeamOn', 'Plot', use_name=False)                    # Pulser Pedestal
-            rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))                     # Signal Pulse Height
+            rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Pulser Pedestal
+            rows[i] += make_pic_link(*(['SignalVoltageScan', 'Plot', False] if volt_scan else ['CombinedPulseHeights', self.get_signal(runs, tc, ch)]))
             rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
             rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
             rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
