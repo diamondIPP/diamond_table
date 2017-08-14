@@ -169,7 +169,7 @@ def add_bkg(table, color='black'):
             lines[i] = line.replace('<TH', '<TH bgcolor={col} '.format(col=color))
         else:
             lines[i] = line.replace('<TD', '<TD bgcolor=white ')
-        if not 'bgcolor' in lines[i]:
+        if 'bgcolor' not in lines[i]:
             lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
     return '\n'.join(lines)
 
