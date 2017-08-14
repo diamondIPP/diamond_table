@@ -92,12 +92,13 @@ def make_runplan_string(nr):
     return nr.zfill(2) if len(nr) <= 2 else nr.zfill(4)
 
 
-def make_tc_str(tc, txt=True):
-    tc = str(tc)
-    if tc[0].isdigit():
-        return datetime.strptime(tc, '%Y%m').strftime('%B %Y' if txt else '%b%y')
+def make_tc_str(tc, long_=True):
+    tc_data = str(tc).split('-')
+    sub_string = '-{0}'.format(tc_data[-1]) if len(tc_data) > 1 else ''
+    if tc_data[0][0].isdigit():
+        return '{tc}{s}'.format(tc=datetime.strptime(tc_data[0], '%Y%m').strftime('%B %Y' if long_ else '%b%y'), s=sub_string)
     else:
-        return datetime.strptime(tc, '%b%y').strftime('%Y%m' if txt else '%B %Y')
+        return '{tc}{s}'.format(tc=datetime.strptime(tc_data[0], '%b%y').strftime('%Y%m' if long_ else '%B %Y'), s=sub_string)
 
 
 def make_bias_str(biases):
