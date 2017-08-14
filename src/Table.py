@@ -108,10 +108,11 @@ class Table:
 
     def get_pickle(self, run, tc, ch, tag, form=''):
         ch = 0 if ch == 1 else 3
+        pul_ped = 'Pedestal/{{tc}}_{{run}}_{{ch}}_a{n}2_fwhm_PulserBeamOn'.format(n='b' if tc < '201707' else 'c')
         file_name_dic = {'PH': 'Ph_fit/{tc}_{run}_{ch}_10000_eventwise_b2',
                          'Pedestal': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_all_cuts',
                          'Pulser': 'Pulser/HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn',
-                         'PulserPed': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_PulserBeamOn'}
+                         'PulserPed': pul_ped}
         path = '{dir}/Pickles/{f}.pickle'.format(dir=self.Dir, f=file_name_dic[tag])
         path = path.format(tc=tc, run=run, ch=ch)
         if not file_exists(path):
