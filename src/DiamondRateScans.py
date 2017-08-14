@@ -111,7 +111,8 @@ class DiaScans:
                     continue
                 ch = next(ch for ch in [1, 2] if dia == self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]))
                 plans.append((rp, ch))
-            runplans[tc] = sorted(plans)
+            if plans:
+                runplans[tc] = sorted(plans)
         return OrderedDict(sorted(runplans.iteritems()))
 
     def get_runs(self, rp, tc):
