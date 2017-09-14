@@ -217,7 +217,7 @@ class DiamondTable(Table):
             rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, plans in rps.iteritems():
-                if tc < '201705':
+                if tc < '201708-2':
                     continue
                 tc_string = make_tc_str(tc, long_=False)
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
@@ -256,12 +256,20 @@ class DiamondTable(Table):
             rows[i] += [right_txt(make_bias_str(self.DiaScans.get_biases(rp, tc, ch)))]                         # Bias
             rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
             rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
-            rows[i] += make_pic_link(*(['PulserVoltageScan', 'Plot', False] if volt_scan else ['CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch)]))  # Pulser Pulse Height
-            rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                                 # Pulser Pulse Height (corrected)
-            rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Pulser Pedestal
-            rows[i] += make_pic_link(*(['SignalVoltageScan', 'Plot', False] if volt_scan else ['CombinedPulseHeights', self.get_signal(runs, tc, ch)]))
-            rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
-            rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
+            if volt_scan:
+                rows[i] += make_pic_link('PulserVoltageScan', 'Plot', False)                                    # Pulser Pulse Height
+                rows[i] += [center_txt('-')]                                                                    # Pulser Pulse Height (corrected)
+                rows[i] += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
+                rows[i] += make_pic_link('SignalVoltageScan', 'Plot', False)
+                rows[i] += make_pic_link('PedestalMeanVoltage', 'Plot', False)
+                rows[i] += make_pic_link('PedestalSigmaVoltage', self.get_noise(runs, tc, ch))
+            else:
+                rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
+                rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                                 # Pulser Pulse Height (corrected)
+                rows[i] += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)                          # Pulser Pedestal
+                rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))
+                rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
+                rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
             rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
             rows[i] += [self.calc_duration(info, z.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
 
