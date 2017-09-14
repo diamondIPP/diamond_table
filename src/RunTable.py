@@ -29,9 +29,14 @@ class RunTable(Table):
 
     def build_table(self, path, rp, tc, dia, runs, ch):
         # if not tc == '201508' or not dia == 'II6-79':
-        if not tc > '201612':
+        if dia == 'None':
             return
-        print tc, rp
+        if tc == '201707' and dia == 'SiD6' and rp == '02':
+            return
+        # if not tc > '201612' or dia == 'II6-A2' or dia == 'Si352':
+        if not tc >= '201708-2':
+            return
+        print tc, rp, dia
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
         f = open(html_file, 'w')
         tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
