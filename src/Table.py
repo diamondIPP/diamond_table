@@ -136,5 +136,11 @@ class Table:
         dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
         return dic.get('ALIASES', dia)
 
+    @staticmethod
+    def create_home_button(path):
+        n_dirs = len(path.split('/')) - 3
+        back = '../' * n_dirs
+        return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
+
 if __name__ == '__main__':
     z = Table()

@@ -400,12 +400,6 @@ class DiamondTable(Table):
             self.ProgressBar.update(i)
 
     @staticmethod
-    def create_home_button(path):
-        n_dirs = len(path.split('/')) - 3
-        back = '../' * n_dirs
-        return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
-
-    @staticmethod
     def create_year_button(year, before=True):
         y_str = '{b}{y}{a}'.format(b='<< ' if before else '', y=year, a=' >>' if not before else '')
         btn_string = '#rs30#lightgrey</br> <button onclick="location.href={t}" type="button"> {s} </button>'.format(t="'index{y}.html'".format(y=year), s=y_str)
