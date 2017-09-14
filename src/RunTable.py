@@ -80,6 +80,7 @@ class RunTable(Table):
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(2))                                                # Pulser Ped Noise
             rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]                                     # comments
         f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
+        f.write(self.create_home_button(join(path, 'index.php')))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
