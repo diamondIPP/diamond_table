@@ -75,18 +75,24 @@ class Table:
         area = [52 * 80 * pixel_size] * 2
         try:
             f = open('{path}/masks/{mask}'.format(path=self.Dir, mask=info['maskfile']), 'r')
-            data = []
+            data = {}
             for line in f:
                 if line.startswith('#'):
                     continue
                 if len(line) > 3:
                     line = line.split()
-                    data.append([int(line[2])] + [int(line[3])])
+                    roc = int(line[1])
+                    if roc not in data:
+                        data[roc] = {}
+                    data[roc][line[0]] = (int(line[2]), int(line[3]))
             f.close()
-            area = [(data[1][0] - data[0][0]) * (data[1][1] - data[0][1]) * pixel_size, (data[3][0] - data[2][0]) * (data[3][1] - data[2][1]) * pixel_size]
+            try:
+                area = [(dic['cornTop'][1] - dic['cornBot'][1] + 1) * (dic['cornTop'][0] - dic['cornBot'][0] + 1) * pixel_size for dic in data.itervalues()]
+            except KeyError:
+                area = [dic['col'][1] - dic['col'][0] + 1 * dic['row'][1] - dic['row'][0] + 1 * pixel_size for dic in data.itervalues()]
         except IOError:
             log_warning('Could not find mask file {f}! Not taking any mask!'.format(f=info['maskfile']))
-        flux = [info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(2)]
+        flux = [info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(len(area))]
         return str('{0:5.0f}'.format(mean(flux)))
 
     @staticmethod
