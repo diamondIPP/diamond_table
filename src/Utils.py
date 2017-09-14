@@ -78,6 +78,7 @@ def create_dir(path):
 def write_html_header(f, name, bkg=None):
     f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n')
     f.write('<html>\n<head>\n<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">\n')
+    f.write('<link rel="icon" href="http://pngimg.com/uploads/diamond/diamond_PNG6684.png">\n')
     f.write('<title> {tit} </title>\n'.format(tit=name))
     f.write('</head>\n<body{bkg}>\n\n\n'.format(bkg='' if bkg is None else ' bgcolor=' + bkg))
     f.write('<h1>{tit}</h1>\n'.format(tit=name))
