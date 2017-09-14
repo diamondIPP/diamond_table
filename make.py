@@ -293,12 +293,14 @@ class DiamondTable(Table):
             att_string = 'None'
             if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:
                 att_string = self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser' if 'pulser' in self.DiaScans.RunPlans[tc][rp]['attenuators'] else 'pulser{c}'.format(c=ch)]
+            if att_string == 'None':
+                return center_txt('-')
             attenuations = att_string.split('+') if att_string.lower() not in ['unknown', 'none'] else ['0']
             db = sum(int(att.lower().split('db')[0]) for att in attenuations)
             att = 10 ** (db / 20.)
             pulser_mean = mean([self.get_pickle(run, tc, ch, 'Pulser').Parameter(1) for run in runs])
             return center_txt('{:2.2f}'.format(pulser_mean * att))
-        except Exception:
+        except TypeError:
             return center_txt('?')
 
     def get_pickle_mean(self, runs, tc, ch, name, par):
