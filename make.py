@@ -152,7 +152,7 @@ class DiamondTable(Table):
             path = '{dir}/BeamTests/{dat}'.format(dir=self.Dir, dat=tc)
             create_dir(path)
             self.RunTable.build_full_table(tc, path)
-            dias = str(list(z.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
+            dias = str(list(self.DiaScans.get_diamonds(make_tc_str(tc)))).strip('[]').replace('\'', '')
             if dias:
                 target = 'BeamTests/{tc}/index.html'.format(tc=tc)
                 rows.append([make_link(target, make_tc_str(tc, long_=0), path=self.Dir), dias])
@@ -217,7 +217,7 @@ class DiamondTable(Table):
             rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, plans in rps.iteritems():
-                if tc < '201708-2':
+                if tc != '201608':
                     continue
                 tc_string = make_tc_str(tc, long_=False)
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
@@ -244,7 +244,7 @@ class DiamondTable(Table):
         # for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
         for i, (rp, ch) in enumerate(plans, 1):
             runs = self.DiaScans.get_runs(rp, tc)
-            info = z.DiaScans.RunInfos[tc][str(runs[0])]
+            info = self.DiaScans.RunInfos[tc][str(runs[0])]
             rp_dir = 'RunPlan{rp}'.format(rp=make_rp_string(rp))
             name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
             volt_scan = self.DiaScans.RunPlans[tc][rp]['type'] == 'voltage scan'
@@ -270,8 +270,8 @@ class DiamondTable(Table):
                 rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))
                 rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
                 rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
-            rows[i] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
-            rows[i] += [self.calc_duration(info, z.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
+            rows[i] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
+            rows[i] += [self.calc_duration(info, self.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
 
         f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
         f.write(self.create_home_button(path))
