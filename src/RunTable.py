@@ -5,7 +5,7 @@
 
 from collections import OrderedDict
 
-import HTML
+import HTMLTable
 from Table import Table
 from Utils import *
 
@@ -34,7 +34,7 @@ class RunTable(Table):
         if tc == '201707' and dia == 'SiD6' and rp == '02':
             return
         # if not tc > '201612' or dia == 'II6-A2' or dia == 'Si352':
-        if not tc >= '201708-2':
+        if not tc == '201705':
             return
         print tc, rp, dia
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
@@ -79,7 +79,7 @@ class RunTable(Table):
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(1))                                                # Pulser Pedestal
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(2))                                                # Pulser Ped Noise
             rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]                                     # comments
-        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
+        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write(self.create_home_button(join(path, 'index.php')))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
@@ -101,6 +101,6 @@ class RunTable(Table):
             rows[i] += [self.get_runtype(data), center_txt(self.calc_flux(data)), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.calc_duration(data)]
             rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
             rows[i] += [data['comments'][:100]]
-        f.write(add_bkg(HTML.table(rows, header_row=header), self.BkgCol))
+        f.write(add_bkg(HTMLTable.table(rows, header_row=header), self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
