@@ -150,7 +150,7 @@ class DiamondTable(Table):
             if dias:
                 target = 'BeamTests/{tc}/index.html'.format(tc=tc)
                 rows.append([make_link(target, make_tc_str(tc, long_=0), path=self.Dir), dias])
-        return add_bkg(HTML.table(rows, header_row=header))
+        return add_bkg(HTMLTable.table(rows, header_row=header))
 
     def get_manufacturer(self, dia):
         info_path = join(self.DataPath, dia, 'info.conf')
@@ -185,7 +185,7 @@ class DiamondTable(Table):
         second_row = []
         for date in self.TestCampaigns:
             if str(year)[2:] in date:
-                header_row += ['#cs4#{d}'.format(d=date)]
+                header_row += ['#cs4#{d}'.format(d=make_link(join('BeamTests', date, 'RunPlans.html'), date, path=self.Dir))]
                 second_row += [center_txt(txt) for txt in [add_spacings('Type', 2), 'Irr* [neq]', make_link(join('BoardNumbers', 'bn.html'), 'BN*'), 'Data Set*']]
         header_row += self.create_year_button(year + 1, before=False)
         return header_row, second_row
@@ -198,7 +198,7 @@ class DiamondTable(Table):
         write_html_header(f, 'Diamond Amplifier Boards', bkg=self.BkgCol)
         header = ['Board Number', 'Pulser Type']
         rows = sorted([[center_txt(str(bn)), typ] for typ, bns in info.iteritems() for bn in bns])
-        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
+        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
@@ -211,7 +211,7 @@ class DiamondTable(Table):
             rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, plans in rps.iteritems():
-                if tc != '201608':
+                if tc != '201705':
                     continue
                 tc_string = make_tc_str(tc, long_=False)
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
@@ -267,7 +267,7 @@ class DiamondTable(Table):
             rows[i] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
             rows[i] += [self.calc_duration(info, self.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
 
-        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
+        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write(self.create_home_button(path))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
@@ -322,87 +322,6 @@ class DiamondTable(Table):
             if tc == '201707':
                 copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/data/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
         copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/data/'.format(dir=self.Dir))
-
-    def copy_pics(self, copy_all=False, runplan=None):
-        widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
-        n = len(glob('/home/testbeam/testing/micha/myPadAnalysis/Res*/*/*/png/*'))
-        pbar = ProgressBar(widgets=widgets, maxval=n).start()
-        k = 1
-        used_runs = {}
-        for dia in self.DiaScans.get_diamonds():
-            rps = self.DiaScans.find_diamond_runplans(dia) if runplan is None else {make_tc_str(tc): {'bla': {make_runplan_string(runplan): 'bla'}} for tc in self.TestCampaigns}
-            for tc, item in rps.iteritems():
-                used_runs[tc] = {dia: []}
-                runplans = sorted([str(j) for sl in [i.keys() for i in item.itervalues()] for j in sl])
-                path = '/home/testbeam/Desktop/psi/Diamonds/{0}/BeamTests/{1}'.format(dia, make_tc_str(tc, 0))
-                for rp in runplans:
-                    rp_path = '{path}/RunPlan{rp}'.format(path=path, rp=make_rp_string(rp))
-                    for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Results{0}/{1}/runplan{2}/png/*'.format(tc, self.translate_dia(dia), rp)):
-                        pbar.update(k)
-                        k += 1
-                        pic = name.split('/')[-1]
-                        if not file_exists('{path}/{file}'.format(path=rp_path, file=pic)) or copy_all:
-                            copy(name, rp_path)
-                    runs = self.DiaScans.get_runs(rp, tc) if rp in self.DiaScans.RunPlans[tc] else []
-                    for run in runs:
-                        if run in used_runs[tc][dia]:
-                            continue
-                        used_runs[tc][dia].append(run)
-                        run_path = '{path}/{run}'.format(path=path, run=run)
-                        for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Results{0}/{1}/{2}/png/*'.format(tc, self.translate_dia(dia), str(run).zfill(3))):
-                            pbar.update(k)
-                            k += 1
-                            pic = name.split('/')[-1]
-                            if not file_exists('{path}/{file}'.format(path=run_path, file=pic)) or copy_all:
-                                copy(name, run_path)
-        pbar.finish()
-
-    @staticmethod
-    def copy_pickles():
-        picdirs = ['Ph_fit', 'Pulser', 'Pedestal']
-        widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
-        n = len([i for lst in [glob('/home/testbeam/testing/micha/myPadAnalysis/Configuration/Individual_Configs/{0}/*'.format(picdir)) for picdir in picdirs] for i in lst])
-        pbar = ProgressBar(widgets=widgets, maxval=n).start()
-        k = 1
-        for picdir in picdirs:
-            dst = '/home/testbeam/Desktop/psi/Pickles/{0}/'.format(picdir)
-            for name in glob('/home/testbeam/testing/micha/myPadAnalysis/Configuration/Individual_Configs/{0}/*'.format(picdir)):
-                pbar.update(k)
-                k += 1
-                pic = name.strip('/')[-1]
-                if not file_exists('{path}/{file}'.format(path=dst, file=pic)):
-                    copy(name, dst)
-        pbar.finish()
-
-    def copy_rp_pickle(self, rp, tc):
-        pic_dic = {'Ph_fit': '', 'Pulser': 'HistoFit_', 'Pedestal': ''}
-        rp = make_runplan_string(rp)
-        runs = self.DiaScans.RunPlans[str(tc)][rp]['runs']
-        files = []
-        for picdir, name in pic_dic.iteritems():
-            for run in runs:
-                files += glob('{dir}/{sdir}/{n}{tc}_{r}*'.format(dir=self.AnaPickleDir, sdir=picdir, n=name, tc=tc, r=run))
-        self.start_pbar(len(files))
-        for i, f in enumerate(files, 1):
-            copy(f, '{dir}/{sdir}'.format(dir=self.PickleDir, sdir=f.split('/')[-2]))
-            self.ProgressBar.update(i)
-
-    def copy_rp_pics(self, rp, tc, copy_all=False):
-        rp = make_runplan_string(rp)
-        runs = self.DiaScans.RunPlans[str(tc)][rp]['runs']
-        anadir = '{dir}/Results{tc}/*'.format(dir=self.AnaDir, tc=tc)
-        files = [i for lst in [glob('{dir}/{r}/png/*'.format(dir=anadir, r=run)) for run in runs] for i in lst] + glob('{dir}/runplan{rp}/png/*'.format(dir=anadir, rp=rp))
-        this_dir = '{dir}/Diamonds/*/BeamTests/{tc}'.format(dir=self.Dir, tc=make_tc_str(tc, 0))
-        existing_files = [i for lst in [glob('{dir}/{r}/*'.format(dir=this_dir, r=run)) for run in runs] for i in lst] + glob('{dir}/RunPlan{rp}/*'.format(dir=this_dir, rp=make_rp_string(rp)))
-        self.start_pbar(len(files))
-        for i, f in enumerate(files, 1):
-            if not basename(f) in [basename(ef) for ef in existing_files] or copy_all:
-                r_string = f.split('/')[-3]
-                dia = self.translate_old_dia(f.split('/')[-4])
-                sub_dir = 'RunPlan{r}'.format(r=make_rp_string(r_string.strip('runplan'))) if 'runplan' in f else r_string
-                # print basename(f), '{dir}/{sdir}'.format(dir=this_dir.replace('*', dia), sdir=sub_dir)
-                copy(f, '{dir}/{sdir}'.format(dir=this_dir.replace('*', dia), sdir=sub_dir))
-            self.ProgressBar.update(i)
 
     @staticmethod
     def create_year_button(year, before=True):
