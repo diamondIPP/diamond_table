@@ -175,10 +175,10 @@ def add_bkg(table, color='black'):
     return '\n'.join(lines)
 
 
-def calc_mean(l):
-    l = [float(i) for i in l]
-    mean_ = sum(l) / len(l)
-    mean2 = sum(map(lambda x: x ** 2, l)) / len(l)
+def calc_mean(lst):
+    lst = [float(i) for i in lst]
+    mean_ = sum(lst) / len(lst)
+    mean2 = sum(map(lambda x: x ** 2, lst)) / len(lst)
     sigma = sqrt(mean2 - mean_ ** 2)
     return mean_, sigma
 
