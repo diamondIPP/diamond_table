@@ -135,15 +135,10 @@ class Table:
         return fit_res
 
     def translate_dia(self, dia):
-        return self.DiaScans.Parser.get('ALIASES', dia.lower())
+        self.DiaScans.translate_dia(dia)
 
-    def translate_old_dia(self, dia):
-        dic = load_parser('{dir}/data/OldDiamondAliases.cfg'.format(dir=self.Dir))
-        return dic.get('ALIASES', dia)
-
-    @staticmethod
-    def create_home_button(path):
-        n_dirs = len(path.split('/')) - 3
+    def create_home_button(self, curr_path):
+        n_dirs = len(curr_path.split(sep)) - len(self.Dir.split(sep))
         back = '../' * n_dirs
         return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
 
