@@ -121,32 +121,23 @@ class DiamondTable(Table):
                     if not row[-1].startswith('#cs'):
                         target = join('Diamonds', dia, 'BeamTests', tc, 'index.html')
                         row.append(make_link(target, path=self.Dir, name=self.make_set_string(tc, dia)))
-        return add_bkg(HTML.table(rows, header_row=header, ), 'lightgrey')
+        return add_bkg(HTMLTable.table(rows, header_row=header, ), 'lightgrey')
 
     def make_set_string(self, tc, dia):
-        start_runs = [str(r) for r in sorted(run_plan['runs'][0] for run_plan in self.DiaScans.RunPlans[make_tc_str(tc)].itervalues())]
-        info = self.DiaScans.RunInfos[make_tc_str(tc)]
         dia_set = []
-        for tup in [tuple(self.RunTable.translate_dia(info[run][d]) for d in ['dia1', 'dia2']) for run in start_runs]:
+        for tup in [tuple(self.DiaScans.get_rp_diamonds(make_tc_str(tc), rp)) for rp in sorted(self.DiaScans.RunPlans[make_tc_str(tc)])]:
             dia_set += [tup] if tup not in dia_set else []
         return center_txt(' / '.join(['{i}{j}'.format(i=i, j='f' if not tup.index(dia) else 'b') for i, tup in enumerate(dia_set, 1) if dia in tup]))
 
     def make_info_str(self, tc_str, dia):
-        info = ConfigParser()
-        info.read(join(self.DataPath, dia, 'info.conf'))
-        out = [''] * 3
-        if tc_str not in info.sections():
+        if tc_str not in load_parser(join(self.DataPath, dia, 'info.conf')).sections():
             return ['#cs4#']
-        options = info.options(tc_str)
-
-        typ = '{0}'.format(info.get(tc_str, 'type')) if 'type' in options else ''
-        out[0] = center_txt(typ)
-        out[1] = center_txt('{0:.1e}'.format(float(info.get(tc_str, 'irradiation')))) if 'irradiation' in options else center_txt('0')
-        if 'boardnumber' in options:
-            out[2] = center_txt(info.get(tc_str, 'boardnumber'))
-        else:
-            out[2] = center_txt('-' if 'pix' in typ else '?')
-        return out
+        typ = center_txt(self.get_info(dia, tc_str, 'type'))
+        irr = self.get_info(dia, tc_str, 'irradiation')
+        irr = center_txt('{0:.1e}'.format(float(irr)) if irr else '0')
+        board_number = self.get_info(dia, tc_str, 'boardnumber')
+        board_number = center_txt(board_number) if board_number else center_txt('-' if 'pix' in typ else '?')
+        return [typ, irr, board_number]
 
     def build_tc_table(self):
         header = ['Test Campaign', 'Tested Diamonds']
