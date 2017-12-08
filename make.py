@@ -5,7 +5,7 @@
 import sys
 
 sys.path.append('src')
-import HTML
+import HTMLTable
 from json import loads
 from glob import glob
 from Utils import *
@@ -13,6 +13,7 @@ from shutil import copy
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from RunTable import RunTable
 from Table import Table
+from RunPlanTable import RunPlanTable
 from os.path import basename, join
 from os import system
 from numpy import mean
@@ -27,6 +28,7 @@ class DiamondTable(Table):
         Table.__init__(self)
 
         self.RunTable = RunTable()
+        self.RunPlanTable = RunPlanTable()
 
     def create_diamond_folders(self):
         for dia in self.Diamonds:
@@ -35,6 +37,7 @@ class DiamondTable(Table):
             create_dir('{path}/BeamTests'.format(path=path))
 
     def build_everything(self):
+        self.RunPlanTable.build_all()
         self.create_overview()
         self.create_runplan_overview()
         self.RunTable.create_overview()
