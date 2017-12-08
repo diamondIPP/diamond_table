@@ -142,5 +142,18 @@ class Table:
         back = '../' * n_dirs
         return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
 
+    def get_info(self, dia, section, option):
+        info = ConfigParser()
+        info.read(join(self.DataPath, dia, 'info.conf'))
+        try:
+            return info.get(section, option)
+        except NoOptionError:
+            log_warning('option {o} not in {d} config'.format(o=option, d=dia)) if option == 'type' else do_nothing()
+            return ''
+        except NoSectionError:
+            log_warning('section {s} not in {d} config'.format(s=section, d=dia)) if option == 'type' else do_nothing()
+            return ''
+
+
 if __name__ == '__main__':
     z = Table()
