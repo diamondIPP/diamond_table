@@ -4,7 +4,7 @@
 # created on April 25th 2017 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-import HTML
+import HTMLTable
 from Table import Table
 from Utils import make_tc_str, join, write_html_header, add_bkg, make_link, make_bias_str, make_rp_string, center_txt, right_txt, conv_time
 from numpy import mean
@@ -62,7 +62,7 @@ class DiaTable(Table):
                 rows[i_row] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]
                 rows[i_row] += [self.calc_duration(z.DiaScans.RunInfos[tc][str(runs[0])], z.DiaScans.RunInfos[tc][str(runs[-1])])]
                 i_row += 1
-        f.write(add_bkg(HTML.table(rows, header_row=header), color=self.BkgCol))
+        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 

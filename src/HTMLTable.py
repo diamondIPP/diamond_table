@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 """
-HTML.py - v0.04 2009-07-28 Philippe Lagadec
+HTMLTable.py - v0.04 2009-07-28 Philippe Lagadec
 
 This module provides a few classes to easily generate HTML code such as tables
 and lists.
@@ -159,7 +159,7 @@ class TableCell (object):
             # An empty cell should at least contain a non-breaking space
             text = '&nbsp;'
         if self.header:
-            return '  <TH%s>%s</TH>\n' % (attribs_str, text + 'a')
+            return '  <TH%s>%s</TH>\n' % (attribs_str, text)
         else:
             return '  <TD%s>%s</TD>\n' % (attribs_str, text)
 
