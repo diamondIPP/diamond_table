@@ -150,7 +150,7 @@ class TableCell (object):
             if text.startswith('#'):
                 data = text.split('#')
                 att = data[1][2:]
-                text = data[2]
+                text = '#'.join(data[2:])
                 if data[1].startswith('cs'):
                     attribs_str += ' colspan="{att}"'.format(att=att)
                 elif data[1].startswith('rs'):
@@ -159,7 +159,7 @@ class TableCell (object):
             # An empty cell should at least contain a non-breaking space
             text = '&nbsp;'
         if self.header:
-            return '  <TH%s>%s</TH>\n' % (attribs_str, text)
+            return '  <TH%s>%s</TH>\n' % (attribs_str, text + 'a')
         else:
             return '  <TD%s>%s</TD>\n' % (attribs_str, text)
 
