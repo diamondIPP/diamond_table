@@ -126,7 +126,11 @@ class Table:
             log_warning('did not find {p}'.format(p=path))
             return FitRes()
         f = open(path)
-        fit_res = FitRes(pickle.load(f), form)
+        try:
+            fit_res = FitRes(pickle.load(f), form)
+        except ImportError as err:
+            print err
+            return FitRes()
         f.close()
         return fit_res
 
