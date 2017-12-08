@@ -11,9 +11,10 @@ from os import remove
 from shutil import copy
 from glob import glob
 from numpy import mean
-from os.path import dirname, realpath, join
+from os.path import dirname, realpath, join, sep
 import pickle
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
+from ConfigParser import NoSectionError, NoOptionError
 
 
 def get_program_dir():
@@ -32,10 +33,10 @@ class Table:
         self.Config = self.load_config()
 
         # directories
-        self.DataPath = '{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'data_directory'))
+        self.DataPath = join(self.Dir, self.Config.get('General', 'data_directory'))
         self.AnaDir = self.Config.get('General', 'analysis_dir')
-        self.AnaPickleDir = '{ana}/Configuration/Individual_Configs'.format(ana=self.AnaDir)
-        self.PickleDir = '{dir}/Pickles'.format(dir=self.Dir)
+        self.AnaPickleDir = join(self.AnaDir, 'Configuration', 'Individual_Configs')
+        self.PickleDir = join(self.Dir, 'Pickles')
 
         # info
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
