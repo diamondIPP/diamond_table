@@ -160,6 +160,12 @@ class DiaScans:
     def get_first_run(self, tc, rp):
         return str(self.RunPlans[tc][rp]['runs'][0])
 
+    def get_dia_position(self, tc, rp, ch):
+        info = self.RunInfos[tc][self.get_first_run(tc, rp)]
+        keys = sorted([key for key in info.iterkeys() if key.startswith('dia') and len(key) < 6])
+        pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back'] if len(keys) == 2 else range(len(keys))
+        return pos[keys.index('dia{ch}'.format(ch=ch))]
+
 
 if __name__ == '__main__':
     main_parser = ArgumentParser()
