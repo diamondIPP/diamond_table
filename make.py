@@ -10,13 +10,11 @@ from json import loads
 from glob import glob
 from Utils import *
 from shutil import copy
-from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from RunTable import RunTable
 from Table import Table
 from RunPlanTable import RunPlanTable
 from os.path import basename, join
 from os import system
-from numpy import mean
 from datetime import datetime
 
 this_year = datetime.now().year
@@ -37,9 +35,9 @@ class DiamondTable(Table):
             create_dir('{path}/BeamTests'.format(path=path))
 
     def build_everything(self):
-        self.RunPlanTable.build_all()
+        self.RunPlanTable.create_tc_overview()
         self.create_overview()
-        self.create_runplan_overview()
+        self.RunPlanTable.create_dia_overview()
         self.RunTable.create_overview()
 
     # =====================================================
@@ -206,119 +204,6 @@ class DiamondTable(Table):
         f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
-
-    # endregion
-
-    # =====================================================
-    # region RUN PLANS
-    def create_runplan_overview(self):
-        for dia in self.Diamonds:
-            rps = self.DiaScans.find_dia_run_plans(dia)
-            path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
-            for tc, plans in rps.iteritems():
-                if tc != '201705':
-                    continue
-                tc_string = make_tc_str(tc, long_=False)
-                sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
-                create_dir(sub_path)
-                self.build_runplan_table(sub_path, plans, tc)
-                for rp, ch in plans:
-                    rp_path = '{path}/RunPlan{rp}'.format(path=sub_path, rp=make_rp_string(rp))
-                    create_dir(rp_path)
-                    self.copy_index_php(rp_path)
-
-    def build_runplan_table(self, path, plans, tc):
-        html_file = '{path}/index.html'.format(path=path)
-        f = open(html_file, 'w')
-        tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
-        write_html_header(f, tit, bkg=self.BkgCol)
-        header = ['#rs2#Nr.', '#rs2#Type', '#rs2#Diamond<br>Attenuator', '#rs2#Pulser<br>Attenuator', '#rs2#Runs', '#rs2#Bias [V]', '#rs2#Leakage<br>Current',
-                  '#cs4#Pulser', '#cs3#Signal', '#rs2#Start', '#rs2#Duration']
-        rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Ped.', 'Noise [&sigma;]']]]
-        # rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
-
-        def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
-            return [make_link(join(rp_dir, '{p}.{t}'.format(p=pic_name, t=ftype)), text, path=path, center=True, use_name=use_name)]
-
-        # for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
-        for i, (rp, ch) in enumerate(plans, 1):
-            runs = self.DiaScans.get_runs(rp, tc)
-            info = self.DiaScans.RunInfos[tc][str(runs[0])]
-            rp_dir = 'RunPlan{rp}'.format(rp=make_rp_string(rp))
-            name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
-            volt_scan = self.DiaScans.RunPlans[tc][rp]['type'] == 'voltage scan'
-            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
-            rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]                                                 # Run Plan Type
-            rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=False)                # Diamond Attenuators
-            rows[i] += self.get_attenuators(self.DiaScans.RunPlans[tc][rp], ch=ch, pulser=True)                 # Pulser Attenuators
-            rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]     # Runs
-            rows[i] += [right_txt(make_bias_str(self.DiaScans.get_biases(rp, tc, ch)))]                         # Bias
-            rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
-            rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
-            if volt_scan:
-                rows[i] += make_pic_link('PulserVoltageScan', 'Plot', False)                                    # Pulser Pulse Height
-                rows[i] += [center_txt('-')]                                                                    # Pulser Pulse Height (corrected)
-                rows[i] += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
-                rows[i] += make_pic_link('SignalVoltageScan', 'Plot', False)
-                rows[i] += make_pic_link('PedestalMeanVoltage', 'Plot', False)
-                rows[i] += make_pic_link('PedestalSigmaVoltage', self.get_noise(runs, tc, ch))
-            else:
-                rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
-                rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                                 # Pulser Pulse Height (corrected)
-                rows[i] += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)                          # Pulser Pedestal
-                rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))
-                rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
-                rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
-            rows[i] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
-            rows[i] += [self.calc_duration(info, self.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
-
-        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
-        f.write(self.create_home_button(path))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
-
-    @staticmethod
-    def get_attenuators(info, ch, pulser=False):
-        if 'attenuators' in info:
-            key = 'pulser' if pulser else 'dia'
-            return [info['attenuators']['{k}{ch}'.format(k=key, ch='' if key in info['attenuators'] else ch)]]
-        else:
-            return ['']
-
-    def get_pulser_mean(self, runs, tc, rp, ch):
-        if tc < '201505':
-            return center_txt('?')
-        try:
-            att_string = 'None'
-            if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:
-                att_string = self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser' if 'pulser' in self.DiaScans.RunPlans[tc][rp]['attenuators'] else 'pulser{c}'.format(c=ch)]
-            if att_string == 'None':
-                return center_txt('-')
-            attenuations = att_string.split('+') if att_string.lower() not in ['unknown', 'none'] else ['0']
-            db = sum(int(att.lower().split('db')[0]) for att in attenuations)
-            att = 10 ** (db / 20.)
-            pulser_mean = mean([self.get_pickle(run, tc, ch, 'Pulser').Parameter(1) for run in runs])
-            return center_txt('{:2.2f}'.format(pulser_mean * att))
-        except TypeError:
-            return center_txt('?')
-
-    def get_pickle_mean(self, runs, tc, ch, name, par):
-        if tc < '201508':
-            return center_txt('?')
-        try:
-            signal, sigma = calc_mean([float(self.get_pickle(run, tc, ch, name).Parameter(par)) for run in runs])
-        except (TypeError, ValueError, ReferenceError):
-            return center_txt('?')
-        return center_txt('{:2.2f} ({:.2f})'.format(signal, sigma))
-
-    def get_noise(self, runs, tc, ch):
-        return self.get_pickle_mean(runs, tc, ch, 'Pedestal', 2)
-
-    def get_signal(self, runs, tc, ch):
-        return self.get_pickle_mean(runs, tc, ch, 'PH', 0)
-
-    def get_pulser(self, runs, tc, ch):
-        return self.get_pickle_mean(runs, tc, ch, 'Pulser', 1)
 
     # endregion
 
