@@ -45,9 +45,14 @@ class DiamondTable(Table):
     # =====================================================
     # region OVERVIEW
     def create_overview(self):
+        print_banner('CREATING DIAMOND TABLES')
+        years = range(start_year, this_year + 1)
+        self.start_pbar(len(years))
         self.create_diamond_folders()
-        for year in xrange(start_year, this_year + 1):
+        for i, year in enumerate(years, 1):
             self.create_year_overview(year)
+            self.ProgressBar.update(i)
+        self.ProgressBar.finish()
 
     def create_year_overview(self, year):
         html_file = 'index{y}.html'.format(y=year)
