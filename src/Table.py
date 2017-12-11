@@ -74,8 +74,11 @@ class Table:
                 return str('{0:5.0f}'.format(info['measuredflux'] * 2.48))
         pixel_size = 0.01 * 0.015
         area = [52 * 80 * pixel_size] * 2
+        file_name = info['maskfile']
         try:
-            f = open('{path}/masks/{mask}'.format(path=self.Dir, mask=info['maskfile']), 'r')
+            if file_name.lower() in ['none.msk', 'none', 'no mask']:
+                raise UserWarning
+            f = open(join(self.Dir, 'masks', file_name), 'r')
             data = {}
             for line in f:
                 if line.startswith('#'):
@@ -92,7 +95,9 @@ class Table:
             except KeyError:
                 area = [dic['col'][1] - dic['col'][0] + 1 * dic['row'][1] - dic['row'][0] + 1 * pixel_size for dic in data.itervalues()]
         except IOError:
-            log_warning('Could not find mask file {f}! Not taking any mask!'.format(f=info['maskfile']))
+            log_warning('Could not find mask file "{f}"! Not taking any mask!'.format(f=file_name))
+        except UserWarning:
+            pass
         flux = [info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(len(area))]
         return str('{0:5.0f}'.format(mean(flux)))
 
