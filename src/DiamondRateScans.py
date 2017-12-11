@@ -4,6 +4,7 @@
 # --------------------------------------------------------
 
 from argparse import ArgumentParser
+from ConfigParser import NoOptionError
 from collections import OrderedDict
 from Utils import *
 
@@ -136,19 +137,20 @@ class DiaScans:
         return set(dias)
 
     def get_rp_diamonds(self, tc, rp):
-        first_run = self.RunPlans[tc][rp]['runs'][0]
-        keys = sorted([key for key in self.RunInfos[tc][str(first_run)] if key.startswith('dia') and len(key) < 6])
-        return [self.translate_dia(self.RunInfos[tc][str(first_run)][key]) for key in keys]
+        keys = sorted([key for key in self.RunInfos[tc][self.get_first_run(tc, rp)] if key.startswith('dia') and len(key) < 6])
+        return [self.translate_dia(self.RunInfos[tc][self.get_first_run(tc, rp)][key]) for key in keys]
 
     def get_rp_biases(self, tc, rp):
         return [self.get_biases(rp, tc, ch) for ch in xrange(1, self.get_n_diamonds(tc, rp) + 1)]
 
     def get_n_diamonds(self, tc, rp):
-        first_run = self.RunPlans[tc][rp]['runs'][0]
-        return sum(1 for key in self.RunInfos[tc][str(first_run)] if key.startswith('dia') and len(key) < 6)
+        return sum(1 for key in self.RunInfos[tc][self.get_first_run(tc, rp)] if key.startswith('dia') and len(key) < 6)
 
     def translate_dia(self, dia):
         return self.Parser.get('ALIASES', dia.lower())
+
+    def get_first_run(self, tc, rp):
+        return str(self.RunPlans[tc][rp]['runs'][0])
 
 
 if __name__ == '__main__':
