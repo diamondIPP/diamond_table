@@ -149,6 +149,14 @@ class DiaScans:
     def translate_dia(self, dia):
         return self.Parser.get('ALIASES', dia.lower())
 
+    def get_attenuators(self, tc, rp, ch, pulser=False):
+        info = self.RunPlans[tc][rp]
+        if 'attenuators' in info:
+            key = 'pulser' if pulser else 'dia'
+            return [info['attenuators']['{k}{ch}'.format(k=key, ch='' if key in info['attenuators'] else ch)]]
+        else:
+            return ['']
+
     def get_first_run(self, tc, rp):
         return str(self.RunPlans[tc][rp]['runs'][0])
 
