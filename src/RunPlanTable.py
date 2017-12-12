@@ -71,7 +71,7 @@ class RunPlanTable(Table):
             rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, plans in rps.iteritems():
-                if tc < '201508':
+                if tc != '201508':
                     continue
                 tc_string = make_tc_str(tc, long_=False)
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)

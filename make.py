@@ -13,6 +13,7 @@ from shutil import copy
 from RunTable import RunTable
 from Table import Table
 from RunPlanTable import RunPlanTable
+from DiaTable import DiaTable
 from os.path import basename, join
 from os import system
 from datetime import datetime
@@ -27,6 +28,7 @@ class DiamondTable(Table):
 
         self.RunTable = RunTable()
         self.RunPlanTable = RunPlanTable()
+        self.DiaTable = DiaTable()
 
     def create_diamond_folders(self):
         for dia in self.Diamonds:

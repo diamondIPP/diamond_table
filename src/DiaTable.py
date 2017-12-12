@@ -6,7 +6,7 @@
 
 import HTMLTable
 from Table import Table
-from Utils import make_tc_str, join, write_html_header, add_bkg, make_link, make_bias_str, make_rp_string, center_txt, right_txt, conv_time
+from Utils import make_tc_str, join, write_html_header, add_bkg, make_link, make_bias_str, make_rp_string, center_txt, right_txt, conv_time, print_banner
 from numpy import mean
 
 
@@ -15,6 +15,13 @@ class DiaTable(Table):
     def __init__(self):
         Table.__init__(self)
 
+    def create_all(self):
+        print_banner('CREATING SINGLE DIAMOND TABLES')
+        self.start_pbar(len(self.Diamonds))
+        for i, dia in enumerate(self.Diamonds, 1):
+            self.build_table(dia)
+            self.ProgressBar.update(i)
+        self.ProgressBar.finish()
 
     def build_table(self, dia):
         html_file = join(self.DataPath, dia, 'index.html')
@@ -36,6 +43,7 @@ class DiaTable(Table):
 
             rows += [['#rs{n}#{tc}'.format(n=len(tc_plans), tc=center_txt(make_tc_str(tc)))]]
             for rp, (ch, bias) in sorted(tc_plans.iteritems()):
+                print dia, tc, rp
                 runs = self.DiaScans.get_runs(rp, tc)
                 rp_target = join('BeamTests', make_tc_str(tc, 0), 'RunPlan{r}'.format(r=make_rp_string(rp)))
                 rows += [[]] if len(rows[-1]) > 1 else []
@@ -52,15 +60,15 @@ class DiaTable(Table):
                     rows[i_row] += [center_txt('?'), center_txt('?')]
                 rows[i_row] += [right_txt(make_bias_str(bias))]
                 rows[i_row] += [make_link(join(rp_target, 'PhPulserCurrent.png'), 'Plot', path=path, use_name=False, center=True)]
-                info = z.DiaScans.RunInfos[tc][str(runs[0])]
+                info = self.DiaScans.RunInfos[tc][str(runs[0])]
                 rows[i_row] += make_pic_link('CombinedPulserPulseHeights.png', info['pulser'] if 'pulser' in info else '?')
                 rows[i_row] += make_pic_link('CombinedPulserPulseHeights.png', self.get_pulser_mean(runs, tc, rp, ch))
                 rows[i_row] += make_pic_link('Pedestal_FluxPulserBeamOn.png', 'Plot', use_name=False)
                 rows[i_row] += make_pic_link('CombinedPulseHeights.png', 'Plot', use_name=False)
                 rows[i_row] += make_pic_link('Pedestal_Flux.png', 'Plot', use_name=False)
-                runs = z.DiaScans.get_runs(rp, tc)
-                rows[i_row] += [conv_time(z.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]
-                rows[i_row] += [self.calc_duration(z.DiaScans.RunInfos[tc][str(runs[0])], z.DiaScans.RunInfos[tc][str(runs[-1])])]
+                runs = self.DiaScans.get_runs(rp, tc)
+                rows[i_row] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]
+                rows[i_row] += [self.calc_duration(self.DiaScans.RunInfos[tc][str(runs[0])], self.DiaScans.RunInfos[tc][str(runs[-1])])]
                 i_row += 1
         f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write('\n\n\n</body>\n</html>\n')
