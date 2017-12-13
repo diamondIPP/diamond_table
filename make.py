@@ -37,6 +37,7 @@ class DiamondTable(Table):
             create_dir('{path}/BeamTests'.format(path=path))
 
     def build_everything(self):
+        self.DiaTable.create_all()
         self.RunPlanTable.create_tc_overview()
         self.create_overview()
         self.RunPlanTable.create_dia_overview()
