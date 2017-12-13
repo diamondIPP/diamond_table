@@ -118,6 +118,9 @@ class DiaScans:
     def get_runs(self, rp, tc):
         return self.RunPlans[tc][rp]['runs']
 
+    def get_first_run(self, tc, rp):
+        return str(self.get_runs(rp, tc)[0])
+
     def get_biases(self, rp, tc, ch):
         runs = self.get_runs(rp, tc)
         return sorted(list(set([int(self.RunInfos[tc][str(run)]['dia{c}hv'.format(c=ch)]) for run in runs])), key=abs)
