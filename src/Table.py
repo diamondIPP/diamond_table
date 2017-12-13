@@ -102,13 +102,6 @@ class Table:
         return str('{0:5.0f}'.format(mean(flux)))
 
     @staticmethod
-    def calc_duration(info1, info2=None):
-        endinfo = info2 if info2 is not None else info1
-        dur = conv_time(endinfo['endtime'], strg=False) - conv_time(info1['starttime0'], strg=False)
-        dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
-        return str(dur)
-
-    @staticmethod
     def get_runtype(info):
         data = info['runtype']
         if 'signal' in data:

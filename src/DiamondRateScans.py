@@ -160,14 +160,19 @@ class DiaScans:
         else:
             return ['']
 
-    def get_first_run(self, tc, rp):
-        return str(self.RunPlans[tc][rp]['runs'][0])
-
     def get_dia_position(self, tc, rp, ch):
         info = self.RunInfos[tc][self.get_first_run(tc, rp)]
         keys = sorted([key for key in info.iterkeys() if key.startswith('dia') and len(key) < 6])
         pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back'] if len(keys) == 2 else range(len(keys))
         return pos[keys.index('dia{ch}'.format(ch=ch))]
+
+    def calc_duration(self, tc, rp):
+        runs = self.get_runs(rp, tc) if type(rp) in [str, unicode] else [rp]
+        endinfo = self.RunInfos[tc][str(runs[-1])]
+        startinfo = self.RunInfos[tc][str(runs[0])]
+        dur = conv_time(endinfo['endtime'], strg=False) - conv_time(startinfo['starttime0'], strg=False)
+        dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
+        return str(dur)
 
 
 if __name__ == '__main__':
