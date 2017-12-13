@@ -78,7 +78,7 @@ class RunTable(Table):
             rows[i] += make_entry('PulserDistributionFit', data['Pulser'].Parameter(2))                                                     # Pulser Sigma
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(1))                                                # Pulser Pedestal
             rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(2))                                                # Pulser Ped Noise
-            rows[i] += [conv_time(info['starttime0']), self.calc_duration(info), info['comments'][:50]]                                     # comments
+            rows[i] += [conv_time(info['starttime0']), self.DiaScans.calc_duration(tc, run), info['comments'][:50]]                                     # comments
         f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write(self.create_home_button(join(path, 'index.php')))
         f.write('\n\n\n</body>\n</html>\n')
@@ -91,14 +91,15 @@ class RunTable(Table):
         write_html_header(f, tit, bkg=self.BkgCol)
         header = ['Run', 'Type', 'Flux<br>[kHz/cm{0}]'.format(sup(2)), 'FS11', 'FSH13', 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
         rows = []
-        if make_tc_str(tc) not in self.DiaScans.RunInfos:
+        tc = make_tc_str(tc)
+        if tc not in self.DiaScans.RunInfos:
             return
-        runs = self.DiaScans.RunInfos[make_tc_str(tc)]
+        runs = self.DiaScans.RunInfos[tc]
         sorted_runs = OrderedDict(sorted({int(run): data for run, data in runs.iteritems()}.iteritems()))
         for i, (run, data) in enumerate(sorted_runs.iteritems()):
             rows.append([run])
             # Type - Flux - FS11 - FS13 - Start - Duration
-            rows[i] += [self.get_runtype(data), center_txt(self.calc_flux(data)), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.calc_duration(data)]
+            rows[i] += [self.get_runtype(data), center_txt(self.calc_flux(data)), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.DiaScans.calc_duration(tc, run)]
             rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
             rows[i] += [data['comments'][:100]]
         f.write(add_bkg(HTMLTable.table(rows, header_row=header), self.BkgCol))

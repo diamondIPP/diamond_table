@@ -131,14 +131,14 @@ class RunPlanTable(Table):
                 rows[i] += make_pic_link('PedestalMeanVoltage', 'Plot', False)
                 rows[i] += make_pic_link('PedestalSigmaVoltage', self.get_noise(runs, tc, ch))
             else:
-                rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))               # Pulser Pulse Height
-                rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                                 # Pulser Pulse Height (corrected)
-                rows[i] += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)                          # Pulser Pedestal
+                rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))           # Pulser Pulse Height
+                rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                             # Pulser Pulse Height (corrected)
+                rows[i] += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)                      # Pulser Pedestal
                 rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))
-                rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                                # Signal Pedestal
-                rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                         # Noise
-            rows[i] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                         # Start Time
-            rows[i] += [self.calc_duration(info, self.DiaScans.RunInfos[tc][str(runs[-1])])]                       # Duration
+                rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                            # Signal Pedestal
+                rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                     # Noise
+            rows[i] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                      # Start Time
+            rows[i] += [self.DiaScans.calc_duration(tc, rp)]                                                    # Duration
 
         f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
         f.write(self.create_home_button(path))
