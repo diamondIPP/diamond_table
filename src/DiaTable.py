@@ -29,7 +29,18 @@ class DiaTable(Table):
         tit = 'Overview of all RunPlans for Diamond {d}'.format(d=dia)
         write_html_header(f, tit, bkg=self.BkgCol)
 
-        header = ['#rs2#Beam Test', '#rs2#Nr. ', '#rs2#Type', '#rs2#Runs', '#cs2#Attenuators', '#rs2#Bias [V]', '#rs2#Leakage<br>Current', '#cs3#Pulser', '#cs2#Signal', '#rs2#Start', '#rs2#Duration']
+        header = ['#rs2#Beam Test',
+                  '#rs2#Nr. ',
+                  '#rs2#Position',
+                  '#rs2#Type',
+                  '#rs2#Runs',
+                  '#cs2#Attenuators',
+                  '#rs2#Bias [V]',
+                  '#rs2#Leakage<br>Current',
+                  '#cs3#Pulser',
+                  '#cs2#Signal',
+                  '#rs2#Start',
+                  '#rs2#Duration']
         rows = [[center_txt(text) for text in ['Diamond', 'Pulser', 'Type', 'Mean', 'Ped.', 'Distr.', 'Ped.']]]
         run_plans = self.DiaScans.find_dia_run_plans(dia)
         path = join(self.DataPath, dia)
@@ -38,14 +49,14 @@ class DiaTable(Table):
             return [make_link(join(rp_target, pic_name), name, path=path, center=True, use_name=use_name)]
 
         for tc, plans in sorted(run_plans.iteritems()):
-            row = ['#rs{n}#{tc}'.format(n=len(plans), tc=center_txt(make_tc_str(tc)))]                                  # Test Campaign
+            row = ['#rs{n}#{tc}'.format(n=len(plans), tc=center_txt(make_tc_str(tc)))]                                          # Test Campaign
             for rp, ch in sorted(plans):
-                print dia, tc, rp
                 rp_info = self.DiaScans.RunPlans[tc][rp]
                 run_info = self.DiaScans.RunInfos[tc][str(rp_info['runs'][0])]
                 rp_target = join('BeamTests', make_tc_str(tc, 0), 'RunPlan{r}'.format(r=make_rp_string(rp)))
                 row = row if rp == plans[0][0] else []
                 row += [make_link(join(rp_target, 'index.php'), name=make_rp_string(rp), path=path)]                            # Nr
+                row += [center_txt(self.DiaScans.get_dia_position(tc, rp, ch))]                                                 # Position
                 row += [center_txt(rp_info['type'])]                                                                            # Type
                 row += [make_link(join(rp_target, 'index.html'), make_runs_str(rp_info['runs']), path=path)]                    # Runs
                 if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:                                                             # Attenuators
