@@ -113,6 +113,10 @@ def make_bias_str(biases):
         return '{min:+4.0f} ... {max:+4.0f}'.format(min=biases[0], max=biases[-1])
 
 
+def make_runs_str(runs):
+    return '{b:03d}-{e:03d}'.format(b=runs[0], e=runs[-1])
+
+
 def load_parser(path):
     p = ConfigParser()
     p.read(path)
