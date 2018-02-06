@@ -18,6 +18,8 @@ class RunPlanTable(Table):
         print_banner('CREATING TESTCAMPAIGN RUNPLAN TABLES')
         self.start_pbar(len(self.TestCampaigns))
         for i, tc in enumerate(self.TestCampaigns, 1):
+            if tc != make_tc_str(self.TestCampaign, long_=False) and self.TestCampaign is not None:
+                continue
             self.build_tc_table(make_tc_str(tc))
             self.ProgressBar.update(i)
         self.ProgressBar.finish()
@@ -68,10 +70,12 @@ class RunPlanTable(Table):
         print_banner('CREATING DIAMOND RUNPLAN TABLES')
         self.start_pbar(len(self.Diamonds))
         for i, dia in enumerate(self.Diamonds, 1):
+            if dia != self.Diamond and self.Diamond is not None:
+                continue
             rps = self.DiaScans.find_dia_run_plans(dia)
             path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
             for tc, plans in rps.iteritems():
-                if tc != '201508':
+                if tc != self.TestCampaign and self.TestCampaign is not None:
                     continue
                 tc_string = make_tc_str(tc, long_=False)
                 sub_path = '{path}{tc}'.format(path=path, tc=tc_string)

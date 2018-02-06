@@ -21,6 +21,10 @@ def get_program_dir():
     return '/'.join(dirname(realpath(__file__)).split('/')[:-1])
 
 
+tc = None
+dia = None
+
+
 class Table:
 
     def __init__(self):
@@ -47,10 +51,29 @@ class Table:
 
         # settings
         self.BkgCol = 'lightgrey'
+        self.TestCampaign = None
+        self.Diamond = None
+        self.set_global_vars()
 
         # progressbar
         self.Widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
         self.ProgressBar = None
+
+    def set_global_vars(self, campaign=None, diamond=None):
+        global tc
+        global dia
+        tc = campaign if campaign is not None else tc
+        dia = diamond if diamond is not None else dia
+        self.select_diamond(dia)
+        self.select_campaign(tc)
+
+    def select_campaign(self, campaign):
+        if campaign is not None and make_tc_str(campaign, long_=False) in self.TestCampaigns:
+            self.TestCampaign = campaign
+
+    def select_diamond(self, diamond):
+        if diamond is not None and diamond in self.Diamonds:
+            self.Diamond = diamond
 
     def start_pbar(self, n):
         self.ProgressBar = ProgressBar(widgets=self.Widgets, maxval=n)
@@ -111,15 +134,15 @@ class Table:
         else:
             return data[:10]
 
-    def get_pickle(self, run, tc, ch, tag, form=''):
+    def get_pickle(self, run, campaign, ch, tag, form=''):
         ch = 0 if ch == 1 else 3
-        pul_ped = 'Pedestal/{{tc}}_{{run}}_{{ch}}_a{n}2_fwhm_PulserBeamOn'.format(n='b' if tc < '201707' else 'c')
+        pul_ped = 'Pedestal/{{tc}}_{{run}}_{{ch}}_a{n}2_fwhm_PulserBeamOn'.format(n='b' if campaign < '201707' else 'c')
         file_name_dic = {'PH': 'Ph_fit/{tc}_{run}_{ch}_10000_eventwise_b2',
                          'Pedestal': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_all_cuts',
                          'Pulser': 'Pulser/HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn',
                          'PulserPed': pul_ped}
         path = '{dir}/Pickles/{f}.pickle'.format(dir=self.Dir, f=file_name_dic[tag])
-        path = path.format(tc=tc, run=run, ch=ch)
+        path = path.format(tc=campaign, run=run, ch=ch)
         if not file_exists(path):
             log_warning('did not find {p}'.format(p=path))
             return FitRes()
@@ -132,24 +155,24 @@ class Table:
         f.close()
         return fit_res
 
-    def translate_dia(self, dia):
-        self.DiaScans.translate_dia(dia)
+    def translate_dia(self, diamond):
+        self.DiaScans.translate_dia(diamond)
 
     def create_home_button(self, curr_path):
         n_dirs = len(curr_path.split(sep)) - len(self.Dir.split(sep))
         back = '../' * n_dirs
         return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
 
-    def get_info(self, dia, section, option):
+    def get_info(self, diamond, section, option):
         info = ConfigParser()
-        info.read(join(self.DataPath, dia, 'info.conf'))
+        info.read(join(self.DataPath, diamond, 'info.conf'))
         try:
             return info.get(section, option)
         except NoOptionError:
-            log_warning('option {o} not in {d} config'.format(o=option, d=dia)) if option == 'type' else do_nothing()
+            log_warning('option {o} not in {d} config'.format(o=option, d=diamond)) if option == 'type' else do_nothing()
             return ''
         except NoSectionError:
-            log_warning('section {s} not in {d} config'.format(s=section, d=dia)) if option == 'type' else do_nothing()
+            log_warning('section {s} not in {d} config'.format(s=section, d=diamond)) if option == 'type' else do_nothing()
             return ''
 
 

@@ -19,6 +19,8 @@ class DiaTable(Table):
         print_banner('CREATING SINGLE DIAMOND TABLES')
         self.start_pbar(len(self.Diamonds))
         for i, dia in enumerate(self.Diamonds, 1):
+            if dia != self.Diamond and self.Diamond is not None:
+                continue
             self.build_table(dia)
             self.ProgressBar.update(i)
         self.ProgressBar.finish()

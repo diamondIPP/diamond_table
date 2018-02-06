@@ -31,10 +31,7 @@ class RunTable(Table):
         # if not tc == '201508' or not dia == 'II6-79':
         if dia == 'None':
             return
-        if tc == '201707' and dia == 'SiD6' and rp == '02':
-            return
-        # if not tc > '201612' or dia == 'II6-A2' or dia == 'Si352':
-        if not tc == '201705':
+        if (tc != self.TestCampaign and self.TestCampaign is not None) or (dia != self.Diamond and self.Diamond is not None):
             return
         print tc, rp, dia
         html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
