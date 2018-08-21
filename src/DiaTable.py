@@ -32,6 +32,7 @@ class DiaTable(Table):
         write_html_header(f, tit, bkg=self.BkgCol)
 
         header = ['#rs2#Beam Test',
+                  '#rs2#Irradiation<br>[n/cm<sup>2</sup>]',
                   '#rs2#Nr. ',
                   '#rs2#Position',
                   '#rs2#Type',
@@ -52,6 +53,7 @@ class DiaTable(Table):
 
         for tc, plans in sorted(run_plans.iteritems()):
             row = ['#rs{n}#{tc}'.format(n=len(plans), tc=center_txt(make_tc_str(tc)))]                                          # Test Campaign
+            row += ['#rs{n}#{irr}'.format(n=len(plans), irr=self.get_irradiation(tc, dia))]                                     # Irradiation
             for rp, ch in sorted(plans):
                 rp_info = self.DiaScans.RunPlans[tc][rp]
                 run_info = self.DiaScans.RunInfos[tc][str(rp_info['runs'][0])]
