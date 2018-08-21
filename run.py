@@ -18,3 +18,8 @@ t = DiamondTable()
 # make sure to copy run_logs, run_plans and irradiations to the data directory
 
 t.create_directories()                  # first create all folders if they're not existing
+t.DiaTable.create_all()                 # creates a table of runplans of all tcs for the single diamonds
+t.RunPlanTable.create_tc_overview()     # creates an overview of all runplans of a single testcampaign
+t.create_overview()
+t.RunPlanTable.create_dia_overview()
+t.RunTable.create_overview()
