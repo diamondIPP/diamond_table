@@ -15,8 +15,6 @@ a = Table()
 a.set_global_vars(args.tc, args.dia)
 t = DiamondTable()
 
-t.DiaTable.create_all()
-t.RunPlanTable.create_tc_overview()
-# t.create_overview()
-t.RunPlanTable.create_dia_overview()
-t.RunTable.create_overview()
+# make sure to copy run_logs, run_plans and irradiations to the data directory
+
+t.create_directories()                  # first create all folders if they're not existing

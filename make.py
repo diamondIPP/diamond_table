@@ -30,11 +30,19 @@ class DiamondTable(Table):
         self.RunPlanTable = RunPlanTable()
         self.DiaTable = DiaTable()
 
-    def create_diamond_folders(self):
+    def create_diamond_directories(self):
         for dia in self.Diamonds:
             path = '{dat}{dia}'.format(dat=self.DataPath, dia=dia)
             create_dir(path)
             create_dir('{path}/BeamTests'.format(path=path))
+
+    def create_beamtest_directories(self):
+        for tc in self.TestCampaigns:
+            create_dir(join(self.Dir, 'BeamTests', tc))
+
+    def create_directories(self):
+        self.create_beamtest_directories()
+        self.create_diamond_directories()
 
     def build_everything(self):
         self.DiaTable.create_all()
@@ -49,7 +57,6 @@ class DiamondTable(Table):
         print_banner('CREATING DIAMOND TABLES')
         years = range(start_year, this_year + 1)
         self.start_pbar(len(years))
-        self.create_diamond_folders()
         for i, year in enumerate(years, 1):
             self.create_year_overview(year)
             self.ProgressBar.update(i)
