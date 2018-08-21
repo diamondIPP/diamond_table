@@ -135,7 +135,7 @@ class DiaScans:
                 runs = info['runs']
                 for ch in [1, 2]:
                     dia0 = self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)])
-                    if all(dia0 == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs):
+                    if all(dia0 == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs) and dia0.lower() != 'none':
                         dias.append(dia0)
         return set(dias)
 
