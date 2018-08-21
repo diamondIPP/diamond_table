@@ -18,8 +18,6 @@ class RunPlanTable(Table):
         print_banner('CREATING TESTCAMPAIGN RUNPLAN TABLES')
         self.start_pbar(len(self.TestCampaigns))
         for i, tc in enumerate(self.TestCampaigns, 1):
-            if tc != make_tc_str(self.TestCampaign, long_=False) and self.TestCampaign is not None:
-                continue
             self.build_tc_table(make_tc_str(tc))
             self.ProgressBar.update(i)
         self.ProgressBar.finish()
