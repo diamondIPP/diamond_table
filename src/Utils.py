@@ -113,6 +113,15 @@ def make_bias_str(biases):
         return '{min:+4.0f} ... {max:+4.0f}'.format(min=biases[0], max=biases[-1])
 
 
+def make_irr_string(val):
+    if val == '?':
+        return val
+    if not val or val == '0':
+        return 'unirr.'
+    val, power = [float(i) for i in val.split('e')]
+    return '{v:1.1f} &middot 10<sup>{p}</sup>'.format(v=val, p=int(power))
+
+
 def make_runs_str(runs):
     return '{b:03d}-{e:03d}'.format(b=runs[0], e=runs[-1])
 
