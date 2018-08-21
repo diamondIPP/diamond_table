@@ -11,10 +11,11 @@ from os import remove
 from shutil import copy
 from glob import glob
 from numpy import mean
-from os.path import dirname, realpath, join, sep
+from os.path import dirname, realpath, join, sep, expanduser, basename
 import pickle
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from ConfigParser import NoSectionError, NoOptionError
+from json import load
 
 
 def get_program_dir():
@@ -35,10 +36,11 @@ class Table:
         # config
         self.ConfigFileName = 'conf.ini'
         self.Config = self.load_config()
+        self.Irradiations = self.load_irradiations()
 
         # directories
         self.DataPath = join(self.Dir, self.Config.get('General', 'data_directory'))
-        self.AnaDir = self.Config.get('General', 'analysis_dir')
+        self.AnaDir = expanduser(self.Config.get('General', 'analysis_dir'))
         self.AnaPickleDir = join(self.AnaDir, 'Configuration', 'Individual_Configs')
         self.PickleDir = join(self.Dir, 'Pickles')
 
@@ -79,6 +81,12 @@ class Table:
         self.ProgressBar = ProgressBar(widgets=self.Widgets, maxval=n)
         self.ProgressBar.start()
 
+    def load_irradiations(self):
+        f = open(join(self.Dir, 'data', self.Config.get('Files', 'irradiation')), 'r')
+        irr = load(f)
+        f.close()
+        return irr
+
     def load_config(self):
         p = ConfigParser()
         p.read(join(self.Dir, self.ConfigFileName))
@@ -97,7 +105,7 @@ class Table:
                 return str('{0:5.0f}'.format(info['measuredflux'] * 2.48))
         pixel_size = 0.01 * 0.015
         area = [52 * 80 * pixel_size] * 2
-        file_name = info['maskfile']
+        file_name = basename(info['maskfile']).strip('"')
         try:
             if file_name.lower() in ['none.msk', 'none', 'no mask']:
                 raise UserWarning
@@ -174,6 +182,9 @@ class Table:
         except NoSectionError:
             log_warning('section {s} not in {d} config'.format(s=section, d=diamond)) if option == 'type' else do_nothing()
             return ''
+
+    def get_irradiation(self, campaign, diamond):
+        return center_txt(make_irr_string(self.Irradiations[campaign][diamond]))
 
 
 if __name__ == '__main__':
