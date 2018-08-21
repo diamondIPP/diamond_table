@@ -146,8 +146,7 @@ class DiamondTable(Table):
         if tc_str not in load_parser(join(self.DataPath, dia, 'info.conf')).sections():
             return ['#cs4#']
         typ = center_txt(self.get_info(dia, tc_str, 'type'))
-        irr = self.get_info(dia, tc_str, 'irradiation')
-        irr = center_txt('{0:.1e}'.format(float(irr)) if irr else '0')
+        irr = self.get_irradiation(tc_str, dia)
         board_number = self.get_info(dia, tc_str, 'boardnumber')
         board_number = center_txt(board_number) if board_number else center_txt('-' if 'pix' in typ else '?')
         return [typ, irr, board_number]
@@ -218,9 +217,10 @@ class DiamondTable(Table):
     # endregion
 
     def copy_logs(self):
-        for tc in self.DiaScans.RunPlans:
-            if tc == '201707':
-                copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/data/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
+        # TODO: UPDATE
+        # for tc in self.DiaScans.RunPlans:
+        #    if tc == '201707':
+        #        copy('/data/psi_{y}_{m}/run_log.json'.format(y=tc[:4], m=tc[-2:]), '{dir}/data/run_log{tc}.json'.format(dir=self.Dir, tc=tc))
         copy('{ana}/Runinfos/run_plans.json'.format(ana=self.AnaDir), '{dir}/data/'.format(dir=self.Dir))
 
     @staticmethod
