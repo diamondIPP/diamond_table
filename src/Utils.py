@@ -10,6 +10,7 @@ from ConfigParser import ConfigParser
 from json import load
 from os.path import join
 from math import sqrt
+from re import sub
 
 
 # ==============================================
@@ -60,6 +61,10 @@ def make_link(target, name='Results', new_tab=False, path='', use_name=True, cen
         return '<a href={tar}{tab}>{nam}</a>'.format(tar=target, nam=name, tab=tab)
     else:
         return name if use_name else ''
+
+def make_abs_link(target, name, active=False):
+    active = 'class="active" ' if active else''
+    return '<a {}href={}>{}</a>'.format(active, abs_html_path(target), name)
 
 
 def folder_exists(path):
@@ -126,6 +131,10 @@ def make_runs_str(runs):
     return '{b:03d}-{e:03d}'.format(b=runs[0], e=runs[-1])
 
 
+def remove_letters(string):
+    return sub('\D', '', string)
+
+
 def load_parser(path):
     p = ConfigParser()
     p.read(path)
@@ -186,6 +195,24 @@ def add_bkg(table, color='black'):
         if 'bgcolor' not in lines[i]:
             lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
     return '\n'.join(lines)
+
+
+def abs_html_path(*paths):
+    return join('https://diamond.ethz.ch', 'psi', *paths)
+
+
+def make_dropdown(name, lst):
+    s = ''
+    s += '    <div class="dropdown">\n'
+    s += '      <button class="dropbtn" onclick="myFunction()">{}\n'.format(name)
+    s += '        <i class="fa fa-caret-down"></i>\n'
+    s += '      </button>\n'
+    s += '      <div class="dropdown-content" id="myDropdown">\n'
+    for item in lst:
+        s += '        <a href="#">{}</a>\n'.format(item)
+    s += '      </div>\n'
+    s += '    </div>\n'
+    return s
 
 
 def calc_mean(lst):
