@@ -37,7 +37,11 @@ class HomePage:
             self.write_trailer(f)
 
     def get_years(self):
-        return sorted(list(set(remove_letters(name)[:4] for name in glob(join(self.Dir, 'data', 'run_log*')))))
+        return ['< 2015'] + sorted(list(set(remove_letters(name)[:4] for name in glob(join(self.Dir, 'data', 'run_log*')))))
+
+    def get_year_htmls(self):
+        old = [join('Diamonds', 'OLD', 'index.php')]
+        return old + [join('Overview', '{}.html'.format(year)) for year in self.get_years()[1:]]
 
     def get_testcampaigns(self):
         return sorted(basename(name).strip('run_log.json') for name in glob(join(self.Dir, 'data', 'run_log*')))
