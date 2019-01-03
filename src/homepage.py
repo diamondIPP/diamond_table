@@ -58,13 +58,14 @@ class HomePage:
     def write_body(self, f):
         f.write('<body>\n')
         f.write('  <div class="navbar">\n')
-        f.write('    {}\n'.format(make_abs_link(self.FilePath, 'Home', active=True)))
-        f.write('    {}\n'.format(make_abs_link(join('Overview', 'Location.html'), 'Location')))
-        f.write(make_dropdown('Years', self.get_years()))
-        f.write(make_dropdown('Test Campaigns', self.get_testcampaigns()))
+        f.write('    {}\n'.format(make_abs_link(join('Overview', 'HomePage.html'), 'Home', active='HomePage' in self.FilePath, colour=False)))
+        f.write('    {}\n'.format(make_abs_link(join('Overview', 'Location.html'), 'Location', active='Location' in self.FilePath, colour=False)))
+        f.write(make_dropdown('Years', self.get_years(), self.get_year_htmls(), n=1, active='20' in self.FilePath))
+        f.write(make_dropdown('Test Campaigns', self.get_testcampaigns(), self.get_tc_htmls(), n=2))
+        f.write('    {}\n'.format(make_abs_link(join('Overview', 'AmpBoards.html'), 'Amplifier Boards', active='Boards' in self.FilePath, colour=False)))
         f.write('  </div>\n')
         f.write('  \n')
-        f.write('  <p> <br /><br /><br /><br />Here could be your text...</p>\n')
+        f.write('{}\n'.format(self.Body))
         f.write('</body>\n')
 
     def write_header(self, f):
