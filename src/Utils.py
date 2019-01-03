@@ -8,9 +8,12 @@ from termcolor import colored
 import os
 from ConfigParser import ConfigParser
 from json import load
-from os.path import join
+from os.path import join, dirname, realpath
 from math import sqrt
 from re import sub
+
+
+Dir = dirname(dirname(realpath(__file__)))
 
 
 # ==============================================
@@ -23,7 +26,7 @@ def log_warning(msg):
 
 def log_message(msg):
     t = datetime.now().strftime('%H:%M:%S')
-    print '{t} --> {msg}'.format(t=t, msg=msg, head=colored('WARNING:', 'red'))
+    print '{head} {t} --> {msg}'.format(t=t, msg=msg, head=colored('INFO:', 'cyan'))
 
 
 def untitle(string):
