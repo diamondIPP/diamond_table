@@ -140,8 +140,11 @@ class DiaScans:
         return set(dias)
 
     def get_rp_diamonds(self, tc, rp):
-        keys = sorted([key for key in self.RunInfos[tc][self.get_first_run(tc, rp)] if key.startswith('dia') and len(key) < 6])
-        return [self.translate_dia(self.RunInfos[tc][self.get_first_run(tc, rp)][key]) for key in keys]
+        dias = [item for key, item in sorted(self.RunInfos[tc][self.get_first_run(tc, rp)].iteritems()) if key.startswith('dia') and len(key) < 6]
+        return [self.translate_dia(dia) for dia in dias]
+
+    def get_all_rp_diamonds(self, tc):
+        return [self.get_rp_diamonds(tc, rp) for rp in self.RunPlans[tc]]
 
     def get_rp_biases(self, tc, rp):
         return [self.get_biases(rp, tc, ch) for ch in xrange(1, self.get_n_diamonds(tc, rp) + 1)]
