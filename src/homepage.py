@@ -12,7 +12,7 @@ from glob import glob
 
 class HomePage:
 
-    def __init__(self, config):
+    def __init__(self, config, filename):
 
         self.Dir = dirname(dirname(realpath(__file__)))
 
@@ -22,7 +22,8 @@ class HomePage:
         self.Color = self.Config.get('Home Page', 'color')
         self.BackgroundColor = self.Config.get('Home Page', 'background color')
 
-        self.FilePath = join('Overview', 'HomePage.html')
+        self.FilePath = join('Overview', '{}.html'.format(filename))
+        self.Body = ''
 
     def create(self):
         with open(join(self.Dir, self.FilePath), 'w') as f:
