@@ -232,7 +232,8 @@ def add_bkg(table, color='black'):
 
 
 def abs_html_path(*paths):
-    return join('https://diamond.ethz.ch', 'psi', *paths)
+    paths = list(paths) if type(paths) is not list else paths
+    return join('https://diamond.ethz.ch', 'psi', *paths) if 'http' not in paths[0] else paths[0]
 
 
 def make_dropdown(name, lst):
