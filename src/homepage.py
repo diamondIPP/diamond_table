@@ -46,6 +46,15 @@ class HomePage:
     def get_testcampaigns(self):
         return sorted(basename(name).strip('run_log.json') for name in glob(join(self.Dir, 'data', 'run_log*')))
 
+    def get_tc_htmls(self):
+        return [join('BeamTests', tc_to_str(tc), 'RunPlans.html') for tc in self.get_testcampaigns()]
+
+    def set_body(self, txt):
+        self.Body = txt
+
+    def set_file_path(self, path):
+        self.FilePath = path
+
     def write_body(self, f):
         f.write('<body>\n')
         f.write('  <div class="navbar">\n')
