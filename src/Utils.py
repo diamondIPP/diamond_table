@@ -236,15 +236,15 @@ def abs_html_path(*paths):
     return join('https://diamond.ethz.ch', 'psi', *paths) if 'http' not in paths[0] else paths[0]
 
 
-def make_dropdown(name, lst):
+def make_dropdown(name, items, targets, n, active=False):
     s = ''
     s += '    <div class="dropdown">\n'
-    s += '      <button class="dropbtn" onclick="myFunction()">{}\n'.format(name)
+    s += '      <button class="dropbtn{}" onclick="f{}()">{}\n'.format(' active' if active else '', n, name)
     s += '        <i class="fa fa-caret-down"></i>\n'
     s += '      </button>\n'
-    s += '      <div class="dropdown-content" id="myDropdown">\n'
-    for item in lst:
-        s += '        <a href="#">{}</a>\n'.format(item)
+    s += '      <div class="dropdown-content" id="drop{}">\n'.format(n)
+    for item, target in zip(items, targets):
+        s += '        {}\n'.format(make_abs_link(target, item, colour=False))
     s += '      </div>\n'
     s += '    </div>\n'
     return s
