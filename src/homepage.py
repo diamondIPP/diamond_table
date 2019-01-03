@@ -25,6 +25,9 @@ class HomePage:
         self.FilePath = join('Overview', '{}.html'.format(filename))
         self.Body = ''
 
+    def __del__(self):
+        log_message('created {}'.format(self.FilePath)) if 'default' not in self.FilePath else do_nothing()
+
     def create(self):
         with open(join(self.Dir, self.FilePath), 'w') as f:
             self.write_header(f)
