@@ -62,12 +62,40 @@ def make_link(target, name='Results', new_tab=False, path='', use_name=True, cen
     name = center_txt(name) if center else name
     if file_exists(join(path, target.strip('./'))) or not path:
         return '<a href={tar}{tab}>{nam}</a>'.format(tar=target, nam=name, tab=tab)
-    else:
-        return name if use_name else ''
+    return name if use_name else ''
 
-def make_abs_link(target, name, active=False):
-    active = 'class="active" ' if active else''
-    return '<a {}href={}>{}</a>'.format(active, abs_html_path(target), name)
+
+def make_lines(n):
+    return '<br/>' * n
+
+
+def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour=True):
+    active = 'class="active" ' if active else ''
+    new_tab = ' target="_blank"' if new_tab else ''
+    name = center_txt(name) if center else name
+    style = ' style="color:red"' if colour else ''
+    if file_exists(join(Dir, target)) or 'http' in target:
+        return '<a {act}href={tar}{tab}{s}>{name}</a>'.format(act=active, tar=abs_html_path(target), tab=new_tab, name=name, s=style)
+    return name if use_name else ''
+
+
+def make_figure(path, name, width=None, height=None):
+    width = ' width="{}"'.format(width) if width is not None else ''
+    height = ' height"{}"'.format(height) if height is not None else ''
+    return '<img src="{path}" alt="{name}"{w}{h}>'.format(path=abs_html_path(path), name=name, w=width, h=height)
+
+
+def indent(txt, n_spaces=2):
+    lines = txt.split('\n')
+    return '\n'.join('{}{}'.format(n_spaces * ' ', line) for line in lines)
+
+
+def bold(txt):
+    return '<b>{}</b>'.format(txt)
+
+
+def head(txt, size=1):
+    return '<h{0}>{1}</h{0}>'.format(size, txt)
 
 
 def folder_exists(path):
