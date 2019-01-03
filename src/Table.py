@@ -171,7 +171,7 @@ class Table:
         back = '../' * n_dirs
         return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
 
-    def get_info(self, diamond, section, option):
+    def get_info(self, diamond, section, option, quiet=False):
         info = ConfigParser()
         info.read(join(self.DataPath, diamond, 'info.conf'))
         try:
@@ -180,7 +180,7 @@ class Table:
             log_warning('option {o} not in {d} config'.format(o=option, d=diamond)) if option == 'type' else do_nothing()
             return ''
         except NoSectionError:
-            log_warning('section {s} not in {d} config'.format(s=section, d=diamond)) if option == 'type' else do_nothing()
+            log_warning('section {s} not in {d} config'.format(s=section, d=diamond)) if option == 'type' and not quiet else do_nothing()
             return ''
 
     def get_irradiation(self, campaign, diamond):
