@@ -40,7 +40,7 @@ class HomePage:
         return ['< 2015'] + sorted(list(set(remove_letters(name)[:4] for name in glob(join(self.Dir, 'data', 'run_log*')))))
 
     def get_year_htmls(self):
-        old = [join('Diamonds', 'OLD', 'index.php')]
+        old = [join('Overview', 'Old.html')]
         return old + [join('Overview', '{}.html'.format(year)) for year in self.get_years()[1:]]
 
     def get_testcampaigns(self):
