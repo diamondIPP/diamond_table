@@ -14,6 +14,7 @@ from os.path import dirname, realpath
 from YearTable import YearTable
 from json import loads
 import HTMLTable
+from OldTable import OldTable
 
 
 class Website:
@@ -54,6 +55,12 @@ class Website:
         h.set_body(body)
         h.create()
 
+    def create_old(self):
+        h = HomePage(self.Config, 'Old')
+        table = OldTable()
+        h.set_body(table.get_body())
+        h.create()
+
     def create_years(self):
         for year in self.HomePage.get_years():
             if year.isdigit():
@@ -65,6 +72,7 @@ class Website:
     def build(self):
         self.create_home()
         self.create_location()
+        self.create_old()
         self.create_years()
         self.create_boards()
 

@@ -173,7 +173,7 @@ class Table:
 
     def get_info(self, diamond, section, option, quiet=False):
         info = ConfigParser()
-        info.read(join(self.DataPath, diamond, 'info.conf'))
+        info.read(join(self.DataPath, diamond, 'info.ini'))
         try:
             return info.get(section, option)
         except NoOptionError:
