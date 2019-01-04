@@ -31,15 +31,22 @@ class OldTable(Table):
         header = ['Nr', 'Name', 'Thickness [&micro;m]', 'Feed Size [mm]', 'Beam Tests', 'Comments']
         rows = []
         for i, dia in enumerate(self.Diamonds):
-            row = ['{:02d}'.format(i)]
-            row += [center_txt(dia)]
-            t, s = (self.get_info(dia, 'Attributes', opt) for opt in ['thickness', 'size'])
-            row += [center_txt(t if t else '?')]
-            row += [center_txt(s if s else '?')]
-            row += [self.get_beam_tests(dia)]
-            row += [self.get_comment(dia)]
+            row = ['{:02d}'.format(i)]          # Nr
+            row += [center_txt(dia)]            # Name
+            row += [self.get_thickness(dia)]    # Thickness
+            row += [self.get_size(dia)]         # Feed Size
+            row += [self.get_beam_tests(dia)]   # Beam Tests
+            row += [self.get_comment(dia)]      # Comments
             rows.append(row)
         return add_bkg(HTMLTable.table(rows, header_row=header, ), self.BkgCol)
+
+    def get_size(self, dia):
+        size = self.get_info(dia, 'Attributes', 'size')
+        return center_txt(size if size else '?')
+
+    def get_thickness(self, dia):
+        thickness = self.get_info(dia, 'Attributes', 'thickness')
+        return center_txt(thickness if thickness else '?')
 
     def get_beam_tests(self, dia):
         beam_tests = []
