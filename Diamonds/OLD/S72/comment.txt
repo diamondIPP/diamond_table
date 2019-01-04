@@ -1,4 +1,3 @@
-thickness=515um 4.7x4.7mm
 14-May-10  run 20449     full chg@0.2 V/micron  side A  0.6 nA @500V dist OK
 17-May-10  run 20450     full chg@0.4 V/micron  side B  0.15nA @400V dist OK
  -may-13 RIE 6um new ROC  --to PSI

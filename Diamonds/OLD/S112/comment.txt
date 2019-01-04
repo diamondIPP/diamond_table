@@ -1,4 +1,3 @@
-Thickness=538micron 4.8mm2
 12-may-11  run 20503     full chg@0.4 V/micron  side A <0.15nA @ 1KV dist OK
 13-may-11  run 20504     full chg@0.4 V/micron  side B  1   nA @500V dist OK
 18-may-11 PU for pixels
