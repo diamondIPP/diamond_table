@@ -9,8 +9,10 @@ import os
 from ConfigParser import ConfigParser
 from json import load
 from os.path import join, dirname, realpath
-from math import sqrt
 from re import sub
+from uncertainties import ufloat
+from uncertainties.core import Variable
+from numpy import array, sqrt, average
 
 
 Dir = dirname(dirname(realpath(__file__)))
@@ -260,6 +262,29 @@ def calc_mean(lst):
     mean2 = sum(map(lambda x: x ** 2, lst)) / len(lst)
     sigma = sqrt(mean2 - mean_ ** 2)
     return mean_, sigma
+
+
+def mean_sigma(values, weights=None):
+    """ Return the weighted average and standard deviation. values, weights -- Numpy ndarrays with the same shape. """
+    if len(values) == 1:
+        return make_ufloat(values[0])
+    weights = [1] * len(values) if weights is None else weights
+    if type(values[0]) is Variable:
+        weights = [1 / v.s for v in values]
+        values = array([v.n for v in values], 'd')
+    if all(weight == 0 for weight in weights):
+        return [0, 0]
+    avrg = average(values, weights=weights)
+    variance = average((values - avrg) ** 2, weights=weights)  # Fast and numerically precise
+    return avrg, sqrt(variance)
+
+
+def make_ufloat(tup, par=0):
+    if type(tup) is Variable:
+        return tup
+    if isinstance(tup, FitRes):
+        return ufloat(tup.Parameter(par), tup.ParError(par))
+    return ufloat(tup[0], tup[1])
 
 
 class FitRes:
