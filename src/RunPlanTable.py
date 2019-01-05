@@ -162,3 +162,9 @@ class RunPlanTable(Table):
 
     def get_pulser(self, runs, tc, ch):
         return self.get_pickle_mean(runs, tc, ch, 'Pulser', 1)
+
+
+if __name__ == '__main__':
+    z = RunPlanTable()
+    z.Diamond = 'S129'
+    z.TestCampaign = '201508'
