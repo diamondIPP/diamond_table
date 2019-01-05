@@ -7,11 +7,13 @@ from argparse import ArgumentParser
 from ConfigParser import NoOptionError
 from collections import OrderedDict
 from Utils import *
+from DiaScan import DiaScan
 
 
 class DiaScans:
-    def __init__(self, prog_dir, diamond=None):
-        self.Dir = prog_dir
+    def __init__(self, diamond=None):
+
+        self.Dir = dirname(dirname(realpath(__file__)))
         self.Selection = []
         self.Name = None
         self.scale_factors = OrderedDict()
