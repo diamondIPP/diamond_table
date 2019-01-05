@@ -12,7 +12,7 @@ from glob import glob
 
 class HomePage:
 
-    def __init__(self, config, filename):
+    def __init__(self, config, filename=None):
 
         self.Dir = dirname(dirname(realpath(__file__)))
 
