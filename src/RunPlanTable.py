@@ -4,7 +4,7 @@
 # --------------------------------------------------------
 
 import HTMLTable
-from Table import Table, dirname
+from Table import Table
 from Utils import *
 from numpy import mean
 
@@ -18,7 +18,7 @@ class RunPlanTable(Table):
         print_banner('CREATING TESTCAMPAIGN RUNPLAN TABLES')
         self.start_pbar(len(self.TestCampaigns))
         for i, tc in enumerate(self.TestCampaigns, 1):
-            self.build_tc_table(make_tc_str(tc))
+            self.build_tc_table(str_to_tc(tc))
             self.ProgressBar.update(i)
         self.ProgressBar.finish()
 
@@ -64,27 +64,12 @@ class RunPlanTable(Table):
         f.write('\n\n\n</body>\n</html>\n')
         f.close()
 
-    def create_dia_overview(self):
-        print_banner('CREATING DIAMOND RUNPLAN TABLES')
-        self.start_pbar(len(self.Diamonds))
-        for i, dia in enumerate(self.Diamonds, 1):
-            if dia != self.Diamond and self.Diamond is not None:
-                continue
-            rps = self.DiaScans.find_dia_run_plans(dia)
-            path = '{dat}{dia}/BeamTests/'.format(dat=self.DataPath, dia=dia)
-            for tc, plans in rps.iteritems():
-                if tc != self.TestCampaign and self.TestCampaign is not None:
-                    continue
-                tc_string = make_tc_str(tc, long_=False)
-                sub_path = '{path}{tc}'.format(path=path, tc=tc_string)
-                create_dir(sub_path)
-                self.build_dia_table(sub_path, plans, tc)
-                for rp, ch in plans:
-                    rp_path = '{path}/RunPlan{rp}'.format(path=sub_path, rp=make_rp_string(rp))
-                    create_dir(rp_path)
-                    self.copy_index_php(rp_path)
-            self.ProgressBar.update(i)
-        self.ProgressBar.finish()
+    def get_dia_body(self, dia_scans):
+        dia, tc = dia_scans[0].Diamond, dia_scans[0].TestCampaign
+        txt = make_lines(3)
+        txt += head(bold('Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=dia, tc=tc_to_str(tc, short=False))))
+        txt += self.build_dia_table(dia_scans)
+        return txt
 
     def build_dia_table(self, path, plans, tc):
         html_file = '{path}/index.html'.format(path=path)
