@@ -115,11 +115,22 @@ class DiaScans:
                 runplans[tc] = sorted(plans)
         return OrderedDict(sorted(runplans.iteritems()))
 
+    def get_diamond_scans(self, dia, tc):
+        scans = []
+        for rp, dic in sorted(self.RunPlans[tc].iteritems()):
+            rp_diamonds = self.get_rp_diamonds(tc, rp)
+            if dia in rp_diamonds:
+                scans.append(DiaScan(tc, rp, rp_diamonds.index(dia) + 1))
+        return scans
+
     def get_runs(self, rp, tc):
         return self.RunPlans[tc][rp]['runs']
 
     def get_first_run(self, tc, rp):
         return str(self.get_runs(rp, tc)[0])
+
+    def get_type(self, tc, rp):
+        return self.RunPlans[tc][rp]['type']
 
     def get_biases(self, rp, tc, ch):
         runs = self.get_runs(rp, tc)
