@@ -57,10 +57,8 @@ class DiaScans:
             return tcs
 
     def load_all_runplans(self):
-        f = open('{dir}/data/run_plans.json'.format(dir=self.Dir), 'r')
-        runplans = load(f)
-        f.close()
-        return runplans
+        with open(join(self.Dir, 'data', 'run_plans.json')) as f:
+            return load(f)
 
     def load_runinfos(self):
         run_infos = {}
