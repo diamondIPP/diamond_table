@@ -110,6 +110,7 @@ class RunPlanTable(Table):
                 row += [center_txt('-')]                                                            # Pulser Pulse Height (corrected)
                 row += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
                 row += make_pic_link('SignalVoltageScan', 'Plot', False)
+                row += [center_txt('-')]                                                            # makes no sense for Voltage Scan
                 row += make_pic_link('PedestalMeanVoltage', 'Plot', False)
                 row += make_pic_link('PedestalSigmaVoltage', dc.get_noise())
             else:
