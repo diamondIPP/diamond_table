@@ -71,11 +71,7 @@ class RunPlanTable(Table):
         txt += self.build_dia_table(dia_scans)
         return txt
 
-    def build_dia_table(self, path, plans, tc):
-        html_file = '{path}/index.html'.format(path=path)
-        f = open(html_file, 'w')
-        tit = 'Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=path.split('/')[4], tc=make_tc_str(tc))
-        write_html_header(f, tit, bkg=self.BkgCol)
+    def build_dia_table(self, dia_scans):
         header = ['#rs2#Nr.',
                   '#rs2#Type',
                   '#rs2#Position',
@@ -85,52 +81,50 @@ class RunPlanTable(Table):
                   '#rs2#Bias [V]',
                   '#rs2#Leakage<br>Current',
                   '#cs4#Pulser',
-                  '#cs3#Signal',
+                  '#cs4#Signal',
                   '#rs2#Start',
                   '#rs2#Duration']
-        rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Ped.', 'Noise [&sigma;]']]]
-        # rps = {rp: (bias, ch) for bias, rps in rp_dict.iteritems() for rp, ch in rps.iteritems()}
+        rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
+        path = dirname(dia_scans[0].Path)
+        create_dir(join(self.Dir, path))
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
-            return [make_link(join(rp_dir, '{p}.{t}'.format(p=pic_name, t=ftype)), text, path=path, center=True, use_name=use_name)]
+            return [make_abs_link(join(path, 'RunPlan{}'.format(make_rp_string(rp)), '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name)]
 
-        # for i, (rp, (bias, ch)) in enumerate(sorted(rps.iteritems()), 1):
-        for i, (rp, ch) in enumerate(plans, 1):
-            runs = self.DiaScans.get_runs(rp, tc)
-            info = self.DiaScans.RunInfos[tc][str(runs[0])]
-            rp_dir = 'RunPlan{rp}'.format(rp=make_rp_string(rp))
-            name = '{first}-{last}'.format(first=runs[0], last=runs[-1])
-            volt_scan = self.DiaScans.RunPlans[tc][rp]['type'] == 'voltage scan'
-            rows.append([make_link('RunPlan{rp}/index.php'.format(rp=make_rp_string(rp)), str(make_rp_string(rp)), path=path, center=True)])
-            rows[i] += [self.DiaScans.RunPlans[tc][rp]['type']]                                                 # Run Plan Type
-            rows[i] += [center_txt(self.DiaScans.get_dia_position(tc, rp, ch))]                                                 # Diamond Position
-            rows[i] += self.DiaScans.get_attenuators(tc, rp, ch)                                                # Diamond Attenuators
-            rows[i] += self.DiaScans.get_attenuators(tc, rp, ch, pulser=True)                                   # Pulser Attenuators
-            rows[i] += [make_link('RunPlan{rp}/index.html'.format(rp=make_rp_string(rp)), name, path=path)]     # Runs
-            rows[i] += [right_txt(make_bias_str(self.DiaScans.get_biases(rp, tc, ch)))]                         # Bias
-            rows[i] += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                                 # Leakage Current
-            rows[i] += [info['pulser'] if 'pulser' in info else '']                                             # Pulser Type
-            if volt_scan:
-                rows[i] += make_pic_link('PulserVoltageScan', 'Plot', False)                                    # Pulser Pulse Height
-                rows[i] += [center_txt('-')]                                                                    # Pulser Pulse Height (corrected)
-                rows[i] += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
-                rows[i] += make_pic_link('SignalVoltageScan', 'Plot', False)
-                rows[i] += make_pic_link('PedestalMeanVoltage', 'Plot', False)
-                rows[i] += make_pic_link('PedestalSigmaVoltage', self.get_noise(runs, tc, ch))
+        for dc in dia_scans:
+            rp = dc.RunPlan
+            rp_str = make_rp_string(dc.RunPlan)
+            create_dir(join(self.Dir, dc.Path))
+            self.copy_index_php(dc.Path)
+            row = [make_abs_link(join(dc.Path, 'index.php'), rp_str, center=True)]                  # Nr
+            row += [center_txt(dc.Type)]                                                            # Run Plan Type
+            row += [center_txt(dc.DiaPosition)]                                                     # Diamond Position
+            row += [center_txt(dc.Attenuator)]                                                      # Diamond Attenuators
+            row += [center_txt(dc.PulserAttenuator)]                                                # Pulser Attenuators
+            row += [make_abs_link(join(dc.Path, 'index.html'), dc.get_runs_str(), center=True)]     # Runs
+            row += [right_txt(make_bias_str(dc.Bias))]                                              # Bias
+            row += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                         # Leakage Current
+            row += [dc.PulserType]                                                                  # Pulser Type
+            if dc.Type == 'voltage scan':
+                row += make_pic_link('PulserVoltageScan', 'Plot', False)                            # Pulser Pulse Height
+                row += [center_txt('-')]                                                            # Pulser Pulse Height (corrected)
+                row += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
+                row += make_pic_link('SignalVoltageScan', 'Plot', False)
+                row += make_pic_link('PedestalMeanVoltage', 'Plot', False)
+                row += make_pic_link('PedestalSigmaVoltage', dc.get_noise())
             else:
-                rows[i] += make_pic_link('CombinedPulserPulseHeights', self.get_pulser(runs, tc, ch))           # Pulser Pulse Height
-                rows[i] += [self.get_pulser_mean(runs, tc, rp, ch)]                                             # Pulser Pulse Height (corrected)
-                rows[i] += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)                      # Pulser Pedestal
-                rows[i] += make_pic_link('CombinedPulseHeights', self.get_signal(runs, tc, ch))
-                rows[i] += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                            # Signal Pedestal
-                rows[i] += make_pic_link('PedestalSigmaFlux', self.get_noise(runs, tc, ch))                     # Noise
-            rows[i] += [conv_time(self.DiaScans.RunInfos[tc][str(runs[0])]['starttime0'])]                      # Start Time
-            rows[i] += [self.DiaScans.calc_duration(tc, rp)]                                                    # Duration
+                row += make_pic_link('CombinedPulserPulseHeights', dc.get_pulser())                 # Pulser Pulse Height
+                row += [dc.get_corrected_pulser()]                                                  # Pulser Pulse Height (corrected)
+                row += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)              # Pulser Pedestal
+                row += make_pic_link('CombinedPulseHeights', dc.get_signal())                       # Pulse Height
+                row += [dc.get_corrected_signal()]                                                  # Pulse Height (corrected)
+                row += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                    # Signal Pedestal
+                row += make_pic_link('PedestalSigmaFlux', dc.get_noise())                           # Noise
+            row += [t_to_str(dc.StartTime)]                                                         # Start Time
+            row += [dc.Duration]                                                                    # Duration
+            rows.append(row)
 
-        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
-        f.write(self.create_home_button(path))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
+        return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
     def get_pulser_mean(self, runs, tc, rp, ch):
         if tc < '201505':
