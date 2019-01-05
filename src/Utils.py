@@ -187,7 +187,11 @@ def load_json(path):
 
 def conv_time(time_str, delta=1, strg=True):
     t = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ') + timedelta(hours=delta)
-    return t.strftime('%b %d{0} %H:%M:%S').format(nth(t.day)) if strg else t
+    return t.strftime('%b %d{} %H:%M:%S').format(nth(t.day)) if strg else t
+
+
+def t_to_str(time):
+    return time.strftime('%b %d{} %H:%M:%S').format(nth(time.day))
 
 
 def dig_str(value, form='5.1f'):
