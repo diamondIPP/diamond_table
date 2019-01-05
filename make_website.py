@@ -15,6 +15,7 @@ from YearTable import YearTable
 from json import loads
 import HTMLTable
 from OldTable import OldTable
+from RunPlanTable import RunPlanTable
 
 
 class Website:
@@ -68,6 +69,24 @@ class Website:
                 table = YearTable(year)
                 h.set_body(table.get_body())
                 h.create()
+                
+    def create_dia_runplans(self):
+        table = RunPlanTable()
+        table.Diamond = 'S129'
+        table.TestCampaign = 'Aug16'
+        print_banner('CREATING DIAMOND RUNPLAN TABLES')
+        diamonds = [dia for dia in table.Diamonds if dia == table.Diamond or table.Diamond is None]
+        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == table.TestCampaign or table.TestCampaign is None]
+        table.start_pbar(len(diamonds))
+        for i, dia in enumerate(diamonds, 1):
+            for tc in test_campaigns:
+                dia_scans = table.DiaScans.get_diamond_scans(dia, tc)
+                h = HomePage(self.Config)
+                h.set_file_path(join(dirname(dia_scans[0].Path), 'index.html'))
+                h.set_body(table.get_dia_body(dia_scans))
+                h.create()
+            table.ProgressBar.update(i)
+        table.ProgressBar.finish()
 
     def build(self):
         self.create_home()
@@ -80,4 +99,5 @@ class Website:
 if __name__ == '__main__':
 
     w = Website()
-    w.build()
+    # w.build()
+    w.create_dia_runplans()
