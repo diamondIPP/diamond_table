@@ -48,7 +48,7 @@ class Table:
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
-        self.DiaScans = DiaScans(self.Dir)
+        self.DiaScans = DiaScans()
         self.Diamonds = self.DiaScans.get_diamonds()
 
         # settings
@@ -93,11 +93,11 @@ class Table:
         return p
 
     def copy_index_php(self, path):
-        file_path = '{path}/{file}'.format(path=path, file=self.Config.get('General', 'index_php'))
-        if file_exists(file_path) and len(glob('{path}/*'.format(path=path))) <= 2:
+        file_path = join(self.Dir, path, self.Config.get('General', 'index_php'))
+        if file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) <= 2:
             remove(file_path)
-        if not file_exists(file_path) and len(glob('{path}/*'.format(path=path))) > 1:
-            copy('{dir}/{file}'.format(dir=self.Dir, file=self.Config.get('General', 'index_php')), file_path)
+        if not file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) > 1:
+            copy(join(self.Dir, basename(file_path)), file_path)
 
     def calc_flux(self, info):
         if 'for1' not in info or info['for1'] == 0:
