@@ -6,8 +6,7 @@
 
 import HTMLTable
 from Table import Table
-from Utils import make_tc_str, join, write_html_header, add_bkg, make_link, make_bias_str, make_rp_string, center_txt, right_txt, conv_time, print_banner, make_runs_str, log_warning
-from numpy import mean
+from Utils import *
 
 
 class DiaTable(Table):
@@ -15,94 +14,72 @@ class DiaTable(Table):
     def __init__(self):
         Table.__init__(self)
 
-    def create_all(self):
-        print_banner('CREATING SINGLE DIAMOND TABLES')
-        self.start_pbar(len(self.Diamonds))
-        for i, dia in enumerate(self.Diamonds, 1):
-            if dia != self.Diamond and self.Diamond is not None:
-                continue
-            self.build_table(dia)
-            self.ProgressBar.update(i)
-        self.ProgressBar.finish()
+    def get_body(self, dia_scans):
+        txt = make_lines(3)
+        txt += head(bold('Overview of all RunPlans for {}'.format(dia_scans.values()[0][0].Diamond)))
+        txt += self.build_table(dia_scans)
+        return txt
 
-    def build_table(self, dia):
-        html_file = join(self.DataPath, dia, 'index.html')
-        f = open(html_file, 'w')
-        tit = 'Overview of all RunPlans for Diamond {d}'.format(d=dia)
-        write_html_header(f, tit, bkg=self.BkgCol)
+    def build_table(self, dia_scans):
 
+        dia = dia_scans.values()[0][0].Diamond
         header = ['#rs2#Beam Test',
                   '#rs2#Irradiation<br>[n/cm<sup>2</sup>]',
                   '#rs2#Nr. ',
-                  '#rs2#Position',
                   '#rs2#Type',
+                  '#rs2#Position',
                   '#rs2#Runs',
                   '#cs2#Attenuators',
                   '#rs2#Bias [V]',
                   '#rs2#Leakage<br>Current',
-                  '#cs3#Pulser',
-                  '#cs2#Signal',
+                  '#cs4#Pulser',
+                  '#cs4#Signal',
                   '#rs2#Start',
                   '#rs2#Duration']
-        rows = [[center_txt(text) for text in ['Diamond', 'Pulser', 'Type', 'Mean', 'Ped.', 'Distr.', 'Ped.']]]
-        run_plans = self.DiaScans.find_dia_run_plans(dia)
-        path = join(self.DataPath, dia)
+        rows = [[center_txt(text) for text in ['Diamond', 'Pulser', 'Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
 
-        def make_pic_link(pic_name, name, use_name=True):
-            return [make_link(join(rp_target, pic_name), name, path=path, center=True, use_name=use_name)]
+        def make_pic_link(pic_name, name, use_name=True, ftype='pdf'):
+            return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), name, center=True, use_name=use_name)]
 
-        for tc, plans in sorted(run_plans.iteritems()):
-            row = ['#rs{n}#{tc}'.format(n=len(plans), tc=center_txt(make_tc_str(tc)))]                                          # Test Campaign
-            row += ['#rs{n}#{irr}'.format(n=len(plans), irr=self.get_irradiation(tc, dia))]                                     # Irradiation
-            for rp, ch in sorted(plans):
-                rp_info = self.DiaScans.RunPlans[tc][rp]
-                run_info = self.DiaScans.RunInfos[tc][str(rp_info['runs'][0])]
-                rp_target = join('BeamTests', make_tc_str(tc, 0), 'RunPlan{r}'.format(r=make_rp_string(rp)))
-                row = row if rp == plans[0][0] else []
-                row += [make_link(join(rp_target, 'index.php'), name=make_rp_string(rp), path=path)]                            # Nr
-                row += [center_txt(self.DiaScans.get_dia_position(tc, rp, ch))]                                                 # Position
-                row += [center_txt(rp_info['type'])]                                                                            # Type
-                row += [make_link(join(rp_target, 'index.html'), make_runs_str(rp_info['runs']), path=path)]                    # Runs
-                if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:                                                             # Attenuators
-                    row += [center_txt(self.DiaScans.RunPlans[tc][rp]['attenuators']['dia{ch}'.format(ch=ch)])]
-                    if 'pulser' in self.DiaScans.RunPlans[tc][rp]['attenuators']:                                               # Pulser Attenuators
-                        log_warning('Add pulser attenuator for each channel for rp {rp} in {tc}'.format(rp=rp, tc=tc))
-                        row += [center_txt(self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser'])]
-                    else:
-                        row += [center_txt(self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser{ch}'.format(ch=ch)])]
+        for tc, lst in dia_scans.iteritems():
+            if not lst:
+                continue
+            row = ['#rs{n}#{tc}'.format(n=len(lst), tc=center_txt(tc))]                                 # Test Campaign
+            row += ['#rs{n}#{irr}'.format(n=len(lst), irr=self.get_irradiation(tc, dia))]               # Irradiation
+            for i, dc in enumerate(lst):
+                rp_str = make_rp_string(dc.RunPlan)
+                row = row if not i else []
+                row += [make_abs_link(join(dc.Path, 'index.php'), rp_str, center=True)]                 # Nr
+                row += [center_txt(dc.Type)]                                                            # Run Plan Type
+                row += [center_txt(dc.DiaPosition)]                                                     # Diamond Position
+                row += [center_txt(dc.Attenuator)]                                                      # Diamond Attenuators
+                row += [center_txt(dc.PulserAttenuator)]                                                # Pulser Attenuators
+                row += [make_abs_link(join(dc.Path, 'index.html'), dc.get_runs_str(), center=True)]     # Runs
+                row += [right_txt(make_bias_str(dc.Bias))]                                              # Bias
+                row += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                         # Leakage Current
+                row += [dc.PulserType]                                                                  # Pulser Type
+                if dc.Type == 'voltage scan':
+                    row += make_pic_link('PulserVoltageScan', 'Plot', False)                            # Pulser Pulse Height
+                    row += [center_txt('-')]                                                            # Pulser Pulse Height (corrected)
+                    row += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
+                    row += make_pic_link('SignalVoltageScan', 'Plot', False)
+                    row += [center_txt('-')]                                                            # makes no sense for Voltage Scan
+                    row += make_pic_link('PedestalMeanVoltage', 'Plot', False)
+                    row += make_pic_link('PedestalSigmaVoltage', dc.get_noise())
                 else:
-                    log_warning('Add  attenuators for rp {rp} in {tc}'.format(rp=rp, tc=tc))
-                    row += [center_txt('?'), center_txt('?')]
-                row += [right_txt(make_bias_str(self.DiaScans.get_biases(rp, tc, ch)))]                                         # Bias
-                row += [make_link(join(rp_target, 'PhPulserCurrent.png'), 'Plot', path=path, use_name=False, center=True)]      # Leakage Current
-                row += make_pic_link('CombinedPulserPulseHeights.png', run_info['pulser'] if 'pulser' in run_info else '?')     # Pulser Type
-                row += make_pic_link('CombinedPulserPulseHeights.png', self.get_pulser_mean(rp_info['runs'], tc, rp, ch))       # Pulser Mean
-                row += make_pic_link('Pedestal_FluxPulserBeamOn.png', 'Plot', use_name=False)                                   # Pulser Pedestals
-                row += make_pic_link('CombinedPulseHeights.png', 'Plot', use_name=False)                                        # Signal PH
-                row += make_pic_link('Pedestal_Flux.png', 'Plot', use_name=False)                                               # Signal Pedestal
-                row += [conv_time(self.DiaScans.RunInfos[tc][str(rp_info['runs'][0])]['starttime0'])]                           # Start Time
-                row += [self.DiaScans.calc_duration(tc, rp)]                                                                    # Duration
+                    row += make_pic_link('CombinedPulserPulseHeights', dc.get_pulser())                 # Pulser Pulse Height
+                    row += [dc.get_corrected_pulser()]                                                  # Pulser Pulse Height (corrected)
+                    row += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)              # Pulser Pedestal
+                    row += make_pic_link('CombinedPulseHeights', dc.get_signal())                       # Pulse Height
+                    row += [dc.get_corrected_signal()]                                                  # Pulse Height (corrected)
+                    row += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                    # Signal Pedestal
+                    row += make_pic_link('PedestalSigmaFlux', dc.get_noise())                           # Noise
+                row += [t_to_str(dc.StartTime)]                                                         # Start Time
+                row += [dc.Duration]                                                                    # Duration
                 rows.append(row)
-        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
 
-    def get_pulser_mean(self, runs, tc, rp, ch):
-        if tc <= '201505':
-            return center_txt('?')
-        try:
-            att_string = 'None'
-            if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:
-                att_string = self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser' if 'pulser' in self.DiaScans.RunPlans[tc][rp]['attenuators'] else 'pulser{c}'.format(c=ch)]
-            attenuations = att_string.split('+') if att_string.lower() not in ['unknown', 'none'] else ['0']
-            db = sum(int(att.lower().split('db')[0]) for att in attenuations)
-            att = 10 ** (db / 20.)
-            pulser_mean = mean([self.get_pickle(run, tc, ch, 'Pulser').Parameter(1) for run in runs])
-            return center_txt('{:2.2f}'.format(pulser_mean * att))
-        except (TypeError, ValueError):
-            return center_txt('?')
+        return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
 
 if __name__ == '__main__':
     z = DiaTable()
-    z.build_table('S129')
