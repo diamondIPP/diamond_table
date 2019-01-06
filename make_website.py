@@ -16,6 +16,7 @@ from json import loads
 import HTMLTable
 from OldTable import OldTable
 from RunPlanTable import RunPlanTable
+from DiaTable import DiaTable
 
 
 class Website:
@@ -80,13 +81,29 @@ class Website:
         table.start_pbar(len(diamonds))
         for i, dia in enumerate(diamonds, 1):
             for tc in test_campaigns:
-                dia_scans = table.DiaScans.get_diamond_scans(dia, tc)
+                dia_scans = table.DiaScans.get_tc_diamond_scans(dia, tc)
                 if not dia_scans:
                     continue  # continue if the diamond was not measured during this campaign
                 h = HomePage(self.Config)
                 h.set_file_path(join(dirname(dia_scans[0].Path), 'index.html'))
                 h.set_body(table.get_dia_body(dia_scans))
                 h.create()
+            table.ProgressBar.update(i)
+        table.ProgressBar.finish()
+
+    def create_dias(self):
+        table = DiaTable()
+        diamond = 'S129'
+        print_banner('CREATING SINGLE DIAMOND TABLES')
+        diamonds = [dia for dia in table.Diamonds if dia == diamond or diamond is None]
+        table.start_pbar(len(diamonds))
+        for i, dia in enumerate(diamonds, 1):
+            dia_scans = table.DiaScans.get_diamond_scans(dia)
+            h = HomePage(self.Config)
+            h.set_file_path(join('Diamonds', dia, 'index.html'))
+            print h.FilePath
+            h.set_body(table.get_body(dia_scans))
+            h.create()
             table.ProgressBar.update(i)
         table.ProgressBar.finish()
 
@@ -102,4 +119,4 @@ if __name__ == '__main__':
 
     w = Website()
     # w.build()
-    w.create_dia_runplans()
+    w.create_dias()
