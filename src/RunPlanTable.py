@@ -89,10 +89,9 @@ class RunPlanTable(Table):
         create_dir(join(self.Dir, path))
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
-            return [make_abs_link(join(path, 'RunPlan{}'.format(make_rp_string(rp)), '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name)]
+            return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name)]
 
         for dc in dia_scans:
-            rp = dc.RunPlan
             rp_str = make_rp_string(dc.RunPlan)
             create_dir(join(self.Dir, dc.Path))
             self.copy_index_php(dc.Path)
