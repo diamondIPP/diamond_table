@@ -88,6 +88,9 @@ class DiaScan:
         dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
         return str(dur)
 
+    def get_run_bias(self, run):
+        return make_bias_str(self.RunInfos[str(run)]['dia{}hv'.format(self.Channel)])
+
     def load_dia_position(self):
         keys = sorted([key for key in self.RunInfos.values()[0].iterkeys() if key.startswith('dia') and len(key) < 5])
         pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back'] if len(keys) == 2 else range(len(keys))
@@ -169,5 +172,5 @@ class DiaScan:
 
 if __name__ == '__main__':
     t = time()
-    z = DiaScan('201508', '05', '1')
+    z = DiaScan('201807', '04', '2')
     print time() - t
