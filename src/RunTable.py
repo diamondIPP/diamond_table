@@ -3,11 +3,11 @@
 # created on October 14th 2016 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from collections import OrderedDict
 
 import HTMLTable
 from Table import Table
 from Utils import *
+from DiaScan import DiaScan
 
 
 class RunTable(Table):
@@ -15,29 +15,20 @@ class RunTable(Table):
     def __init__(self):
         Table.__init__(self)
 
-    def create_overview(self):
-        for dia in self.Diamonds:
-            for tc, plans in self.DiaScans.find_dia_run_plans(dia).iteritems():
-                for rp, ch in plans:
-                    path = '{dat}{dia}/BeamTests/{tc}'.format(dat=self.DataPath, dia=dia, tc=make_tc_str(tc, 0))
-                    runs = self.DiaScans.get_runs(rp, tc)
-                    self.build_table(path, rp, tc, dia, runs, ch)
-                    for run in runs:
-                        run_path = '{path}/{run}'.format(path=path, run=run)
-                        create_dir(run_path)
-                        self.copy_index_php(run_path)
+    def get_body(self, dia_scan):
+        txt = make_lines(3)
+        rp, dia, tc = dia_scan.RunPlanStr, dia_scan.Diamond, tc_to_str(dia_scan.TestCampaign, short=False)
+        txt += head(bold('Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=rp, dia=dia, tc=tc)))
+        txt += self.build(dia_scan)
+        return txt
 
-    def build_table(self, path, rp, tc, dia, runs, ch):
-        # if not tc == '201508' or not dia == 'II6-79':
-        if dia == 'None':
-            return
-        if (tc != self.TestCampaign and self.TestCampaign is not None) or (dia != self.Diamond and self.Diamond is not None):
-            return
-        print tc, rp, dia
-        html_file = '{path}/RunPlan{rp}/index.html'.format(path=path, rp=make_rp_string(rp))
-        f = open(html_file, 'w')
-        tit = 'Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=make_rp_string(rp), tc=make_tc_str(tc), dia=dia)
-        write_html_header(f, tit, bkg=self.BkgCol)
+    def get_tc_body(self, tc):
+        txt = make_lines(3)
+        txt += head(bold('All Runs for the Beam Test Campaign in {tc}'.format(tc=tc_to_str(tc, short=False))))
+        txt += self.build_tc(tc)
+        return txt
+
+    def build(self, dc):
 
         header = ['#rs2#Run',
                   '#rs2#Type',
@@ -50,55 +41,68 @@ class RunTable(Table):
                   '#rs2#Duration',
                   '#rs2#Comments']
 
-        def make_entry(plot_name, value, value2=None):
-            value2 = ' ({0})'.format(value2) if value2 is not None else ''
-            return [center_txt(make_link(file_name.format(plot_name), '{0}{1}'.format(value, value2), path=path))]
+        def make_pic_link(pic_name, name, use_name=True, ftype='pdf'):
+            return [make_abs_link(join(run_path, '{}.{}'.format(pic_name, ftype)), name, center=True, use_name=use_name)]
 
         rows = [[center_txt(txt) for txt in ['Distr.', '2DMap', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma',
                                              'Pedestal [au]', 'Noise [1&sigma;]']]]
-        for i, run in enumerate(runs, 1):
-            info = self.DiaScans.RunInfos[tc][str(run)]
-            data = {tag: self.get_pickle(run, tc, ch, tag, form) for tag, form in zip(['PH', 'Pedestal', 'Pulser', 'PulserPed'], ['2.2f', '2.2f', '2.2f', '2.2f'])}
-            run_path = '../{run}'.format(run=run)
-            file_name = '{path}/{{0}}.png'.format(path=run_path)
-            rows.append([make_link('{path}/index.php'.format(path=run_path), run, path=path)])                                              # Run
-            rows[i] += [info['runtype']]                                                                                                    # Type
-            rows[i] += [make_bias_str(info['dia{ch}hv'.format(ch=ch)])]                                                                     # HV
-            rows[i] += [center_txt(self.calc_flux(info))]                                                                                   # Flux
-            rows[i] += [center_txt(make_link('{path}/HitMap.pdf'.format(path=run_path), 'Plot', path=path, use_name=False))]                # Hit Map
-            rows[i] += [center_txt(make_link('{path}/SignalDistribution.pdf'.format(path=run_path), 'Plot', path=path, use_name=False))]    # Distribution
-            rows[i] += [center_txt(make_link('{path}/SignalMap2D.pdf'.format(path=run_path), 'Plot', path=path, use_name=False))]           # Signal Map
-            rows[i] += make_entry('PulseHeight10000', data['PH'].Parameter(0), data['PH'].ParError(0))                                      # PH
-            rows[i] += make_entry('Pedestal_aball_cuts', data['Pedestal'].Parameter(1))                                                     # Pedestal
-            rows[i] += make_entry('Pedestal_aball_cuts', data['Pedestal'].Parameter(2))                                                     # Pedestal Noise
-            rows[i] += make_entry('PulserDistributionFit', data['Pulser'].Parameter(1), data['Pulser'].ParError(1))                         # Pulser
-            rows[i] += make_entry('PulserDistributionFit', data['Pulser'].Parameter(2))                                                     # Pulser Sigma
-            rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(1))                                                # Pulser Pedestal
-            rows[i] += make_entry('Pedestal_abPulserBeamOn', data['PulserPed'].Parameter(2))                                                # Pulser Ped Noise
-            rows[i] += [conv_time(info['starttime0']), self.DiaScans.calc_duration(tc, run), info['comments'][:50]]                                     # comments
-        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
-        f.write(self.create_home_button(join(path, 'index.php')))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
+        for run in dc.Runs:
+            info = dc.RunInfos[str(run)]
+            run_path = join(dirname(dc.Path), str(run))
+            create_dir(join(self.Dir, run_path))
+            self.copy_index_php(run_path)
+            row = [make_abs_link(join(run_path, 'index.php'), run)]                                             # Run
+            row += [dc.Type]                                                                                    # Type
+            row += [right_txt(make_bias_str(dc.Bias))]                                                          # Bias
+            row += [center_txt(self.calc_flux(info))]                                                           # Flux
+            row += make_pic_link('HitMap', 'Plot', use_name=False)                                              # Hit Map
+            row += make_pic_link('SignalDistribution', 'Plot', use_name=False)                                  # Distribution
+            row += make_pic_link('SignalMap2D', 'Plot', use_name=False)                                         # Signal Map
+            row += make_pic_link('PulseHeight10000', dc.get_run_ph(run))                                        # PH
+            row += make_pic_link('PedestalDistributionFitAllCuts', dc.get_run_ped(run))                         # Pedestal
+            row += make_pic_link('PedestalDistributionFitAllCuts', dc.get_run_noise(run))                       # Pedestal Noise
+            row += make_pic_link('PulserDistributionFit', dc.get_run_pul(run))                                  # Pulser
+            row += make_pic_link('PulserDistributionFit', dc.get_run_pul(run, sigma=True))                      # Pulser Sigma
+            row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_ped(run, pulser=True))       # Pulser Pedestal
+            row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_noise(run, pulser=True))     # Pulser Pedestal Noise
+            row += [conv_time(info['starttime0']), dc.calc_run_duration(run), info['comments']]                 # Start, Duration, Comments
+            rows.append(row)
+        return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
-    def build_full_table(self, tc, path):
-        html_file = '{path}/index.html'.format(path=path)
-        f = open(html_file, 'w')
-        tit = 'All Runs for the Beam Test Campaign in {tc}'.format(tc=make_tc_str(tc, long_=False))
-        write_html_header(f, tit, bkg=self.BkgCol)
-        header = ['Run', 'Type', 'Flux<br>[kHz/cm{0}]'.format(sup(2)), 'FS11', 'FSH13', 'Start Time', 'Duration', 'Dia I', 'HV I [V]', 'Dia II', 'HV II [V]', 'Comments']
-        rows = []
-        tc = make_tc_str(tc)
-        if tc not in self.DiaScans.RunInfos:
-            return
-        runs = self.DiaScans.RunInfos[tc]
-        sorted_runs = OrderedDict(sorted({int(run): data for run, data in runs.iteritems()}.iteritems()))
-        for i, (run, data) in enumerate(sorted_runs.iteritems()):
-            rows.append([run])
-            # Type - Flux - FS11 - FS13 - Start - Duration
-            rows[i] += [self.get_runtype(data), center_txt(self.calc_flux(data)), data['fs11'], data['fs13'], conv_time(data['starttime0']), self.DiaScans.calc_duration(tc, run)]
-            rows[i] += [k for j in [(self.DiaScans.load_diamond(data['dia{ch}'.format(ch=ch)]), make_bias_str(data['dia{ch}hv'.format(ch=ch)])) for ch in xrange(1, 3)] for k in j]
-            rows[i] += [data['comments'][:100]]
-        f.write(add_bkg(HTMLTable.table(rows, header_row=header), self.BkgCol))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
+    def build_tc(self, tc):
+
+        info = self.DiaScans.RunInfos[tc]
+        max_channels = get_max_channels(info)
+        header = ['#rs2#Run',
+                  '#rs2#Type',
+                  '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
+                  '#rs2#FS11',
+                  '#rs2#FSH13',
+                  '#rs2#Start Time',
+                  '#rs2#Duration']
+        header += ['#cs2#{}'.format(txt) for txt in (['Front', 'Middle', 'Back'] if max_channels == 3 else ['Front', 'Back'])]
+        header += ['#rs2#Comments']
+
+        rows = [[center_txt(txt) for txt in ['Dia', 'HV [V]'] * max_channels]]
+        for run, data in sorted(info.iteritems(), key=lambda (key, v): (int(key), v)):
+            row = [center_txt(run)]
+            row += [center_txt(data['runtype'])]
+            row += [center_txt(self.calc_flux(data))]
+            row += [right_txt(data['fs11'])]
+            row += [right_txt(data['fs13'])]
+            row += [center_txt(conv_time(data['starttime0']))]
+            row += [self.DiaScans.calc_duration(tc, int(run))]
+            for channel in get_dia_channels(data):
+                dia = self.DiaScans.load_diamond(data['dia{}'.format(channel)])
+                row += [make_abs_link(join('Diamonds', dia, 'index.html'), dia)]
+                row += [make_bias_str(data['dia{}hv'.format(channel)])]
+                if channel == '1' and max_channels != len(get_dia_channels(data)):
+                    row += ['', '']
+            row += [data['comments'][:100]]
+            rows.append(row)
+        return add_bkg(HTMLTable.table(rows, header_row=header), self.BkgCol)
+
+
+if __name__ == '__main__':
+    z = RunTable()
+    s = DiaScan('201508', '05', '1')
