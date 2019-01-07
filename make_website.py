@@ -16,6 +16,9 @@ from json import loads
 import HTMLTable
 from OldTable import OldTable
 from RunPlanTable import RunPlanTable
+from DiaTable import DiaTable
+from RunTable import RunTable
+from time import time
 
 
 class Website:
@@ -26,6 +29,9 @@ class Website:
         self.Config = self.load_config()
         self.HomePage = HomePage(self.Config, 'default')
         self.BkgCol = 'lightgrey'  # TODO FIX
+
+        self.Diamond = None
+        self.TestCampaign = None
 
     def load_config(self):
         conf = ConfigParser()
@@ -72,34 +78,82 @@ class Website:
                 
     def create_dia_runplans(self):
         table = RunPlanTable()
-        table.Diamond = 'S129'
-        # table.TestCampaign = 'Aug16'
         print_banner('CREATING DIAMOND RUNPLAN TABLES')
-        diamonds = [dia for dia in table.Diamonds if dia == table.Diamond or table.Diamond is None]
-        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == table.TestCampaign or table.TestCampaign is None]
+        diamonds = [dia for dia in table.Diamonds if dia == self.Diamond or self.Diamond is None]
+        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == self.TestCampaign or self.TestCampaign is None]
         table.start_pbar(len(diamonds))
         for i, dia in enumerate(diamonds, 1):
             for tc in test_campaigns:
-                dia_scans = table.DiaScans.get_diamond_scans(dia, tc)
+                dia_scans = table.DiaScans.get_tc_diamond_scans(dia, tc)
                 if not dia_scans:
                     continue  # continue if the diamond was not measured during this campaign
                 h = HomePage(self.Config)
                 h.set_file_path(join(dirname(dia_scans[0].Path), 'index.html'))
                 h.set_body(table.get_dia_body(dia_scans))
                 h.create()
+                self.create_runs(dia_scans)
             table.ProgressBar.update(i)
         table.ProgressBar.finish()
 
+    def create_dias(self):
+        table = DiaTable()
+        print_banner('CREATING SINGLE DIAMOND TABLES')
+        diamonds = [dia for dia in table.Diamonds if dia == self.Diamond or self.Diamond is None]
+        table.start_pbar(len(diamonds))
+        for i, dia in enumerate(diamonds, 1):
+            dia_scans = table.DiaScans.get_diamond_scans(dia)
+            print dia_scans
+            h = HomePage(self.Config)
+            h.set_file_path(join('Diamonds', dia, 'index.html'))
+            h.set_body(table.get_body(dia_scans))
+            h.create()
+            table.ProgressBar.update(i)
+        table.ProgressBar.finish()
+
+    def create_runs(self, dia_scans):
+        table = RunTable()
+        print_banner('CREATING RUN TABLES')
+        for dia_scan in dia_scans:
+            h = HomePage(self.Config)
+            h.set_file_path(join(dia_scan.Path, 'index.html'))
+            h.set_body(table.get_body(dia_scan))
+            h.create()
+
+    def create_full_runs(self):
+        table = RunTable()
+        print_banner('CREATING FULL RUN TABLES')
+        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == self.TestCampaign or self.TestCampaign is None]
+        for tc in test_campaigns:
+            h = HomePage(self.Config)
+            h.set_file_path(join('BeamTests', tc_to_str(tc), 'index.html'))
+            h.set_body(table.get_tc_body(tc))
+            h.create()
+
+    def create_full_runplans(self):
+        table = RunPlanTable()
+        print_banner('CREATING FULL RUNPLAN TABLES')
+        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == self.TestCampaign or self.TestCampaign is None]
+        for tc in test_campaigns:
+            h = HomePage(self.Config)
+            h.set_file_path(join('BeamTests', tc_to_str(tc), 'RunPlans.html'))
+            h.set_body(table.get_tc_body(tc))
+            h.create()
+
     def build(self):
+        t = time()
         self.create_home()
         self.create_location()
         self.create_old()
         self.create_years()
         self.create_boards()
+        self.create_dia_runplans()
+        self.create_dias()
+        self.create_full_runs()
+        self.create_full_runplans()
+        print 'This took {}'.format(time() - t)
 
 
 if __name__ == '__main__':
 
     w = Website()
-    # w.build()
-    w.create_dia_runplans()
+    w.build()
