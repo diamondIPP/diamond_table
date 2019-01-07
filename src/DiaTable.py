@@ -17,10 +17,10 @@ class DiaTable(Table):
     def get_body(self, dia_scans):
         txt = make_lines(3)
         txt += head(bold('Overview of all RunPlans for {}'.format(dia_scans.values()[0][0].Diamond)))
-        txt += self.build_table(dia_scans)
+        txt += self.build(dia_scans)
         return txt
 
-    def build_table(self, dia_scans):
+    def build(self, dia_scans):
 
         dia = dia_scans.values()[0][0].Diamond
         header = ['#rs2#Beam Test',
