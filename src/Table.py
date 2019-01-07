@@ -7,7 +7,6 @@ from json import loads
 
 from Utils import *
 from DiamondRateScans import DiaScans
-from os import remove
 from shutil import copy
 from glob import glob
 from numpy import mean
@@ -94,8 +93,8 @@ class Table:
 
     def copy_index_php(self, path):
         file_path = join(self.Dir, path, self.Config.get('General', 'index_php'))
-        if file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) <= 2:
-            remove(file_path)
+        # if file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) <= 2:
+        #     remove(file_path)
         if not file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) > 1:
             copy(join(self.Dir, basename(file_path)), file_path)
 
