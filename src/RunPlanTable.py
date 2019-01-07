@@ -22,47 +22,11 @@ class RunPlanTable(Table):
             self.ProgressBar.update(i)
         self.ProgressBar.finish()
 
-    def build_tc_table(self, tc):
-
-        html_file = join(self.Dir, 'BeamTests', make_tc_str(tc, long_=False), 'RunPlans.html')
-        f = open(html_file, 'w')
-        tit = 'All Run Plans for the Test Campaign in {tc}'.format(tc=make_tc_str(tc))
-        write_html_header(f, tit, bkg=self.BkgCol)
-
-        def is_main_plan(runplan):
-            return runplan.isdigit()
-
-        def n_sub_plans(runplan):
-            return sum(1 for plan in self.DiaScans.RunPlans[tc] if runplan in plan)
-
-        def max_diamonds():
-            return max(self.DiaScans.get_n_diamonds(tc, plan) for plan in self.DiaScans.RunPlans[tc])
-
-        header = ['#rs2#Run Plan',
-                  '#rs2#Sub Plan',
-                  '#rs2#Run Type',
-                  '#rs2#Runs',
-                  '#cs3#Front Pad',
-                  '#cs3#Back Pad']
-        rows = [[center_txt(txt) for txt in ['Diamond', 'Detector', 'Bias [V]'] * max_diamonds()]]
-
-        for i, (rp, info) in enumerate(sorted(self.DiaScans.RunPlans[tc].iteritems()), 1):
-            row = ['#rs{n}#{rp}'.format(n=n_sub_plans(rp), rp=center_txt(rp))] if is_main_plan(rp) else []
-            row += [rp]
-            row += [info['type']]
-            row += ['{min} - {max}'.format(min=str(min(info['runs'])).zfill(3), max=str(max(info['runs'])).zfill(3))]
-            if is_main_plan(rp):
-                for dia, bias in zip(self.DiaScans.get_rp_diamonds(tc, rp), self.DiaScans.get_rp_biases(tc, rp)):
-                    if dia == 'None':
-                        row += ['#cs3#']
-                    else:
-                        dia_link = make_link(join('..', '..', 'Diamonds', dia, 'BeamTests', make_tc_str(tc, 0), 'RunPlan{rp}'.format(rp=make_rp_string(rp)), 'index.html'), dia)
-                        row += ['#rs{n}#{i}'.format(n=n_sub_plans(rp), i=i) for i in [dia_link, center_txt(self.get_info(dia, tc, 'type')), right_txt(make_bias_str(bias))]]
-            rows.append(row)
-        f.write(add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol))
-        f.write(self.create_home_button(dirname(html_file)))
-        f.write('\n\n\n</body>\n</html>\n')
-        f.close()
+    def get_tc_body(self, tc):
+        txt = make_lines(3)
+        txt += head(bold('Run Plan Ovierview for the Test Campaign in {tc}'.format(tc=tc_to_str(tc, short=False))))
+        txt += self.build_tc_table(tc)
+        return txt
 
     def get_dia_body(self, dia_scans):
         dia, tc = dia_scans[0].Diamond, dia_scans[0].TestCampaign
@@ -70,6 +34,44 @@ class RunPlanTable(Table):
         txt += head(bold('Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=dia, tc=tc_to_str(tc, short=False))))
         txt += self.build_dia_table(dia_scans)
         return txt
+
+    def build_tc_table(self, tc):
+
+        info = self.DiaScans.RunPlans[tc]
+        max_channels = get_max_channels(self.DiaScans.RunInfos[tc])
+
+        def is_main_plan(runplan):
+            return runplan.isdigit()
+
+        def n_sub_plans(runplan):
+            return sum(1 for plan in info if runplan in plan)
+
+        header = ['#rs2#Run Plan',
+                  '#rs2#Sub Plan',
+                  '#rs2#Run Type',
+                  '#rs2#Runs']
+        header += ['#cs3#{}'.format(txt) for txt in (['Front', 'Middle', 'Back'] if max_channels == 3 else ['Front', 'Back'])]
+        rows = [[center_txt(txt) for txt in ['Diamond', 'Detector', 'Bias [V]'] * max_channels]]
+
+        for i, (rp, data) in enumerate(sorted(info.iteritems()), 1):
+            row = ['#rs{n}#{rp}'.format(n=n_sub_plans(rp), rp=center_txt(rp))] if is_main_plan(rp) else []
+            row += [center_txt(make_rp_string(rp))]
+            row += [center_txt(data['type'])]
+            row += [center_txt('{:03d} - {:03d}'.format(data['runs'][0], data['runs'][-1]))]
+            dias, biases = self.DiaScans.get_rp_diamonds(tc, rp), self.DiaScans.get_rp_biases(tc, rp)
+            if is_main_plan(rp):
+                for dia, bias in zip(dias, biases):
+                    if dia == 'None':
+                        row += [''] * 3
+                    else:
+                        dia_link = make_abs_link(join('Diamonds', dia, 'BeamTests', tc_to_str(tc), 'RunPlan{}'.format(make_rp_string(rp)), 'index.html'), dia, center=True)
+                        row += ['#rs{n}#{i}'.format(n=n_sub_plans(rp), i=i) for i in [dia_link, center_txt(self.get_info(dia, tc, 'type')), right_txt(make_bias_str(bias))]]
+                        if dias.index(dia) == 0 and max_channels != len(dias):
+                            row += [''] * 3
+            elif max_channels != len(dias):
+                row += [''] * 3
+            rows.append(row)
+        return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
     def build_dia_table(self, dia_scans):
         header = ['#rs2#Nr.',
@@ -89,10 +91,9 @@ class RunPlanTable(Table):
         create_dir(join(self.Dir, path))
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
-            return [make_abs_link(join(path, 'RunPlan{}'.format(make_rp_string(rp)), '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name)]
+            return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name)]
 
         for dc in dia_scans:
-            rp = dc.RunPlan
             rp_str = make_rp_string(dc.RunPlan)
             create_dir(join(self.Dir, dc.Path))
             self.copy_index_php(dc.Path)
