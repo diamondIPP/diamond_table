@@ -8,6 +8,7 @@ from Utils import *
 from os.path import realpath, dirname, basename
 from ConfigParser import ConfigParser
 from glob import glob
+from json import loads
 
 
 class HomePage:
@@ -24,6 +25,9 @@ class HomePage:
 
         self.FilePath = join('Overview', '{}.html'.format(filename))
         self.Body = ''
+
+        self.NDropDowns = 6
+        self.Excluded = loads(self.Config.get('General', 'exclude'))
 
     def __del__(self):
         log_message('created {}'.format(self.FilePath)) if 'default' not in self.FilePath else do_nothing()
@@ -46,8 +50,20 @@ class HomePage:
     def get_testcampaigns(self):
         return sorted(basename(name).strip('run_log.json') for name in glob(join(self.Dir, 'data', 'run_log*')))
 
-    def get_tc_htmls(self):
-        return [join('BeamTests', tc_to_str(tc), 'RunPlans.html') for tc in self.get_testcampaigns()]
+    def get_tc_htmls(self, runs=False):
+        return [join('BeamTests', tc_to_str(tc), '{}.html'.format('index' if runs else 'RunPlans')) for tc in self.get_testcampaigns()]
+
+    def get_sccvd_dias(self):
+        dias = [dia for dia in loads(self.Config.get('General', 'single_crystal')) if dia not in self.Excluded]
+        s_dias = [dia for dia in dias if dia.startswith('S') and dia[2].isdigit()]
+        return sorted(s_dias, key=lambda x: int(remove_letters(x))) + sorted(dia for dia in dias if dia not in s_dias)
+
+    def get_si_detectors(self):
+        return sorted(dia for dia in loads(self.Config.get('General', 'si-diodes')) if dia not in self.Excluded)
+
+    def get_pcvd_dias(self):
+        dias = [basename(name) for name in glob(join(self.Dir, 'Diamonds', '*'))]
+        return sorted(dia for dia in dias if dia not in self.Excluded + self.get_sccvd_dias() + self.get_si_detectors())
 
     def set_body(self, txt):
         self.Body = txt
@@ -60,8 +76,12 @@ class HomePage:
         f.write('  <div class="navbar">\n')
         f.write('    {}\n'.format(make_abs_link(join('Overview', 'HomePage.html'), 'Home', active='HomePage' in self.FilePath, colour=False)))
         f.write('    {}\n'.format(make_abs_link(join('Overview', 'Location.html'), 'Location', active='Location' in self.FilePath, colour=False)))
-        f.write(make_dropdown('Years', self.get_years(), self.get_year_htmls(), n=1, active='20' in self.FilePath))
-        f.write(make_dropdown('Test Campaigns', self.get_testcampaigns(), self.get_tc_htmls(), n=2))
+        f.write(make_dropdown('Years', self.get_years(), self.get_year_htmls(), n=0, active='20' in self.FilePath))
+        f.write(make_dropdown('Diamond Scans', self.get_testcampaigns(), self.get_tc_htmls(), n=1))
+        f.write(make_dropdown('Single Runs', self.get_testcampaigns(), self.get_tc_htmls(runs=True), n=2))
+        f.write(make_dropdown('scCVD', self.get_sccvd_dias(), [join('Diamonds', dia, 'index.html') for dia in self.get_sccvd_dias()], n=3))
+        f.write(make_dropdown('pCVD', self.get_pcvd_dias(), [join('Diamonds', dia, 'index.html') for dia in self.get_pcvd_dias()], n=4))
+        f.write(make_dropdown('Silicon', self.get_si_detectors(), [join('Diamonds', dia, 'index.html') for dia in self.get_si_detectors()], n=5))
         f.write('    {}\n'.format(make_abs_link(join('Overview', 'AmpBoards.html'), 'Amplifier Boards', active='Boards' in self.FilePath, colour=False)))
         f.write('  </div>\n')
         f.write('  \n')
@@ -161,21 +181,19 @@ class HomePage:
         f.write('\n')
         f.write('</style>\n')
 
-    @staticmethod
-    def write_script(f):
+    def write_script(self, f):
         f.write('<script>\n')
         f.write('\n')
         f.write('  // When the user clicks on the button, toggle between hiding and showing the dropdown content\n')
-        f.write('  function f1() { document.getElementById("drop1").classList.toggle("show"); }\n')
-        f.write('  function f2() { document.getElementById("drop2").classList.toggle("show"); }\n')
+        for i in xrange(self.NDropDowns):
+            f.write('  function f{0}() {{ document.getElementById("drop{0}").classList.toggle("show"); }}\n'.format(i))
         f.write('\n')
         f.write('  // Close the dropdown if the user clicks outside of it\n')
         f.write('  window.onclick = function(e){\n')
         f.write("    if (!e.target.matches('.dropbtn')) {\n")
-        f.write('      var drop1 = document.getElementById("drop1");\n')
-        f.write('      var drop2 = document.getElementById("drop2");\n')
-        f.write("      if (drop1.classList.contains('show')) { drop1.classList.remove('show'); }\n")
-        f.write("      if (drop2.classList.contains('show')) { drop2.classList.remove('show'); }\n")
+        for i in xrange(self.NDropDowns):
+            f.write('      var drop{0} = document.getElementById("drop{0}");\n'.format(i))
+            f.write("      if (drop{0}.classList.contains('show')) {{ drop{0}.classList.remove('show'); }}\n".format(i))
         f.write('    }\n')
         f.write('  }\n')
         f.write('\n')
