@@ -145,7 +145,7 @@ def tc_to_str(tc, short=True):
 
 def make_bias_str(biases):
     if type(biases) is not list:
-        return '{v:+2.0f}'.format(v=biases)
+        return '{v:+2.0f}'.format(v=float(biases))
     if len(biases) == 1:
         return '{v:+2.0f}'.format(v=biases[0])
     elif len(biases) < 4:
@@ -279,7 +279,17 @@ def mean_sigma(values, weights=None):
     return avrg, sqrt(variance)
 
 
+def get_dia_channels(info):
+    return sorted(key.strip('dia') for key in info if key.startswith('dia') and len(key) < 5)
+
+
+def get_max_channels(info):
+    return max(len(get_dia_channels(data)) for data in info.itervalues())
+
+
 def make_ufloat(tup, par=0):
+    if tup is None:
+        return
     if type(tup) is Variable:
         return tup
     if isinstance(tup, FitRes):
