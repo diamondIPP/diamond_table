@@ -20,6 +20,7 @@ class DiaScan:
 
         self.TestCampaign = test_campaign
         self.RunPlan = run_plan
+        self.RunPlanStr = make_rp_string(run_plan)
         self.Channel = channel
 
         self.Info = self.load_run_plan()
@@ -82,13 +83,18 @@ class DiaScan:
         dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
         return str(dur)
 
+    def calc_run_duration(self, run):
+        dur = conv_time(self.RunInfos[str(run)]['endtime'], strg=False) - conv_time(self.RunInfos[str(run)]['starttime0'], strg=False)
+        dur += timedelta(days=1) if dur < timedelta(0) else timedelta(0)
+        return str(dur)
+
     def load_dia_position(self):
         keys = sorted([key for key in self.RunInfos.values()[0].iterkeys() if key.startswith('dia') and len(key) < 5])
         pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back'] if len(keys) == 2 else range(len(keys))
         return pos[keys.index('dia{ch}'.format(ch=self.Channel))]
 
     def get_runs_str(self):
-        return '{:3d}-{:3d}'.format(self.FirstRun, self.Runs[-1])
+        return '{:03d}-{:03d}'.format(self.FirstRun, self.Runs[-1])
 
     def get_pickle(self, run, tag, form=''):
         dic = {'PH': join('Ph_fit', '{tc}_{run}_{ch}_10000_eventwise_b2'),
@@ -98,13 +104,12 @@ class DiaScan:
         path = join(self.Dir, 'Pickles', '{}.pickle'.format(dic[tag])).format(tc=self.TestCampaign, run=run, ch=self.Channel)
         if not file_exists(path):
             log_warning('did not find {p}'.format(p=path))
-            return FitRes()
+            return
         with open(path) as f:
             try:
                 return FitRes(pload(f), form)
             except ImportError as err:
                 log_warning(err)
-                return FitRes()
 
     def get_pickle_mean(self, name, par, val=False):
         if self.TestCampaign < '201508':
@@ -144,6 +149,22 @@ class DiaScan:
 
     def get_corrected_pulser(self):
         return self.get_corrected_signal(pulser=True)
+
+    def get_run_noise(self, run, pulser=False):
+        value = self.get_pickle(run, 'PulPed' if pulser else 'Ped')
+        return center_txt('{:.2f}'.format(value.Parameter(2))) if value is not None else ''
+
+    def get_run_ped(self, run, pulser=False):
+        value = self.get_pickle(run, 'PulPed' if pulser else 'Ped')
+        return center_txt('{:.2f}'.format(value.Parameter(1))) if value is not None else ''
+
+    def get_run_ph(self, run):
+        value = make_ufloat(self.get_pickle(run, 'PH'), par=0)
+        return center_txt('{:2.2f} ({:.2f})'.format(value.n, value.s)) if value is not None else ''
+
+    def get_run_pul(self, run, sigma=False):
+        value = make_ufloat(self.get_pickle(run, 'Pul'), par=2 if sigma else 1)
+        return center_txt('{:2.2f}{}'.format(value.n, '' if sigma else ' ({:.2f})'.format(value.s))) if value is not None else ''
 
 
 if __name__ == '__main__':
