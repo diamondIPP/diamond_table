@@ -53,7 +53,7 @@ class RunTable(Table):
             self.copy_index_php(run_path)
             row = [make_abs_link(join(run_path, 'index.php'), run)]                                             # Run
             row += [dc.Type]                                                                                    # Type
-            row += [right_txt(make_bias_str(dc.Bias))]                                                          # Bias
+            row += [right_txt(make_bias_str(dc.get_run_bias(run)))]                                             # Bias
             row += [center_txt(self.calc_flux(info))]                                                           # Flux
             row += make_pic_link('HitMap', 'Plot', use_name=False)                                              # Hit Map
             row += make_pic_link('SignalDistribution', 'Plot', use_name=False)                                  # Distribution
