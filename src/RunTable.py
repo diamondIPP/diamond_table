@@ -18,7 +18,9 @@ class RunTable(Table):
     def get_body(self, dia_scan):
         txt = make_lines(3)
         rp, dia, tc = dia_scan.RunPlanStr, dia_scan.Diamond, tc_to_str(dia_scan.TestCampaign, short=False)
-        txt += head(bold('Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=rp, dia=dia, tc=tc)))
+        dia_link = make_abs_link(join('Diamonds', dia, 'index.html'), dia, colour='darkblue')
+        tc_link = make_abs_link(join('BeamTests', tc_to_str(dia_scan.TestCampaign), 'RunPlans.html'), tc, colour='darkblue')
+        txt += head(bold('Single Runs for Run Plan {rp} of {dia} for the Test Campaign in {tc}'.format(rp=rp, dia=dia_link, tc=tc_link)))
         txt += self.build(dia_scan)
         return txt
 
