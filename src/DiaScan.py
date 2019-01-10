@@ -101,7 +101,7 @@ class DiaScan:
 
     def get_pickle(self, run, tag, form=''):
         dic = {'PH': join('Ph_fit', '{tc}_{run}_{ch}_10000_eventwise_b2'),
-               'Ped': join('Pedestal', '{tc}_{run}_{ch}_ab2_fwhm_all_cuts'),
+               'Ped': join('Pedestal', '{tc}_{run}_{ch}_ab2_fwhm_AllCuts'),
                'Pul': join('Pulser', 'HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn'),
                'PulPed': join('Pedestal', '{tc}_{run}_{ch}_ac2_fwhm_PulserBeamOn')}
         path = join(self.Dir, 'Pickles', '{}.pickle'.format(dic[tag])).format(tc=self.TestCampaign, run=run, ch=self.Channel)
@@ -172,5 +172,5 @@ class DiaScan:
 
 if __name__ == '__main__':
     t = time()
-    z = DiaScan('201807', '04', '2')
+    z = DiaScan('201608', '05', '1')
     print time() - t
