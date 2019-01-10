@@ -19,6 +19,7 @@ from RunPlanTable import RunPlanTable
 from DiaTable import DiaTable
 from RunTable import RunTable
 from time import time
+from os import system
 
 
 class Website:
@@ -30,7 +31,8 @@ class Website:
         self.HomePage = HomePage(self.Config, 'default')
         self.BkgCol = 'lightgrey'  # TODO FIX
 
-        self.Diamond = None
+        self.Diamond = 'S129'
+        # in string format! Aug16
         self.TestCampaign = None
 
     def load_config(self):
@@ -38,10 +40,33 @@ class Website:
         conf.read(join(self.Dir, 'conf.ini'))
         return conf
 
+    def update_run_plans(self):
+        cmd = 'rsync -aP mutter:/home/reichmann/software/RatePadAnalysis/Runinfos/run_plans.json {}'.format(join(self.Dir, 'data'))
+        system(cmd)
+
+    def update_irradiation_file(self):
+        cmd = 'rsync -aP mutter:/home/reichmann/software/RatePadAnalysis/Runinfos/irradiation.json {}'.format(join(self.Dir, 'data'))
+        system(cmd)
+
+    def update_diamond_aliases(self):
+        cmd = 'rsync -aP mutter:/home/reichmann/software/RatePadAnalysis/Configuration/DiamondAliases.cfg {}'.format(join(self.Dir, 'data'))
+        system(cmd)
+
+    def update_masks(self):
+        cmd = 'rsync -aP mutter:/scratch2/psi/psi*/masks/*.msk {}'.format(join(self.Dir, 'masks'))
+        system(cmd)
+
+    def update(self):
+        self.update_run_plans()
+        self.update_irradiation_file()
+
     def create_home(self):
         h = HomePage(self.Config, 'HomePage')
         body = '{}\n'.format(make_lines(3))
         body += '{}\n'.format(head(bold('Here could be your text ...')))
+        body += '  <script type="text/javascript">\n'
+        body += '    load_home();\n'
+        body += '  </script>\n'
         h.set_body(indent(body, 2))
         h.create()
 
@@ -102,7 +127,6 @@ class Website:
         table.start_pbar(len(diamonds))
         for i, dia in enumerate(diamonds, 1):
             dia_scans = table.DiaScans.get_diamond_scans(dia)
-            print dia_scans
             h = HomePage(self.Config)
             h.set_file_path(join('Diamonds', dia, 'index.html'))
             h.set_body(table.get_body(dia_scans))
@@ -156,4 +180,5 @@ class Website:
 if __name__ == '__main__':
 
     w = Website()
+    # w.update()
     w.build()
