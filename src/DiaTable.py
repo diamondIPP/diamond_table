@@ -52,9 +52,9 @@ class DiaTable(Table):
                 row += [make_abs_link(join(dc.Path, 'index.php'), rp_str, center=True)]                 # Nr
                 row += [center_txt(dc.Type)]                                                            # Run Plan Type
                 row += [center_txt(dc.DiaPosition)]                                                     # Diamond Position
+                row += [make_abs_link(join(dc.Path, 'index.html'), dc.get_runs_str(), center=True)]     # Runs
                 row += [center_txt(dc.Attenuator)]                                                      # Diamond Attenuators
                 row += [center_txt(dc.PulserAttenuator)]                                                # Pulser Attenuators
-                row += [make_abs_link(join(dc.Path, 'index.html'), dc.get_runs_str(), center=True)]     # Runs
                 row += [right_txt(make_bias_str(dc.Bias))]                                              # Bias
                 row += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                         # Leakage Current
                 row += [dc.PulserType]                                                                  # Pulser Type
