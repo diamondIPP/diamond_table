@@ -38,37 +38,39 @@ class Table:
         self.TCDir = join(self.Dir, self.Config.get('Files', 'tc directory'))
 
         # info
-        self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
         self.OtherCols = loads(self.Config.get("Other", "columns"))
         self.Exclude = loads(self.Config.get("General", "exclude"))
         self.DiaScans = DiaScans()
+        self.TestCampaigns = self.load_test_campaigns()
         self.Diamonds = self.DiaScans.get_diamonds()
 
         # settings
         self.BkgCol = 'lightgrey'
-        self.TestCampaign = None
-        self.Diamond = None
-        self.set_global_vars()
 
         # progressbar
         self.Widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
         self.ProgressBar = None
 
-    def set_global_vars(self, campaign=None, diamond=None):
-        global tc
-        global dia
-        tc = campaign if campaign is not None else tc
-        dia = diamond if diamond is not None else dia
-        self.select_diamond(dia)
-        self.select_campaign(tc)
+    def load_test_campaigns(self):
+        return [tc_to_str(tc) for tc in sorted(self.DiaScans.RunPlans.keys())]
 
-    def select_campaign(self, campaign):
-        if campaign is not None and make_tc_str(campaign, long_=False) in self.TestCampaigns:
-            self.TestCampaign = campaign
+    def create_dia_dir(self, diamond):
+        path = join(self.DataDir, diamond)
+        create_dir(path)
+        create_dir(join(path, 'BeamTests'))
+        self.create_default_info(path)
 
-    def select_diamond(self, diamond):
-        if diamond is not None and diamond in self.Diamonds:
-            self.Diamond = diamond
+    def create_tc_dir(self, tc):
+        create_dir(join(self.TCDir, tc))
+
+    @staticmethod
+    def create_default_info(path):
+        file_name = join(path, 'info.ini')
+        if not file_exists(file_name):
+            with open(file_name, 'w') as f:
+                f.write('[Manufacturer]\n')
+                f.write('name = ?\n')
+                f.write('url = ?\n')
 
     def start_pbar(self, n):
         self.ProgressBar = ProgressBar(widgets=self.Widgets, maxval=n)
@@ -86,9 +88,7 @@ class Table:
         return p
 
     def copy_index_php(self, path):
-        file_path = join(self.Dir, path, self.Config.get('General', 'index_php'))
-        # if file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) <= 2:
-        #     remove(file_path)
+        file_path = join(self.Dir, path, self.Config.get('Files', 'index php'))
         if not file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) > 1:
             copy(join(self.Dir, basename(file_path)), file_path)
 
@@ -100,7 +100,7 @@ class Table:
         area = [52 * 80 * pixel_size] * 2
         file_name = basename(info['maskfile']).strip('"')
         try:
-            if file_name.lower() in ['none.msk', 'none', 'no mask']:
+            if file_name.lower() in ['none.msk', 'none', 'no mask', 'pump.msk']:
                 raise UserWarning
             f = open(join(self.Dir, 'masks', file_name), 'r')
             data = {}
@@ -135,38 +135,12 @@ class Table:
         else:
             return data[:10]
 
-    def get_pickle(self, run, campaign, ch, tag, form=''):
-        ch = 0 if ch == 1 else 3
-        pul_ped = 'Pedestal/{{tc}}_{{run}}_{{ch}}_a{n}2_fwhm_PulserBeamOn'.format(n='b' if campaign < '201707' else 'c')
-        file_name_dic = {'PH': 'Ph_fit/{tc}_{run}_{ch}_10000_eventwise_b2',
-                         'Pedestal': 'Pedestal/{tc}_{run}_{ch}_ab2_fwhm_all_cuts',
-                         'Pulser': 'Pulser/HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn',
-                         'PulserPed': pul_ped}
-        path = '{dir}/Pickles/{f}.pickle'.format(dir=self.Dir, f=file_name_dic[tag])
-        path = path.format(tc=campaign, run=run, ch=ch)
-        if not file_exists(path):
-            log_warning('did not find {p}'.format(p=path))
-            return FitRes()
-        f = open(path)
-        try:
-            fit_res = FitRes(pickle.load(f), form)
-        except ImportError as err:
-            print err
-            return FitRes()
-        f.close()
-        return fit_res
-
     def translate_dia(self, diamond):
         self.DiaScans.translate_dia(diamond)
 
-    def create_home_button(self, curr_path):
-        n_dirs = len(curr_path.split(sep)) - len(self.Dir.split(sep))
-        back = '../' * n_dirs
-        return '</br> <button onclick="location.href={t}" type="button"> Home </button>'.format(t="'{p}'".format(p=join(back, 'index.html')))
-
     def get_info(self, diamond, section, option, quiet=False):
         info = ConfigParser()
-        info.read(join(self.DataPath, diamond, 'info.ini'))
+        info.read(join(self.DataDir, diamond, 'info.ini'))
         try:
             return info.get(section, option)
         except NoOptionError:

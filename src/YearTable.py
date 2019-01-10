@@ -33,16 +33,6 @@ class YearTable(Table):
         txt += self.build_legend()
         return txt
 
-        # TODO include tc overview
-        # # run overview
-        # f.write('\n<h3>Full Run Overview:</h3>\n')
-        # f.write(self.build_tc_table())
-        # f.write(self.build_legend())
-        # f.write('\n\n\n</body>\n</html>\n')
-        # f.close()
-        # if year == this_year:
-        #     system('cp {f} index.html'.format(f=html_file))
-
     def build_scvd(self):
         return self.build(scvd=True)
 
@@ -57,12 +47,14 @@ class YearTable(Table):
         rows = [first_row]
         dias = self.get_diamond_names(scvd, si)
         for dia in dias:
+            self.create_dia_dir(dia)
             row = [make_abs_link(join('Diamonds', dia, 'index.html'), name=dia)]
             # general information
             for col in self.OtherCols:
                 row.append(self.build_col(col, dia))
             # test campaigns
             for tc in self.TestCampaigns:
+                self.create_tc_dir(tc)
                 row += self.make_info_str(str_to_tc(tc), dia)
             rows.append(row)
         return add_bkg(HTMLTable.table(rows, header_row=header, ), self.BkgCol)
