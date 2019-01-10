@@ -15,11 +15,11 @@ class OldTable(Table):
 
     def __init__(self):
         Table.__init__(self)
-        self.DataPath = join(self.DataPath, 'OLD')
+        self.DataDir = join(self.DataDir, 'OLD')
         self.Diamonds = self.get_diamonds()
 
     def get_diamonds(self):
-        return sorted((basename(name) for name in glob(join(self.DataPath, '*')) if basename(name) not in self.Exclude and 'index' not in name), key=lambda x: int(remove_letters(x)))
+        return sorted((basename(name) for name in glob(join(self.DataDir, '*')) if basename(name) not in self.Exclude and 'index' not in name), key=lambda x: int(remove_letters(x)))
 
     def get_body(self):
         txt = make_lines(3)
@@ -50,7 +50,7 @@ class OldTable(Table):
 
     def get_beam_tests(self, dia):
         beam_tests = []
-        for path in glob(join(self.DataPath, dia, 'BeamTests', '*')):
+        for path in glob(join(self.DataDir, dia, 'BeamTests', '*')):
             name = basename(path)
             try:
                 str_to_tc(basename(name))
@@ -60,7 +60,7 @@ class OldTable(Table):
         return beam_tests if beam_tests else center_txt('?')
 
     def get_comment(self, dia):
-        with open(join(self.DataPath, dia, 'comment.txt')) as f:
+        with open(join(self.DataDir, dia, 'comment.txt')) as f:
             return ''.join(f.readlines()).replace('\n', '<br/>')
 
 
