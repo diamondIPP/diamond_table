@@ -182,7 +182,7 @@ class HomePage:
         f.write('</style>\n')
 
     def write_script(self, f):
-        f.write('<script>\n')
+        f.write('<script type="text/javascript">\n')
         f.write('\n')
         f.write('  // When the user clicks on the button, toggle between hiding and showing the dropdown content\n')
         for i in xrange(self.NDropDowns):
@@ -195,6 +195,11 @@ class HomePage:
             f.write('      var drop{0} = document.getElementById("drop{0}");\n'.format(i))
             f.write("      if (drop{0}.classList.contains('show')) {{ drop{0}.classList.remove('show'); }}\n".format(i))
         f.write('    }\n')
+        f.write('  }\n')
+        f.write('\n')
+        f.write('  // show home page\n')
+        f.write('  function load_home() { \n')
+        f.write('    document.getElementById("content").innerHTML=\'<object type="text/html" data="{}" ></object>\';'.format(self.get_year_htmls()[-1]))
         f.write('  }\n')
         f.write('\n')
         f.write('</script>\n')
