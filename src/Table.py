@@ -10,8 +10,7 @@ from DiamondRateScans import DiaScans
 from shutil import copy
 from glob import glob
 from numpy import mean
-from os.path import dirname, realpath, join, sep, expanduser, basename
-import pickle
+from os.path import dirname, realpath, join, basename
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from ConfigParser import NoSectionError, NoOptionError
 from json import load
@@ -19,10 +18,6 @@ from json import load
 
 def get_program_dir():
     return '/'.join(dirname(realpath(__file__)).split('/')[:-1])
-
-
-tc = None
-dia = None
 
 
 class Table:
@@ -38,10 +33,9 @@ class Table:
         self.Irradiations = self.load_irradiations()
 
         # directories
-        self.DataPath = join(self.Dir, self.Config.get('General', 'data_directory'))
-        self.AnaDir = expanduser(self.Config.get('General', 'analysis_dir'))
-        self.AnaPickleDir = join(self.AnaDir, 'Configuration', 'Individual_Configs')
-        self.PickleDir = join(self.Dir, 'Pickles')
+        self.DataDir = join(self.Dir, self.Config.get('Files', 'data directory'))
+        self.PickleDir = join(self.Dir, self.Config.get('Files', 'pickle directory'))
+        self.TCDir = join(self.Dir, self.Config.get('Files', 'tc directory'))
 
         # info
         self.TestCampaigns = loads(self.Config.get("BeamTests", "dates"))
