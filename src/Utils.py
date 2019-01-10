@@ -71,11 +71,11 @@ def make_lines(n):
     return '<br/>' * n
 
 
-def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour=True):
+def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour='red'):
     active = 'class="active" ' if active else ''
     new_tab = ' target="_blank"' if new_tab else ''
     name = center_txt(name) if center else name
-    style = ' style="color:red"' if colour else ''
+    style = ' style="color:{}"'.format(colour) if colour else ''
     if file_exists(join(Dir, target)) or 'http' in target:
         return '<a {act}href={tar}{tab}{s}>{name}</a>'.format(act=active, tar=abs_html_path(target), tab=new_tab, name=name, s=style)
     return name if use_name else ''
@@ -110,6 +110,7 @@ def file_exists(path):
 
 def create_dir(path):
     if not folder_exists(path):
+        log_message('creating directory: {}'.format(path))
         os.mkdir(path)
 
 
@@ -250,7 +251,7 @@ def make_dropdown(name, items, targets, n, active=False):
     s += '      </button>\n'
     s += '      <div class="dropdown-content" id="drop{}">\n'.format(n)
     for item, target in zip(items, targets):
-        s += '        {}\n'.format(make_abs_link(target, item, colour=False))
+        s += '        {}\n'.format(make_abs_link(target, item, colour=''))
     s += '      </div>\n'
     s += '    </div>\n'
     return s
