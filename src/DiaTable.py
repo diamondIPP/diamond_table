@@ -27,6 +27,7 @@ class DiaTable(Table):
                   '#rs2#Irradiation<br>[n/cm<sup>2</sup>]',
                   '#rs2#Nr. ',
                   '#rs2#Type',
+                  '#rs2#Digitiser',
                   '#rs2#Position',
                   '#rs2#Runs',
                   '#cs2#Attenuators',
@@ -51,6 +52,7 @@ class DiaTable(Table):
                 row = row if not i else []
                 row += [make_abs_link(join(dc.Path, 'index.php'), rp_str, center=True)]                 # Nr
                 row += [center_txt(dc.Type)]                                                            # Run Plan Type
+                row += [center_txt(dc.Digitiser)]                                                       # Digitiser
                 row += [center_txt(dc.DiaPosition)]                                                     # Diamond Position
                 row += [make_abs_link(join(dc.Path, 'index.html'), dc.get_runs_str(), center=True)]     # Runs
                 row += [center_txt(dc.Attenuator)]                                                      # Diamond Attenuators
