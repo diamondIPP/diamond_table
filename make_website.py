@@ -150,8 +150,10 @@ class Website:
 
     def create_runs(self, dia_scans):
         table = RunTable()
-        print_banner('CREATING RUN TABLES')
+        print_banner('CREATING RUN TABLES FOR {}'.format(dia_scans[0].TestCampaign))
         for dia_scan in dia_scans:
+            if dia_scan.TestCampaign < '201508':
+                continue
             h = HomePage(self.Config)
             h.set_file_path(join(dia_scan.Path, 'index.html'))
             h.set_body(table.get_body(dia_scan))
