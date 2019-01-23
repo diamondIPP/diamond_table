@@ -57,14 +57,27 @@ class Website:
         cmd = 'rsync -aP mutter:/scratch2/psi/psi*/masks/*.msk {}'.format(join(self.Dir, 'masks'))
         system(cmd)
 
+    def update_run_log(self, tc):
+        psi_dir = 'psi_{}_{}'.format(tc[:4], tc[4:])
+        cmd = 'rsync -aP mutter:/scratch2/psi/{}/run_log.json {}'.format(psi_dir, join(self.Dir, 'data', 'run_log{}.json'.format(tc)))
+        system(cmd)
+
+    def update_run_logs(self):
+        for tc in self.HomePage.get_testcampaigns():
+            if tc > '201505':
+                self.update_run_log(tc)
+
     def update(self):
         self.update_run_plans()
         self.update_irradiation_file()
+        self.update_diamond_aliases()
+        self.update_masks()
+        self.update_run_logs()
 
     def create_home(self):
         h = HomePage(self.Config, 'HomePage')
         body = '{}\n'.format(make_lines(3))
-        body += '{}\n'.format(head(bold('Here could be your text ...')))
+        body += '{}\n'.format(head(bold('Complete Set of Data Taken at Beam Tests at PSI ...')))
         body += '  <script type="text/javascript">\n'
         body += '    load_home();\n'
         body += '  </script>\n'
