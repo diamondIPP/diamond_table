@@ -20,6 +20,7 @@ from DiaTable import DiaTable
 from RunTable import RunTable
 from time import time
 from os import system
+from argparse import ArgumentParser
 
 
 class Website:
@@ -31,7 +32,7 @@ class Website:
         self.HomePage = HomePage(self.Config, 'default')
         self.BkgCol = 'lightgrey'  # TODO FIX
 
-        self.Diamond = 'S129'
+        self.Diamond = None
         # in string format! Aug16
         self.TestCampaign = None
 
@@ -179,6 +180,11 @@ class Website:
 
 if __name__ == '__main__':
 
+    p = ArgumentParser()
+    p.add_argument('-t', action='store_true')
+    args = p.parse_args()
+
     w = Website()
-    # w.update()
-    w.build()
+    if not args.t:
+        w.update()
+        w.build()
