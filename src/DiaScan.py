@@ -125,13 +125,17 @@ class DiaScan:
                'PulPed': join('Pedestal', '{tc}_{run}_{ch}_ac2_fwhm_PulserBeamOn')}
         path = join(self.Dir, 'Pickles', '{}.pickle'.format(dic[tag])).format(tc=self.TestCampaign, run=run, ch=self.Channel)
         if not file_exists(path):
-            log_warning('did not find {p}'.format(p=path))
+            warning('did not find {p}'.format(p=path))
             return
         with open(path) as f:
             try:
-                return FitRes(pload(f), form)
+                fit = FitRes(pload(f), form)
+                if fit.Parameter(0) is None:
+                    warning('empty fitparameter pickle for: {}'.format(basename(path)))
+                    return
+                return fit
             except ImportError as err:
-                log_warning(err)
+                warning(err)
 
     def get_pickle_mean(self, name, par, val=False):
         if self.TestCampaign < '201508':
