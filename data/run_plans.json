@@ -148,6 +148,7 @@
         "pulser2": "?"
       }, 
       "runs": [
+        69, 
         73, 
         74, 
         75, 
@@ -158,6 +159,7 @@
         80, 
         81, 
         82, 
+        83, 
         84, 
         85, 
         86, 
@@ -265,9 +267,26 @@
       ], 
       "type": "rate scan"
     }, 
+    "03": {
+      "attenuators": {
+        "dia1": "6dB_?", 
+        "dia2": "None", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
+      "runs": [
+        118, 
+        119, 
+        120, 
+        122, 
+        123, 
+        125
+      ], 
+      "type": "up scan"
+    }, 
     "04": {
       "attenuators": {
-        "dia1": "?", 
+        "dia1": "6dB_?", 
         "dia2": "None", 
         "pulser1": "?", 
         "pulser2": "?"
@@ -294,7 +313,7 @@
     }, 
     "04.1": {
       "attenuators": {
-        "dia1": "?", 
+        "dia1": "6dB_?", 
         "dia2": "None", 
         "pulser1": "?", 
         "pulser2": "?"
@@ -311,7 +330,7 @@
     }, 
     "05": {
       "attenuators": {
-        "dia1": "?", 
+        "dia1": "6dB_?", 
         "dia2": "None", 
         "pulser1": "?", 
         "pulser2": "?"
@@ -337,7 +356,7 @@
     }, 
     "05.1": {
       "attenuators": {
-        "dia1": "?", 
+        "dia1": "6dB_?", 
         "dia2": "None", 
         "pulser1": "?", 
         "pulser2": "?"
@@ -352,7 +371,32 @@
       ], 
       "type": "up scan"
     }, 
-    "06": {
+    "07": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
+      "runs": [
+        270, 
+        271, 
+        272, 
+        287, 
+        288, 
+        289, 
+        291, 
+        292
+      ], 
+      "type": "voltage scan"
+    }, 
+    "08": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         293, 
         294, 
@@ -361,10 +405,17 @@
         297, 
         298
       ], 
-      "type": "rate scan"
+      "type": "up scan"
     }, 
-    "07": {
+    "09": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
+        300, 
         304, 
         305, 
         306, 
@@ -382,19 +433,32 @@
         318, 
         319
       ], 
-      "type": "signal"
+      "type": "rate scan"
     }, 
-    "08": {
+    "10": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
+        321, 
         322, 
         323, 
         324, 
         325, 
         327
       ], 
-      "type": "rate scan"
+      "type": "up scan"
     }, 
-    "09": {
+    "11": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         330, 
         332, 
@@ -415,7 +479,30 @@
       ], 
       "type": "rate scan"
     }, 
-    "10": {
+    "12": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
+      "runs": [
+        351, 
+        352, 
+        353, 
+        354, 
+        355, 
+        356
+      ], 
+      "type": "voltage scan"
+    }, 
+    "13": {
+      "attenuators": {
+        "dia1": "?", 
+        "dia2": "?", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         386, 
         387, 
@@ -432,7 +519,13 @@
       ], 
       "type": "rate scan"
     }, 
-    "11": {
+    "14": {
+      "attenuators": {
+        "dia1": "6dB_?", 
+        "dia2": "None", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         431, 
         432, 
@@ -440,9 +533,15 @@
         434, 
         436
       ], 
-      "type": "rate scan"
+      "type": "up scan"
     }, 
-    "12": {
+    "15": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         439, 
         440, 
@@ -462,11 +561,18 @@
         458, 
         459
       ], 
-      "type": "signal"
+      "type": "rate scan"
     }, 
-    "13": {
+    "16": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         462, 
+        463, 
         464, 
         465, 
         466, 
@@ -485,7 +591,7 @@
       ], 
       "type": "rate scan"
     }, 
-    "13.1": {
+    "16.1": {
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -507,7 +613,13 @@
       ], 
       "type": "rate scan"
     }, 
-    "13.2": {
+    "16.2": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         462, 
         464, 
@@ -516,9 +628,15 @@
         467, 
         468
       ], 
-      "type": "rate scan"
+      "type": "up scan"
     }, 
-    "13.3": {
+    "16.3": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "?", 
+        "pulser2": "?"
+      }, 
       "runs": [
         473, 
         474, 
@@ -527,7 +645,7 @@
         477, 
         478
       ], 
-      "type": "rate scan"
+      "type": "up scan"
     }
   }, 
   "201510": {
@@ -1653,6 +1771,7 @@
         "dia2": "6DB_2", 
         "pulser": "20DB"
       }, 
+      "digitiser": "CAEN", 
       "runs": [
         856, 
         857, 
@@ -1679,6 +1798,7 @@
         "dia2": "6DB_2", 
         "pulser": "20DB"
       }, 
+      "digitiser": "CAEN", 
       "runs": [
         875, 
         876, 
@@ -1696,6 +1816,7 @@
         "dia2": "6DB_2", 
         "pulser": "20DB"
       }, 
+      "digitiser": "CAEN", 
       "runs": [
         875, 
         876, 
@@ -3526,6 +3647,7 @@
         "pulser1": "6dB_3", 
         "pulser2": "6dB_1"
       }, 
+      "digitiser": "CAEN", 
       "runs": [
         155, 
         157, 
@@ -3533,6 +3655,24 @@
         162, 
         163, 
         164
+      ], 
+      "type": "rate scan"
+    }, 
+    "06": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "6dB_2", 
+        "pulser1": "6dB_3", 
+        "pulser2": "6dB_1"
+      }, 
+      "digitiser": "OSCI", 
+      "runs": [
+        170, 
+        171, 
+        172, 
+        174, 
+        175, 
+        176
       ], 
       "type": "rate scan"
     }, 
@@ -3591,7 +3731,7 @@
         10, 
         12
       ], 
-      "type": "rate scan"
+      "type": "voltage scan"
     }, 
     "02": {
       "attenuators": {
@@ -3853,7 +3993,7 @@
         267, 
         268, 
         269, 
-        270,
+        270, 
         272, 
         273, 
         274, 
@@ -3939,6 +4079,50 @@
         357, 
         358, 
         359
+      ], 
+      "type": "collimator scan"
+    }, 
+    "13.1": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "6dB_2", 
+        "pulser1": "6dB_3", 
+        "pulser2": "6dB_1"
+      }, 
+      "runs": [
+        324, 
+        325, 
+        326, 
+        327, 
+        328, 
+        329, 
+        330, 
+        331, 
+        332, 
+        334, 
+        335, 
+        336, 
+        337, 
+        338, 
+        339, 
+        340, 
+        341, 
+        342, 
+        343, 
+        344, 
+        345, 
+        346, 
+        347, 
+        348, 
+        349, 
+        350, 
+        351, 
+        352, 
+        353, 
+        354, 
+        355, 
+        356, 
+        357
       ], 
       "type": "collimator scan"
     }, 
@@ -4169,7 +4353,7 @@
         52, 
         53
       ], 
-      "type": null
+      "type": "rate scan"
     }, 
     "03": {
       "attenuators": {
@@ -4193,6 +4377,397 @@
         67
       ], 
       "type": "voltage scan"
+    }, 
+    "04": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        69, 
+        70, 
+        71, 
+        72, 
+        73, 
+        74, 
+        75, 
+        76, 
+        77, 
+        78, 
+        79, 
+        80, 
+        81, 
+        82, 
+        83, 
+        84, 
+        85, 
+        86, 
+        87, 
+        88, 
+        89, 
+        90, 
+        91, 
+        92, 
+        94, 
+        95, 
+        96, 
+        97, 
+        98, 
+        99, 
+        100, 
+        101, 
+        104
+      ], 
+      "type": "rate scan"
+    }, 
+    "05": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        129, 
+        130, 
+        131, 
+        132, 
+        133, 
+        134, 
+        135
+      ], 
+      "type": "voltage scan"
+    }, 
+    "06": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        138, 
+        139, 
+        140, 
+        141, 
+        143, 
+        144, 
+        145, 
+        146, 
+        147, 
+        148, 
+        149, 
+        150, 
+        152, 
+        153
+      ], 
+      "type": "rate scan"
+    }, 
+    "07": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        154, 
+        155, 
+        156
+      ], 
+      "type": "voltage scan"
+    }, 
+    "08": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "dia3": "None", 
+        "pulser1": "None", 
+        "pulser2": "None", 
+        "pulser3": "None"
+      }, 
+      "runs": [
+        157, 
+        158, 
+        159, 
+        160, 
+        161, 
+        162, 
+        163, 
+        164, 
+        165, 
+        166, 
+        167, 
+        168, 
+        169, 
+        170, 
+        171, 
+        172, 
+        173, 
+        174, 
+        175, 
+        176, 
+        177, 
+        178, 
+        179, 
+        180, 
+        181, 
+        182, 
+        183
+      ], 
+      "type": "rate scan"
+    }, 
+    "09": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        191, 
+        192, 
+        193, 
+        196, 
+        197, 
+        198, 
+        199, 
+        200, 
+        201, 
+        202, 
+        206, 
+        207, 
+        208, 
+        209, 
+        210
+      ], 
+      "type": "angle scan"
+    }, 
+    "10": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        311
+      ], 
+      "type": "calibration"
+    }, 
+    "11": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        371, 
+        372, 
+        385, 
+        388, 
+        389, 
+        390, 
+        391, 
+        392, 
+        393, 
+        394, 
+        395, 
+        398, 
+        399
+      ], 
+      "type": "rate scan"
+    }, 
+    "12": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        403, 
+        404, 
+        405, 
+        406, 
+        407, 
+        408, 
+        409, 
+        410, 
+        411, 
+        412, 
+        413, 
+        414, 
+        415
+      ], 
+      "type": "rate scan"
+    }, 
+    "13": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        427, 
+        428, 
+        429, 
+        430, 
+        431, 
+        432
+      ], 
+      "type": "voltage scan"
+    }, 
+    "14": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        435, 
+        436, 
+        437, 
+        438, 
+        439, 
+        440
+      ], 
+      "type": "voltage scan"
+    }, 
+    "15": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        450, 
+        451, 
+        452, 
+        453, 
+        454, 
+        455, 
+        456, 
+        457
+      ], 
+      "type": "voltage scan"
+    }, 
+    "16": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        458, 
+        459, 
+        460, 
+        461, 
+        462, 
+        463, 
+        464, 
+        465, 
+        466, 
+        467, 
+        468, 
+        469, 
+        472, 
+        473
+      ], 
+      "type": "rate scan"
+    }, 
+    "17": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        477, 
+        478, 
+        479, 
+        480, 
+        481, 
+        482, 
+        483
+      ], 
+      "type": "voltage scan"
+    }, 
+    "18": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        484, 
+        485, 
+        486, 
+        487, 
+        488, 
+        489, 
+        490, 
+        492, 
+        494, 
+        495, 
+        496, 
+        497, 
+        498, 
+        499
+      ], 
+      "type": "rate scan"
+    }, 
+    "19": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        599, 
+        600, 
+        601, 
+        603, 
+        604, 
+        605, 
+        606
+      ], 
+      "type": "voltage scan"
+    }, 
+    "20": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        607, 
+        608, 
+        609, 
+        610, 
+        611, 
+        612, 
+        613, 
+        614, 
+        615, 
+        616, 
+        617, 
+        618, 
+        619, 
+        620
+      ], 
+      "type": "rate scan"
     }
   }
 }
