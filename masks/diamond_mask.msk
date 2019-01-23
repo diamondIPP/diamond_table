@@ -1,8 +1,16 @@
-col 0 0 0
-col 0 40 51
-col 3 0 0
-col 3 40 51
-row 0 70 79
-row 0 0 10
-row 3 70 79
-row 3 0 10 
+
+cornBot 0 1  11
+cornTop 0 39 69
+
+cornBot 3 1  11
+cornTop 3 39 69
+
+
+#col 0 0 0
+#col 0 40 51
+#col 3 0 0
+#col 3 40 51
+#row 0 70 79
+#row 0 0 10
+#row 3 70 79
+#row 3 0 10 
