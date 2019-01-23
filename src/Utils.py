@@ -8,11 +8,11 @@ from termcolor import colored
 import os
 from ConfigParser import ConfigParser
 from json import load
-from os.path import join, dirname, realpath
+from os.path import join, dirname, realpath, basename
 from re import sub
 from uncertainties import ufloat
 from uncertainties.core import Variable
-from numpy import array, sqrt, average
+from numpy import array, sqrt, average, mean
 
 
 Dir = dirname(dirname(realpath(__file__)))
@@ -303,6 +303,40 @@ def make_ufloat(tup, par=0):
     if isinstance(tup, FitRes):
         return ufloat(tup.Parameter(par), tup.ParError(par))
     return ufloat(tup[0], tup[1])
+
+
+def calc_flux(run_info):
+    if 'for1' not in run_info or run_info['for1'] == 0:
+        if 'measuredflux' in run_info:
+            return str('{0:5.0f}'.format(run_info['measuredflux'] * 2.48))
+    pixel_size = 0.01 * 0.015
+    area = [52 * 80 * pixel_size] * 2
+    file_name = basename(run_info['maskfile']).strip('"')
+    try:
+        if file_name.lower() in ['none.msk', 'none', 'no mask', 'pump.msk']:
+            raise UserWarning
+        f = open(join(Dir, 'masks', file_name), 'r')
+        data = {}
+        for line in f:
+            if line.startswith('#'):
+                continue
+            if len(line) > 3:
+                line = line.split()
+                roc = int(line[1])
+                if roc not in data:
+                    data[roc] = {}
+                data[roc][line[0]] = (int(line[2]), int(line[3]))
+        f.close()
+        try:
+            area = [(dic['cornTop'][1] - dic['cornBot'][1] + 1) * (dic['cornTop'][0] - dic['cornBot'][0] + 1) * pixel_size for dic in data.itervalues()]
+        except KeyError:
+            area = [dic['col'][1] - dic['col'][0] + 1 * dic['row'][1] - dic['row'][0] + 1 * pixel_size for dic in data.itervalues()]
+    except IOError:
+        warning('Could not find mask file "{f}"! Not taking any mask!'.format(f=file_name))
+    except UserWarning:
+        pass
+    flux = [run_info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(len(area))]
+    return '{0:1.0f}'.format(mean(flux))
 
 
 class FitRes:
