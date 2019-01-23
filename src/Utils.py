@@ -21,14 +21,21 @@ Dir = dirname(dirname(realpath(__file__)))
 # ==============================================
 # UTILITY FUNCTIONS
 # ==============================================
-def log_warning(msg):
-    t = datetime.now().strftime('%H:%M:%S')
-    print '{head} {t} --> {msg}'.format(t=t, msg=msg, head=colored('WARNING:', 'red'))
+def get_t_str():
+    return datetime.now().strftime('%H:%M:%S')
 
 
-def log_message(msg):
-    t = datetime.now().strftime('%H:%M:%S')
-    print '{head} {t} --> {msg}'.format(t=t, msg=msg, head=colored('INFO:', 'cyan'))
+def warning(msg):
+    print '{head} {t} --> {msg}'.format(t=get_t_str(), msg=msg, head=colored('WARNING:', 'yellow'))
+
+
+def info(msg):
+    print '{head} {t} --> {msg}'.format(t=get_t_str(), msg=msg, head=colored('INFO:', 'cyan'))
+
+
+def critical(msg):
+    print '{head} {t} --> {msg}\n'.format(t=get_t_str(), msg=msg, head=colored('CRITICAL:', 'red'))
+    os._exit(1)
 
 
 def untitle(string):
@@ -110,7 +117,7 @@ def file_exists(path):
 
 def create_dir(path):
     if not folder_exists(path):
-        log_message('creating directory: {}'.format(path))
+        info('creating directory: {}'.format(path))
         os.mkdir(path)
 
 
@@ -280,12 +287,12 @@ def mean_sigma(values, weights=None):
     return avrg, sqrt(variance)
 
 
-def get_dia_channels(info):
-    return sorted(key.strip('dia') for key in info if key.startswith('dia') and len(key) < 5)
+def get_dia_channels(dic):
+    return sorted(key.strip('dia') for key in dic if key.startswith('dia') and len(key) < 5)
 
 
-def get_max_channels(info):
-    return max(len(get_dia_channels(data)) for data in info.itervalues())
+def get_max_channels(dic):
+    return max(len(get_dia_channels(data)) for data in dic.itervalues())
 
 
 def make_ufloat(tup, par=0):
