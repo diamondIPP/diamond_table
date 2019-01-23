@@ -9,6 +9,7 @@ from time import time
 from ConfigParser import NoOptionError
 from collections import OrderedDict
 from pickle import load as pload
+from os.path import basename
 
 
 class DiaScan:
@@ -30,10 +31,12 @@ class DiaScan:
         self.RunInfos = self.load_run_infos()
         self.FirstInfo = self.RunInfos[str(self.FirstRun)]
         self.Diamond = self.load_diamond()
+        self.DiaInfo = self.load_dia_info()
 
         self.Path = join('Diamonds', self.Diamond, 'BeamTests', tc_to_str(test_campaign), 'RunPlan{}'.format(make_rp_string(run_plan)))
 
         self.Bias = self.load_biases()
+        self.Fluxes = self.load_fluxes()
         self.Attenuator = self.load_attenuator()
         self.PulserAttenuator = self.load_pulser_attenuator()
         self.StartTime = self.load_start_time()
@@ -41,6 +44,8 @@ class DiaScan:
         self.Duration = self.calc_duration()
         self.DiaPosition = self.load_dia_position()
         self.PulserType = self.FirstInfo['pulser'] if 'pulser' in self.FirstInfo else ''
+        self.Digitiser = self.load_digitiser()
+        self.Events = self.get_events()
 
     def load_run_plan(self):
         with open(join(self.DataDir, 'run_plans.json')) as f:
