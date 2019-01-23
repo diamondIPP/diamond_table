@@ -150,7 +150,7 @@ class Website:
 
     def create_runs(self, dia_scans):
         table = RunTable()
-        print_banner('CREATING RUN TABLES FOR {}'.format(dia_scans[0].TestCampaign))
+        print_banner('CREATING RUN TABLES FOR {} in {}'.format( dia_scans[0].Diamond, tc_to_str(dia_scans[0].TestCampaign, short=False)))
         for dia_scan in dia_scans:
             if dia_scan.TestCampaign < '201508':
                 continue
