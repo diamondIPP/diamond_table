@@ -30,7 +30,7 @@ class HomePage:
         self.Excluded = loads(self.Config.get('General', 'exclude'))
 
     def __del__(self):
-        log_message('created {}'.format(self.FilePath)) if 'default' not in self.FilePath else do_nothing()
+        info('created {}'.format(self.FilePath)) if 'default' not in self.FilePath else do_nothing()
 
     def create(self):
         with open(join(self.Dir, self.FilePath), 'w') as f:
