@@ -52,8 +52,8 @@ class RunPlanTable(Table):
                   '#rs2#Run Type',
                   '#rs2#Runs',
                   '#rs2#Events']
-        header += ['#cs3#{}'.format(txt) for txt in (['Front', 'Middle', 'Back'] if max_channels == 3 else ['Front', 'Back'])]
-        rows = [[center_txt(txt) for txt in ['Diamond', 'Detector', 'Bias [V]'] * max_channels]]
+        header += ['#cs4#{}'.format(txt) for txt in (['Front', 'Middle', 'Back'] if max_channels == 3 else ['Front', 'Back'])]
+        rows = [[center_txt(txt) for txt in ['Info', 'Diamond', 'Detector', 'Bias [V]'] * max_channels]]
 
         for i, (rp, data) in enumerate(sorted(run_info.iteritems()), 1):
             row = ['#rs{n}#{rp}'.format(n=n_sub_plans(rp), rp=center_txt(rp))] if is_main_plan(rp) else []
@@ -62,17 +62,17 @@ class RunPlanTable(Table):
             row += [center_txt('{:03d} - {:03d}'.format(data['runs'][0], data['runs'][-1]))]
             row += [center_txt(self.get_events(self.DiaScans.RunInfos[tc], data['runs']))]
             dias, biases = self.DiaScans.get_rp_diamonds(tc, rp), self.DiaScans.get_rp_biases(tc, rp)
-            if is_main_plan(rp):
-                for dia, bias in zip(dias, biases):
+            for dia, bias in zip(dias, biases):
+                tc_dir = join('Diamonds', dia, 'BeamTests', tc_to_str(tc))
+                row += [make_abs_link(join(tc_dir, 'RunPlan{}'.format(make_rp_string(rp)), 'index.html'), 'Runs', center=True)]
+                if is_main_plan(rp):
                     if dia == 'None':
-                        row += [''] * 3
+                        row += ['#ds4-{}#{}'.format(n_sub_plans(rp), center_txt('-'))]
                     else:
-                        dia_link = make_abs_link(join('Diamonds', dia, 'BeamTests', tc_to_str(tc), 'RunPlan{}'.format(make_rp_string(rp)), 'index.html'), dia, center=True)
+                        dia_link = make_abs_link(join(tc_dir, 'index.html'), dia, center=True)
                         row += ['#rs{n}#{i}'.format(n=n_sub_plans(rp), i=i) for i in [dia_link, center_txt(self.get_info(dia, tc, 'type')), right_txt(make_bias_str(bias))]]
                         if dias.index(dia) == 0 and max_channels != len(dias):
-                            row += [''] * 3
-            elif max_channels != len(dias):
-                row += [''] * 3
+                            row += ['#ds4-{}#{}'.format(n_sub_plans(rp), center_txt('-'))]
             rows.append(row)
         return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
