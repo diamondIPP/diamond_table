@@ -64,12 +64,14 @@ class DiaScan:
         try:
             return parser.get('ALIASES', dia)
         except NoOptionError:
-            log_warning('"{}" is not a known diamond')
+            warning('"{}" is not a known diamond')
 
     def load_biases(self):
         return sorted(list(set([int(dic['dia{}hv'.format(self.Channel)]) for dic in self.RunInfos.values()])), key=lambda x: abs(x))
 
     def load_attenuator(self, pulser=False):
+        if 'pixel' in self.DiaInfo.get(self.TestCampaign, 'type'):
+            return '-'
         if 'attenuators' in self.Info:
             key = '{}{}'.format('dia', self.Channel) if not pulser else '{}{}'.format('pulser', self.Channel if 'pulser1' in self.Info['attenuators'] else '')
             return self.Info['attenuators'][key]
