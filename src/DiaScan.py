@@ -161,7 +161,7 @@ class DiaScan:
             return center_txt('?')
         att_str = self.PulserAttenuator if pulser else self.Attenuator
         try:
-            if str(att_str).lower() == 'none':
+            if str(att_str).lower() in ['none', '-']:
                 return center_txt('-')
             elif att_str.lower() in ['?', 'unknown']:
                 return center_txt('?')
@@ -192,8 +192,32 @@ class DiaScan:
         value = make_ufloat(self.get_pickle(run, 'Pul'), par=2 if sigma else 1)
         return center_txt('{:2.2f}{}'.format(value.n, '' if sigma else ' ({:.2f})'.format(value.s))) if value is not None else ''
 
+    def get_run_flux(self, run):
+        return self.Fluxes[str(run)]
+
+    def get_run_events(self, run):
+        if 'events' in self.RunInfos[str(run)]:
+            n = self.RunInfos[str(run)]['events']
+            return '{:1.1f}M'.format(n / 1e6) if n > 1e6 else '{:1.0f}k'.format(n / 1e3)
+        return '?'
+
+    def load_digitiser(self):
+        if 'pixel' in self.DiaInfo.get(self.TestCampaign, 'type').lower():
+            return 'ROC'
+        return self.Info['digitiser'] if 'digitiser' in self.Info else 'DRS4'
+
+    def load_dia_info(self):
+        parser = ConfigParser()
+        parser.read(join(self.Dir, 'Diamonds', self.Diamond, 'info.ini'))
+        if self.TestCampaign not in parser.sections():
+            critical('The testcampaign {} was not added to {}\'s info.ini yet!'.format(self.TestCampaign, self.Diamond))
+        return parser
+
+    def load_fluxes(self):
+        return {run: calc_flux(run_info) for run, run_info in self.RunInfos.iteritems()}
+
 
 if __name__ == '__main__':
     t = time()
-    z = DiaScan('201608', '05', '1')
+    z = DiaScan('201810', '05', '3')
     print time() - t
