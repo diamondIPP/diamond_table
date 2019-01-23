@@ -100,11 +100,23 @@ class DiaScan:
 
     def load_dia_position(self):
         keys = sorted([key for key in self.RunInfos.values()[0].iterkeys() if key.startswith('dia') and len(key) < 5])
-        pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back'] if len(keys) == 2 else range(len(keys))
+        pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back']
         return pos[keys.index('dia{ch}'.format(ch=self.Channel))]
 
     def get_runs_str(self):
         return '{:03d}-{:03d}'.format(self.FirstRun, self.Runs[-1])
+
+    def get_flux_str(self):
+        min_flux, max_flux = int(min(self.Fluxes.itervalues(), key=int)), int(max(self.Fluxes.itervalues(), key=int))
+        if max_flux - min_flux < .5 * max_flux:
+            return '~ {:1.0f}'.format(mean([int(flux) for flux in self.Fluxes.itervalues()]))
+        return '{} ... {}'.format(min_flux, max_flux)
+
+    def get_events(self):
+        if all('events' in dic for dic in self.RunInfos.itervalues()):
+            n = sum(dic['events'] for dic in self.RunInfos.itervalues())
+            return '{:1.1f}M'.format(n / 1e6)
+        return '?'
 
     def get_pickle(self, run, tag, form=''):
         dic = {'PH': join('Ph_fit', '{tc}_{run}_{ch}_10000_eventwise_b2'),
