@@ -6,7 +6,6 @@
 import HTMLTable
 from Table import Table
 from Utils import *
-from numpy import mean
 
 
 class RunPlanTable(Table):
@@ -31,33 +30,37 @@ class RunPlanTable(Table):
     def get_dia_body(self, dia_scans):
         dia, tc = dia_scans[0].Diamond, dia_scans[0].TestCampaign
         txt = make_lines(3)
-        txt += head(bold('Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=dia, tc=tc_to_str(tc, short=False))))
+        dia_link = make_abs_link(join('Diamonds', dia, 'index.html'), dia, colour='darkblue')
+        tc_link = make_abs_link(join('BeamTests', tc_to_str(tc), 'RunPlans.html'), tc_to_str(tc, short=False), colour='darkblue')
+        txt += head(bold('Run Plans for {dia} for the Test Campaign in {tc}'.format(dia=dia_link, tc=tc_link)))
         txt += self.build_dia_table(dia_scans)
         return txt
 
     def build_tc_table(self, tc):
 
-        info = self.DiaScans.RunPlans[tc]
+        run_info = self.DiaScans.RunPlans[tc]
         max_channels = get_max_channels(self.DiaScans.RunInfos[tc])
 
         def is_main_plan(runplan):
             return runplan.isdigit()
 
         def n_sub_plans(runplan):
-            return sum(1 for plan in info if runplan in plan)
+            return sum(1 for plan in run_info if runplan in plan)
 
         header = ['#rs2#Run Plan',
                   '#rs2#Sub Plan',
                   '#rs2#Run Type',
-                  '#rs2#Runs']
+                  '#rs2#Runs',
+                  '#rs2#Events']
         header += ['#cs3#{}'.format(txt) for txt in (['Front', 'Middle', 'Back'] if max_channels == 3 else ['Front', 'Back'])]
         rows = [[center_txt(txt) for txt in ['Diamond', 'Detector', 'Bias [V]'] * max_channels]]
 
-        for i, (rp, data) in enumerate(sorted(info.iteritems()), 1):
+        for i, (rp, data) in enumerate(sorted(run_info.iteritems()), 1):
             row = ['#rs{n}#{rp}'.format(n=n_sub_plans(rp), rp=center_txt(rp))] if is_main_plan(rp) else []
             row += [center_txt(make_rp_string(rp))]
             row += [center_txt(data['type'])]
             row += [center_txt('{:03d} - {:03d}'.format(data['runs'][0], data['runs'][-1]))]
+            row += [center_txt(self.get_events(self.DiaScans.RunInfos[tc], data['runs']))]
             dias, biases = self.DiaScans.get_rp_diamonds(tc, rp), self.DiaScans.get_rp_biases(tc, rp)
             if is_main_plan(rp):
                 for dia, bias in zip(dias, biases):
@@ -82,9 +85,11 @@ class RunPlanTable(Table):
                   '#rs2#Pulser<br>Attenuator',
                   '#rs2#Runs',
                   '#rs2#Bias [V]',
+                  '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
                   '#rs2#Leakage<br>Current',
                   '#cs4#Pulser',
                   '#cs4#Signal',
+                  '#rs2#Events',
                   '#rs2#Start',
                   '#rs2#Duration']
         rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
@@ -106,6 +111,7 @@ class RunPlanTable(Table):
             row += [center_txt(dc.PulserAttenuator)]                                                # Pulser Attenuators
             row += [make_abs_link(join(dc.Path, 'index.html'), dc.get_runs_str(), center=True)]     # Runs
             row += [right_txt(make_bias_str(dc.Bias))]                                              # Bias
+            row += [right_txt(dc.get_flux_str())]                                                   # Flux
             row += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                         # Leakage Current
             row += [dc.PulserType]                                                                  # Pulser Type
             if dc.Type == 'voltage scan':
@@ -124,48 +130,19 @@ class RunPlanTable(Table):
                 row += [dc.get_corrected_signal()]                                                  # Pulse Height (corrected)
                 row += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                    # Signal Pedestal
                 row += make_pic_link('PedestalSigmaFlux', dc.get_noise())                           # Noise
+            row += [center_txt(dc.Events)]                                                          # Events
             row += [t_to_str(dc.StartTime)]                                                         # Start Time
             row += [dc.Duration]                                                                    # Duration
             rows.append(row)
 
         return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
-    def get_pulser_mean(self, runs, tc, rp, ch):
-        if tc < '201505':
-            return center_txt('?')
-        try:
-            att_string = 'None'
-            if 'attenuators' in self.DiaScans.RunPlans[tc][rp]:
-                att_string = self.DiaScans.RunPlans[tc][rp]['attenuators']['pulser' if 'pulser' in self.DiaScans.RunPlans[tc][rp]['attenuators'] else 'pulser{c}'.format(c=ch)]
-            if att_string == 'None':
-                return center_txt('-')
-            attenuations = att_string.split('+') if att_string.lower() not in ['unknown', 'none'] else ['0']
-            if '?' in attenuations:
-                return center_txt('?')
-            db = sum(int(att.lower().split('db')[0]) for att in attenuations)
-            att = 10 ** (db / 20.)
-            pulser_mean = mean([self.get_pickle(run, tc, ch, 'Pulser').Parameter(1) for run in runs])
-            return center_txt('{:2.2f}'.format(pulser_mean * att))
-        except TypeError:
-            return center_txt('?')
-
-    def get_pickle_mean(self, runs, tc, ch, name, par):
-        if tc < '201508':
-            return center_txt('?')
-        try:
-            signal, sigma = calc_mean([float(self.get_pickle(run, tc, ch, name).Parameter(par)) for run in runs])
-        except (TypeError, ValueError, ReferenceError):
-            return center_txt('?')
-        return center_txt('{:2.2f} ({:.2f})'.format(signal, sigma))
-
-    def get_noise(self, runs, tc, ch):
-        return self.get_pickle_mean(runs, tc, ch, 'Pedestal', 2)
-
-    def get_signal(self, runs, tc, ch):
-        return self.get_pickle_mean(runs, tc, ch, 'PH', 0)
-
-    def get_pulser(self, runs, tc, ch):
-        return self.get_pickle_mean(runs, tc, ch, 'Pulser', 1)
+    @staticmethod
+    def get_events(run_info, runs):
+        if all('events' in run_info[str(run)] for run in runs):
+            n = sum(run_info[str(run)]['events'] for run in runs)
+            return '{:1.1f}M'.format(n / 1e6)
+        return '?'
 
 
 if __name__ == '__main__':
