@@ -42,7 +42,7 @@ class DiaScans:
             if dia in [self.Parser.get('ALIASES', a) for a in self.Parser.options('ALIASES')]:
                 return dia
             if dia != 'none':
-                log_warning('{0} is not a known diamond name! Please choose one from \n{1}'.format(dia, self.Parser.options('ALIASES')))
+                warning('{0} is not a known diamond name! Please choose one from \n{1}'.format(dia, self.Parser.options('ALIASES')))
 
     @staticmethod
     def load_tcs(tcs):
@@ -51,7 +51,7 @@ class DiaScans:
             return all_tcs
         tcs = [tcs] if type(tcs) is not list else tcs
         if not all(tc in all_tcs for tc in tcs):
-            log_warning('You entered and invalid test campaign! Aborting!')
+            warning('You entered and invalid test campaign! Aborting!')
             exit()
         else:
             return tcs
@@ -70,50 +70,6 @@ class DiaScans:
         return run_infos
 
     # endregion
-
-    # ==========================================================================
-    # region SHOW
-
-    def show_runplans(self):
-        for tc in self.RunPlans:
-            print_small_banner(tc)
-            for rp, info in sorted(self.RunPlans[tc].iteritems()):
-                runs = info['runs']
-                dias = [self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]) for ch in [1, 2]]
-                print rp.ljust(5), '{0}-{1}'.format(str(runs[0]).zfill(3), str(runs[-1]).zfill(3)), str(dias[0]).ljust(11), str(dias[1]).ljust(11)
-
-    # endregion
-
-    def find_diamond_runplans(self, dia=None):
-        dia = self.DiamondName if dia is None else dia
-        runplans = {}
-        for tc, item in self.RunPlans.iteritems():
-            runplans[tc] = {}
-            for rp, info in item.iteritems():
-                runs = info['runs']
-                for ch in [1, 2]:
-                    if all(dia == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs):
-                        bias = self.RunInfos[tc][str(runs[0])]['dia{0}hv'.format(ch)]
-                        if all(self.RunInfos[tc][str(run)]['dia{0}hv'.format(ch)] == bias for run in runs):
-                            if bias not in runplans[tc]:
-                                runplans[tc][bias] = {}
-                            runplans[tc][bias][rp] = ch
-        return runplans
-
-    def find_dia_run_plans(self, dia):
-        runplans = {}
-        for tc, dic in self.RunPlans.iteritems():
-            plans = []
-            for rp, info in dic.iteritems():
-                runs = info['runs']
-                all_dias = set([self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in info['runs'] for ch in [1, 2]])
-                if dia not in all_dias or len(all_dias) > 2:
-                    continue
-                ch = next(ch for ch in [1, 2] if dia == self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)]))
-                plans.append((rp, ch))
-            if plans:
-                runplans[tc] = sorted(plans)
-        return OrderedDict(sorted(runplans.iteritems()))
 
     def get_tc_diamond_scans(self, dia, tc):
         scans = []
@@ -138,7 +94,7 @@ class DiaScans:
 
     def get_biases(self, rp, tc, ch):
         runs = self.get_runs(rp, tc)
-        return sorted(list(set([int(self.RunInfos[tc][str(run)]['dia{c}hv'.format(c=ch)]) for run in runs])), key=abs)
+        return sorted(list(set([int(self.RunInfos[tc][str(run)]['dia{c}hv'.format(c=ch)]) for run in runs])), key=lambda x: abs(x))
 
     def get_diamonds(self, single_tc=None):
         dias = []
@@ -146,9 +102,9 @@ class DiaScans:
             if single_tc is not None:
                 if tc != single_tc:
                     continue
-            for info in item.itervalues():
-                runs = info['runs']
-                for ch in [1, 2]:
+            for rp, dic in item.iteritems():
+                runs = dic['runs']
+                for ch in xrange(1, self.get_n_diamonds(tc, rp) + 1):
                     dia0 = self.load_diamond(self.RunInfos[tc][str(runs[0])]['dia{0}'.format(ch)])
                     if all(dia0 == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs) and dia0.lower() != 'none':
                         dias.append(dia0)
@@ -171,16 +127,16 @@ class DiaScans:
         return self.Parser.get('ALIASES', dia.lower())
 
     def get_attenuators(self, tc, rp, ch, pulser=False):
-        info = self.RunPlans[tc][rp]
-        if 'attenuators' in info:
+        rp_info = self.RunPlans[tc][rp]
+        if 'attenuators' in rp_info:
             key = 'pulser' if pulser else 'dia'
-            return [info['attenuators']['{k}{ch}'.format(k=key, ch='' if key in info['attenuators'] else ch)]]
+            return [rp_info['attenuators']['{k}{ch}'.format(k=key, ch='' if key in rp_info['attenuators'] else ch)]]
         else:
             return ['']
 
     def get_dia_position(self, tc, rp, ch):
-        info = self.RunInfos[tc][self.get_first_run(tc, rp)]
-        keys = sorted([key for key in info.iterkeys() if key.startswith('dia') and len(key) < 6])
+        run_info = self.RunInfos[tc][self.get_first_run(tc, rp)]
+        keys = sorted([key for key in run_info.iterkeys() if key.startswith('dia') and len(key) < 6])
         pos = ['Front', 'Middle', 'Back'] if len(keys) == 3 else ['Front', 'Back'] if len(keys) == 2 else range(len(keys))
         return pos[keys.index('dia{ch}'.format(ch=ch))]
 
