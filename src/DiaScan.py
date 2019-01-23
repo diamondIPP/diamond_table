@@ -32,6 +32,7 @@ class DiaScan:
         self.FirstInfo = self.RunInfos[str(self.FirstRun)]
         self.Diamond = self.load_diamond()
         self.DiaInfo = self.load_dia_info()
+        self.DetectorType = self.DiaInfo.get(self.TestCampaign, 'type')
 
         self.Path = join('Diamonds', self.Diamond, 'BeamTests', tc_to_str(test_campaign), 'RunPlan{}'.format(make_rp_string(run_plan)))
 
@@ -70,7 +71,7 @@ class DiaScan:
         return sorted(list(set([int(dic['dia{}hv'.format(self.Channel)]) for dic in self.RunInfos.values()])), key=lambda x: abs(x))
 
     def load_attenuator(self, pulser=False):
-        if 'pixel' in self.DiaInfo.get(self.TestCampaign, 'type'):
+        if 'pixel' in self.DetectorType.lower():
             return '-'
         if 'attenuators' in self.Info:
             key = '{}{}'.format('dia', self.Channel) if not pulser else '{}{}'.format('pulser', self.Channel if 'pulser1' in self.Info['attenuators'] else '')
@@ -125,7 +126,8 @@ class DiaScan:
                'PulPed': join('Pedestal', '{tc}_{run}_{ch}_ac2_fwhm_PulserBeamOn')}
         path = join(self.Dir, 'Pickles', '{}.pickle'.format(dic[tag])).format(tc=self.TestCampaign, run=run, ch=self.Channel)
         if not file_exists(path):
-            warning('did not find {p}'.format(p=path))
+            if 'pixel' not in self.DetectorType.lower():
+                warning('did not find {p}'.format(p=path))
             return
         with open(path) as f:
             try:
@@ -202,7 +204,7 @@ class DiaScan:
         return '?'
 
     def load_digitiser(self):
-        if 'pixel' in self.DiaInfo.get(self.TestCampaign, 'type').lower():
+        if 'pixel' in self.DetectorType.lower():
             return 'ROC'
         return self.Info['digitiser'] if 'digitiser' in self.Info else 'DRS4'
 
