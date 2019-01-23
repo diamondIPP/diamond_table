@@ -25,8 +25,8 @@ def get_t_str():
     return datetime.now().strftime('%H:%M:%S')
 
 
-def warning(msg):
-    print '{head} {t} --> {msg}'.format(t=get_t_str(), msg=msg, head=colored('WARNING:', 'yellow'))
+def warning(msg, color='yellow'):
+    print '{head} {t} --> {msg}'.format(t=get_t_str(), msg=msg, head=colored('WARNING:', color))
 
 
 def info(msg):
@@ -85,6 +85,7 @@ def make_abs_link(target, name, active=False, center=False, new_tab=False, use_n
     style = ' style="color:{}"'.format(colour) if colour else ''
     if file_exists(join(Dir, target)) or 'http' in target:
         return '<a {act}href={tar}{tab}{s}>{name}</a>'.format(act=active, tar=abs_html_path(target), tab=new_tab, name=name, s=style)
+    warning('The file {} does not exist!'.format(target), color='magenta')
     return name if use_name else ''
 
 
