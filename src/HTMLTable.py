@@ -155,6 +155,9 @@ class TableCell (object):
                     attribs_str += ' colspan="{att}"'.format(att=att)
                 elif data[1].startswith('rs'):
                     attribs_str += ' rowspan="{att}"'.format(att=att)
+                elif data[1].startswith('ds'):
+                    attribs_str += ' colspan="{}" rowspan="{}"'.format(*att.split('-'))
+
         else:
             # An empty cell should at least contain a non-breaking space
             text = '&nbsp;'
