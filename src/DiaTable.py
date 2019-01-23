@@ -32,9 +32,11 @@ class DiaTable(Table):
                   '#rs2#Runs',
                   '#cs2#Attenuators',
                   '#rs2#Bias [V]',
+                  '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
                   '#rs2#Leakage<br>Current',
                   '#cs4#Pulser',
                   '#cs4#Signal',
+                  '#rs2#Events',
                   '#rs2#Start',
                   '#rs2#Duration']
         rows = [[center_txt(text) for text in ['Diamond', 'Pulser', 'Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
@@ -45,7 +47,8 @@ class DiaTable(Table):
         for tc, lst in dia_scans.iteritems():
             if not lst:
                 continue
-            row = ['#rs{n}#{tc}'.format(n=len(lst), tc=center_txt(tc))]                                 # Test Campaign
+            tc_table = join(dirname(lst[0].Path), 'index.html')
+            row = ['#rs{n}#{tc}'.format(n=len(lst), tc=make_abs_link(tc_table, tc, center=True))]       # Test Campaign
             row += ['#rs{n}#{irr}'.format(n=len(lst), irr=self.get_irradiation(tc, dia))]               # Irradiation
             for i, dc in enumerate(lst):
                 rp_str = make_rp_string(dc.RunPlan)
@@ -58,6 +61,7 @@ class DiaTable(Table):
                 row += [center_txt(dc.Attenuator)]                                                      # Diamond Attenuators
                 row += [center_txt(dc.PulserAttenuator)]                                                # Pulser Attenuators
                 row += [right_txt(make_bias_str(dc.Bias))]                                              # Bias
+                row += [right_txt(dc.get_flux_str())]                                                   # Flux
                 row += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                         # Leakage Current
                 row += [dc.PulserType]                                                                  # Pulser Type
                 if dc.Type == 'voltage scan':
@@ -76,6 +80,7 @@ class DiaTable(Table):
                     row += [dc.get_corrected_signal()]                                                  # Pulse Height (corrected)
                     row += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                    # Signal Pedestal
                     row += make_pic_link('PedestalSigmaFlux', dc.get_noise())                           # Noise
+                row += [center_txt(dc.Events)]                                                          # Events
                 row += [t_to_str(dc.StartTime)]                                                         # Start Time
                 row += [dc.Duration]                                                                    # Duration
                 rows.append(row)
