@@ -36,6 +36,7 @@ class RunTable(Table):
                   '#rs2#Type',
                   '#rs2#HV [V]',
                   '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
+                  '#rs2#Current<br>[nA]',
                   '#rs2#Hit<br>Map',
                   '#cs5#Signal',
                   '#cs4#Pulser',
@@ -54,22 +55,23 @@ class RunTable(Table):
             run_path = join(dirname(dc.Path), str(run))
             create_dir(join(self.Dir, run_path))
             self.copy_index_php(run_path)
-            row = [make_abs_link(join(run_path, 'index.php'), run)]                                             # Run
-            row += [dc.Type]                                                                                    # Type
-            row += [right_txt(make_bias_str(dc.get_run_bias(run)))]                                             # Bias
-            row += [center_txt(dc.get_run_flux(run))]                                                           # Flux
-            row += make_pic_link('HitMap', 'Plot', use_name=False)                                              # Hit Map
-            row += make_pic_link('SignalDistribution', 'Plot', use_name=False)                                  # Distribution
-            row += make_pic_link('SignalMap2D', 'Plot', use_name=False)                                         # Signal Map
-            row += make_pic_link('PulseHeight10000', dc.get_run_ph(run))                                        # PH
-            row += make_pic_link('PedestalDistributionFitAllCuts', dc.get_run_ped(run))                         # Pedestal
-            row += make_pic_link('PedestalDistributionFitAllCuts', dc.get_run_noise(run))                       # Pedestal Noise
-            row += make_pic_link('PulserDistributionFit', dc.get_run_pul(run))                                  # Pulser
-            row += make_pic_link('PulserDistributionFit', dc.get_run_pul(run, sigma=True))                      # Pulser Sigma
-            row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_ped(run, pulser=True))       # Pulser Pedestal
-            row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_noise(run, pulser=True))     # Pulser Pedestal Noise
-            row += [center_txt(dc.get_run_events(run))]                                                         # Events
-            row += [conv_time(run_info['starttime0']), dc.calc_run_duration(run), run_info['comments'][:100]]   # Start, Duration, Comments
+            row = [make_abs_link(join(run_path, 'index.php'), run)]                                                     # Run
+            row += [dc.Type]                                                                                            # Type
+            row += [right_txt(make_bias_str(dc.get_run_bias(run)))]                                                     # Bias
+            row += [center_txt(dc.get_run_flux(run))]                                                                   # Flux
+            row += make_pic_link('Currents{}_{}_{}'.format(dc.TestCampaign, run, dc.Channel), dc.get_run_current(run))  # Current
+            row += make_pic_link('HitMap', 'Plot', use_name=False)                                                      # Hit Map
+            row += make_pic_link('SignalDistribution', 'Plot', use_name=False)                                          # Distribution
+            row += make_pic_link('SignalMap2D', 'Plot', use_name=False)                                                 # Signal Map
+            row += make_pic_link('PulseHeight10000', dc.get_run_ph(run))                                                # PH
+            row += make_pic_link('PedestalDistributionFitAllCuts', dc.get_run_ped(run))                                 # Pedestal
+            row += make_pic_link('PedestalDistributionFitAllCuts', dc.get_run_noise(run))                               # Pedestal Noise
+            row += make_pic_link('PulserDistributionFit', dc.get_run_pul(run))                                          # Pulser
+            row += make_pic_link('PulserDistributionFit', dc.get_run_pul(run, sigma=True))                              # Pulser Sigma
+            row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_ped(run, pulser=True))               # Pulser Pedestal
+            row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_noise(run, pulser=True))             # Pulser Pedestal Noise
+            row += [center_txt(dc.get_run_events(run))]                                                                 # Events
+            row += [conv_time(run_info['starttime0']), dc.calc_run_duration(run), run_info['comments'][:100]]           # Start, Duration, Comments
             rows.append(row)
         return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
