@@ -123,6 +123,7 @@ class DiaScan:
         dic = {'PH': join('Ph_fit', '{tc}_{run}_{ch}_10000_eventwise_b2'),
                'Ped': join('Pedestal', '{tc}_{run}_{ch}_ab2_fwhm_AllCuts'),
                'Pul': join('Pulser', 'HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn'),
+               'Cur': join('Currents', '{tc}_{run}_{ch}'),
                'PulPed': join('Pedestal', '{tc}_{run}_{ch}_ac2_fwhm_PulserBeamOn')}
         path = join(self.Dir, 'Pickles', '{}.pickle'.format(dic[tag])).format(tc=self.TestCampaign, run=run, ch=self.Channel)
         if not file_exists(path):
@@ -131,7 +132,10 @@ class DiaScan:
             return
         with open(path) as f:
             try:
-                fit = FitRes(pload(f), form)
+                value = pload(f)
+                if type(value) is Variable:
+                    return value
+                fit = FitRes(value, form)
                 if fit.Parameter(0) is None:
                     warning('empty fitparameter pickle for: {}'.format(basename(path)))
                     return
@@ -203,6 +207,10 @@ class DiaScan:
             return '{:1.1f}M'.format(n / 1e6) if n > 1e6 else '{:1.0f}k'.format(n / 1e3)
         return '?'
 
+    def get_run_current(self, run):
+        value = make_ufloat(self.get_pickle(run, 'Cur'))
+        return center_txt('{:2.1f} ({:.1f})'.format(value.n, value.s)) if value is not None else ''
+
     def load_digitiser(self):
         if 'pixel' in self.DetectorType.lower():
             return 'ROC'
@@ -221,5 +229,5 @@ class DiaScan:
 
 if __name__ == '__main__':
     t = time()
-    z = DiaScan('201810', '05', '3')
+    z = DiaScan('201508', '01', '1')
     print time() - t
