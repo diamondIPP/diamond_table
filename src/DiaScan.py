@@ -215,6 +215,12 @@ class DiaScan:
         value = make_ufloat(self.get_pickle(run, 'Cur'))
         return center_txt('{:2.1f} ({:.1f})'.format(value.n, value.s)) if value is not None else ''
 
+    def get_run_path(self, run):
+        return join(dirname(self.Path), str(run))
+
+    def get_run_start(self, run):
+        return conv_time(self.RunInfos[str(run)]['starttime0'])
+
     def load_digitiser(self):
         if 'pixel' in self.DetectorType.lower():
             return 'ROC'
