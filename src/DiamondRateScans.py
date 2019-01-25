@@ -8,6 +8,7 @@ from ConfigParser import NoOptionError
 from collections import OrderedDict
 from Utils import *
 from DiaScan import DiaScan
+from datetime import timedelta
 
 
 class DiaScans:

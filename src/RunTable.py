@@ -71,7 +71,7 @@ class RunTable(Table):
             row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_ped(run, pulser=True))               # Pulser Pedestal
             row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_noise(run, pulser=True))             # Pulser Pedestal Noise
             row += [center_txt(dc.get_run_events(run))]                                                                 # Events
-            row += [conv_time(run_info['starttime0']), dc.calc_run_duration(run), run_info['comments'][:100]]           # Start, Duration, Comments
+            row += [dc.get_run_start(run), dc.calc_run_duration(run), run_info['comments'][:100]]                       # Start, Duration, Comments
             rows.append(row)
         return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 

@@ -3,7 +3,7 @@
 # created on May 19th 2016 by M. Reichmann
 # --------------------------------------------------------
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from termcolor import colored
 import os
 from ConfigParser import ConfigParser
@@ -13,6 +13,7 @@ from re import sub
 from uncertainties import ufloat
 from uncertainties.core import Variable
 from numpy import array, sqrt, average, mean
+from pytz import timezone, utc
 
 
 Dir = dirname(dirname(realpath(__file__)))
@@ -89,7 +90,7 @@ def make_abs_link(target, name, active=False, center=False, new_tab=False, use_n
     return name if use_name else ''
 
 
-def make_figure(path, name, width=None, height=None):
+def make_figure(path, name='', width=None, height=None):
     width = ' width="{}"'.format(width) if width is not None else ''
     height = ' height"{}"'.format(height) if height is not None else ''
     return '<img src="{path}" alt="{name}"{w}{h}>'.format(path=abs_html_path(path), name=name, w=width, h=height)
@@ -196,8 +197,8 @@ def load_json(path):
         return {}
 
 
-def conv_time(time_str, delta=1, strg=True):
-    t = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ') + timedelta(hours=delta)
+def conv_time(time_str, strg=True):
+    t = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc).astimezone(timezone('Europe/Zurich'))
     return t.strftime('%b %d{} %H:%M:%S').format(nth(t.day)) if strg else t
 
 
