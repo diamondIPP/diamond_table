@@ -6,10 +6,12 @@
 
 from Utils import *
 from time import time
+from datetime import timedelta
 from ConfigParser import NoOptionError
 from collections import OrderedDict
 from pickle import load as pload
 from os.path import basename
+from json import loads
 
 
 class DiaScan:
@@ -33,6 +35,7 @@ class DiaScan:
         self.Diamond = self.load_diamond()
         self.DiaInfo = self.load_dia_info()
         self.DetectorType = self.DiaInfo.get(self.TestCampaign, 'type')
+        self.BoardNumber = self.load_board_number()
 
         self.Path = join('Diamonds', self.Diamond, 'BeamTests', tc_to_str(test_campaign), 'RunPlan{}'.format(make_rp_string(run_plan)))
 
@@ -46,6 +49,7 @@ class DiaScan:
         self.DiaPosition = self.load_dia_position()
         self.PulserType = self.FirstInfo['pulser'] if 'pulser' in self.FirstInfo else ''
         self.Digitiser = self.load_digitiser()
+        self.Amplifier = self.load_amplifier()
         self.Events = self.get_events()
 
     def load_run_plan(self):
