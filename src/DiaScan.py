@@ -236,8 +236,19 @@ class DiaScan:
     def load_fluxes(self):
         return {run: calc_flux(run_info) for run, run_info in self.RunInfos.iteritems()}
 
+    def load_amplifier(self):
+        if 'pixel' in self.DetectorType.lower():
+            return 'ROC'
+        if 'amplifiers' in self.Info:
+            return loads(self.Info['amplifiers'])[int(self.Channel) - 1]
+        return 'OSU_{}'.format(remove_letters(self.BoardNumber) if remove_letters(self.BoardNumber) else '?')
+
+    def load_board_number(self):
+        if 'boardnumber' in self.DiaInfo.options(self.TestCampaign):
+            return self.DiaInfo.get(self.TestCampaign, 'boardnumber')
+
 
 if __name__ == '__main__':
     t = time()
-    z = DiaScan('201508', '01', '1')
+    z = DiaScan('201807', '07', '1')
     print time() - t
