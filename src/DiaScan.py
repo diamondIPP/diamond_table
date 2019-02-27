@@ -123,7 +123,7 @@ class DiaScan:
             return '{:1.1f}M'.format(n / 1e6)
         return '?'
 
-    def get_pickle(self, run, tag, form=''):
+    def get_pickle(self, run, tag, form='', warn=True):
         dic = {'PH': join('Ph_fit', '{tc}_{run}_{ch}_10000_eventwise_b2'),
                'Ped': join('Pedestal', '{tc}_{run}_{ch}_ab2_fwhm_AllCuts'),
                'Pul': join('Pulser', 'HistoFit_{tc}_{run}_{ch}_ped_corr_BeamOn'),
@@ -131,7 +131,7 @@ class DiaScan:
                'PulPed': join('Pedestal', '{tc}_{run}_{ch}_ac2_fwhm_PulserBeamOn')}
         path = join(self.Dir, 'Pickles', '{}.pickle'.format(dic[tag])).format(tc=self.TestCampaign, run=run, ch=self.Channel)
         if not file_exists(path):
-            if 'pixel' not in self.DetectorType.lower():
+            if 'pixel' not in self.DetectorType.lower() and warn:
                 warning('did not find {p}'.format(p=path))
             return
         with open(path) as f:
@@ -212,7 +212,7 @@ class DiaScan:
         return '?'
 
     def get_run_current(self, run):
-        value = make_ufloat(self.get_pickle(run, 'Cur'))
+        value = make_ufloat(self.get_pickle(run, 'Cur', warn='iseg tripped' not in self.RunInfos[str(run)]['comments']))
         return center_txt('{:2.1f} ({:.1f})'.format(value.n, value.s)) if value is not None else ''
 
     def get_run_path(self, run):
