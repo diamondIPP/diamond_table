@@ -79,14 +79,14 @@ def make_lines(n):
     return '<br/>' * n
 
 
-def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour='red'):
+def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour='red', warn=True):
     active = 'class="active" ' if active else ''
     new_tab = ' target="_blank"' if new_tab else ''
     name = center_txt(name) if center else name
     style = ' style="color:{}"'.format(colour) if colour else ''
     if file_exists(join(Dir, target)) or 'http' in target:
         return '<a {act}href={tar}{tab}{s}>{name}</a>'.format(act=active, tar=abs_html_path(target), tab=new_tab, name=name, s=style)
-    warning('The file {} does not exist!'.format(target), color='magenta')
+    warning('The file {} does not exist!'.format(target), color='magenta') if warn else do_nothing()
     return name if use_name else ''
 
 

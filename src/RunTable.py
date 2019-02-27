@@ -46,7 +46,7 @@ class RunTable(Table):
                   '#rs2#Comments']
 
         def make_pic_link(pic_name, name, use_name=True, ftype='pdf'):
-            return [make_abs_link(join(run_path, '{}.{}'.format(pic_name, ftype)), name, center=True, use_name=use_name)]
+            return [make_abs_link(join(run_path, '{}.{}'.format(pic_name, ftype)), name, center=True, use_name=use_name, warn=dc.Diamond not in self.Exclude)]
 
         rows = [[center_txt(txt) for txt in ['Distr.', '2DMap', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma',
                                              'Pedestal [au]', 'Noise [1&sigma;]']]]
@@ -55,7 +55,7 @@ class RunTable(Table):
             run_path = join(dirname(dc.Path), str(run))
             create_dir(join(self.Dir, run_path))
             self.copy_index_php(run_path)
-            row = [make_abs_link(join(run_path, 'index.php'), run)]                                                     # Run
+            row = [make_abs_link(join(run_path, 'index.php'), run, warn=dc.Diamond not in self.Exclude)]                # Run
             row += [dc.Type]                                                                                            # Type
             row += [right_txt(make_bias_str(dc.get_run_bias(run)))]                                                     # Bias
             row += [center_txt(dc.get_run_flux(run))]                                                                   # Flux
@@ -71,7 +71,7 @@ class RunTable(Table):
             row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_ped(run, pulser=True))               # Pulser Pedestal
             row += make_pic_link('PedestalDistributionFitPulserBeamOn', dc.get_run_noise(run, pulser=True))             # Pulser Pedestal Noise
             row += [center_txt(dc.get_run_events(run))]                                                                 # Events
-            row += [dc.get_run_start(run), dc.calc_run_duration(run), run_info['comments'][:100]]                       # Start, Duration, Comments
+            row += [dc.get_run_start(run), dc.calc_run_duration(run), run_info['comments'][:80]]                        # Start, Duration, Comments
             rows.append(row)
         return add_bkg(HTMLTable.table(rows, header_row=header), color=self.BkgCol)
 
@@ -102,7 +102,7 @@ class RunTable(Table):
             row += [self.DiaScans.calc_duration(tc, int(run))]
             for channel in get_dia_channels(data):
                 dia = self.DiaScans.load_diamond(data['dia{}'.format(channel)])
-                row += [make_abs_link(join('Diamonds', dia, 'index.html'), dia)]
+                row += [make_abs_link(join('Diamonds', dia, 'index.html'), dia, warn=dia not in self.Exclude)]
                 row += [make_bias_str(data['dia{}hv'.format(channel)])]
                 if channel == '1' and max_channels != len(get_dia_channels(data)):
                     row += ['', ''] * (max_channels - len(get_dia_channels(data)))
