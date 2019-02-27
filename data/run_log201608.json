@@ -9,8 +9,8 @@
     "dia2hv": -500.0, 
     "dia2supply": "0", 
     "endtime": "2016-08-05T12:33:18Z", 
-    "for1": 0, 
-    "for2": 0, 
+    "for1": 1, 
+    "for2": 1, 
     "fs11": 100.0, 
     "fs13": 50.0, 
     "maskfile": "S129_SiD1_2016_08_05_12_40.msk", 
@@ -2039,7 +2039,7 @@
   }, 
   "443": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "Checked voltage connections. SiD1 was connected to CH4. Changed the lemo cables physically in the drs4. Had to reset the voltage sources.", 
@@ -2060,12 +2060,12 @@
     "persons": "Harris, Diego", 
     "pulser": "extern", 
     "runnr": 443, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:11:28Z"
   }, 
   "444": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2086,12 +2086,12 @@
     "persons": "Harris, Diego", 
     "pulser": "extern", 
     "runnr": 444, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:18:01Z"
   }, 
   "445": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2112,12 +2112,12 @@
     "persons": "Harris, Diego", 
     "pulser": "extern", 
     "runnr": 445, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:24:27Z"
   }, 
   "446": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2138,12 +2138,12 @@
     "persons": "Harris, Diego", 
     "pulser": "extern", 
     "runnr": 446, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:31:23Z"
   }, 
   "447": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2164,12 +2164,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 447, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:42:03Z"
   }, 
   "448": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2190,12 +2190,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 448, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:48:03Z"
   }, 
   "449": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2216,12 +2216,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 449, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T03:55:30Z"
   }, 
   "450": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2242,12 +2242,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 450, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:05:37Z"
   }, 
   "451": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2268,12 +2268,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 451, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:12:12Z"
   }, 
   "452": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2294,12 +2294,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 452, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:17:56Z"
   }, 
   "453": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2320,12 +2320,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 453, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:24:04Z"
   }, 
   "454": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2346,12 +2346,12 @@
     "persons": "Diego", 
     "pulser": "extern", 
     "runnr": 454, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:29:51Z"
   }, 
   "455": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2372,12 +2372,12 @@
     "persons": "Diego, Dmitry", 
     "pulser": "extern", 
     "runnr": 455, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:39:38Z"
   }, 
   "456": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2398,12 +2398,12 @@
     "persons": "Diego, Dmitry", 
     "pulser": "extern", 
     "runnr": 456, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:47:11Z"
   }, 
   "457": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2424,12 +2424,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 457, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T04:54:06Z"
   }, 
   "458": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2450,12 +2450,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 458, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T05:00:52Z"
   }, 
   "459": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "Swapped receiver boxes inputs between DUT front  and DUT back\r\nSwapped receiver boxes output between DRS4 Ch1 and Ch4", 
@@ -2476,12 +2476,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 459, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T05:45:26Z"
   }, 
   "460": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2502,12 +2502,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 460, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T05:52:56Z"
   }, 
   "461": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2528,12 +2528,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 461, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:00:12Z"
   }, 
   "462": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2554,12 +2554,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 462, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:07:54Z"
   }, 
   "463": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "\r\n", 
@@ -2580,12 +2580,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 463, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:14:17Z"
   }, 
   "464": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2606,12 +2606,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 464, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:20:35Z"
   }, 
   "465": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2632,12 +2632,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 465, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:28:39Z"
   }, 
   "466": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2658,12 +2658,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 466, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:34:26Z"
   }, 
   "467": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2684,12 +2684,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 467, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:40:13Z"
   }, 
   "468": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2710,12 +2710,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 468, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:45:36Z"
   }, 
   "469": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2736,12 +2736,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 469, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:52:03Z"
   }, 
   "470": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2762,12 +2762,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 470, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T06:57:54Z"
   }, 
   "472": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "Restarted EuDAQ", 
@@ -2788,12 +2788,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 472, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:03:25Z"
   }, 
   "473": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2814,12 +2814,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 473, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:12:55Z"
   }, 
   "474": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2840,12 +2840,12 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 474, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:19:57Z"
   }, 
   "475": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2866,12 +2866,12 @@
     "persons": "Dmitry, Micha", 
     "pulser": "extern", 
     "runnr": 475, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:29:05Z"
   }, 
   "476": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "S129 ramp to -500 V\r\nSiD1 ramping to 10 V", 
@@ -2896,7 +2896,7 @@
   }, 
   "477": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2917,12 +2917,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 477, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:45:16Z"
   }, 
   "478": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2943,12 +2943,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 478, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:50:37Z"
   }, 
   "479": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2969,12 +2969,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 479, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T07:55:58Z"
   }, 
   "480": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -2995,12 +2995,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 480, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:02:55Z"
   }, 
   "481": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3021,12 +3021,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 481, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:08:30Z"
   }, 
   "482": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3047,12 +3047,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 482, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:13:41Z"
   }, 
   "483": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3073,12 +3073,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 483, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:19:50Z"
   }, 
   "484": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3099,12 +3099,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 484, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:25:43Z"
   }, 
   "485": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3125,12 +3125,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 485, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:30:47Z"
   }, 
   "486": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3151,12 +3151,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 486, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:36:10Z"
   }, 
   "487": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3177,12 +3177,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 487, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:41:36Z"
   }, 
   "488": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3207,7 +3207,7 @@
   }, 
   "489": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3228,12 +3228,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 489, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T08:57:59Z"
   }, 
   "490": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3254,12 +3254,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 490, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T09:02:50Z"
   }, 
   "491": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3280,12 +3280,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 491, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T09:08:02Z"
   }, 
   "492": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3306,12 +3306,12 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 492, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T09:13:41Z"
   }, 
   "493": {
     "att_dia1": "10dB_1", 
-    "att_dia2": "6dB_2", 
+    "att_dia2": "None", 
     "att_pul1": "6dB_3", 
     "att_pul2": "6dB_1", 
     "comments": "", 
@@ -3332,7 +3332,7 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 493, 
-    "runtype": "signal", 
+    "runtype": "voltage scan", 
     "starttime0": "2016-08-10T09:19:13Z"
   }, 
   "495": {
@@ -3379,7 +3379,7 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 498, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T10:26:43Z"
   }, 
   "499": {
@@ -3405,7 +3405,7 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 499, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T10:58:29Z"
   }, 
   "500": {
@@ -3431,7 +3431,7 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 500, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T11:21:28Z"
   }, 
   "501": {
@@ -3457,7 +3457,7 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 501, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T11:44:36Z"
   }, 
   "502": {
@@ -3483,7 +3483,7 @@
     "persons": "Micha", 
     "pulser": "extern", 
     "runnr": 502, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T12:05:48Z"
   }, 
   "504": {
@@ -3509,7 +3509,7 @@
     "persons": "Micha, Dmitry", 
     "pulser": "extern", 
     "runnr": 504, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T12:28:41Z"
   }, 
   "505": {
@@ -3535,7 +3535,7 @@
     "persons": "Christian, Dmitry", 
     "pulser": "extern", 
     "runnr": 505, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T12:51:37Z"
   }, 
   "506": {
@@ -3561,7 +3561,7 @@
     "persons": "Christian, Dmitry", 
     "pulser": "extern", 
     "runnr": 506, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T13:17:18Z"
   }, 
   "507": {
@@ -3587,7 +3587,7 @@
     "persons": "Christian, Dmitry", 
     "pulser": "extern", 
     "runnr": 507, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T13:39:59Z"
   }, 
   "508": {
@@ -3613,7 +3613,7 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 508, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T14:02:37Z"
   }, 
   "509": {
@@ -3639,10 +3639,14 @@
     "persons": "Dmitry", 
     "pulser": "extern", 
     "runnr": 509, 
-    "runtype": "signal", 
+    "runtype": "rate scan", 
     "starttime0": "2016-08-10T14:26:27Z"
   }, 
   "510": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "pumping run with old mask and 0V Bias\r\nTU crashed at 315513 events", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -3664,6 +3668,10 @@
     "starttime0": "2016-08-10T16:20:27Z"
   }, 
   "511": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "continuation of run 510\r\npumping at 0V", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -3685,6 +3693,10 @@
     "starttime0": "2016-08-10T16:53:51Z"
   }, 
   "512": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "both diamonds show positive signals gotta change this...", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -3706,6 +3718,10 @@
     "starttime0": "2016-08-10T17:28:01Z"
   }, 
   "523": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -3727,6 +3743,10 @@
     "starttime0": "2016-08-10T21:43:50Z"
   }, 
   "524": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "FS13 had to be restarted (plugs) at the beam area.", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -3748,6 +3768,10 @@
     "starttime0": "2016-08-11T00:13:28Z"
   }, 
   "525": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "TU needed to be power-cycled Repeating last run.", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -3757,6 +3781,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T02:14:08Z", 
+    "events": 370569, 
     "for1": 1190, 
     "for2": 956, 
     "fs11": 70.0, 
@@ -3769,6 +3794,10 @@
     "starttime0": "2016-08-11T01:15:38Z"
   }, 
   "526": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -3778,6 +3807,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T02:38:01Z", 
+    "events": 338670, 
     "for1": 5260, 
     "for2": 4237, 
     "fs11": 85.0, 
@@ -3790,6 +3820,10 @@
     "starttime0": "2016-08-11T02:16:36Z"
   }, 
   "527": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -3799,6 +3833,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T03:01:14Z", 
+    "events": 314534, 
     "for1": 11410, 
     "for2": 9140, 
     "fs11": 100.0, 
@@ -3811,6 +3846,10 @@
     "starttime0": "2016-08-11T02:39:10Z"
   }, 
   "528": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -3820,6 +3859,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T03:32:56Z", 
+    "events": 577551, 
     "for1": 40550, 
     "for2": 32000, 
     "fs11": 150.0, 
@@ -3832,6 +3872,10 @@
     "starttime0": "2016-08-11T03:02:22Z"
   }, 
   "529": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -3841,6 +3885,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T03:54:54Z", 
+    "events": 274096, 
     "for1": 98500, 
     "for2": 77200, 
     "fs11": 280.0, 
@@ -3853,6 +3898,10 @@
     "starttime0": "2016-08-11T03:34:23Z"
   }, 
   "530": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -3862,6 +3911,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T04:35:37Z", 
+    "events": 623553, 
     "for1": 266000, 
     "for2": 205000, 
     "fs11": 280.0, 
@@ -3874,6 +3924,10 @@
     "starttime0": "2016-08-11T03:56:26Z"
   }, 
   "531": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -3883,6 +3937,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T04:58:01Z", 
+    "events": 292247, 
     "for1": 97500, 
     "for2": 76200, 
     "fs11": 280.0, 
@@ -3895,6 +3950,10 @@
     "starttime0": "2016-08-11T04:36:47Z"
   }, 
   "534": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "this is a redo of run 533 where the tu somehow saw fewer event numbers", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -3904,6 +3963,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T05:43:31Z", 
+    "events": 392098, 
     "for1": 39400, 
     "for2": 31200, 
     "fs11": 150.0, 
@@ -3916,6 +3976,10 @@
     "starttime0": "2016-08-11T05:22:45Z"
   }, 
   "535": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -3925,6 +3989,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T06:06:46Z", 
+    "events": 261825, 
     "for1": 2250, 
     "for2": 1800, 
     "fs11": 100.0, 
@@ -3937,6 +4002,10 @@
     "starttime0": "2016-08-11T05:45:50Z"
   }, 
   "536": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "too few events - have to retake", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -3958,6 +4027,10 @@
     "starttime0": "2016-08-11T06:08:17Z"
   }, 
   "542": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "stabilizing run diamond pulse height was going down\r\nFS11_U was 58 instea of 85", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -3967,6 +4040,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T18:31:30Z", 
+    "events": 289621, 
     "for1": 2965, 
     "for2": 2380, 
     "fs11": 85.0, 
@@ -3979,6 +4053,10 @@
     "starttime0": "2016-08-11T18:09:00Z"
   }, 
   "543": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "FS11-U was 58 instead of 85 ", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4000,6 +4078,10 @@
     "starttime0": "2016-08-11T18:32:24Z"
   }, 
   "544": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4009,6 +4091,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T18:58:06Z", 
+    "events": 322540, 
     "for1": 5272, 
     "for2": 4199, 
     "fs11": 85.0, 
@@ -4021,6 +4104,10 @@
     "starttime0": "2016-08-11T18:37:52Z"
   }, 
   "545": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -4030,6 +4117,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T19:31:23Z", 
+    "events": 206352, 
     "for1": 1186, 
     "for2": 941, 
     "fs11": 70.0, 
@@ -4042,6 +4130,10 @@
     "starttime0": "2016-08-11T18:59:30Z"
   }, 
   "546": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4051,6 +4143,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T19:51:54Z", 
+    "events": 282015, 
     "for1": 5240, 
     "for2": 4179, 
     "fs11": 85.0, 
@@ -4063,6 +4156,10 @@
     "starttime0": "2016-08-11T19:32:28Z"
   }, 
   "547": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4072,6 +4169,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T20:12:09Z", 
+    "events": 265421, 
     "for1": 11224, 
     "for2": 8979, 
     "fs11": 100.0, 
@@ -4084,6 +4182,10 @@
     "starttime0": "2016-08-11T19:52:57Z"
   }, 
   "548": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4093,6 +4195,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T20:32:17Z", 
+    "events": 331747, 
     "for1": 39973, 
     "for2": 31561, 
     "fs11": 150.0, 
@@ -4105,6 +4208,10 @@
     "starttime0": "2016-08-11T20:13:21Z"
   }, 
   "549": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4114,6 +4221,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T20:53:06Z", 
+    "events": 270415, 
     "for1": 98556, 
     "for2": 77025, 
     "fs11": 280.0, 
@@ -4126,6 +4234,10 @@
     "starttime0": "2016-08-11T20:33:46Z"
   }, 
   "550": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4135,6 +4247,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T21:13:06Z", 
+    "events": 314903, 
     "for1": 264307, 
     "for2": 201433, 
     "fs11": 280.0, 
@@ -4147,6 +4260,10 @@
     "starttime0": "2016-08-11T20:54:31Z"
   }, 
   "551": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4156,6 +4273,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T21:34:15Z", 
+    "events": 280414, 
     "for1": 98530, 
     "for2": 77312, 
     "fs11": 280.0, 
@@ -4168,6 +4286,10 @@
     "starttime0": "2016-08-11T21:14:29Z"
   }, 
   "552": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4177,6 +4299,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T21:55:41Z", 
+    "events": 360477, 
     "for1": 39424, 
     "for2": 31070, 
     "fs11": 150.0, 
@@ -4189,6 +4312,10 @@
     "starttime0": "2016-08-11T21:36:23Z"
   }, 
   "553": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Keithley power cycled at 00:06", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4197,7 +4324,8 @@
     "dia2": "II6-95", 
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
-    "endtime": "2016-08-10T22:17:37Z", 
+    "endtime": "2016-08-11T22:17:37Z", 
+    "events": 286701, 
     "for1": 10680, 
     "for2": 8493, 
     "fs11": 100.0, 
@@ -4210,6 +4338,10 @@
     "starttime0": "2016-08-11T21:56:42Z"
   }, 
   "554": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4219,6 +4351,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T22:39:21Z", 
+    "events": 288340, 
     "for1": 4798, 
     "for2": 3814, 
     "fs11": 85.0, 
@@ -4231,6 +4364,10 @@
     "starttime0": "2016-08-11T22:20:19Z"
   }, 
   "555": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Keithley 2410: HV2 power cycled again at 00:54", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -4240,6 +4377,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T23:00:31Z", 
+    "events": 128709, 
     "for1": 1163, 
     "for2": 912, 
     "fs11": 70.0, 
@@ -4252,6 +4390,10 @@
     "starttime0": "2016-08-11T22:40:32Z"
   }, 
   "556": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4261,6 +4403,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T23:20:30Z", 
+    "events": 299854, 
     "for1": 5150, 
     "for2": 4108, 
     "fs11": 85.0, 
@@ -4273,6 +4416,10 @@
     "starttime0": "2016-08-11T23:01:24Z"
   }, 
   "557": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4282,6 +4429,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T23:41:21Z", 
+    "events": 242826, 
     "for1": 11245, 
     "for2": 8928, 
     "fs11": 100.0, 
@@ -4294,6 +4442,10 @@
     "starttime0": "2016-08-11T23:21:42Z"
   }, 
   "558": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Long beam interruption at the beginning of the run (2 mins aprox)", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4303,6 +4455,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T00:01:21Z", 
+    "events": 334618, 
     "for1": 40240, 
     "for2": 31640, 
     "fs11": 150.0, 
@@ -4315,6 +4468,10 @@
     "starttime0": "2016-08-11T23:42:18Z"
   }, 
   "559": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4324,6 +4481,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T00:24:16Z", 
+    "events": 268175, 
     "for1": 98353, 
     "for2": 77258, 
     "fs11": 280.0, 
@@ -4336,6 +4494,10 @@
     "starttime0": "2016-08-12T00:05:15Z"
   }, 
   "560": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4345,6 +4507,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T00:44:26Z", 
+    "events": 324363, 
     "for1": 262600, 
     "for2": 202400, 
     "fs11": 280.0, 
@@ -4357,6 +4520,10 @@
     "starttime0": "2016-08-12T00:25:19Z"
   }, 
   "561": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Long beam interruption at 2:53", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4366,6 +4533,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T01:05:26Z", 
+    "events": 283258, 
     "for1": 98650, 
     "for2": 77260, 
     "fs11": 280.0, 
@@ -4378,6 +4546,10 @@
     "starttime0": "2016-08-12T00:45:17Z"
   }, 
   "562": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4387,6 +4559,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T01:25:14Z", 
+    "events": 340364, 
     "for1": 39400, 
     "for2": 30946, 
     "fs11": 100.0, 
@@ -4399,6 +4572,10 @@
     "starttime0": "2016-08-12T01:06:44Z"
   }, 
   "563": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4408,6 +4585,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T01:46:26Z", 
+    "events": 273280, 
     "for1": 10696, 
     "for2": 8520, 
     "fs11": 100.0, 
@@ -4420,6 +4598,10 @@
     "starttime0": "2016-08-12T01:26:24Z"
   }, 
   "564": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "At 03:55, Keithley 2410: HV2 power cycle again, the voltage went to 0 and then went up.", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4429,6 +4611,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T02:09:20Z", 
+    "events": 328564, 
     "for1": 4815, 
     "for2": 3845, 
     "fs11": 85.0, 
@@ -4441,6 +4624,10 @@
     "starttime0": "2016-08-12T01:47:31Z"
   }, 
   "565": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -4450,6 +4637,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T02:57:19Z", 
+    "events": 209464, 
     "for1": 1171, 
     "for2": 944, 
     "fs11": 70.0, 
@@ -4462,6 +4650,10 @@
     "starttime0": "2016-08-12T02:10:20Z"
   }, 
   "566": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4471,6 +4663,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T03:17:46Z", 
+    "events": 280434, 
     "for1": 5175, 
     "for2": 4135, 
     "fs11": 85.0, 
@@ -4483,6 +4676,10 @@
     "starttime0": "2016-08-12T02:58:31Z"
   }, 
   "567": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4492,6 +4689,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T03:42:09Z", 
+    "events": 313841, 
     "for1": 11250, 
     "for2": 8970, 
     "fs11": 100.0, 
@@ -4504,6 +4702,10 @@
     "starttime0": "2016-08-12T03:19:28Z"
   }, 
   "568": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4513,6 +4715,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T04:05:36Z", 
+    "events": 378472, 
     "for1": 40040, 
     "for2": 31530, 
     "fs11": 150.0, 
@@ -4525,6 +4728,10 @@
     "starttime0": "2016-08-12T03:43:36Z"
   }, 
   "569": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4534,6 +4741,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T04:29:42Z", 
+    "events": 301188, 
     "for1": 98550, 
     "for2": 77180, 
     "fs11": 280.0, 
@@ -4546,6 +4754,10 @@
     "starttime0": "2016-08-12T04:07:06Z"
   }, 
   "570": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4555,6 +4767,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T04:54:00Z", 
+    "events": 369176, 
     "for1": 262200, 
     "for2": 202459, 
     "fs11": 280.0, 
@@ -4567,6 +4780,10 @@
     "starttime0": "2016-08-12T04:31:10Z"
   }, 
   "571": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4576,6 +4793,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T05:17:22Z", 
+    "events": 295588, 
     "for1": 98700, 
     "for2": 77390, 
     "fs11": 280.0, 
@@ -4588,6 +4806,10 @@
     "starttime0": "2016-08-12T04:54:55Z"
   }, 
   "572": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4597,6 +4819,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T05:40:09Z", 
+    "events": 331599, 
     "for1": 39352, 
     "for2": 31011, 
     "fs11": 150.0, 
@@ -4609,6 +4832,10 @@
     "starttime0": "2016-08-12T05:19:24Z"
   }, 
   "573": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4618,6 +4845,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T06:02:27Z", 
+    "events": 276587, 
     "for1": 10516, 
     "for2": 8444, 
     "fs11": 100.0, 
@@ -4630,6 +4858,10 @@
     "starttime0": "2016-08-12T05:41:40Z"
   }, 
   "575": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4639,6 +4871,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T06:36:22Z", 
+    "events": 409059, 
     "for1": 4785, 
     "for2": 3804, 
     "fs11": 85.0, 
@@ -4651,6 +4884,10 @@
     "starttime0": "2016-08-12T06:07:02Z"
   }, 
   "576": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -4660,6 +4897,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T07:17:55Z", 
+    "events": 264536, 
     "for1": 1156, 
     "for2": 926, 
     "fs11": 70.0, 
@@ -4672,6 +4910,10 @@
     "starttime0": "2016-08-12T06:37:14Z"
   }, 
   "577": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4681,6 +4923,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T07:40:57Z", 
+    "events": 364959, 
     "for1": 39858, 
     "for2": 31347, 
     "fs11": 150.0, 
@@ -4693,6 +4936,10 @@
     "starttime0": "2016-08-12T07:19:37Z"
   }, 
   "578": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4702,6 +4949,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T08:03:39Z", 
+    "events": 300931, 
     "for1": 4797, 
     "for2": 3863, 
     "fs11": 85.0, 
@@ -4714,6 +4962,10 @@
     "starttime0": "2016-08-12T07:43:36Z"
   }, 
   "579": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4723,6 +4975,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T08:25:05Z", 
+    "events": 271474, 
     "for1": 97565, 
     "for2": 76399, 
     "fs11": 280.0, 
@@ -4735,6 +4988,10 @@
     "starttime0": "2016-08-12T08:05:25Z"
   }, 
   "580": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4744,6 +5001,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T08:48:08Z", 
+    "events": 292638, 
     "for1": 10710, 
     "for2": 8503, 
     "fs11": 100.0, 
@@ -4756,6 +5014,10 @@
     "starttime0": "2016-08-12T08:27:01Z"
   }, 
   "581": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4765,6 +5027,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T09:13:10Z", 
+    "events": 372929, 
     "for1": 261750, 
     "for2": 201452, 
     "fs11": 280.0, 
@@ -4777,6 +5040,10 @@
     "starttime0": "2016-08-12T08:51:18Z"
   }, 
   "582": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -4786,6 +5053,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T09:42:25Z", 
+    "events": 168590, 
     "for1": 1147, 
     "for2": 915, 
     "fs11": 70.0, 
@@ -4798,6 +5066,10 @@
     "starttime0": "2016-08-12T09:16:10Z"
   }, 
   "583": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -4807,6 +5079,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T10:05:43Z", 
+    "events": 311496, 
     "for1": 11225, 
     "for2": 8954, 
     "fs11": 100.0, 
@@ -4819,6 +5092,10 @@
     "starttime0": "2016-08-12T09:43:31Z"
   }, 
   "584": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -4828,6 +5105,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T10:27:05Z", 
+    "events": 127270, 
     "for1": 1137, 
     "for2": 914, 
     "fs11": 70.0, 
@@ -4840,6 +5118,10 @@
     "starttime0": "2016-08-12T10:07:36Z"
   }, 
   "585": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -4849,6 +5131,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T10:48:21Z", 
+    "events": 276134, 
     "for1": 98614, 
     "for2": 76882, 
     "fs11": 280.0, 
@@ -4861,6 +5144,10 @@
     "starttime0": "2016-08-12T10:28:44Z"
   }, 
   "586": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -4870,6 +5157,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T11:08:36Z", 
+    "events": 288940, 
     "for1": 4820, 
     "for2": 3821, 
     "fs11": 85.0, 
@@ -4882,6 +5170,10 @@
     "starttime0": "2016-08-12T10:49:48Z"
   }, 
   "587": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -4891,6 +5183,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T11:28:54Z", 
+    "events": 368664, 
     "for1": 39912, 
     "for2": 31336, 
     "fs11": 150.0, 
@@ -4903,6 +5196,10 @@
     "starttime0": "2016-08-12T11:09:38Z"
   }, 
   "589": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "TU crashed and was restarted", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4912,6 +5209,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T11:54:22Z", 
+    "events": 346729, 
     "for1": 262107, 
     "for2": 201232, 
     "fs11": 280.0, 
@@ -4924,6 +5222,10 @@
     "starttime0": "2016-08-12T11:34:00Z"
   }, 
   "590": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "ramp down to 0 and pump at 0 Volts\r\n\r\nramp down was too fast", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4945,6 +5247,10 @@
     "starttime0": "2016-08-12T11:54:57Z"
   }, 
   "591": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "II6-B2 ramp up very fast due to the wrong ramp up speed in the config file (Micha's fault)", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4966,6 +5272,10 @@
     "starttime0": "2016-08-12T13:30:00Z"
   }, 
   "592": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -4987,6 +5297,10 @@
     "starttime0": "2016-08-12T14:54:55Z"
   }, 
   "593": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "dinner run", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -5008,6 +5322,10 @@
     "starttime0": "2016-08-12T16:36:57Z"
   }, 
   "594": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5029,6 +5347,10 @@
     "starttime0": "2016-08-12T17:59:47Z"
   }, 
   "596": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Changed pulser to positive. Repeating up-shift", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -5038,6 +5360,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T18:53:56Z", 
+    "events": 153370, 
     "for1": 1160, 
     "for2": 937, 
     "fs11": 70.0, 
@@ -5050,6 +5373,10 @@
     "starttime0": "2016-08-12T18:29:46Z"
   }, 
   "597": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "TU crashed. ", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5071,6 +5398,10 @@
     "starttime0": "2016-08-12T18:54:46Z"
   }, 
   "598": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5080,6 +5411,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T19:39:54Z", 
+    "events": 321158, 
     "for1": 5176, 
     "for2": 4095, 
     "fs11": 85.0, 
@@ -5092,6 +5424,10 @@
     "starttime0": "2016-08-12T19:19:18Z"
   }, 
   "599": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5101,6 +5437,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T20:01:51Z", 
+    "events": 284669, 
     "for1": 11234, 
     "for2": 8910, 
     "fs11": 100.0, 
@@ -5113,6 +5450,10 @@
     "starttime0": "2016-08-12T19:41:26Z"
   }, 
   "600": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5122,6 +5463,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T20:23:20Z", 
+    "events": 386043, 
     "for1": 39880, 
     "for2": 31433, 
     "fs11": 150.0, 
@@ -5134,6 +5476,10 @@
     "starttime0": "2016-08-12T20:02:49Z"
   }, 
   "601": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5143,6 +5489,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T20:46:21Z", 
+    "events": 307643, 
     "for1": 98517, 
     "for2": 77045, 
     "fs11": 280.0, 
@@ -5155,6 +5502,10 @@
     "starttime0": "2016-08-12T20:24:31Z"
   }, 
   "602": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -5164,6 +5515,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T21:07:42Z", 
+    "events": 347067, 
     "for1": 261866, 
     "for2": 201156, 
     "fs11": 280.0, 
@@ -5176,6 +5528,10 @@
     "starttime0": "2016-08-12T20:47:07Z"
   }, 
   "603": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5185,6 +5541,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T21:27:19Z", 
+    "events": 264065, 
     "for1": 98500, 
     "for2": 77132, 
     "fs11": 280.0, 
@@ -5197,6 +5554,10 @@
     "starttime0": "2016-08-12T21:08:34Z"
   }, 
   "604": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5206,6 +5567,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T21:51:20Z", 
+    "events": 414409, 
     "for1": 39283, 
     "for2": 30824, 
     "fs11": 150.0, 
@@ -5218,6 +5580,10 @@
     "starttime0": "2016-08-12T21:29:14Z"
   }, 
   "605": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5227,6 +5593,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-11T22:13:55Z", 
+    "events": 288928, 
     "for1": 10643, 
     "for2": 8492, 
     "fs11": 100.0, 
@@ -5239,6 +5606,10 @@
     "starttime0": "2016-08-12T21:52:32Z"
   }, 
   "607": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5248,6 +5619,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T22:36:11Z", 
+    "events": 310445, 
     "for1": 4745, 
     "for2": 3747, 
     "fs11": 85.0, 
@@ -5260,6 +5632,10 @@
     "starttime0": "2016-08-12T22:15:43Z"
   }, 
   "608": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -5269,6 +5645,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T22:59:05Z", 
+    "events": 132576, 
     "for1": 1142, 
     "for2": 908, 
     "fs11": 70.0, 
@@ -5281,6 +5658,10 @@
     "starttime0": "2016-08-12T22:38:32Z"
   }, 
   "609": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5290,6 +5671,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T23:20:47Z", 
+    "events": 320331, 
     "for1": 5139, 
     "for2": 4096, 
     "fs11": 85.0, 
@@ -5302,6 +5684,10 @@
     "starttime0": "2016-08-12T23:00:12Z"
   }, 
   "610": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5311,6 +5697,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-12T23:42:55Z", 
+    "events": 290530, 
     "for1": 11189, 
     "for2": 8919, 
     "fs11": 100.0, 
@@ -5323,6 +5710,10 @@
     "starttime0": "2016-08-12T23:22:04Z"
   }, 
   "611": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5345,6 +5736,10 @@
     "starttime0": "2016-08-12T23:43:48Z"
   }, 
   "612": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5367,6 +5762,10 @@
     "starttime0": "2016-08-13T00:05:45Z"
   }, 
   "613": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "HV6 connected to II6-95 is starting to show an exponential increase in the current. Stopped at current of 2.5nA", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -5389,6 +5788,10 @@
     "starttime0": "2016-08-13T00:27:01Z"
   }, 
   "614": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5411,6 +5814,10 @@
     "starttime0": "2016-08-13T00:54:54Z"
   }, 
   "615": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5433,6 +5840,10 @@
     "starttime0": "2016-08-13T01:17:41Z"
   }, 
   "616": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5455,6 +5866,10 @@
     "starttime0": "2016-08-13T01:39:04Z"
   }, 
   "617": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5477,6 +5892,10 @@
     "starttime0": "2016-08-13T02:04:28Z"
   }, 
   "618": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -5499,6 +5918,10 @@
     "starttime0": "2016-08-13T02:25:50Z"
   }, 
   "620": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5521,6 +5944,10 @@
     "starttime0": "2016-08-13T03:09:26Z"
   }, 
   "621": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5543,6 +5970,10 @@
     "starttime0": "2016-08-13T03:30:36Z"
   }, 
   "622": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5565,6 +5996,10 @@
     "starttime0": "2016-08-13T03:52:17Z"
   }, 
   "623": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5587,6 +6022,10 @@
     "starttime0": "2016-08-13T04:13:51Z"
   }, 
   "624": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -5609,6 +6048,10 @@
     "starttime0": "2016-08-13T04:35:09Z"
   }, 
   "625": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5631,6 +6074,10 @@
     "starttime0": "2016-08-13T04:56:50Z"
   }, 
   "626": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5653,6 +6100,10 @@
     "starttime0": "2016-08-13T05:18:18Z"
   }, 
   "627": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5675,6 +6126,10 @@
     "starttime0": "2016-08-13T05:39:13Z"
   }, 
   "628": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5697,6 +6152,10 @@
     "starttime0": "2016-08-13T06:00:10Z"
   }, 
   "629": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -5719,6 +6178,10 @@
     "starttime0": "2016-08-13T06:21:01Z"
   }, 
   "630": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5728,6 +6191,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T07:03:23Z", 
+    "events": 322751, 
     "for1": 5185, 
     "for2": 4138, 
     "fs11": 85.0, 
@@ -5740,6 +6204,10 @@
     "starttime0": "2016-08-13T06:42:48Z"
   }, 
   "631": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5749,6 +6217,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T07:25:04Z", 
+    "events": 285398, 
     "for1": 11227, 
     "for2": 8883, 
     "fs11": 100.0, 
@@ -5761,6 +6230,10 @@
     "starttime0": "2016-08-13T07:04:45Z"
   }, 
   "632": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5770,6 +6243,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T07:47:26Z", 
+    "events": 397446, 
     "for1": 39950, 
     "for2": 31450, 
     "fs11": 150.0, 
@@ -5782,6 +6256,10 @@
     "starttime0": "2016-08-13T07:26:27Z"
   }, 
   "633": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5791,6 +6269,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T08:10:34Z", 
+    "events": 288804, 
     "for1": 98559, 
     "for2": 77112, 
     "fs11": 280.0, 
@@ -5803,6 +6282,10 @@
     "starttime0": "2016-08-13T07:49:56Z"
   }, 
   "634": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -5812,6 +6295,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T08:30:55Z", 
+    "events": 327224, 
     "for1": 262083, 
     "for2": 201776, 
     "fs11": 280.0, 
@@ -5824,6 +6308,10 @@
     "starttime0": "2016-08-13T08:11:36Z"
   }, 
   "635": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -5833,6 +6321,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T08:52:01Z", 
+    "events": 283416, 
     "for1": 98420, 
     "for2": 76759, 
     "fs11": 280.0, 
@@ -5845,6 +6334,10 @@
     "starttime0": "2016-08-13T08:31:45Z"
   }, 
   "636": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
@@ -5854,6 +6347,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T09:13:20Z", 
+    "events": 372320, 
     "for1": 39243, 
     "for2": 30952, 
     "fs11": 150.0, 
@@ -5866,6 +6360,10 @@
     "starttime0": "2016-08-13T08:53:06Z"
   }, 
   "637": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
@@ -5875,6 +6373,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T09:34:05Z", 
+    "events": 275884, 
     "for1": 10730, 
     "for2": 8559, 
     "fs11": 100.0, 
@@ -5887,6 +6386,10 @@
     "starttime0": "2016-08-13T09:14:01Z"
   }, 
   "638": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
@@ -5896,6 +6399,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T09:56:01Z", 
+    "events": 304989, 
     "for1": 4823, 
     "for2": 3858, 
     "fs11": 85.0, 
@@ -5908,6 +6412,10 @@
     "starttime0": "2016-08-13T09:36:01Z"
   }, 
   "639": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
@@ -5917,6 +6425,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T10:20:58Z", 
+    "events": 132041, 
     "for1": 1154, 
     "for2": 910, 
     "fs11": 70.0, 
@@ -5929,15 +6438,20 @@
     "starttime0": "2016-08-13T10:00:25Z"
   }, 
   "640": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T10:44:23Z", 
+    "events": 410764, 
     "for1": 39950, 
     "for2": 31530, 
     "fs11": 150.0, 
@@ -5950,15 +6464,20 @@
     "starttime0": "2016-08-13T10:22:32Z"
   }, 
   "643": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T11:16:54Z", 
+    "events": 357185, 
     "for1": 4790, 
     "for2": 3820, 
     "fs11": 100.0, 
@@ -5971,15 +6490,20 @@
     "starttime0": "2016-08-13T10:53:15Z"
   }, 
   "644": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T11:40:56Z", 
+    "events": 308599, 
     "for1": 98431, 
     "for2": 76850, 
     "fs11": 280.0, 
@@ -5992,15 +6516,20 @@
     "starttime0": "2016-08-13T11:18:06Z"
   }, 
   "646": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T12:02:27Z", 
+    "events": 272410, 
     "for1": 10750, 
     "for2": 8540, 
     "fs11": 100.0, 
@@ -6013,15 +6542,20 @@
     "starttime0": "2016-08-13T11:42:00Z"
   }, 
   "647": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T12:22:59Z", 
+    "events": 324039, 
     "for1": 262520, 
     "for2": 202200, 
     "fs11": 280.0, 
@@ -6034,15 +6568,20 @@
     "starttime0": "2016-08-13T12:03:46Z"
   }, 
   "648": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T12:45:34Z", 
+    "events": 132245, 
     "for1": 1165, 
     "for2": 930, 
     "fs11": 70.0, 
@@ -6055,15 +6594,20 @@
     "starttime0": "2016-08-13T12:24:56Z"
   }, 
   "649": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T13:07:43Z", 
+    "events": 287433, 
     "for1": 11242, 
     "for2": 8920, 
     "fs11": 100.0, 
@@ -6076,15 +6620,20 @@
     "starttime0": "2016-08-13T12:47:10Z"
   }, 
   "650": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T13:30:01Z", 
+    "events": 134125, 
     "for1": 1184, 
     "for2": 944, 
     "fs11": 70.0, 
@@ -6097,6 +6646,10 @@
     "starttime0": "2016-08-13T13:09:27Z"
   }, 
   "651": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "DTB crash in the middle of the run, then drs4", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
@@ -6118,15 +6671,20 @@
     "starttime0": "2016-08-13T13:31:58Z"
   }, 
   "652": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T14:02:58Z", 
+    "events": 158656, 
     "for1": 98600, 
     "for2": 76950, 
     "fs11": 280.0, 
@@ -6139,15 +6697,20 @@
     "starttime0": "2016-08-13T13:51:18Z"
   }, 
   "653": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T14:27:06Z", 
+    "events": 349163, 
     "for1": 4830, 
     "for2": 3807, 
     "fs11": 85.0, 
@@ -6160,15 +6723,20 @@
     "starttime0": "2016-08-13T14:04:08Z"
   }, 
   "654": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T14:48:56Z", 
+    "events": 381956, 
     "for1": 39967, 
     "for2": 31310, 
     "fs11": 150.0, 
@@ -6181,15 +6749,20 @@
     "starttime0": "2016-08-13T14:28:34Z"
   }, 
   "655": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T15:10:54Z", 
+    "events": 340669, 
     "for1": 262599, 
     "for2": 201624, 
     "fs11": 280.0, 
@@ -6202,15 +6775,20 @@
     "starttime0": "2016-08-13T14:50:57Z"
   }, 
   "661": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T16:20:19Z", 
+    "events": 149480, 
     "for1": 1179, 
     "for2": 941, 
     "fs11": 70.0, 
@@ -6223,15 +6801,20 @@
     "starttime0": "2016-08-13T15:59:52Z"
   }, 
   "662": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T16:42:01Z", 
+    "events": 342444, 
     "for1": 5160, 
     "for2": 4120, 
     "fs11": 85.0, 
@@ -6244,15 +6827,20 @@
     "starttime0": "2016-08-13T16:21:31Z"
   }, 
   "663": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T17:04:58Z", 
+    "events": 331580, 
     "for1": 11270, 
     "for2": 8990, 
     "fs11": 100.0, 
@@ -6265,15 +6853,20 @@
     "starttime0": "2016-08-13T16:43:07Z"
   }, 
   "664": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T17:26:47Z", 
+    "events": 415741, 
     "for1": 39985, 
     "for2": 31394, 
     "fs11": 150.0, 
@@ -6286,15 +6879,20 @@
     "starttime0": "2016-08-13T17:05:54Z"
   }, 
   "665": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T17:50:14Z", 
+    "events": 337314, 
     "for1": 98099, 
     "for2": 76400, 
     "fs11": 280.0, 
@@ -6307,15 +6905,20 @@
     "starttime0": "2016-08-13T17:28:42Z"
   }, 
   "666": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
     "dia1hv": 1000.0, 
-    "dia1supply": "2", 
+    "dia1supply": "7-0", 
     "dia2": "II6-95", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-13T18:12:13Z", 
+    "events": 410806, 
     "for1": 262100, 
     "for2": 201070, 
     "fs11": 280.0, 
@@ -6328,6 +6931,10 @@
     "starttime0": "2016-08-13T17:51:13Z"
   }, 
   "667": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "ramp down voltage run plus close the beam stopper", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-B2", 
@@ -6349,6 +6956,10 @@
     "starttime0": "2016-08-13T18:12:26Z"
   }, 
   "669": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Beam pumping", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -6370,6 +6981,10 @@
     "starttime0": "2016-08-13T19:20:13Z"
   }, 
   "670": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "stopped because there are no beam and not sure when it is coming back", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -6391,6 +7006,10 @@
     "starttime0": "2016-08-13T21:04:30Z"
   }, 
   "682": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "diaShadow.conf", 
     "dia1": "II6-97", 
@@ -6412,6 +7031,10 @@
     "starttime0": "2016-08-14T00:57:03Z"
   }, 
   "683": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "SHadow for Ch4 (diamond II6-94 in the back)", 
     "config_file": "diaShadow.conf", 
     "dia1": "II6-97", 
@@ -6433,6 +7056,10 @@
     "starttime0": "2016-08-14T01:02:43Z"
   }, 
   "684": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Stabilizing run", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -6454,6 +7081,10 @@
     "starttime0": "2016-08-14T01:19:22Z"
   }, 
   "685": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "no mask file set -> aborting", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -6475,6 +7106,10 @@
     "starttime0": "2016-08-14T02:29:43Z"
   }, 
   "686": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "signal stable stopping", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -6484,6 +7119,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T03:15:17Z", 
+    "events": 217251, 
     "for1": 1173, 
     "for2": 899, 
     "fs11": 70.0, 
@@ -6496,6 +7132,10 @@
     "starttime0": "2016-08-14T02:43:14Z"
   }, 
   "687": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -6505,6 +7145,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T03:35:29Z", 
+    "events": 308671, 
     "for1": 5109, 
     "for2": 3949, 
     "fs11": 85.0, 
@@ -6517,6 +7158,10 @@
     "starttime0": "2016-08-14T03:16:08Z"
   }, 
   "688": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -6526,6 +7171,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T03:56:33Z", 
+    "events": 291863, 
     "for1": 11197, 
     "for2": 8120, 
     "fs11": 100.0, 
@@ -6538,6 +7184,10 @@
     "starttime0": "2016-08-14T03:36:24Z"
   }, 
   "689": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -6547,6 +7197,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T04:17:41Z", 
+    "events": 389162, 
     "for1": 39603, 
     "for2": 29770, 
     "fs11": 150.0, 
@@ -6559,6 +7210,10 @@
     "starttime0": "2016-08-14T03:57:32Z"
   }, 
   "690": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "pixel producer crashed at 56856 events...", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -6580,6 +7235,10 @@
     "starttime0": "2016-08-14T04:19:10Z"
   }, 
   "691": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -6589,6 +7248,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T05:04:36Z", 
+    "events": 300829, 
     "for1": 96817, 
     "for2": 73111, 
     "fs11": 280.0, 
@@ -6601,6 +7261,10 @@
     "starttime0": "2016-08-14T04:44:27Z"
   }, 
   "692": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -6610,6 +7274,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T05:25:25Z", 
+    "events": 371173, 
     "for1": 257335, 
     "for2": 189719, 
     "fs11": 280.0, 
@@ -6622,6 +7287,10 @@
     "starttime0": "2016-08-14T05:05:16Z"
   }, 
   "693": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -6631,6 +7300,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T05:46:14Z", 
+    "events": 300037, 
     "for1": 96800, 
     "for2": 73267, 
     "fs11": 280.0, 
@@ -6643,6 +7313,10 @@
     "starttime0": "2016-08-14T05:26:08Z"
   }, 
   "694": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -6652,6 +7326,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T06:07:30Z", 
+    "events": 387736, 
     "for1": 38956, 
     "for2": 29336, 
     "fs11": 150.0, 
@@ -6664,6 +7339,10 @@
     "starttime0": "2016-08-14T05:47:21Z"
   }, 
   "695": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -6673,6 +7352,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T06:28:32Z", 
+    "events": 285616, 
     "for1": 10623, 
     "for2": 8127, 
     "fs11": 100.0, 
@@ -6685,6 +7365,10 @@
     "starttime0": "2016-08-14T06:08:21Z"
   }, 
   "696": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -6694,6 +7378,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T06:49:23Z", 
+    "events": 314242, 
     "for1": 4748, 
     "for2": 3640, 
     "fs11": 85.0, 
@@ -6706,6 +7391,10 @@
     "starttime0": "2016-08-14T06:29:14Z"
   }, 
   "697": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -6715,6 +7404,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T07:10:09Z", 
+    "events": 134930, 
     "for1": 1142, 
     "for2": 879, 
     "fs11": 70.0, 
@@ -6727,6 +7417,10 @@
     "starttime0": "2016-08-14T06:49:59Z"
   }, 
   "698": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -6736,6 +7430,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T07:31:04Z", 
+    "events": 322255, 
     "for1": 5146, 
     "for2": 3943, 
     "fs11": 85.0, 
@@ -6748,6 +7443,10 @@
     "starttime0": "2016-08-14T07:10:56Z"
   }, 
   "699": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "TU crashed at event 41672", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -6769,6 +7468,10 @@
     "starttime0": "2016-08-14T07:31:51Z"
   }, 
   "700": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -6778,6 +7481,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T08:16:05Z", 
+    "events": 285805, 
     "for1": 10596, 
     "for2": 8100, 
     "fs11": 100.0, 
@@ -6790,6 +7494,10 @@
     "starttime0": "2016-08-14T07:55:46Z"
   }, 
   "701": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -6799,6 +7507,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T08:37:32Z", 
+    "events": 391334, 
     "for1": 39485, 
     "for2": 29844, 
     "fs11": 150.0, 
@@ -6811,6 +7520,10 @@
     "starttime0": "2016-08-14T08:17:30Z"
   }, 
   "702": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -6820,6 +7533,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T09:00:46Z", 
+    "events": 301284, 
     "for1": 97041, 
     "for2": 73159, 
     "fs11": 280.0, 
@@ -6832,6 +7546,10 @@
     "starttime0": "2016-08-14T08:40:35Z"
   }, 
   "703": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -6841,6 +7559,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T09:03:36Z", 
+    "events": 369947, 
     "for1": 257915, 
     "for2": 190254, 
     "fs11": 280.0, 
@@ -6853,6 +7572,10 @@
     "starttime0": "2016-08-14T09:01:56Z"
   }, 
   "704": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -6862,6 +7585,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T09:45:32Z", 
+    "events": 301487, 
     "for1": 97222, 
     "for2": 73108, 
     "fs11": 280.0, 
@@ -6874,6 +7598,10 @@
     "starttime0": "2016-08-14T09:25:20Z"
   }, 
   "705": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -6883,6 +7611,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T10:08:59Z", 
+    "events": 389197, 
     "for1": 38912, 
     "for2": 29361, 
     "fs11": 150.0, 
@@ -6895,6 +7624,10 @@
     "starttime0": "2016-08-14T09:48:10Z"
   }, 
   "706": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -6904,6 +7637,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T10:30:48Z", 
+    "events": 291043, 
     "for1": 10602, 
     "for2": 8134, 
     "fs11": 100.0, 
@@ -6916,6 +7650,10 @@
     "starttime0": "2016-08-14T10:10:13Z"
   }, 
   "707": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -6925,6 +7663,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T10:53:39Z", 
+    "events": 332065, 
     "for1": 4740, 
     "for2": 3630, 
     "fs11": 85.0, 
@@ -6937,6 +7676,10 @@
     "starttime0": "2016-08-14T10:32:19Z"
   }, 
   "708": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -6946,6 +7689,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T11:14:48Z", 
+    "events": 134836, 
     "for1": 1177, 
     "for2": 888, 
     "fs11": 70.0, 
@@ -6958,6 +7702,10 @@
     "starttime0": "2016-08-14T10:54:40Z"
   }, 
   "709": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -6967,6 +7715,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T11:37:14Z", 
+    "events": 347902, 
     "for1": 5140, 
     "for2": 3940, 
     "fs11": 85.0, 
@@ -6979,6 +7728,10 @@
     "starttime0": "2016-08-14T11:15:45Z"
   }, 
   "710": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -6988,6 +7741,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T12:00:02Z", 
+    "events": 315907, 
     "for1": 11150, 
     "for2": 8530, 
     "fs11": 100.0, 
@@ -7000,6 +7754,10 @@
     "starttime0": "2016-08-14T11:38:27Z"
   }, 
   "711": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7009,6 +7767,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T12:23:17Z", 
+    "events": 425806, 
     "for1": 39450, 
     "for2": 29700, 
     "fs11": 150.0, 
@@ -7021,6 +7780,10 @@
     "starttime0": "2016-08-14T12:01:11Z"
   }, 
   "712": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "started run a little to early - collimators were still moving (cut out 20sek)", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7030,6 +7793,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T12:47:37Z", 
+    "events": 326687, 
     "for1": 97000, 
     "for2": 73200, 
     "fs11": 280.0, 
@@ -7042,6 +7806,10 @@
     "starttime0": "2016-08-14T12:25:31Z"
   }, 
   "713": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7051,6 +7819,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T13:10:03Z", 
+    "events": 395658, 
     "for1": 258800, 
     "for2": 190600, 
     "fs11": 280.0, 
@@ -7063,6 +7832,10 @@
     "starttime0": "2016-08-14T12:48:32Z"
   }, 
   "714": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7072,6 +7845,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T13:42:22Z", 
+    "events": 446912, 
     "for1": 97736, 
     "for2": 73427, 
     "fs11": 280.0, 
@@ -7084,6 +7858,10 @@
     "starttime0": "2016-08-14T13:11:29Z"
   }, 
   "715": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7093,6 +7871,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T14:05:29Z", 
+    "events": 432524, 
     "for1": 38974, 
     "for2": 29409, 
     "fs11": 150.0, 
@@ -7105,6 +7884,10 @@
     "starttime0": "2016-08-14T13:42:59Z"
   }, 
   "716": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7114,6 +7897,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T14:26:49Z", 
+    "events": 286780, 
     "for1": 10602, 
     "for2": 8110, 
     "fs11": 100.0, 
@@ -7126,6 +7910,10 @@
     "starttime0": "2016-08-14T14:06:36Z"
   }, 
   "717": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7135,6 +7923,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T14:48:36Z", 
+    "events": 317121, 
     "for1": 4811, 
     "for2": 3678, 
     "fs11": 85.0, 
@@ -7147,6 +7936,10 @@
     "starttime0": "2016-08-14T14:28:17Z"
   }, 
   "718": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "euRun crashed", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -7156,6 +7949,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T15:13:07Z", 
+    "events": 148675, 
     "for1": 1210, 
     "for2": 900, 
     "fs11": 70.0, 
@@ -7168,6 +7962,10 @@
     "starttime0": "2016-08-14T14:49:37Z"
   }, 
   "719": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7177,6 +7975,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T15:37:09Z", 
+    "events": 341393, 
     "for1": 5090, 
     "for2": 3904, 
     "fs11": 85.0, 
@@ -7189,6 +7988,10 @@
     "starttime0": "2016-08-14T15:16:08Z"
   }, 
   "720": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7198,6 +8001,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T15:59:44Z", 
+    "events": 315414, 
     "for1": 11210, 
     "for2": 8599, 
     "fs11": 100.0, 
@@ -7210,6 +8014,10 @@
     "starttime0": "2016-08-14T15:37:59Z"
   }, 
   "721": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7219,6 +8027,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T16:21:21Z", 
+    "events": 401750, 
     "for1": 39753, 
     "for2": 30014, 
     "fs11": 150.0, 
@@ -7231,6 +8040,10 @@
     "starttime0": "2016-08-14T16:00:46Z"
   }, 
   "722": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7240,6 +8053,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T16:45:59Z", 
+    "events": 340095, 
     "for1": 98200, 
     "for2": 73800, 
     "fs11": 280.0, 
@@ -7252,6 +8066,10 @@
     "starttime0": "2016-08-14T16:23:26Z"
   }, 
   "723": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7261,6 +8079,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T17:07:01Z", 
+    "events": 372490, 
     "for1": 259300, 
     "for2": 190780, 
     "fs11": 280.0, 
@@ -7273,6 +8092,10 @@
     "starttime0": "2016-08-14T16:46:46Z"
   }, 
   "724": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7282,6 +8105,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T17:28:36Z", 
+    "events": 308672, 
     "for1": 98205, 
     "for2": 73810, 
     "fs11": 280.0, 
@@ -7294,6 +8118,10 @@
     "starttime0": "2016-08-14T17:08:17Z"
   }, 
   "725": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7303,6 +8131,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T17:50:23Z", 
+    "events": 397100, 
     "for1": 39255, 
     "for2": 29475, 
     "fs11": 150.0, 
@@ -7315,6 +8144,10 @@
     "starttime0": "2016-08-14T17:30:04Z"
   }, 
   "726": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7324,6 +8157,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T18:11:53Z", 
+    "events": 294565, 
     "for1": 10664, 
     "for2": 8114, 
     "fs11": 100.0, 
@@ -7336,6 +8170,10 @@
     "starttime0": "2016-08-14T17:51:30Z"
   }, 
   "727": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7345,6 +8183,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T18:35:23Z", 
+    "events": 321096, 
     "for1": 4800, 
     "for2": 3700, 
     "fs11": 85.0, 
@@ -7357,6 +8196,10 @@
     "starttime0": "2016-08-14T18:14:55Z"
   }, 
   "728": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -7366,6 +8209,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T19:00:06Z", 
+    "events": 153398, 
     "for1": 1193, 
     "for2": 802, 
     "fs11": 70.0, 
@@ -7378,6 +8222,10 @@
     "starttime0": "2016-08-14T18:37:13Z"
   }, 
   "729": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7387,6 +8235,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T19:23:44Z", 
+    "events": 432913, 
     "for1": 39753, 
     "for2": 29823, 
     "fs11": 150.0, 
@@ -7399,6 +8248,10 @@
     "starttime0": "2016-08-14T19:01:40Z"
   }, 
   "730": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7408,6 +8261,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T19:46:25Z", 
+    "events": 331588, 
     "for1": 4770, 
     "for2": 3673, 
     "fs11": 85.0, 
@@ -7420,6 +8274,10 @@
     "starttime0": "2016-08-14T19:25:24Z"
   }, 
   "731": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7429,6 +8287,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T20:08:46Z", 
+    "events": 311224, 
     "for1": 98180, 
     "for2": 73707, 
     "fs11": 280.0, 
@@ -7441,6 +8300,10 @@
     "starttime0": "2016-08-14T19:48:23Z"
   }, 
   "732": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7450,6 +8313,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T20:30:55Z", 
+    "events": 289330, 
     "for1": 10716, 
     "for2": 8190, 
     "fs11": 100.0, 
@@ -7462,6 +8326,10 @@
     "starttime0": "2016-08-14T20:10:37Z"
   }, 
   "733": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7471,6 +8339,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T20:53:08Z", 
+    "events": 373186, 
     "for1": 259477, 
     "for2": 190777, 
     "fs11": 280.0, 
@@ -7483,6 +8352,10 @@
     "starttime0": "2016-08-14T20:32:49Z"
   }, 
   "734": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -7492,6 +8365,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T21:17:30Z", 
+    "events": 148034, 
     "for1": 1197, 
     "for2": 916, 
     "fs11": 70.0, 
@@ -7504,6 +8378,10 @@
     "starttime0": "2016-08-14T20:55:49Z"
   }, 
   "735": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7513,6 +8391,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T21:39:20Z", 
+    "events": 297561, 
     "for1": 11201, 
     "for2": 8605, 
     "fs11": 100.0, 
@@ -7525,6 +8404,10 @@
     "starttime0": "2016-08-14T21:18:49Z"
   }, 
   "736": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -7533,7 +8416,8 @@
     "dia2": "II6-94", 
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
-    "endtime": "2016-08-13T22:03:37Z", 
+    "endtime": "2016-08-14T22:03:37Z", 
+    "events": 154831, 
     "for1": 1191, 
     "for2": 892, 
     "fs11": 70.0, 
@@ -7546,6 +8430,10 @@
     "starttime0": "2016-08-14T21:41:02Z"
   }, 
   "737": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7555,6 +8443,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T22:28:16Z", 
+    "events": 338088, 
     "for1": 97888, 
     "for2": 73707, 
     "fs11": 280.0, 
@@ -7567,6 +8456,10 @@
     "starttime0": "2016-08-14T22:05:42Z"
   }, 
   "738": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7576,6 +8469,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T22:53:17Z", 
+    "events": 312461, 
     "for1": 4789, 
     "for2": 3642, 
     "fs11": 85.0, 
@@ -7588,6 +8482,10 @@
     "starttime0": "2016-08-14T22:30:31Z"
   }, 
   "739": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Killed this run due to TU not working.", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7609,6 +8507,10 @@
     "starttime0": "2016-08-14T22:59:53Z"
   }, 
   "740": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7618,6 +8520,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T23:35:58Z", 
+    "events": 445873, 
     "for1": 39936, 
     "for2": 30035, 
     "fs11": 150.0, 
@@ -7630,6 +8533,10 @@
     "starttime0": "2016-08-14T23:13:02Z"
   }, 
   "741": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7639,6 +8546,7 @@
     "dia2hv": -1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-14T23:58:36Z", 
+    "events": 383106, 
     "for1": 259500, 
     "for2": 191055, 
     "fs11": 280.0, 
@@ -7651,6 +8559,10 @@
     "starttime0": "2016-08-14T23:37:47Z"
   }, 
   "742": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "This run was started an hour *after* the voltage ramping began.  My understanding was that we wanted to ramp completely first, and *then* start the run.  This was not the case.  So this run began when HV6 was already very close to 0 V and HV7 CH4 was at ~-150 V.", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7672,6 +8584,10 @@
     "starttime0": "2016-08-15T01:11:04Z"
   }, 
   "743": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "ramping up both diamonds from 0 to +1000 V", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7693,6 +8609,10 @@
     "starttime0": "2016-08-15T02:29:53Z"
   }, 
   "744": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7714,6 +8634,10 @@
     "starttime0": "2016-08-15T04:04:37Z"
   }, 
   "745": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -7723,6 +8647,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T05:00:00Z", 
+    "events": 221609, 
     "for1": 1211, 
     "for2": 907, 
     "fs11": 70.0, 
@@ -7735,6 +8660,10 @@
     "starttime0": "2016-08-15T04:27:32Z"
   }, 
   "746": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7744,6 +8673,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T05:21:38Z", 
+    "events": 325604, 
     "for1": 5120, 
     "for2": 3932, 
     "fs11": 85.0, 
@@ -7756,6 +8686,10 @@
     "starttime0": "2016-08-15T05:01:08Z"
   }, 
   "747": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7765,6 +8699,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T05:42:29Z", 
+    "events": 294086, 
     "for1": 11169, 
     "for2": 8583, 
     "fs11": 100.0, 
@@ -7777,6 +8712,10 @@
     "starttime0": "2016-08-15T05:22:16Z"
   }, 
   "748": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7786,6 +8725,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T06:03:32Z", 
+    "events": 381857, 
     "for1": 39869, 
     "for2": 30034, 
     "fs11": 150.0, 
@@ -7798,6 +8738,10 @@
     "starttime0": "2016-08-15T05:43:19Z"
   }, 
   "749": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7807,6 +8751,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T06:24:41Z", 
+    "events": 305622, 
     "for1": 98698, 
     "for2": 73884, 
     "fs11": 280.0, 
@@ -7819,6 +8764,10 @@
     "starttime0": "2016-08-15T06:04:30Z"
   }, 
   "750": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "TU crashed at the end of the run", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -7828,6 +8777,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T06:45:51Z", 
+    "events": 372304, 
     "for1": 260556, 
     "for2": 191464, 
     "fs11": 280.0, 
@@ -7840,6 +8790,10 @@
     "starttime0": "2016-08-15T06:25:31Z"
   }, 
   "752": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -7849,6 +8803,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T07:15:46Z", 
+    "events": 308876, 
     "for1": 98606, 
     "for2": 74051, 
     "fs11": 280.0, 
@@ -7861,15 +8816,20 @@
     "starttime0": "2016-08-15T06:55:34Z"
   }, 
   "753": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
     "dia1hv": 1000.0, 
-    "dia1supply": "7-4", 
+    "dia1supply": "7-0", 
     "dia2": "II6-94", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T07:38:46Z", 
+    "events": 392533, 
     "for1": 39290, 
     "for2": 29457, 
     "fs11": 150.0, 
@@ -7882,6 +8842,10 @@
     "starttime0": "2016-08-15T07:18:34Z"
   }, 
   "754": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7891,6 +8855,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T08:00:29Z", 
+    "events": 290340, 
     "for1": 10709, 
     "for2": 8213, 
     "fs11": 100.0, 
@@ -7903,6 +8868,10 @@
     "starttime0": "2016-08-15T07:40:48Z"
   }, 
   "755": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7912,6 +8881,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T08:22:52Z", 
+    "events": 317912, 
     "for1": 4799, 
     "for2": 3663, 
     "fs11": 85.0, 
@@ -7924,6 +8894,10 @@
     "starttime0": "2016-08-15T08:02:41Z"
   }, 
   "756": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -7933,6 +8907,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T08:45:29Z", 
+    "events": 138282, 
     "for1": 1161, 
     "for2": 894, 
     "fs11": 70.0, 
@@ -7945,6 +8920,10 @@
     "starttime0": "2016-08-15T08:25:20Z"
   }, 
   "757": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -7954,6 +8933,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T09:08:46Z", 
+    "events": 336004, 
     "for1": 5138, 
     "for2": 3914, 
     "fs11": 85.0, 
@@ -7966,6 +8946,10 @@
     "starttime0": "2016-08-15T08:48:17Z"
   }, 
   "758": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -7975,6 +8959,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T09:30:58Z", 
+    "events": 304182, 
     "for1": 11242, 
     "for2": 8549, 
     "fs11": 100.0, 
@@ -7987,6 +8972,10 @@
     "starttime0": "2016-08-15T09:10:31Z"
   }, 
   "759": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -7996,6 +8985,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T09:53:24Z", 
+    "events": 412822, 
     "for1": 40124, 
     "for2": 30150, 
     "fs11": 150.0, 
@@ -8008,6 +8998,10 @@
     "starttime0": "2016-08-15T09:32:32Z"
   }, 
   "760": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8017,6 +9011,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T10:15:27Z", 
+    "events": 312821, 
     "for1": 98977, 
     "for2": 74357, 
     "fs11": 280.0, 
@@ -8029,6 +9024,10 @@
     "starttime0": "2016-08-15T09:55:20Z"
   }, 
   "761": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -8038,6 +9037,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T11:18:45Z", 
+    "events": 1015418, 
     "for1": 292735, 
     "for2": 215091, 
     "fs11": 280.0, 
@@ -8050,6 +9050,10 @@
     "starttime0": "2016-08-15T10:27:54Z"
   }, 
   "762": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8059,6 +9063,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T11:40:11Z", 
+    "events": 442983, 
     "for1": 191585, 
     "for2": 143602, 
     "fs11": 280.0, 
@@ -8071,6 +9076,10 @@
     "starttime0": "2016-08-15T11:20:02Z"
   }, 
   "763": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8080,6 +9089,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T12:01:51Z", 
+    "events": 460315, 
     "for1": 74502, 
     "for2": 55767, 
     "fs11": 150.0, 
@@ -8092,6 +9102,10 @@
     "starttime0": "2016-08-15T11:41:35Z"
   }, 
   "764": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8101,6 +9115,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T12:23:44Z", 
+    "events": 375946, 
     "for1": 20078, 
     "for2": 15330, 
     "fs11": 100.0, 
@@ -8113,6 +9128,10 @@
     "starttime0": "2016-08-15T12:03:34Z"
   }, 
   "765": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8122,6 +9141,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T12:45:27Z", 
+    "events": 400545, 
     "for1": 8993, 
     "for2": 6875, 
     "fs11": 85.0, 
@@ -8134,6 +9154,10 @@
     "starttime0": "2016-08-15T12:25:13Z"
   }, 
   "766": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -8143,6 +9167,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T13:06:39Z", 
+    "events": 197762, 
     "for1": 2230, 
     "for2": 1702, 
     "fs11": 70.0, 
@@ -8155,6 +9180,10 @@
     "starttime0": "2016-08-15T12:46:28Z"
   }, 
   "767": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8164,6 +9193,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T13:29:32Z", 
+    "events": 406741, 
     "for1": 9644, 
     "for2": 7369, 
     "fs11": 85.0, 
@@ -8176,6 +9206,10 @@
     "starttime0": "2016-08-15T13:09:20Z"
   }, 
   "768": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8185,6 +9219,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T13:50:58Z", 
+    "events": 376823, 
     "for1": 21045, 
     "for2": 16004, 
     "fs11": 100.0, 
@@ -8197,6 +9232,10 @@
     "starttime0": "2016-08-15T13:30:51Z"
   }, 
   "769": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8206,6 +9245,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T14:12:41Z", 
+    "events": 460455, 
     "for1": 75839, 
     "for2": 56654, 
     "fs11": 150.0, 
@@ -8218,6 +9258,10 @@
     "starttime0": "2016-08-15T13:52:25Z"
   }, 
   "770": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8227,6 +9271,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T14:34:29Z", 
+    "events": 353764, 
     "for1": 192204, 
     "for2": 144245, 
     "fs11": 280.0, 
@@ -8239,6 +9284,10 @@
     "starttime0": "2016-08-15T14:14:20Z"
   }, 
   "771": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Dima kacken", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -8248,6 +9297,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T15:00:44Z", 
+    "events": 411372, 
     "for1": 293500, 
     "for2": 215640, 
     "fs11": 280.0, 
@@ -8260,6 +9310,10 @@
     "starttime0": "2016-08-15T14:40:29Z"
   }, 
   "772": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8269,6 +9323,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T15:22:15Z", 
+    "events": 443086, 
     "for1": 191852, 
     "for2": 143893, 
     "fs11": 280.0, 
@@ -8281,6 +9336,10 @@
     "starttime0": "2016-08-15T15:02:02Z"
   }, 
   "773": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8290,6 +9349,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T15:43:54Z", 
+    "events": 457127, 
     "for1": 74519, 
     "for2": 55827, 
     "fs11": 150.0, 
@@ -8302,6 +9362,10 @@
     "starttime0": "2016-08-15T15:23:48Z"
   }, 
   "774": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8311,6 +9375,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T16:05:11Z", 
+    "events": 376664, 
     "for1": 20281, 
     "for2": 15308, 
     "fs11": 100.0, 
@@ -8323,6 +9388,10 @@
     "starttime0": "2016-08-15T15:45:03Z"
   }, 
   "775": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8332,6 +9401,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T16:26:31Z", 
+    "events": 394393, 
     "for1": 9032, 
     "for2": 6927, 
     "fs11": 85.0, 
@@ -8344,6 +9414,10 @@
     "starttime0": "2016-08-15T16:06:21Z"
   }, 
   "776": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -8353,6 +9427,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T16:54:14Z", 
+    "events": 195633, 
     "for1": 2250, 
     "for2": 1703, 
     "fs11": 70.0, 
@@ -8365,6 +9440,10 @@
     "starttime0": "2016-08-15T16:34:02Z"
   }, 
   "777": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8374,6 +9453,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T17:15:46Z", 
+    "events": 403167, 
     "for1": 9707, 
     "for2": 7377, 
     "fs11": 85.0, 
@@ -8386,6 +9466,10 @@
     "starttime0": "2016-08-15T16:55:37Z"
   }, 
   "778": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8395,6 +9479,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T17:37:07Z", 
+    "events": 382838, 
     "for1": 21137, 
     "for2": 16075, 
     "fs11": 100.0, 
@@ -8407,6 +9492,10 @@
     "starttime0": "2016-08-15T17:16:57Z"
   }, 
   "779": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8416,6 +9505,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T17:58:19Z", 
+    "events": 459424, 
     "for1": 76001, 
     "for2": 56720, 
     "fs11": 150.0, 
@@ -8428,6 +9518,10 @@
     "starttime0": "2016-08-15T17:38:10Z"
   }, 
   "780": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8437,6 +9531,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T20:29:18Z", 
+    "events": 2507346, 
     "for1": 193041, 
     "for2": 144838, 
     "fs11": 280.0, 
@@ -8449,6 +9544,10 @@
     "starttime0": "2016-08-15T17:59:33Z"
   }, 
   "781": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8457,7 +9556,8 @@
     "dia2": "II6-94", 
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
-    "endtime": "2016-08-15T20:29:53Z", 
+    "endtime": "2016-08-15T20:29:01Z", 
+    "events": 745125, 
     "for1": 192538, 
     "for2": 144154, 
     "fs11": 280.0, 
@@ -8467,9 +9567,13 @@
     "pulser": "extern", 
     "runnr": 781, 
     "runtype": "rate_scan", 
-    "starttime0": "2016-08-15T20:29:51Z"
+    "starttime0": "2016-08-15T20:09:00Z"
   }, 
   "782": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -8479,6 +9583,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T20:52:40Z", 
+    "events": 415931, 
     "for1": 293686, 
     "for2": 215577, 
     "fs11": 280.0, 
@@ -8491,6 +9596,10 @@
     "starttime0": "2016-08-15T20:32:29Z"
   }, 
   "783": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8500,6 +9609,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T21:13:55Z", 
+    "events": 447308, 
     "for1": 192237, 
     "for2": 143620, 
     "fs11": 280.0, 
@@ -8512,6 +9622,10 @@
     "starttime0": "2016-08-15T20:53:40Z"
   }, 
   "784": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8521,6 +9635,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T21:37:09Z", 
+    "events": 481858, 
     "for1": 74642, 
     "for2": 55787, 
     "fs11": 150.0, 
@@ -8533,6 +9648,10 @@
     "starttime0": "2016-08-15T21:15:30Z"
   }, 
   "785": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8542,6 +9661,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T22:05:36Z", 
+    "events": 393784, 
     "for1": 20186, 
     "for2": 15284, 
     "fs11": 100.0, 
@@ -8554,6 +9674,10 @@
     "starttime0": "2016-08-15T21:44:00Z"
   }, 
   "786": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "Beam current a bit wacky during the beginning of this run, so letting it run a few minutes long.", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8563,6 +9687,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T22:33:02Z", 
+    "events": 488610, 
     "for1": 9080, 
     "for2": 6865, 
     "fs11": 85.0, 
@@ -8575,6 +9700,10 @@
     "starttime0": "2016-08-15T22:07:21Z"
   }, 
   "787": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -8584,6 +9713,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T22:58:26Z", 
+    "events": 229542, 
     "for1": 2195, 
     "for2": 1672, 
     "fs11": 70.0, 
@@ -8596,6 +9726,10 @@
     "starttime0": "2016-08-15T22:34:34Z"
   }, 
   "788": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8605,6 +9739,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T23:21:51Z", 
+    "events": 498581, 
     "for1": 75488, 
     "for2": 56479, 
     "fs11": 150.0, 
@@ -8617,6 +9752,10 @@
     "starttime0": "2016-08-15T22:59:55Z"
   }, 
   "789": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8626,6 +9765,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-15T23:45:44Z", 
+    "events": 441210, 
     "for1": 9047, 
     "for2": 6879, 
     "fs11": 85.0, 
@@ -8638,6 +9778,10 @@
     "starttime0": "2016-08-15T23:23:28Z"
   }, 
   "790": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8647,6 +9791,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-16T00:09:32Z", 
+    "events": 471910, 
     "for1": 190997, 
     "for2": 143113, 
     "fs11": 280.0, 
@@ -8659,6 +9804,10 @@
     "starttime0": "2016-08-15T23:48:05Z"
   }, 
   "791": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8668,6 +9817,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-16T00:33:48Z", 
+    "events": 402673, 
     "for1": 20072, 
     "for2": 15280, 
     "fs11": 100.0, 
@@ -8680,6 +9830,10 @@
     "starttime0": "2016-08-16T00:12:25Z"
   }, 
   "792": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -8689,6 +9843,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-16T00:58:26Z", 
+    "events": 456847, 
     "for1": 292500, 
     "for2": 214362, 
     "fs11": 280.0, 
@@ -8701,6 +9856,10 @@
     "starttime0": "2016-08-16T00:36:05Z"
   }, 
   "793": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -8710,6 +9869,7 @@
     "dia2hv": 1000.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-16T01:24:02Z", 
+    "events": 219974, 
     "for1": 2215, 
     "for2": 1667, 
     "fs11": 70.0, 
@@ -8722,6 +9882,10 @@
     "starttime0": "2016-08-16T01:01:28Z"
   }, 
   "794": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
     "dia1": "II6-97", 
@@ -8744,6 +9908,10 @@
     "starttime0": "2016-08-16T01:25:37Z"
   }, 
   "795": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "II6-97", 
@@ -8766,6 +9934,10 @@
     "starttime0": "2016-08-16T01:49:46Z"
   }, 
   "796": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
     "dia1": "II6-97", 
@@ -8788,6 +9960,10 @@
     "starttime0": "2016-08-16T02:13:24Z"
   }, 
   "797": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "II6-97", 
@@ -8810,6 +9986,10 @@
     "starttime0": "2016-08-16T02:35:08Z"
   }, 
   "798": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
     "dia1": "II6-97", 
@@ -8832,6 +10012,10 @@
     "starttime0": "2016-08-16T02:56:01Z"
   }, 
   "799": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -8854,6 +10038,10 @@
     "starttime0": "2016-08-16T03:17:17Z"
   }, 
   "800": {
+    "att_dia1": "None", 
+    "att_dia2": "None", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "ramping to 0V", 
     "config_file": "DRS4_201608_2500k.conf", 
     "dia1": "II6-97", 
@@ -8875,6 +10063,10 @@
     "starttime0": "2016-08-16T03:40:46Z"
   }, 
   "802": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -8896,6 +10088,10 @@
     "starttime0": "2016-08-16T04:29:43Z"
   }, 
   "804": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "dia shadow1", 
     "config_file": "diaShadow.conf", 
     "dia1": "SiD1", 
@@ -8917,6 +10113,10 @@
     "starttime0": "2016-08-16T04:57:22Z"
   }, 
   "805": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "diashadow 2", 
     "config_file": "diaShadow.conf", 
     "dia1": "SiD1", 
@@ -8938,6 +10138,10 @@
     "starttime0": "2016-08-16T05:01:37Z"
   }, 
   "806": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "maskfile wrong", 
     "config_file": "DRS4_201608_14k.conf", 
     "dia1": "SiD1", 
@@ -8961,7 +10165,7 @@
   "807": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
@@ -8987,7 +10191,7 @@
   "808": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
@@ -9013,7 +10217,7 @@
   "809": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
@@ -9039,7 +10243,7 @@
   "811": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
@@ -9065,7 +10269,7 @@
   "812": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
@@ -9091,7 +10295,7 @@
   "813": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_2500k.conf", 
@@ -9117,7 +10321,7 @@
   "814": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_1000k.conf", 
@@ -9143,7 +10347,7 @@
   "815": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_400k.conf", 
@@ -9169,7 +10373,7 @@
   "816": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_110k.conf", 
@@ -9195,7 +10399,7 @@
   "817": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
@@ -9221,7 +10425,7 @@
   "818": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "6dB_3", 
+    "att_pul1": "6dB_1", 
     "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_14k.conf", 
@@ -9245,6 +10449,10 @@
     "starttime0": "2016-08-16T08:58:21Z"
   }, 
   "819": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9267,6 +10475,10 @@
     "starttime0": "2016-08-16T09:25:41Z"
   }, 
   "820": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9289,6 +10501,10 @@
     "starttime0": "2016-08-16T09:36:57Z"
   }, 
   "821": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9311,6 +10527,10 @@
     "starttime0": "2016-08-16T09:49:30Z"
   }, 
   "822": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9333,6 +10553,10 @@
     "starttime0": "2016-08-16T10:01:01Z"
   }, 
   "823": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9355,6 +10579,10 @@
     "starttime0": "2016-08-16T10:13:04Z"
   }, 
   "824": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9377,6 +10605,10 @@
     "starttime0": "2016-08-16T10:24:12Z"
   }, 
   "825": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9399,6 +10631,10 @@
     "starttime0": "2016-08-16T10:35:55Z"
   }, 
   "826": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9421,6 +10657,10 @@
     "starttime0": "2016-08-16T10:47:10Z"
   }, 
   "827": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9443,6 +10683,10 @@
     "starttime0": "2016-08-16T10:58:39Z"
   }, 
   "828": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9465,6 +10709,10 @@
     "starttime0": "2016-08-16T11:11:07Z"
   }, 
   "829": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9487,6 +10735,10 @@
     "starttime0": "2016-08-16T11:23:06Z"
   }, 
   "830": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9509,6 +10761,10 @@
     "starttime0": "2016-08-16T11:35:32Z"
   }, 
   "831": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9531,6 +10787,10 @@
     "starttime0": "2016-08-16T11:47:46Z"
   }, 
   "833": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "\r\n", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9553,6 +10813,10 @@
     "starttime0": "2016-08-16T12:11:29Z"
   }, 
   "834": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9575,6 +10839,10 @@
     "starttime0": "2016-08-16T12:22:21Z"
   }, 
   "836": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "DRS4_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9597,6 +10865,10 @@
     "starttime0": "2016-08-16T12:35:12Z"
   }, 
   "855": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "First run with CAEN after setting everything up", 
     "config_file": "CAEN_201608_14k", 
     "dia1": "SiD1", 
@@ -9606,6 +10878,7 @@
     "dia2hv": -500.0, 
     "dia2supply": "6", 
     "endtime": "2016-08-16T14:49:35Z", 
+    "events": 256442, 
     "for1": 13200, 
     "for2": 10666, 
     "fs11": 85.0, 
@@ -9618,6 +10891,10 @@
     "starttime0": "2016-08-16T14:35:39Z"
   }, 
   "856": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9640,6 +10917,10 @@
     "starttime0": "2016-08-16T14:50:13Z"
   }, 
   "857": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9662,6 +10943,10 @@
     "starttime0": "2016-08-16T15:03:12Z"
   }, 
   "858": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9684,6 +10969,10 @@
     "starttime0": "2016-08-16T15:14:48Z"
   }, 
   "859": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9706,6 +10995,10 @@
     "starttime0": "2016-08-16T15:25:48Z"
   }, 
   "860": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9728,6 +11021,10 @@
     "starttime0": "2016-08-16T15:36:30Z"
   }, 
   "861": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9750,6 +11047,10 @@
     "starttime0": "2016-08-16T15:49:03Z"
   }, 
   "862": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9772,6 +11073,10 @@
     "starttime0": "2016-08-16T16:00:22Z"
   }, 
   "863": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9794,6 +11099,10 @@
     "starttime0": "2016-08-16T16:10:59Z"
   }, 
   "864": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9816,6 +11125,10 @@
     "starttime0": "2016-08-16T16:22:02Z"
   }, 
   "865": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9838,6 +11151,10 @@
     "starttime0": "2016-08-16T16:33:50Z"
   }, 
   "866": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9860,6 +11177,10 @@
     "starttime0": "2016-08-16T16:44:41Z"
   }, 
   "867": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9882,6 +11203,10 @@
     "starttime0": "2016-08-16T16:55:48Z"
   }, 
   "868": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9904,6 +11229,10 @@
     "starttime0": "2016-08-16T17:06:45Z"
   }, 
   "869": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9926,6 +11255,10 @@
     "starttime0": "2016-08-16T17:17:37Z"
   }, 
   "870": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "\r\n", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9948,6 +11281,10 @@
     "starttime0": "2016-08-16T17:28:30Z"
   }, 
   "871": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9970,6 +11307,10 @@
     "starttime0": "2016-08-16T17:39:23Z"
   }, 
   "872": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -9992,6 +11333,10 @@
     "starttime0": "2016-08-16T18:43:46Z"
   }, 
   "873": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -10014,6 +11359,10 @@
     "starttime0": "2016-08-16T18:53:01Z"
   }, 
   "874": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_14k", 
     "dia1": "SiD1", 
@@ -10038,8 +11387,8 @@
   "875": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_14k.conf", 
     "dia1": "SiD1", 
@@ -10064,8 +11413,8 @@
   "876": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_50k.conf", 
     "dia1": "SiD1", 
@@ -10090,8 +11439,8 @@
   "877": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_110k.conf", 
     "dia1": "SiD1", 
@@ -10116,8 +11465,8 @@
   "878": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_400k.conf", 
     "dia1": "SiD1", 
@@ -10142,8 +11491,8 @@
   "879": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_1000k.conf", 
     "dia1": "SiD1", 
@@ -10168,8 +11517,8 @@
   "880": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_2500k.conf", 
     "dia1": "SiD1", 
@@ -10194,8 +11543,8 @@
   "881": {
     "att_dia1": "10dB_1", 
     "att_dia2": "6dB_2", 
-    "att_pul1": "20_dB_1", 
-    "att_pul2": "20_dB_1", 
+    "att_pul1": "6dB_1", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "config_file": "CAEN_201608_1000k.conf", 
     "dia1": "SiD1", 
@@ -10204,7 +11553,7 @@
     "dia2": "S129", 
     "dia2hv": 500.0, 
     "dia2supply": "6", 
-    "endtime": "2016-08-15T22:13:01Z", 
+    "endtime": "2016-08-16T22:13:01Z", 
     "events": 457506, 
     "for1": 237711, 
     "for2": 209625, 

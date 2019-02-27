@@ -1224,7 +1224,7 @@
     "dia2area": 0.0, 
     "dia2hv": 518.0, 
     "dia2supply": "7-1", 
-    "endtime": "2017-07-03T22:09:10Z", 
+    "endtime": "2017-07-04T22:09:10Z", 
     "events": 414670, 
     "for1": 258337, 
     "for2": 282351, 
@@ -1404,10 +1404,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T03:21:22Z", 
     "events": 157594, 
     "for1": 3390, 
@@ -1427,10 +1424,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T03:43:41Z", 
     "events": 313065, 
     "for1": 25805, 
@@ -1450,10 +1444,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T04:05:42Z", 
     "events": 356380, 
     "for1": 60000, 
@@ -1473,10 +1464,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T04:27:13Z", 
     "events": 329601, 
     "for1": 142000, 
@@ -1496,10 +1484,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T04:49:28Z", 
     "events": 313122, 
     "for1": 485000, 
@@ -1519,10 +1504,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T05:10:47Z", 
     "events": 286981, 
     "for1": 1365000, 
@@ -1542,10 +1524,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T05:33:21Z", 
     "events": 281995, 
     "for1": 441372, 
@@ -1565,10 +1544,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T05:54:53Z", 
     "events": 291232, 
     "for1": 132600, 
@@ -1588,10 +1564,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T06:14:27Z", 
     "events": 325556, 
     "for1": 55000, 
@@ -1611,10 +1584,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T06:35:08Z", 
     "events": 266048, 
     "for1": 20668, 
@@ -1634,10 +1604,7 @@
     "dia1area": 0.0, 
     "dia1hv": 150.0, 
     "dia1supply": "7-2", 
-    "dia2": "---", 
     "dia2area": 0.0, 
-    "dia2hv": 0.0, 
-    "dia2supply": "0", 
     "endtime": "2017-07-05T06:56:13Z", 
     "events": 126466, 
     "for1": 3080, 
@@ -1882,7 +1849,7 @@
     "starttime0": "2017-07-05T19:32:15Z"
   }, 
   "157": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -1905,7 +1872,7 @@
     "starttime0": "2017-07-05T19:55:02Z"
   }, 
   "158": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -1928,7 +1895,7 @@
     "starttime0": "2017-07-05T20:16:27Z"
   }, 
   "159": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -1973,7 +1940,7 @@
     "starttime0": "2017-07-05T21:02:30Z"
   }, 
   "161": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -1996,7 +1963,7 @@
     "starttime0": "2017-07-05T21:21:56Z"
   }, 
   "162": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2019,7 +1986,7 @@
     "starttime0": "2017-07-05T21:52:51Z"
   }, 
   "163": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2042,7 +2009,7 @@
     "starttime0": "2017-07-05T22:14:00Z"
   }, 
   "164": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2065,7 +2032,7 @@
     "starttime0": "2017-07-05T22:34:58Z"
   }, 
   "165": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2088,7 +2055,7 @@
     "starttime0": "2017-07-05T22:56:46Z"
   }, 
   "184": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2111,7 +2078,7 @@
     "starttime0": "2017-07-06T00:29:01Z"
   }, 
   "187": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2134,7 +2101,7 @@
     "starttime0": "2017-07-06T00:56:28Z"
   }, 
   "189": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2157,7 +2124,7 @@
     "starttime0": "2017-07-06T01:19:47Z"
   }, 
   "191": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2180,7 +2147,7 @@
     "starttime0": "2017-07-06T01:43:31Z"
   }, 
   "194": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2203,7 +2170,7 @@
     "starttime0": "2017-07-06T02:16:07Z"
   }, 
   "195": {
-    "comments": "", 
+    "comments": "iseg tripped...", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": -1000.0, 
@@ -2683,7 +2650,7 @@
     "starttime0": "2017-07-06T11:55:17Z"
   }, 
   "220": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "II6-B2", 
     "dia1area": 0.0, 
     "dia1hv": 1000.0, 

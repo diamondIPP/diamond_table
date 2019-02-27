@@ -44,7 +44,7 @@
     "starttime0": "2017-07-27T23:13:02Z"
   }, 
   "3": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -67,7 +67,7 @@
     "starttime0": "2017-07-27T23:18:42Z"
   }, 
   "4": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -90,7 +90,7 @@
     "starttime0": "2017-07-27T23:49:53Z"
   }, 
   "5": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -113,7 +113,7 @@
     "starttime0": "2017-07-28T00:11:33Z"
   }, 
   "6": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -136,7 +136,7 @@
     "starttime0": "2017-07-28T00:33:27Z"
   }, 
   "7": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -159,7 +159,7 @@
     "starttime0": "2017-07-28T00:54:18Z"
   }, 
   "8": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -182,7 +182,7 @@
     "starttime0": "2017-07-28T01:15:40Z"
   }, 
   "9": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -205,7 +205,7 @@
     "starttime0": "2017-07-28T01:37:02Z"
   }, 
   "10": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -228,7 +228,7 @@
     "starttime0": "2017-07-28T01:57:27Z"
   }, 
   "11": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -251,7 +251,7 @@
     "starttime0": "2017-07-28T02:19:03Z"
   }, 
   "12": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -274,7 +274,7 @@
     "starttime0": "2017-07-28T02:41:23Z"
   }, 
   "13": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "SiD2", 
     "dia1area": 600.0, 
     "dia1hv": 150.0, 
@@ -995,7 +995,7 @@
     "dia2area": 600.0, 
     "dia2hv": -800.0, 
     "dia2supply": "7-5", 
-    "endtime": "2017-07-27T22:03:20Z", 
+    "endtime": "2017-07-28T22:03:20Z", 
     "events": 528165, 
     "for1": 5292, 
     "for2": 4767, 
@@ -1280,7 +1280,7 @@
     "persons": "Micha, Christian", 
     "pulser": "extern", 
     "runnr": 82, 
-    "runtype": "test", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T02:52:25Z"
   }, 
   "83": {
@@ -1303,7 +1303,7 @@
     "persons": "Christian", 
     "pulser": "extern", 
     "runnr": 83, 
-    "runtype": "test", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T03:24:37Z"
   }, 
   "84": {
@@ -1326,7 +1326,7 @@
     "persons": "Christian", 
     "pulser": "extern", 
     "runnr": 84, 
-    "runtype": "test", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T03:48:33Z"
   }, 
   "85": {
@@ -1349,7 +1349,7 @@
     "persons": "Christian", 
     "pulser": "extern", 
     "runnr": 85, 
-    "runtype": "test", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T04:09:45Z"
   }, 
   "86": {
@@ -1372,7 +1372,7 @@
     "persons": "Christian", 
     "pulser": "extern", 
     "runnr": 86, 
-    "runtype": "test", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T04:31:17Z"
   }, 
   "87": {
@@ -1395,7 +1395,7 @@
     "persons": "Christian", 
     "pulser": "extern", 
     "runnr": 87, 
-    "runtype": "test", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T04:52:33Z"
   }, 
   "92": {
@@ -1418,7 +1418,7 @@
     "persons": "Dima, Dieguito, Micha", 
     "pulser": "extern", 
     "runnr": 92, 
-    "runtype": "rate_scan", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T21:21:41Z"
   }, 
   "93": {
@@ -1431,7 +1431,7 @@
     "dia2area": 600.0, 
     "dia2hv": 800.0, 
     "dia2supply": "7-2", 
-    "endtime": "2017-07-28T22:03:51Z", 
+    "endtime": "2017-07-29T22:03:51Z", 
     "events": 367870, 
     "for1": 1364445, 
     "for2": 1198142, 
@@ -1441,7 +1441,7 @@
     "persons": "Dima, Dieguito, Micha", 
     "pulser": "extern", 
     "runnr": 93, 
-    "runtype": "rate_scan", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T21:43:22Z"
   }, 
   "94": {
@@ -1464,7 +1464,7 @@
     "persons": "Dima, Micha", 
     "pulser": "extern", 
     "runnr": 94, 
-    "runtype": "rate_scan", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T22:04:38Z"
   }, 
   "95": {
@@ -1487,7 +1487,7 @@
     "persons": "Dima, Micha", 
     "pulser": "extern", 
     "runnr": 95, 
-    "runtype": "rate_scan", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T22:25:23Z"
   }, 
   "96": {
@@ -1510,7 +1510,7 @@
     "persons": "Dima, Micha", 
     "pulser": "extern", 
     "runnr": 96, 
-    "runtype": "rate_scan", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T22:45:56Z"
   }, 
   "97": {
@@ -1533,7 +1533,7 @@
     "persons": "Dima, Micha", 
     "pulser": "extern", 
     "runnr": 97, 
-    "runtype": "rate_scan", 
+    "runtype": "rate scan", 
     "starttime0": "2017-07-29T23:07:09Z"
   }, 
   "111": {
@@ -1789,7 +1789,7 @@
     "starttime0": "2017-07-30T05:03:36Z"
   }, 
   "125": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1812,7 +1812,7 @@
     "starttime0": "2017-07-30T05:27:19Z"
   }, 
   "126": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1835,7 +1835,7 @@
     "starttime0": "2017-07-30T05:59:55Z"
   }, 
   "127": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1858,7 +1858,7 @@
     "starttime0": "2017-07-30T06:22:33Z"
   }, 
   "128": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1881,7 +1881,7 @@
     "starttime0": "2017-07-30T06:47:32Z"
   }, 
   "129": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1904,7 +1904,7 @@
     "starttime0": "2017-07-30T07:10:42Z"
   }, 
   "130": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1927,7 +1927,7 @@
     "starttime0": "2017-07-30T07:49:55Z"
   }, 
   "131": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1950,7 +1950,7 @@
     "starttime0": "2017-07-30T08:14:17Z"
   }, 
   "132": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1973,7 +1973,7 @@
     "starttime0": "2017-07-30T08:36:15Z"
   }, 
   "133": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -1996,7 +1996,7 @@
     "starttime0": "2017-07-30T08:59:51Z"
   }, 
   "134": {
-    "comments": "", 
+    "comments": "iseg tripped", 
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": -1000.0, 
@@ -2115,11 +2115,11 @@
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": 900.0, 
-    "dia1supply": "7-4", 
+    "dia1supply": "7-1", 
     "dia2": "S129", 
     "dia2area": 600.0, 
     "dia2hv": 500.0, 
-    "dia2supply": "7-5", 
+    "dia2supply": "7-2", 
     "endtime": "2017-07-30T13:12:50Z", 
     "events": 336036, 
     "for1": 9289, 
@@ -2138,11 +2138,11 @@
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": 900.0, 
-    "dia1supply": "7-4", 
+    "dia1supply": "7-1", 
     "dia2": "S129", 
     "dia2area": 600.0, 
     "dia2hv": 500.0, 
-    "dia2supply": "7-5", 
+    "dia2supply": "7-2", 
     "endtime": "2017-07-30T13:33:46Z", 
     "events": 423503, 
     "for1": 40449, 
@@ -2161,11 +2161,11 @@
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": 900.0, 
-    "dia1supply": "7-4", 
+    "dia1supply": "7-1", 
     "dia2": "S129", 
     "dia2area": 600.0, 
     "dia2hv": 500.0, 
-    "dia2supply": "7-5", 
+    "dia2supply": "7-2", 
     "endtime": "2017-07-30T13:54:51Z", 
     "events": 374441, 
     "for1": 104148, 
@@ -2184,11 +2184,11 @@
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": 900.0, 
-    "dia1supply": "7-4", 
+    "dia1supply": "7-1", 
     "dia2": "S129", 
     "dia2area": 600.0, 
     "dia2hv": 500.0, 
-    "dia2supply": "7-5", 
+    "dia2supply": "7-2", 
     "endtime": "2017-07-30T14:15:42Z", 
     "events": 417296, 
     "for1": 305668, 
@@ -2207,11 +2207,11 @@
     "dia1": "B", 
     "dia1area": 600.0, 
     "dia1hv": 900.0, 
-    "dia1supply": "7-4", 
+    "dia1supply": "7-1", 
     "dia2": "S129", 
     "dia2area": 600.0, 
     "dia2hv": 500.0, 
-    "dia2supply": "7-5", 
+    "dia2supply": "7-2", 
     "endtime": "2017-07-30T14:37:29Z", 
     "events": 361428, 
     "for1": 1316048, 

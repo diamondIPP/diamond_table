@@ -44,6 +44,10 @@
     "starttime0": "2017-05-16T05:16:04Z"
   }, 
   "4": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "The signal was long time stable already in run 3.", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -67,6 +71,10 @@
     "starttime0": "2017-05-16T08:02:06Z"
   }, 
   "5": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -90,6 +98,10 @@
     "starttime0": "2017-05-16T08:27:44Z"
   }, 
   "6": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -113,6 +125,10 @@
     "starttime0": "2017-05-16T08:48:41Z"
   }, 
   "7": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -136,6 +152,10 @@
     "starttime0": "2017-05-16T09:11:23Z"
   }, 
   "8": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -159,10 +179,14 @@
     "starttime0": "2017-05-16T09:34:53Z"
   }, 
   "9": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
-    "dia1hv": 150.0, 
+    "dia1hv": 0.0, 
     "dia1supply": "7-2", 
     "dia2": "S129", 
     "dia2area": 0.0, 
@@ -182,6 +206,10 @@
     "starttime0": "2017-05-16T09:58:05Z"
   }, 
   "10": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -205,6 +233,10 @@
     "starttime0": "2017-05-16T10:20:07Z"
   }, 
   "11": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "FS13 crashed, not sure if already in last run, so this is another 10000kHz run. Also the beam was opened after the run was started. And there was a run max event set to 200k in the previous run too.", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -228,6 +260,10 @@
     "starttime0": "2017-05-16T11:24:16Z"
   }, 
   "12": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -251,10 +287,14 @@
     "starttime0": "2017-05-16T11:46:52Z"
   }, 
   "13": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
-    "dia1hv": 150.0, 
+    "dia1hv": 0.0, 
     "dia1supply": "7-2", 
     "dia2": "S129", 
     "dia2area": 0.0, 
@@ -274,10 +314,14 @@
     "starttime0": "2017-05-16T12:09:49Z"
   }, 
   "14": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
-    "dia1hv": 150.0, 
+    "dia1hv": 0.0, 
     "dia1supply": "7-2", 
     "dia2": "S129", 
     "dia2area": 0.0, 
@@ -297,10 +341,14 @@
     "starttime0": "2017-05-16T12:34:03Z"
   }, 
   "15": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
-    "dia1hv": 150.0, 
+    "dia1hv": 0.0, 
     "dia1supply": "7-2", 
     "dia2": "S129", 
     "dia2area": 0.0, 
@@ -320,6 +368,10 @@
     "starttime0": "2017-05-16T12:58:21Z"
   }, 
   "16": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -343,6 +395,10 @@
     "starttime0": "2017-05-16T13:18:42Z"
   }, 
   "17": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -366,6 +422,10 @@
     "starttime0": "2017-05-16T13:41:22Z"
   }, 
   "18": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -389,6 +449,10 @@
     "starttime0": "2017-05-16T14:32:52Z"
   }, 
   "19": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -412,6 +476,10 @@
     "starttime0": "2017-05-16T14:45:27Z"
   }, 
   "20": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -435,6 +503,10 @@
     "starttime0": "2017-05-16T14:56:26Z"
   }, 
   "21": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -458,6 +530,10 @@
     "starttime0": "2017-05-16T15:06:44Z"
   }, 
   "22": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -481,6 +557,10 @@
     "starttime0": "2017-05-16T15:18:22Z"
   }, 
   "23": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -504,6 +584,10 @@
     "starttime0": "2017-05-16T15:30:19Z"
   }, 
   "24": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -527,6 +611,10 @@
     "starttime0": "2017-05-16T15:42:01Z"
   }, 
   "25": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -550,6 +638,10 @@
     "starttime0": "2017-05-16T15:53:13Z"
   }, 
   "26": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -573,6 +665,10 @@
     "starttime0": "2017-05-16T16:05:51Z"
   }, 
   "27": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Beam was down due to the tuning.", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -596,6 +692,10 @@
     "starttime0": "2017-05-16T16:18:03Z"
   }, 
   "28": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Beam was not stable due to tuning.", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -619,6 +719,10 @@
     "starttime0": "2017-05-16T16:45:58Z"
   }, 
   "29": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -642,6 +746,10 @@
     "starttime0": "2017-05-16T17:02:33Z"
   }, 
   "30": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 
@@ -665,6 +773,10 @@
     "starttime0": "2017-05-16T17:14:25Z"
   }, 
   "38": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "test run at +500V at 1k", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -688,6 +800,10 @@
     "starttime0": "2017-05-16T22:01:21Z"
   }, 
   "39": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "irratic currents of around 60 nA -> decreasing bias to +500", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -711,6 +827,10 @@
     "starttime0": "2017-05-16T22:24:13Z"
   }, 
   "40": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -734,6 +854,10 @@
     "starttime0": "2017-05-16T22:48:42Z"
   }, 
   "41": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -757,6 +881,10 @@
     "starttime0": "2017-05-16T23:11:07Z"
   }, 
   "42": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "fsh 13 disconnected again... rates slightly lower", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -780,6 +908,10 @@
     "starttime0": "2017-05-16T23:33:59Z"
   }, 
   "43": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "FSH13 crashed closing beam and restarting the LabView thing", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -803,6 +935,10 @@
     "starttime0": "2017-05-17T00:03:29Z"
   }, 
   "44": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -826,6 +962,10 @@
     "starttime0": "2017-05-17T00:24:49Z"
   }, 
   "45": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -849,6 +989,10 @@
     "starttime0": "2017-05-17T00:46:00Z"
   }, 
   "46": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -872,6 +1016,10 @@
     "starttime0": "2017-05-17T01:08:35Z"
   }, 
   "48": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -895,6 +1043,10 @@
     "starttime0": "2017-05-17T01:31:42Z"
   }, 
   "49": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -918,6 +1070,10 @@
     "starttime0": "2017-05-17T01:52:55Z"
   }, 
   "50": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -941,6 +1097,10 @@
     "starttime0": "2017-05-17T02:16:44Z"
   }, 
   "51": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -964,6 +1124,10 @@
     "starttime0": "2017-05-17T02:38:44Z"
   }, 
   "52": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -987,6 +1151,10 @@
     "starttime0": "2017-05-17T03:00:40Z"
   }, 
   "55": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Runs 53 and 54 are crap. In one the TU crashed.", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1009,6 +1177,10 @@
     "starttime0": "2017-05-17T03:37:06Z"
   }, 
   "56": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Raised the voltage. End time is not the real one.", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1031,6 +1203,10 @@
     "starttime0": "2017-05-17T04:04:11Z"
   }, 
   "57": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Voltage for Einstein was set back to 486 as written. raised voltages and then pumped with the beam at 10MHz with collimator settings 280 145. Signal looked stable so continued with rate program. Start and end time are not the real ones.", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1053,6 +1229,10 @@
     "starttime0": "2017-05-17T05:04:44Z"
   }, 
   "58": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Started rate scan with negative voltage for II6-H0. 97-3 's voltage was not changed. Stayed at +486V.", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1061,7 +1241,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T05:28:50Z", 
     "events": 129247, 
     "for1": 1717, 
@@ -1076,6 +1256,10 @@
     "starttime0": "2017-05-17T05:08:31Z"
   }, 
   "59": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1084,7 +1268,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T05:49:56Z", 
     "events": 170614, 
     "for1": 2621, 
@@ -1099,6 +1283,10 @@
     "starttime0": "2017-05-17T05:29:43Z"
   }, 
   "60": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1107,7 +1295,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T06:12:24Z", 
     "events": 420789, 
     "for1": 34650, 
@@ -1122,6 +1310,10 @@
     "starttime0": "2017-05-17T05:51:50Z"
   }, 
   "61": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Found out that we forgot to change the pulser polarity. Changing the pulser after this run", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1130,14 +1322,14 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T06:33:41Z", 
     "events": 452751, 
     "for1": 608400, 
     "for2": 496700, 
     "fs11": 90.0, 
     "fs13": 90.0, 
-    "maskfile": "SiD_S129_2017_05_16_23_50.msk", 
+    "maskfile": "None", 
     "persons": "Diego Alejandro, Harris", 
     "pulser": "extern", 
     "runnr": 61, 
@@ -1145,6 +1337,10 @@
     "starttime0": "2017-05-17T06:13:23Z"
   }, 
   "62": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1153,7 +1349,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T07:03:20Z", 
     "events": 298840, 
     "for1": 852318, 
@@ -1168,7 +1364,11 @@
     "starttime0": "2017-05-17T06:42:53Z"
   }, 
   "63": {
-    "comments": "", 
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
+    "comments": "run 61 and 63 have no mask in telescope...", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
     "dia1hv": 486.0, 
@@ -1176,14 +1376,14 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T07:26:39Z", 
     "events": 447881, 
     "for1": 578518, 
     "for2": 473265, 
     "fs11": 90.0, 
     "fs13": 90.0, 
-    "maskfile": "SiD_S129_2017_05_16_23_50.msk", 
+    "maskfile": "None", 
     "persons": "Diego Alejandro", 
     "pulser": "extern", 
     "runnr": 63, 
@@ -1191,6 +1391,10 @@
     "starttime0": "2017-05-17T07:06:18Z"
   }, 
   "64": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1199,7 +1403,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T07:48:12Z", 
     "events": 410965, 
     "for1": 33058, 
@@ -1214,6 +1418,10 @@
     "starttime0": "2017-05-17T07:27:55Z"
   }, 
   "65": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1222,7 +1430,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T08:09:41Z", 
     "events": 167806, 
     "for1": 2625, 
@@ -1237,6 +1445,10 @@
     "starttime0": "2017-05-17T07:49:20Z"
   }, 
   "66": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -1245,7 +1457,7 @@
     "dia2": "H0-1", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-1", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-17T08:31:39Z", 
     "events": 129219, 
     "for1": 1600, 
@@ -1260,6 +1472,10 @@
     "starttime0": "2017-05-17T08:10:21Z"
   }, 
   "71": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Enlarged mask after this run to make sure it includes all of H0\r\nRun72 was used to check that new mask.", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1282,6 +1498,10 @@
     "starttime0": "2017-05-17T14:07:45Z"
   }, 
   "73": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1304,6 +1524,10 @@
     "starttime0": "2017-05-17T15:27:35Z"
   }, 
   "74": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "rates are higher than I would think...\r\npulser rate much too low... retake", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1326,6 +1550,10 @@
     "starttime0": "2017-05-17T16:34:15Z"
   }, 
   "76": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "changing prescale to 20 since rate is much higher...", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1349,6 +1577,10 @@
     "starttime0": "2017-05-17T17:30:49Z"
   }, 
   "78": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1372,6 +1604,10 @@
     "starttime0": "2017-05-17T17:31:16Z"
   }, 
   "80": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1395,6 +1631,10 @@
     "starttime0": "2017-05-17T17:52:36Z"
   }, 
   "82": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "long run with beam down in the beginning\r\nstable beam after ~500k events", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1418,6 +1658,10 @@
     "starttime0": "2017-05-17T18:25:20Z"
   }, 
   "83": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1441,6 +1685,10 @@
     "starttime0": "2017-05-17T20:50:16Z"
   }, 
   "84": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1464,6 +1712,10 @@
     "starttime0": "2017-05-17T21:13:32Z"
   }, 
   "85": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1487,6 +1739,10 @@
     "starttime0": "2017-05-17T21:37:14Z"
   }, 
   "88": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1510,6 +1766,10 @@
     "starttime0": "2017-05-17T22:07:02Z"
   }, 
   "89": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1533,6 +1793,10 @@
     "starttime0": "2017-05-17T22:29:43Z"
   }, 
   "90": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1556,6 +1820,10 @@
     "starttime0": "2017-05-17T22:51:27Z"
   }, 
   "91": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "ramping  voltage down to 0", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1579,6 +1847,10 @@
     "starttime0": "2017-05-17T23:15:38Z"
   }, 
   "92": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "ramping voltage to -500", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1602,6 +1874,10 @@
     "starttime0": "2017-05-17T23:38:00Z"
   }, 
   "93": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1624,6 +1900,10 @@
     "starttime0": "2017-05-17T23:56:24Z"
   }, 
   "94": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1647,6 +1927,10 @@
     "starttime0": "2017-05-18T00:58:42Z"
   }, 
   "95": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1670,6 +1954,10 @@
     "starttime0": "2017-05-18T01:19:52Z"
   }, 
   "96": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1693,6 +1981,10 @@
     "starttime0": "2017-05-18T01:40:36Z"
   }, 
   "97": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1716,6 +2008,10 @@
     "starttime0": "2017-05-18T02:02:09Z"
   }, 
   "98": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1739,6 +2035,10 @@
     "starttime0": "2017-05-18T02:23:46Z"
   }, 
   "99": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1762,6 +2062,10 @@
     "starttime0": "2017-05-18T02:44:29Z"
   }, 
   "100": {
+    "att_dia1": "None", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S83", 
     "dia1area": 0.0, 
@@ -1785,6 +2089,10 @@
     "starttime0": "2017-05-18T03:05:48Z"
   }, 
   "108": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Put in 10dB_1 attenuator for Heisenberg during the run. Changed voltage to 518 to Heisenberg. Current is stable.", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1808,6 +2116,10 @@
     "starttime0": "2017-05-18T06:51:53Z"
   }, 
   "109": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1831,6 +2143,10 @@
     "starttime0": "2017-05-18T07:48:54Z"
   }, 
   "111": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Prescaler was to low. adjusting", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1854,6 +2170,10 @@
     "starttime0": "2017-05-18T08:13:31Z"
   }, 
   "112": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1877,6 +2197,10 @@
     "starttime0": "2017-05-18T08:34:38Z"
   }, 
   "113": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1900,6 +2224,10 @@
     "starttime0": "2017-05-18T08:55:59Z"
   }, 
   "114": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Problem with collimator FS13. Plug-unplug", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1923,6 +2251,10 @@
     "starttime0": "2017-05-18T09:25:51Z"
   }, 
   "115": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Pulser rate to high.", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1946,6 +2278,10 @@
     "starttime0": "2017-05-18T09:46:37Z"
   }, 
   "116": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Reduced prescaler by a factor of 2", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1969,6 +2305,10 @@
     "starttime0": "2017-05-18T09:59:11Z"
   }, 
   "117": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Still too high the pulser rate. Reduced prescaler by another factor of 2 for this run.", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -1992,6 +2332,10 @@
     "starttime0": "2017-05-18T10:02:34Z"
   }, 
   "118": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -2015,6 +2359,10 @@
     "starttime0": "2017-05-18T10:24:00Z"
   }, 
   "119": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -2038,6 +2386,10 @@
     "starttime0": "2017-05-18T10:46:04Z"
   }, 
   "120": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -2061,6 +2413,10 @@
     "starttime0": "2017-05-18T10:58:31Z"
   }, 
   "121": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
@@ -2084,15 +2440,19 @@
     "starttime0": "2017-05-18T11:07:50Z"
   }, 
   "122": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Opened while FS11 was still moving - remove first 6k events..", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T12:26:56Z", 
     "events": 163308, 
     "for1": 1743, 
@@ -2107,15 +2467,19 @@
     "starttime0": "2017-05-18T12:07:03Z"
   }, 
   "123": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T12:48:02Z", 
     "events": 291756, 
     "for1": 6668, 
@@ -2130,15 +2494,19 @@
     "starttime0": "2017-05-18T12:27:52Z"
   }, 
   "124": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T13:10:17Z", 
     "events": 298100, 
     "for1": 154395, 
@@ -2153,15 +2521,19 @@
     "starttime0": "2017-05-18T12:49:00Z"
   }, 
   "125": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T13:33:04Z", 
     "events": 377500, 
     "for1": 1421560, 
@@ -2176,15 +2548,19 @@
     "starttime0": "2017-05-18T13:11:45Z"
   }, 
   "126": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T13:55:00Z", 
     "events": 273890, 
     "for1": 148017, 
@@ -2199,15 +2575,19 @@
     "starttime0": "2017-05-18T13:34:40Z"
   }, 
   "127": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T14:16:55Z", 
     "events": 289679, 
     "for1": 6407, 
@@ -2222,15 +2602,19 @@
     "starttime0": "2017-05-18T13:56:46Z"
   }, 
   "128": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Heisenberg", 
     "dia1area": 0.0, 
     "dia1hv": -518.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-3", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-18T14:38:59Z", 
     "events": 157414, 
     "for1": 1578, 
@@ -2245,6 +2629,10 @@
     "starttime0": "2017-05-18T14:18:57Z"
   }, 
   "130": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "raising voltage with the beam on", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2268,6 +2656,10 @@
     "starttime0": "2017-05-18T16:25:05Z"
   }, 
   "131": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "searching S97 shadow", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2290,6 +2682,10 @@
     "starttime0": "2017-05-18T16:31:56Z"
   }, 
   "132": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "Searching for shadow of II6-H0_2x4", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2312,6 +2708,10 @@
     "starttime0": "2017-05-18T16:35:46Z"
   }, 
   "134": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "pumping", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2335,6 +2735,10 @@
     "starttime0": "2017-05-18T16:58:30Z"
   }, 
   "136": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2358,6 +2762,10 @@
     "starttime0": "2017-05-18T21:00:29Z"
   }, 
   "137": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2381,6 +2789,10 @@
     "starttime0": "2017-05-18T21:21:57Z"
   }, 
   "138": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2390,7 +2802,7 @@
     "dia2area": 0.0, 
     "dia2hv": 500.0, 
     "dia2supply": "7-2", 
-    "endtime": "2017-05-17T22:02:40Z", 
+    "endtime": "2017-05-18T22:02:40Z", 
     "events": 222537, 
     "for1": 192099, 
     "for2": 154229, 
@@ -2404,6 +2816,10 @@
     "starttime0": "2017-05-18T21:42:29Z"
   }, 
   "139": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2427,6 +2843,10 @@
     "starttime0": "2017-05-18T22:05:01Z"
   }, 
   "140": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2450,6 +2870,10 @@
     "starttime0": "2017-05-18T22:26:44Z"
   }, 
   "141": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2473,6 +2897,10 @@
     "starttime0": "2017-05-18T22:48:57Z"
   }, 
   "142": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2496,6 +2924,10 @@
     "starttime0": "2017-05-18T23:10:54Z"
   }, 
   "143": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "ramping down to 0", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2518,6 +2950,10 @@
     "starttime0": "2017-05-18T23:33:42Z"
   }, 
   "145": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "ramping to negative voltage, ISEG did not cooperate, started run when detectors were already at voltage", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2540,6 +2976,10 @@
     "starttime0": "2017-05-19T00:10:00Z"
   }, 
   "146": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2562,15 +3002,19 @@
     "starttime0": "2017-05-19T00:11:30Z"
   }, 
   "147": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
     "dia1hv": -533.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-4", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-19T01:31:56Z", 
     "events": 203039, 
     "for1": 2585, 
@@ -2585,15 +3029,19 @@
     "starttime0": "2017-05-19T01:11:42Z"
   }, 
   "148": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
     "dia1hv": -533.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-4", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-19T01:52:54Z", 
     "events": 320535, 
     "for1": 13512, 
@@ -2608,15 +3056,19 @@
     "starttime0": "2017-05-19T01:32:39Z"
   }, 
   "149": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
     "dia1hv": -533.0, 
-    "dia1supply": "7-0", 
+    "dia1supply": "7-5", 
     "dia2": "H0-4", 
     "dia2area": 0.0, 
     "dia2hv": -500.0, 
-    "dia2supply": "7-2", 
+    "dia2supply": "7-3", 
     "endtime": "2017-05-19T02:16:22Z", 
     "events": 326971, 
     "for1": 203843, 
@@ -2631,6 +3083,10 @@
     "starttime0": "2017-05-19T01:53:28Z"
   }, 
   "150": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2654,6 +3110,10 @@
     "starttime0": "2017-05-19T02:18:43Z"
   }, 
   "151": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2677,6 +3137,10 @@
     "starttime0": "2017-05-19T02:41:04Z"
   }, 
   "152": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2700,6 +3164,10 @@
     "starttime0": "2017-05-19T03:02:04Z"
   }, 
   "153": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "S97", 
     "dia1area": 0.0, 
@@ -2723,6 +3191,10 @@
     "starttime0": "2017-05-19T03:23:27Z"
   }, 
   "155": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "ignore rate information", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2745,6 +3217,10 @@
     "starttime0": "2017-05-19T06:12:14Z"
   }, 
   "156": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2767,6 +3243,10 @@
     "starttime0": "2017-05-19T06:17:59Z"
   }, 
   "160": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2789,6 +3269,10 @@
     "starttime0": "2017-05-19T07:02:09Z"
   }, 
   "161": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2812,6 +3296,10 @@
     "starttime0": "2017-05-19T08:05:20Z"
   }, 
   "164": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2835,6 +3323,10 @@
     "starttime0": "2017-05-19T08:30:27Z"
   }, 
   "167": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "15 minutes beam interruption started at the end of the run", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2858,6 +3350,10 @@
     "starttime0": "2017-05-19T08:53:49Z"
   }, 
   "170": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2881,6 +3377,10 @@
     "starttime0": "2017-05-19T09:28:47Z"
   }, 
   "171": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2904,6 +3404,10 @@
     "starttime0": "2017-05-19T09:50:58Z"
   }, 
   "172": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2927,6 +3431,10 @@
     "starttime0": "2017-05-19T10:13:21Z"
   }, 
   "173": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2950,6 +3458,10 @@
     "starttime0": "2017-05-19T10:33:54Z"
   }, 
   "174": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2972,6 +3484,10 @@
     "starttime0": "2017-05-19T10:54:15Z"
   }, 
   "175": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -2994,6 +3510,10 @@
     "starttime0": "2017-05-19T11:12:05Z"
   }, 
   "176": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3016,6 +3536,10 @@
     "starttime0": "2017-05-19T11:12:32Z"
   }, 
   "177": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3039,6 +3563,10 @@
     "starttime0": "2017-05-19T12:22:59Z"
   }, 
   "178": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "pulser rate lowish in this run. Changed pre-scaler from 6 to 10 for the next run at this rate", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3062,6 +3590,10 @@
     "starttime0": "2017-05-19T12:45:13Z"
   }, 
   "179": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3085,6 +3617,10 @@
     "starttime0": "2017-05-19T13:08:06Z"
   }, 
   "180": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3108,6 +3644,10 @@
     "starttime0": "2017-05-19T13:30:46Z"
   }, 
   "181": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3131,6 +3671,10 @@
     "starttime0": "2017-05-19T13:53:34Z"
   }, 
   "182": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3154,6 +3698,10 @@
     "starttime0": "2017-05-19T14:15:28Z"
   }, 
   "183": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "", 
     "dia1": "Einstein", 
     "dia1area": 0.0, 
@@ -3177,6 +3725,10 @@
     "starttime0": "2017-05-19T14:37:10Z"
   }, 
   "186": {
+    "att_dia1": "10dB_1", 
+    "att_dia2": "6dB_2", 
+    "att_pul1": "6dB_3", 
+    "att_pul2": "6dB_1", 
     "comments": "pixel producer crashed after ~200k events", 
     "dia1": "SiD2", 
     "dia1area": 0.0, 

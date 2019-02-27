@@ -185,6 +185,23 @@
       ], 
       "type": "up scan"
     }, 
+    "01.2": {
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
+      "runs": [
+        69, 
+        73, 
+        74, 
+        75, 
+        76, 
+        77
+      ], 
+      "type": "up scan"
+    }, 
     "02": {
       "attenuators": {
         "dia1": "None", 
@@ -1306,6 +1323,12 @@
   }, 
   "201608": {
     "05": {
+      "attenuators": {
+        "dia1": "10dB_1", 
+        "dia2": "None", 
+        "pulser1": "6dB_3", 
+        "pulser2": "6dB_1"
+      }, 
       "runs": [
         443, 
         444, 
@@ -1327,6 +1350,12 @@
       "type": "voltage scan"
     }, 
     "06": {
+      "attenuators": {
+        "dia1": "10dB_1", 
+        "dia2": "None", 
+        "pulser1": "6dB_3", 
+        "pulser2": "6dB_1"
+      }, 
       "runs": [
         459, 
         460, 
@@ -1348,6 +1377,12 @@
       "type": "voltage scan"
     }, 
     "07": {
+      "attenuators": {
+        "dia1": "10dB_1", 
+        "dia2": "None", 
+        "pulser1": "6dB_3", 
+        "pulser2": "6dB_1"
+      }, 
       "runs": [
         477, 
         478, 
@@ -2096,7 +2131,8 @@
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
-        "pulser": "6DB_1 + 10DB_1"
+        "pulser1": "6dB_1", 
+        "pulser2": "10dB_1"
       }, 
       "runs": [
         120, 
@@ -2141,13 +2177,14 @@
         160, 
         161
       ], 
-      "type": "rate_scan"
+      "type": "rate scan"
     }, 
     "06.1": {
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
-        "pulser": "6DB_1 + 10DB_1"
+        "pulser1": "6DB_1", 
+        "pulser2": "10DB_1"
       }, 
       "runs": [
         130, 
@@ -2163,7 +2200,8 @@
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
-        "pulser": "6dB_3"
+        "pulser1": "6dB_1", 
+        "pulser2": "10dB_1"
       }, 
       "runs": [
         168, 
@@ -2269,7 +2307,8 @@
       "attenuators": {
         "dia1": "10dB_1", 
         "dia2": "6dB_2", 
-        "pulser": "6dB_3 + 6dB_1"
+        "pulser1": "6dB_3", 
+        "pulser2": "6dB_1"
       }, 
       "runs": [
         222, 
@@ -2493,6 +2532,20 @@
       ], 
       "type": "rate scan"
     }, 
+    "15": {
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        360, 
+        361, 
+        362
+      ], 
+      "type": "voltage scan"
+    }, 
     "16": {
       "attenuators": {
         "dia1": "None", 
@@ -2615,7 +2668,6 @@
         7, 
         8, 
         9, 
-        10, 
         11, 
         12, 
         13, 
@@ -2640,7 +2692,7 @@
         7, 
         8, 
         9, 
-        10
+        11
       ], 
       "type": "up scan"
     }, 
@@ -2956,20 +3008,17 @@
         357
       ], 
       "type": "voltage scan"
-    }, 
-    "20": {
-      "runs": [
-        45, 
-        84, 
-        113, 
-        139, 
-        170
-      ], 
-      "type": "high rates"
     }
   }, 
   "201707": {
     "01": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
       "runs": [
         1, 
         2, 
@@ -2992,6 +3041,13 @@
       "type": "voltage scan"
     }, 
     "02": {
+      "amplifiers": "[\"Cx_1\", \"C6_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
       "runs": [
         34, 
         35, 
@@ -3014,6 +3070,13 @@
       "type": "voltage scan"
     }, 
     "03": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
       "runs": [
         58, 
         59, 
@@ -3030,6 +3093,13 @@
       "type": "rate scan"
     }, 
     "04": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
       "runs": [
         72, 
         73, 
@@ -3319,7 +3389,7 @@
     "06": {
       "attenuators": {
         "dia1": "None", 
-        "dia2": "None", 
+        "dia2": "6dB_2", 
         "pulser1": "6dB_3", 
         "pulser2": "6dB_1"
       }, 
@@ -3351,7 +3421,7 @@
     "07": {
       "attenuators": {
         "dia1": "None", 
-        "dia2": "None", 
+        "dia2": "6dB_2", 
         "pulser1": "6dB_3", 
         "pulser2": "6dB_1"
       }, 
@@ -3367,11 +3437,12 @@
   }, 
   "201708": {
     "01": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         2, 
@@ -3389,11 +3460,12 @@
       "type": "rate scan"
     }, 
     "02": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         15, 
@@ -3411,11 +3483,12 @@
       "type": "rate scan"
     }, 
     "03": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         49, 
@@ -3433,11 +3506,12 @@
       "type": "rate scan"
     }, 
     "04": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         62, 
@@ -3455,11 +3529,12 @@
       "type": "rate scan"
     }, 
     "05": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         81, 
@@ -3477,11 +3552,12 @@
       "type": "rate scan"
     }, 
     "06": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         93, 
@@ -3789,12 +3865,58 @@
       ], 
       "type": "rate scan"
     }, 
-    "08": {
+    "07": {
+      "amplifiers": "[\"C6_1\", \"Cx_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
+      "runs": [
+        179, 
+        180, 
+        181, 
+        182, 
+        183, 
+        187
+      ], 
+      "type": "voltage scan"
+    }, 
+    "08": {
+      "amplifiers": "[\"Cx_2\", \"C6_1\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
+      "runs": [
+        188, 
+        189, 
+        190, 
+        191, 
+        192, 
+        193, 
+        194, 
+        195, 
+        196, 
+        197, 
+        198, 
+        199, 
+        200, 
+        201, 
+        202
+      ], 
+      "type": "digitiser test"
+    }, 
+    "09": {
+      "amplifiers": "[\"Cx_2\", \"C6_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         265, 
@@ -3806,12 +3928,13 @@
       ], 
       "type": "rate scan"
     }, 
-    "09": {
+    "10": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
-        "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
       }, 
       "runs": [
         274, 
@@ -3822,6 +3945,32 @@
         280
       ], 
       "type": "rate scan"
+    }, 
+    "11": {
+      "amplifiers": "[\"Cx_2\", \"C6_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
+      "runs": [
+        281
+      ], 
+      "type": "digitiser test"
+    }, 
+    "12": {
+      "amplifiers": "[\"C6_2\", \"Cx_2\"]", 
+      "attenuators": {
+        "dia1": null, 
+        "dia2": null, 
+        "pulser1": null, 
+        "pulser2": null
+      }, 
+      "runs": [
+        282
+      ], 
+      "type": "digitiser test"
     }
   }, 
   "201807": {
@@ -4672,6 +4821,7 @@
       "type": "angle scan"
     }, 
     "10": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4684,6 +4834,7 @@
       "type": "calibration"
     }, 
     "11": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4708,6 +4859,7 @@
       "type": "rate scan"
     }, 
     "12": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4732,6 +4884,7 @@
       "type": "rate scan"
     }, 
     "13": {
+      "amplifiers": "[\"C6_1\", \"C2_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4749,6 +4902,7 @@
       "type": "voltage scan"
     }, 
     "14": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4766,6 +4920,7 @@
       "type": "voltage scan"
     }, 
     "15": {
+      "amplifiers": "[\"C6_2\", \"\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4785,11 +4940,10 @@
       "type": "voltage scan"
     }, 
     "16": {
+      "amplifiers": "[\"C6_2\", \"\"]", 
       "attenuators": {
         "dia1": "None", 
-        "dia2": "None", 
-        "pulser1": "None", 
-        "pulser2": "None"
+        "pulser1": "None"
       }, 
       "runs": [
         458, 
@@ -4800,7 +4954,6 @@
         463, 
         464, 
         465, 
-        466, 
         467, 
         468, 
         469, 
@@ -4810,6 +4963,7 @@
       "type": "rate scan"
     }, 
     "17": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4828,6 +4982,7 @@
       "type": "voltage scan"
     }, 
     "18": {
+      "amplifiers": "[\"C6_1\", \"C6_2\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4853,6 +5008,7 @@
       "type": "rate scan"
     }, 
     "19": {
+      "amplifiers": "[\"C6_1\", \"\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4871,6 +5027,7 @@
       "type": "voltage scan"
     }, 
     "20": {
+      "amplifiers": "[\"C6_1\", \"\"]", 
       "attenuators": {
         "dia1": "None", 
         "dia2": "None", 
@@ -4894,6 +5051,97 @@
         620
       ], 
       "type": "rate scan"
+    }, 
+    "21": {
+      "amplifiers": "[\"OSU2-C1-1\", \"\"]", 
+      "attenuators": {
+        "dia1": "None", 
+        "pulser1": "None"
+      }, 
+      "runs": [
+        511, 
+        513, 
+        514, 
+        515, 
+        516, 
+        517, 
+        520, 
+        522, 
+        523, 
+        524, 
+        525
+      ], 
+      "type": "bcm' box1"
+    }, 
+    "22": {
+      "amplifiers": "[\"OSU2-C2-1\", \"\"]", 
+      "attenuators": {
+        "dia1": "None", 
+        "pulser1": "None"
+      }, 
+      "runs": [
+        538, 
+        539, 
+        540, 
+        541, 
+        542, 
+        543, 
+        544, 
+        545, 
+        546
+      ], 
+      "type": "bcm' box1"
+    }, 
+    "23": {
+      "amplifiers": "[\"OSU2-C1-1\", \"OSU2-C2-1\"]", 
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        551, 
+        553, 
+        554, 
+        555
+      ], 
+      "type": "bcm' box1"
+    }, 
+    "24": {
+      "amplifiers": "[\"OSU2-C1-1\", \"OSU2-C2-1\"]", 
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        565, 
+        566, 
+        567, 
+        568
+      ], 
+      "type": "bcm' box2"
+    }, 
+    "25": {
+      "amplifiers": "[\"OSU2-C1-1\", \"OSU2-C2-1\"]", 
+      "attenuators": {
+        "dia1": "None", 
+        "dia2": "None", 
+        "pulser1": "None", 
+        "pulser2": "None"
+      }, 
+      "runs": [
+        569, 
+        570, 
+        571, 
+        573, 
+        574, 
+        575, 
+        579
+      ], 
+      "type": "bcm' box2"
     }
   }
 }
