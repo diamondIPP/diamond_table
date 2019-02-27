@@ -92,8 +92,14 @@ def make_abs_link(target, name, active=False, center=False, new_tab=False, use_n
 
 def make_figure(path, name='', width=None, height=None):
     width = ' width="{}"'.format(width) if width is not None else ''
-    height = ' height"{}"'.format(height) if height is not None else ''
+    height = ' height="{}"'.format(height) if height is not None else ''
     return '<img src="{path}" alt="{name}"{w}{h}>'.format(path=abs_html_path(path), name=name, w=width, h=height)
+
+
+def embed_pdf(path, width=None, height=None):
+    width = ' width="{}"'.format(width) if width is not None else ''
+    height = ' height="{}"'.format(height) if height is not None else ''
+    return '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={}"{}{}>'.format(path, width, height)
 
 
 def indent(txt, n_spaces=2):
