@@ -6,6 +6,7 @@
 import HTMLTable
 from Table import Table
 from Utils import *
+from json import loads
 
 
 class RunPlanTable(Table):
@@ -23,7 +24,7 @@ class RunPlanTable(Table):
 
     def get_tc_body(self, tc):
         txt = make_lines(3)
-        txt += head(bold('Run Plan Ovierview for the Test Campaign in {tc}'.format(tc=tc_to_str(tc, short=False))))
+        txt += head(bold('Run Plan Overview for the Test Campaign in {tc}'.format(tc=tc_to_str(tc, short=False))))
         txt += self.build_tc_table(tc)
         return txt
 
@@ -48,6 +49,8 @@ class RunPlanTable(Table):
             return sum(1 for plan in run_info if runplan in plan)
 
         header = ['#rs2#Run Plan',
+                  '#rs2#Digitiser',
+                  '#rs2#Amplifier',
                   '#rs2#Sub Plan',
                   '#rs2#Run Type',
                   '#rs2#Runs',
@@ -56,12 +59,15 @@ class RunPlanTable(Table):
         rows = [[center_txt(txt) for txt in ['Info', 'Diamond', 'Detector', 'Bias [V]'] * max_channels]]
 
         for i, (rp, data) in enumerate(sorted(run_info.iteritems()), 1):
+            dias, biases = self.DiaScans.get_rp_diamonds(tc, rp), self.DiaScans.get_rp_biases(tc, rp)
             row = ['#rs{n}#{rp}'.format(n=n_sub_plans(rp), rp=center_txt(rp))] if is_main_plan(rp) else []
+            det_type = self.get_info(dias[0], tc, 'type')
+            row += ['#rs{n}#{rp}'.format(n=n_sub_plans(rp), rp=center_txt(self.load_digitiser(data, det_type)))] if is_main_plan(rp) else []
+            row += ['#rs{n}#{amp}'.format(n=n_sub_plans(rp), amp=center_txt(self.load_amplifier(data, det_type)))] if is_main_plan(rp) else []
             row += [center_txt(make_rp_string(rp))]
             row += [center_txt(data['type'])]
             row += [center_txt('{:03d} - {:03d}'.format(data['runs'][0], data['runs'][-1]))]
             row += [center_txt(self.get_events(self.DiaScans.RunInfos[tc], data['runs']))]
-            dias, biases = self.DiaScans.get_rp_diamonds(tc, rp), self.DiaScans.get_rp_biases(tc, rp)
             for dia, bias in zip(dias, biases):
                 tc_dir = join('Diamonds', dia, 'BeamTests', tc_to_str(tc))
                 row += [make_abs_link(join(tc_dir, 'RunPlan{}'.format(make_rp_string(rp)), 'index.html'), 'Runs', center=True)]
@@ -98,7 +104,7 @@ class RunPlanTable(Table):
         create_dir(join(self.Dir, path))
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
-            return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name)]
+            return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name, warn=dc.Diamond not in self.Exclude)]
 
         for dc in dia_scans:
             rp_str = make_rp_string(dc.RunPlan)
@@ -145,6 +151,23 @@ class RunPlanTable(Table):
             n = sum(run_info[str(run)]['events'] for run in runs)
             return '{:1.1f}M'.format(n / 1e6)
         return '?'
+
+    @staticmethod
+    def load_digitiser(data, det_type):
+        if 'pixel' in det_type.lower():
+            return 'ROC'
+        return data['digitiser'] if 'digitiser' in data else 'DRS4'
+
+    @staticmethod
+    def load_amplifier(data, det_type):
+        if 'pixel' in det_type:
+            return 'ROC'
+        if 'amplifiers' in data:
+            amps = [amp for amp in loads(data['amplifiers']) if amp]
+            if 'OSU2' in amps[0]:
+                return 'OSU2'
+            return ', '.join(amps)
+        return 'OSU1'
 
 
 if __name__ == '__main__':
