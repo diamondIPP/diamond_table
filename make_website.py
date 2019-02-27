@@ -34,7 +34,7 @@ class Website:
 
         self.Diamond = None
         # in string format! Aug16
-        self.TestCampaign = 'Oct15'
+        self.TestCampaign = None
 
     def load_config(self):
         conf = ConfigParser()
@@ -120,8 +120,7 @@ class Website:
         print_banner('CREATING DIAMOND RUNPLAN TABLES')
         diamonds = [dia for dia in table.Diamonds if dia == self.Diamond or self.Diamond is None]
         test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == self.TestCampaign or self.TestCampaign is None]
-        table.start_pbar(len(diamonds))
-        for i, dia in enumerate(diamonds, 1):
+        for dia in diamonds:
             for tc in test_campaigns:
                 dia_scans = table.DiaScans.get_tc_diamond_scans(dia, tc)
                 if not dia_scans:
@@ -131,10 +130,10 @@ class Website:
                 h.set_body(table.get_dia_body(dia_scans))
                 h.create()
                 self.create_runs(dia_scans)
-            table.ProgressBar.update(i)
-        table.ProgressBar.finish()
 
     def create_dias(self):
+        if self.TestCampaign is not None:
+            return
         table = DiaTable()
         print_banner('CREATING SINGLE DIAMOND TABLES')
         diamonds = [dia for dia in table.Diamonds if dia == self.Diamond or self.Diamond is None]
@@ -150,7 +149,9 @@ class Website:
 
     def create_runs(self, dia_scans):
         table = RunTable()
-        print_banner('CREATING RUN TABLES FOR {} in {}'.format(dia_scans[0].Diamond, tc_to_str(dia_scans[0].TestCampaign, short=False)))
+        dia = dia_scans[0].Diamond
+        dias = table.Diamonds
+        print_banner('CREATING RUN TABLES FOR {} ({}/{}) in {}'.format(dia, dias.index(dia), len(dias), tc_to_str(dia_scans[0].TestCampaign, short=False)))
         for dia_scan in dia_scans:
             if dia_scan.TestCampaign < '201508':
                 continue
@@ -197,9 +198,13 @@ if __name__ == '__main__':
 
     p = ArgumentParser()
     p.add_argument('-t', action='store_true')
+    p.add_argument('-d', nargs='?', default=None)
+    p.add_argument('-tc', nargs='?', default=None)
     args = p.parse_args()
 
     w = Website()
+    w.Diamond = args.d if args.d is not None else w.Diamond
+    w.TestCampaign = args.tc if args.tc is not None else w.TestCampaign
     if not args.t:
         w.update()
         w.build()
