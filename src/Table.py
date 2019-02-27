@@ -8,7 +8,6 @@ from json import loads
 from Utils import *
 from DiamondRateScans import DiaScans
 from shutil import copy
-from glob import glob
 from os.path import dirname, realpath, join, basename
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar
 from ConfigParser import NoSectionError, NoOptionError
@@ -88,7 +87,7 @@ class Table:
 
     def copy_index_php(self, path):
         file_path = join(self.Dir, path, self.Config.get('Files', 'index php'))
-        if not file_exists(file_path) and len(glob(join(dirname(file_path), '*'))) > 1:
+        if not file_exists(file_path):
             copy(join(self.Dir, basename(file_path)), file_path)
 
     def translate_dia(self, diamond):
