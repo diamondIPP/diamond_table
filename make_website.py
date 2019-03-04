@@ -21,6 +21,7 @@ from RunTable import RunTable
 from time import time
 from os import system
 from argparse import ArgumentParser
+from PicturePage import PicturePage
 
 
 class Website:
@@ -125,11 +126,12 @@ class Website:
                 dia_scans = table.DiaScans.get_tc_diamond_scans(dia, tc)
                 if not dia_scans:
                     continue  # continue if the diamond was not measured during this campaign
-                h = HomePage(self.Config)
+                h = HomePage()
                 h.set_file_path(join(dirname(dia_scans[0].Path), 'index.html'))
                 h.set_body(table.get_dia_body(dia_scans))
                 h.create()
                 self.create_runs(dia_scans)
+                self.create_picture_pages(dia_scans)
 
     def create_dias(self):
         if self.TestCampaign is not None:
@@ -140,14 +142,21 @@ class Website:
         table.start_pbar(len(diamonds))
         for i, dia in enumerate(diamonds, 1):
             dia_scans = table.DiaScans.get_diamond_scans(dia)
-            h = HomePage(self.Config)
+            h = HomePage()
             h.set_file_path(join('Diamonds', dia, 'index.html'))
             h.set_body(table.get_body(dia_scans))
             h.create()
             table.ProgressBar.update(i)
         table.ProgressBar.finish()
 
-    def create_runs(self, dia_scans):
+    @staticmethod
+    def create_picture_pages(dia_scans):
+        for dia_scan in dia_scans:
+            page = PicturePage(dia_scan)
+            page.make()
+
+    @staticmethod
+    def create_runs(dia_scans):
         table = RunTable()
         dia = dia_scans[0].Diamond
         dias = table.Diamonds
