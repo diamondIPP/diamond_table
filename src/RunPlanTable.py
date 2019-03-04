@@ -110,7 +110,8 @@ class RunPlanTable(Table):
             rp_str = make_rp_string(dc.RunPlan)
             create_dir(join(self.Dir, dc.Path))
             self.copy_index_php(dc.Path)
-            row = [make_abs_link(join(dc.Path, 'index.php'), rp_str, center=True)]                  # Nr
+            figures_html = join(dc.Path, 'figures.html') if file_exists(join(self.Dir, dc.Path, 'figures.html')) else join(dc.Path, 'index.php')
+            row = [make_abs_link(figures_html, rp_str, center=True)]                                # Nr
             row += [center_txt(dc.Type)]                                                            # Run Plan Type
             row += [center_txt(dc.Digitiser)]                                                       # Digitiser
             row += [center_txt(dc.Amplifier)]                                                       # Amplifier
