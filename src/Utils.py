@@ -96,10 +96,20 @@ def make_figure(path, name='', width=None, height=None):
     return '<img src="{path}" alt="{name}"{w}{h}>'.format(path=abs_html_path(path), name=name, w=width, h=height)
 
 
-def embed_pdf(path, width=None, height=None):
+def embed_google_pdf(path, width=None, height=None):
     width = ' width="{}"'.format(width) if width is not None else ''
     height = ' height="{}"'.format(height) if height is not None else ''
-    return '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={}"{}{}>'.format(path, width, height)
+    return '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={}"{}{}>\n'.format(path, width, height)
+
+
+def embed_pdf(path, width=400, height=390, zoom=52):
+    width = ' width="{}"'.format(width) if width is not None else ''
+    height = ' height="{}"'.format(height) if height is not None else ''
+    error = 'pdf {} does not exist'.format(basename(path))
+    zoom = 'view=FitH' if zoom is None else 'zoom={}'.format(zoom)
+    html = '  <a href="{}" target="_blank" class="pdf">\n'.format(path)
+    html += '    <object {h}{w} type="application/pdf" data="{p}?#{z}&scrollbar=0&toolbar=0&navpanes=0&statusbar=0"><p>{e}</p></object>\n'.format(h=height, w=width, p=path, e=error, z=zoom)
+    return html + '  </a>\n'
 
 
 def indent(txt, n_spaces=2):
@@ -112,7 +122,7 @@ def bold(txt):
 
 
 def head(txt, size=1):
-    return '<h{0}>{1}</h{0}>'.format(size, txt)
+    return '<h{0}>{1}</h{0}>\n'.format(size, txt)
 
 
 def folder_exists(path):
