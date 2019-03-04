@@ -13,11 +13,11 @@ from json import loads
 
 class HomePage:
 
-    def __init__(self, config, filename=None):
+    def __init__(self, filename=None, config='conf.ini'):
 
         self.Dir = dirname(dirname(realpath(__file__)))
 
-        self.Config = config
+        self.Config = self.load_config(config_name=config)
         self.Icon = abs_html_path(join('figures', self.Config.get('Home Page', 'icon')))
         self.TextSize = self.Config.get('Home Page', 'text size')
         self.Color = self.Config.get('Home Page', 'color')
@@ -31,6 +31,11 @@ class HomePage:
 
     def __del__(self):
         info('created {}'.format(self.FilePath)) if 'default' not in self.FilePath else do_nothing()
+
+    def load_config(self, config_name):
+        conf = ConfigParser()
+        conf.read(join(self.Dir, config_name))
+        return conf
 
     def create(self):
         with open(join(self.Dir, self.FilePath), 'w') as f:
@@ -211,8 +216,4 @@ class HomePage:
 
 if __name__ == '__main__':
 
-    conf = ConfigParser()
-    d = dirname(dirname(realpath(__file__)))
-    conf.read(join(d, 'conf.ini'))
-
-    z = HomePage(conf, 'HomePage')
+    z = HomePage('HomePage')
