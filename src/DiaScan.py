@@ -22,6 +22,7 @@ class DiaScan:
         self.DataDir = join(self.Dir, 'data')
 
         self.TestCampaign = test_campaign
+        self.Year = test_campaign[:4]
         self.RunPlan = run_plan
         self.RunPlanStr = make_rp_string(run_plan)
         self.Channel = channel
