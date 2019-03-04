@@ -55,7 +55,8 @@ class RunTable(Table):
             run_path = join(dirname(dc.Path), str(run))
             create_dir(join(self.Dir, run_path))
             self.copy_index_php(run_path)
-            row = [make_abs_link(join(run_path, 'index.php'), run, warn=dc.Diamond not in self.Exclude)]                # Run
+            run_html = join(run_path, 'index.html') if file_exists(join(self.Dir, run_path, 'index.html')) else join(run_path, 'index.php')
+            row = [make_abs_link(run_html, run, warn=dc.Diamond not in self.Exclude)]                                   # Run
             row += [dc.Type]                                                                                            # Type
             row += [right_txt(make_bias_str(dc.get_run_bias(run)))]                                                     # Bias
             row += [center_txt(dc.get_run_flux(run))]                                                                   # Flux
