@@ -27,6 +27,7 @@ class PicturePage(HomePage):
     def make_tc(self):
         self.set_file_path(join(self.DiaScan.Path, 'figures.html'))
         self.make_tc_header()
+        self.make_current_flux()
         self.make_signal()
         self.make_signal_distributions()
         self.make_pulser()
@@ -68,6 +69,11 @@ class PicturePage(HomePage):
         self.Body += head(bold('Signal Maps'))
         for i in xrange(len(self.DiaScan.Runs)):
             self.Body += embed_pdf(self.get_pic_path('SignalMap{:02d}'.format(i)))
+
+    def make_current_flux(self):
+        self.Body += head(bold('Current & Flux'))
+        self.Body += embed_pdf(self.get_pic_path('FluxEvo'), width=800, zoom=104)
+        self.Body += embed_pdf(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, self.DiaScan.RunPlan, self.DiaScan.Channel)), width=800, zoom=104)
 
 # endregion
 
