@@ -46,7 +46,8 @@ class PicturePage(HomePage):
 
     def make_signal(self):
         self.Body += head(bold('Signal Pulse Height'))
-        for pic in ['CombinedPulseHeights', 'PulseHeightZeroFlux', 'PedestalMeanFlux', 'PedestalSigmaFlux']:
+        self.Body += embed_pdf(self.get_pic_path('CombinedPulseHeights'), height=429)
+        for pic in ['PulseHeightZeroFlux', 'PedestalMeanFlux', 'PedestalSigmaFlux']:
             self.Body += embed_pdf(self.get_pic_path(pic))
 
     def make_signal_distributions(self):
@@ -56,15 +57,14 @@ class PicturePage(HomePage):
 
     def make_pulser(self):
         self.Body += head(bold('Pulser Pulse Height'))
-        for pic in ['CombinedPulserPulseHeights', 'PulserPedestalMeanFlux', 'PulserPedestalSigmaFlux']:
+        self.Body += embed_pdf(self.get_pic_path('CombinedPulserPulseHeights'), height=429)
+        for pic in ['PulserPedestalMeanFlux', 'PulserPedestalSigmaFlux']:
             self.Body += embed_pdf(self.get_pic_path(pic))
 
     def make_maps(self):
-        self.Body += make_lines(1)
         self.Body += head(bold('Hit Maps'))
         for i in xrange(len(self.DiaScan.Runs)):
             self.Body += embed_pdf(self.get_pic_path('HitMap{:02d}'.format(i)))
-        self.Body += make_lines(1)
         self.Body += head(bold('Signal Maps'))
         for i in xrange(len(self.DiaScan.Runs)):
             self.Body += embed_pdf(self.get_pic_path('SignalMap{:02d}'.format(i)))
@@ -116,7 +116,7 @@ class PicturePage(HomePage):
         self.Body += embed_pdf(self.get_pic_path('PulserRate', run), width=800, zoom=104)
         self.Body += make_lines(1)
         self.Body += head(bold('Current and Event Alignment'))
-        self.Body += embed_pdf(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, self.DiaScan.Channel, run), run), width=800, zoom=104)
+        self.Body += embed_pdf(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, run, self.DiaScan.Channel), run), width=800, zoom=104)
         self.Body += embed_pdf(self.get_pic_path('EventAlignment', run))
 
     def make_timing(self, run):
