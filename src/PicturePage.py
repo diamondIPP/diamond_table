@@ -22,6 +22,8 @@ class PicturePage(HomePage):
             self.make_run(run)
         self.make_tc()
 
+# region TEST-CAMPAIGN
+
     def make_tc(self):
         self.set_file_path(join(self.DiaScan.Path, 'figures.html'))
         self.make_tc_header()
@@ -32,30 +34,6 @@ class PicturePage(HomePage):
         self.set_body(self.Body)
         self.create()
         self.Body = ''
-
-    def make_run(self, run):
-        self.set_file_path(join(self.DiaScan.get_run_path(run), 'index.html'))
-        self.Body += make_lines(2)
-        self.make_run_header(run)
-        self.make_tracking(run)
-        self.make_occupancies(run)
-        self.make_control(run)
-        self.make_timing(run)
-        self.make_run_maps(run)
-        self.make_run_signal(run)
-        self.make_run_pulser(run)
-        self.set_body(self.Body)
-        self.create()
-        self.Body = ''
-
-    def make_run_header(self, run):
-        self.Body += make_lines(1)
-        header = [head(bold(word)) for word in ['Diamond', add_spacings('Run'), 'Flux [kHz/cm{}]'.format(sup(2)), add_spacings('Bias [V]'), 'Date', 'Duration']]
-        date = '{}, {}'.format(self.DiaScan.get_run_start(run), self.DiaScan.Year)
-        dc = self.DiaScan
-        row = [head(bold(center_txt(word))) for word in [dc.Diamond, dc.get_run_flux(run), dc.get_run_bias(run), date, dc.calc_run_duration(run)]]
-        self.Body += add_bkg(HTMLTable.table([row], header_row=header), self.BackgroundColor)
-        self.Body += '<hr>\n'
 
     def make_tc_header(self):
         self.Body += make_lines(3)
@@ -90,6 +68,34 @@ class PicturePage(HomePage):
         self.Body += head(bold('Signal Maps'))
         for i in xrange(len(self.DiaScan.Runs)):
             self.Body += embed_pdf(self.get_pic_path('SignalMap{:02d}'.format(i)))
+
+# endregion
+
+# region RUN
+
+    def make_run(self, run):
+        self.set_file_path(join(self.DiaScan.get_run_path(run), 'index.html'))
+        self.Body += make_lines(2)
+        self.make_run_header(run)
+        self.make_tracking(run)
+        self.make_occupancies(run)
+        self.make_control(run)
+        self.make_timing(run)
+        self.make_run_maps(run)
+        self.make_run_signal(run)
+        self.make_run_pulser(run)
+        self.set_body(self.Body)
+        self.create()
+        self.Body = ''
+
+    def make_run_header(self, run):
+        self.Body += make_lines(1)
+        header = [head(bold(word)) for word in ['Diamond', add_spacings('Run'), 'Flux [kHz/cm{}]'.format(sup(2)), add_spacings('Bias [V]'), 'Date', 'Duration']]
+        date = '{}, {}'.format(self.DiaScan.get_run_start(run), self.DiaScan.Year)
+        dc = self.DiaScan
+        row = [head(bold(center_txt(word))) for word in [dc.Diamond, dc.get_run_flux(run), dc.get_run_bias(run), date, dc.calc_run_duration(run)]]
+        self.Body += add_bkg(HTMLTable.table([row], header_row=header), self.BackgroundColor)
+        self.Body += '<hr>\n'
 
     def make_tracking(self, run):
         # self.Body += make_lines(1)
@@ -137,6 +143,8 @@ class PicturePage(HomePage):
         self.Body += head(bold('Pulser Pulser Height'))
         self.Body += embed_pdf(self.get_pic_path('PulserDistributionFit', run))
         self.Body += embed_pdf(self.get_pic_path('PedestalDistributionFitPulserBeamOn', run))
+
+# endregion
 
     def get_pic_path(self, name, run=None):
         return abs_html_path(join(self.DiaScan.Path if run is None else self.DiaScan.get_run_path(run), '{}.pdf'.format(name)))
