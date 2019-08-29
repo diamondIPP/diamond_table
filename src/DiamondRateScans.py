@@ -72,6 +72,12 @@ class DiaScans:
 
     # endregion
 
+    def get_diamond_tcs(self, dia):
+        return sorted(list(set(tc for tc, dic1 in self.RunPlans.iteritems() for rp, dic2 in dic1.iteritems() if dia in self.get_rp_diamonds(tc, rp))))
+
+    def get_dia_runplans(self, dia, tc):
+        return sorted(rp for rp, dic in self.RunPlans[tc].iteritems() if dia in self.get_rp_diamonds(tc, rp))
+
     def get_tc_diamond_scans(self, dia, tc):
         scans = []
         for rp, dic in sorted(self.RunPlans[tc].iteritems()):
@@ -110,6 +116,9 @@ class DiaScans:
                     if all(dia0 == self.load_diamond(self.RunInfos[tc][str(run)]['dia{0}'.format(ch)]) for run in runs) and dia0.lower() != 'none':
                         dias.append(dia0)
         return sorted(list(set(dias)))
+
+    def get_tc_diamonds(self, tc):
+        return set(dia for lst in self.get_all_rp_diamonds(tc) for dia in lst)
 
     def get_rp_diamonds(self, tc, rp):
         dias = [item for key, item in sorted(self.RunInfos[tc][self.get_first_run(tc, rp)].iteritems()) if key.startswith('dia') and len(key) < 6]
