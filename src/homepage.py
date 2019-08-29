@@ -54,10 +54,10 @@ class HomePage:
         old = [join('Overview', 'Old.html')]
         return old + [join('Overview', '{}.html'.format(year)) for year in self.get_years()[1:]]
 
-    @staticmethod
-    def get_testcampaigns():
+    def get_testcampaigns(self):
         words = ' '.join(getstatusoutput('ssh -tY mutter ls {}'.format(join('/scratch2', 'psi')))[-1].split('\r\n')[:-1])
-        return sorted(tc.replace('psi_', '').replace('_', '').strip('\t') for tc in words.split())
+        exclude = loads(self.Config.get('General', 'exclude tc'))
+        return [tc for tc in sorted(tc.replace('psi_', '').replace('_', '').strip('\t') for tc in words.split()) if tc not in exclude]
 
     def get_tc_htmls(self, runs=False):
         return [join('BeamTests', tc_to_str(tc), '{}.html'.format('index' if runs else 'RunPlans')) for tc in self.TestCampaigns]
