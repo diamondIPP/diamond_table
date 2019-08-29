@@ -12,6 +12,7 @@ parser.add_argument('dia', nargs='?', default=None)
 args = parser.parse_args()
 
 w = Website()
-# w.Diamond = args.dia
-# w.TestCampaign = args.tc
+w.Diamond = args.dia
+w.TestCampaign = args.tc
+# w.update()
 w.build()
