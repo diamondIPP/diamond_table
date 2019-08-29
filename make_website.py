@@ -25,16 +25,16 @@ from PicturePage import PicturePage
 
 class Website:
 
-    def __init__(self):
+    def __init__(self, dia=None, tc=None):
 
         self.Dir = dirname(realpath(__file__))
         self.HomePage = HomePage(filename='default')
         self.Config = self.HomePage.Config
         self.BkgCol = 'lightgrey'  # TODO FIX
 
-        self.Diamond = None
+        self.Diamond = RunPlanTable().load_diamond(dia)
         # in string format! Aug16
-        self.TestCampaign = None
+        self.TestCampaign = RunPlanTable().load_test_campaign(tc)
 
     def update_run_plans(self):
         cmd = 'rsync -aP mutter:/home/reichmann/software/RatePadAnalysis/Runinfos/run_plans.json {}'.format(join(self.Dir, 'data'))
@@ -58,7 +58,7 @@ class Website:
         system(cmd)
 
     def update_run_logs(self):
-        for tc in self.HomePage.get_testcampaigns():
+        for tc in self.HomePage.TestCampaigns:
             if tc > '201505':
                 self.update_run_log(tc)
 
@@ -208,9 +208,7 @@ if __name__ == '__main__':
     p.add_argument('-tc', nargs='?', default=None)
     args = p.parse_args()
 
-    w = Website()
-    w.Diamond = args.d if args.d is not None else w.Diamond
-    w.TestCampaign = args.tc if args.tc is not None else w.TestCampaign
+    w = Website(args.d, args.tc)
     if not args.t:
-        w.update()
+        # w.update()
         w.build()

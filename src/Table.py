@@ -49,6 +49,16 @@ class Table:
         self.Widgets = ['Progress: ', Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed()]
         self.ProgressBar = None
 
+    def load_diamond(self, dia):
+        if dia is not None and dia not in self.Diamonds:
+            critical('{} is not a valid diamond name'.format(dia))
+        return dia
+
+    def load_test_campaign(self, tc):
+        if tc is not None and tc not in self.TestCampaigns:
+            critical('{} is not a valid test campaign (mind format mmmYY, eg Aug16)'.format(tc))
+        return tc
+
     def load_test_campaigns(self):
         return [tc_to_str(tc) for tc in sorted(self.DiaScans.RunPlans.keys())]
 
