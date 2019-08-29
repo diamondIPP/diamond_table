@@ -94,12 +94,12 @@ class RunPlanTable(Table):
                   '#rs2#Bias [V]',
                   '#rs2#Flux<br>[kHz/cm{0}]'.format(sup(2)),
                   '#rs2#Leakage<br>Current',
-                  '#cs4#Pulser',
                   '#cs4#Signal',
+                  '#cs4#Pulser',
                   '#rs2#Events',
                   '#rs2#Start',
                   '#rs2#Duration']
-        rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
+        rows = [[center_txt(txt) for txt in ['Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]', 'Type', 'Mean', 'Corr.', 'Ped.']]]  # sub header
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
             return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name, warn=dc.Diamond not in self.Exclude)]
@@ -119,23 +119,24 @@ class RunPlanTable(Table):
             row += [right_txt(make_bias_str(dc.Bias))]                                              # Bias
             row += [right_txt(dc.get_flux_str())]                                                   # Flux
             row += make_pic_link('PhPulserCurrent', 'Plot', use_name=False)                         # Leakage Current
-            row += [dc.PulserType]                                                                  # Pulser Type
             if dc.Type == 'voltage scan':
-                row += make_pic_link('PulserVoltageScan', 'Plot', False)                            # Pulser Pulse Height
-                row += [center_txt('-')]                                                            # Pulser Pulse Height (corrected)
-                row += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
                 row += make_pic_link('SignalVoltageScan', 'Plot', False)
                 row += [center_txt('-')]                                                            # makes no sense for Voltage Scan
                 row += make_pic_link('PedestalMeanVoltage', 'Plot', False)
                 row += make_pic_link('PedestalSigmaVoltage', dc.get_noise())
+                row += [dc.PulserType]                                                              # Pulser Type
+                row += make_pic_link('PulserVoltageScan', 'Plot', False)                            # Pulser Pulse Height
+                row += [center_txt('-')]                                                            # Pulser Pulse Height (corrected)
+                row += make_pic_link('PulserPedestalMeanVoltage', 'Plot', use_name=False)
             else:
-                row += make_pic_link('CombinedPulserPulseHeights', dc.get_pulser())                 # Pulser Pulse Height
-                row += [dc.get_corrected_pulser()]                                                  # Pulser Pulse Height (corrected)
-                row += make_pic_link('PulserPedestalMeanFlux', 'Plot', use_name=False)              # Pulser Pedestal
                 row += make_pic_link('CombinedPulseHeights', dc.get_signal())                       # Pulse Height
                 row += [dc.get_corrected_signal()]                                                  # Pulse Height (corrected)
-                row += make_pic_link('PedestalMeanFlux', 'Plot', use_name=False)                    # Signal Pedestal
-                row += make_pic_link('PedestalSigmaFlux', dc.get_noise())                           # Noise
+                row += make_pic_link('PedestalFlux', 'Plot', use_name=False)                        # Signal Pedestal
+                row += make_pic_link('PedestalNoiseFlux', dc.get_noise())                           # Noise
+                row += [dc.PulserType]                                                              # Pulser Type
+                row += make_pic_link('CombinedPulserPulseHeights', dc.get_pulser())                 # Pulser Pulse Height
+                row += [dc.get_corrected_pulser()]                                                  # Pulser Pulse Height (corrected)
+                row += make_pic_link('PulserPedestalFlux', 'Plot', use_name=False)                  # Pulser Pedestal
             row += [center_txt(dc.Events)]                                                          # Events
             row += [t_to_str(dc.StartTime)]                                                         # Start Time
             row += [dc.Duration]                                                                    # Duration
