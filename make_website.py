@@ -36,6 +36,12 @@ class Website:
         # in string format! Aug16
         self.TestCampaign = RunPlanTable().load_test_campaign(tc)
 
+    def get_diamonds(self):
+        t = RunPlanTable()
+        if self.Diamond is None:
+            return t.Diamonds if self.TestCampaign is None else t.DiaScans.get_tc_diamonds(tc=str_to_tc(self.TestCampaign))
+        return [self.Diamond]
+
     def update_run_plans(self):
         cmd = 'rsync -aP mutter:/home/reichmann/software/RatePadAnalysis/Runinfos/run_plans.json {}'.format(join(self.Dir, 'data'))
         system(cmd)
@@ -116,8 +122,8 @@ class Website:
     def create_dia_runplans(self):
         table = RunPlanTable()
         print_banner('CREATING DIAMOND RUNPLAN TABLES')
-        diamonds = [dia for dia in table.Diamonds if dia == self.Diamond or self.Diamond is None]
-        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns if tc == self.TestCampaign or self.TestCampaign is None]
+        diamonds = self.get_diamonds()
+        test_campaigns = [str_to_tc(tc) for tc in table.TestCampaigns] if self.TestCampaign is None else [str_to_tc(self.TestCampaign)]
         for dia in diamonds:
             for tc in test_campaigns:
                 dia_scans = table.DiaScans.get_tc_diamond_scans(dia, tc)
@@ -131,11 +137,9 @@ class Website:
                 self.create_picture_pages(dia_scans)
 
     def create_dias(self):
-        if self.TestCampaign is not None:
-            return
         table = DiaTable()
         print_banner('CREATING SINGLE DIAMOND TABLES')
-        diamonds = [dia for dia in table.Diamonds if dia == self.Diamond or self.Diamond is None]
+        diamonds = self.get_diamonds()
         table.start_pbar(len(diamonds))
         for i, dia in enumerate(diamonds, 1):
             dia_scans = table.DiaScans.get_diamond_scans(dia)
