@@ -21,6 +21,7 @@ from time import time
 from os import system
 from argparse import ArgumentParser
 from PicturePage import PicturePage
+from Table import Table
 
 
 class Website:
@@ -190,6 +191,12 @@ class Website:
             h.set_body(table.get_tc_body(tc))
             h.create()
 
+    def build_new_tc(self):
+        self.update()
+        t = Table()
+        t.create_tc_dirs()
+        t.create_dia_dirs()
+
     def build(self):
         t = time()
         self.create_home()
@@ -212,7 +219,7 @@ if __name__ == '__main__':
     p.add_argument('-tc', nargs='?', default=None)
     args = p.parse_args()
 
-    w = Website(args.d, args.tc)
+    z = Website(args.d, args.tc)
     if not args.t:
         # w.update()
-        w.build()
+        z.build()
