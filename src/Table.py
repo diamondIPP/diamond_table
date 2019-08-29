@@ -62,14 +62,23 @@ class Table:
     def load_test_campaigns(self):
         return [tc_to_str(tc) for tc in sorted(self.DiaScans.RunPlans.keys())]
 
-    def create_dia_dir(self, diamond):
-        path = join(self.DataDir, diamond)
-        create_dir(path)
-        create_dir(join(path, 'BeamTests'))
-        self.create_default_info(path)
+    def create_tc_dirs(self):
+        for tc in self.TestCampaigns:
+            create_dir(join(self.TCDir, tc))
 
-    def create_tc_dir(self, tc):
-        create_dir(join(self.TCDir, tc))
+    def create_dia_dirs(self):
+        for dia in self.Diamonds:
+            path = join(self.DataDir, dia)
+            create_dir(path)
+            create_dir(join(path, 'BeamTests'))
+            self.create_default_info(path)
+            for tc in self.DiaScans.get_diamond_tcs(dia):
+                tc_path = join(path, 'BeamTests', tc_to_str(tc))
+                create_dir(tc_path)
+                for rp in self.DiaScans.get_dia_runplans(dia, tc):
+                    create_dir(join(tc_path, make_rp_string(rp, directory=True)))
+                    for run in self.DiaScans.get_runs(rp, tc):
+                        create_dir(join(tc_path, str(run)))
 
     @staticmethod
     def create_default_info(path):

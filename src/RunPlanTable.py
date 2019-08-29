@@ -100,14 +100,12 @@ class RunPlanTable(Table):
                   '#rs2#Start',
                   '#rs2#Duration']
         rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
-        create_dir(join(self.Dir, dirname(dia_scans[0].Path)))
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
             return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name, warn=dc.Diamond not in self.Exclude)]
 
         for dc in dia_scans:
             rp_str = make_rp_string(dc.RunPlan)
-            create_dir(join(self.Dir, dc.Path))
             self.copy_index_php(dc.Path)
             figures_html = join(dc.Path, 'figures.html') if file_exists(join(self.Dir, dc.Path, 'figures.html')) else join(dc.Path, 'index.php')
             row = [make_abs_link(figures_html, rp_str, center=True)]                                # Nr

@@ -53,7 +53,6 @@ class RunTable(Table):
         for run in dc.Runs:
             run_info = dc.RunInfos[str(run)]
             run_path = join(dirname(dc.Path), str(run))
-            create_dir(join(self.Dir, run_path))
             self.copy_index_php(run_path)
             run_html = join(run_path, 'index.html') if file_exists(join(self.Dir, run_path, 'index.html')) else join(run_path, 'index.php')
             row = [make_abs_link(run_html, run, warn=dc.Diamond not in self.Exclude)]                                   # Run
