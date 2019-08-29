@@ -148,8 +148,8 @@ def write_html_header(f, name, bkg=None):
     f.write('<h1>{tit}</h1>\n'.format(tit=name))
 
 
-def make_rp_string(string):
-    return string[1:] if string[0] == '0' else string
+def make_rp_string(string, directory=False):
+    return '{}{}'.format('RunPlan' if directory else '', string[1:] if string[0] == '0' else string)
 
 
 def make_runplan_string(nr):
