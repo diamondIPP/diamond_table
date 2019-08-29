@@ -112,6 +112,12 @@ def embed_pdf(path, width=400, height=390, zoom=52):
     return html + '  </a>\n'
 
 
+def embed_png(path, width=400, height=390):
+    width = ' width="{}"'.format(width) if width is not None else ''
+    height = ' height="{}"'.format(height) if height is not None else ''
+    return '  <a href="{0}.pdf" target="_blank">\n    <img {1} {2} src="{0}.png"\n  </a>\n'.format(path, width, height)
+
+
 def indent(txt, n_spaces=2):
     lines = txt.split('\n')
     return '\n'.join('{}{}'.format(n_spaces * ' ', line) for line in lines)

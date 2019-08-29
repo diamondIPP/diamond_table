@@ -47,33 +47,33 @@ class PicturePage(HomePage):
 
     def make_signal(self):
         self.Body += head(bold('Signal Pulse Height'))
-        self.Body += embed_pdf(self.get_pic_path('CombinedPulseHeights'), height=429)
-        for pic in ['PulseHeightZeroFlux', 'PedestalMeanFlux', 'PedestalSigmaFlux']:
-            self.Body += embed_pdf(self.get_pic_path(pic))
+        self.Body += embed_png(self.get_pic_path('CombinedPulseHeights'), height=429)
+        for pic in ['PulseHeightZeroFlux', 'PedestalFlux', 'PedestalNoiseFlux']:
+            self.Body += embed_png(self.get_pic_path(pic))
 
     def make_signal_distributions(self):
         self.Body += head(bold('Signal Distribution'))
         for pic in ['SignalDistributions', 'SignalDistributionsLogY']:
-            self.Body += embed_pdf(self.get_pic_path(pic))
+            self.Body += embed_png(self.get_pic_path(pic))
 
     def make_pulser(self):
         self.Body += head(bold('Pulser Pulse Height'))
-        self.Body += embed_pdf(self.get_pic_path('CombinedPulserPulseHeights'), height=429)
-        for pic in ['PulserPedestalMeanFlux', 'PulserPedestalSigmaFlux']:
-            self.Body += embed_pdf(self.get_pic_path(pic))
+        self.Body += embed_png(self.get_pic_path('CombinedPulserPulseHeights'), height=429)
+        for pic in ['PulserPedestalFlux', 'PulserPedestalNoiseFlux']:
+            self.Body += embed_png(self.get_pic_path(pic))
 
     def make_maps(self):
         self.Body += head(bold('Hit Maps'))
         for i in xrange(len(self.DiaScan.Runs)):
-            self.Body += embed_pdf(self.get_pic_path('HitMap{:02d}'.format(i)))
+            self.Body += embed_png(self.get_pic_path('HitMap{:02d}'.format(i)), width=250, height=243)
         self.Body += head(bold('Signal Maps'))
         for i in xrange(len(self.DiaScan.Runs)):
-            self.Body += embed_pdf(self.get_pic_path('SignalMap{:02d}'.format(i)))
+            self.Body += embed_png(self.get_pic_path('SignalMap{:02d}'.format(i)), width=250, height=243)
 
     def make_current_flux(self):
         self.Body += head(bold('Current & Flux'))
-        self.Body += embed_pdf(self.get_pic_path('FluxEvo'), width=800, zoom=104)
-        self.Body += embed_pdf(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, self.DiaScan.RunPlan, self.DiaScan.Channel)), width=800, zoom=104)
+        self.Body += embed_png(self.get_pic_path('FluxEvo', descriptor=False), width=800)
+        self.Body += embed_png(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, self.DiaScan.RunPlan, self.DiaScan.Channel), descriptor=False), width=800)
 
 # endregion
 
@@ -99,7 +99,7 @@ class PicturePage(HomePage):
         header = [head(bold(word)) for word in ['Diamond', add_spacings('Run'), 'Flux [kHz/cm{}]'.format(sup(2)), add_spacings('Bias [V]'), 'Date', 'Duration']]
         date = '{}, {}'.format(self.DiaScan.get_run_start(run), self.DiaScan.Year)
         dc = self.DiaScan
-        row = [head(bold(center_txt(word))) for word in [dc.Diamond, dc.get_run_flux(run), dc.get_run_bias(run), date, dc.calc_run_duration(run)]]
+        row = [head(bold(center_txt(word))) for word in [dc.Diamond, run, dc.get_run_flux(run), dc.get_run_bias(run), date, dc.calc_run_duration(run)]]
         self.Body += add_bkg(HTMLTable.table([row], header_row=header), self.BackgroundColor)
         self.Body += '<hr>\n'
 
@@ -107,53 +107,53 @@ class PicturePage(HomePage):
         # self.Body += make_lines(1)
         self.Body += head(bold('Tracking'))
         for pic in ['Chi2Tracks', 'Chi2X', 'Chi2Y', 'TrackAngleX', 'TrackAngleY']:
-            self.Body += embed_pdf(self.get_pic_path(pic, run))
+            self.Body += embed_png(self.get_pic_path(pic, run, descriptor=False))
 
     def make_occupancies(self, run):
         self.Body += make_lines(1)
         self.Body += head(bold('Telescope Occupacies'))
         for i in xrange(4):
-            self.Body += embed_pdf(self.get_pic_path('HitMap{}'.format(i), run))
+            self.Body += embed_png(self.get_pic_path('HitMap{}'.format(i), run))
 
     def make_control(self, run):
         self.Body += make_lines(1)
         self.Body += head(bold('Flux and Pulser Rate'))
-        self.Body += embed_pdf(self.get_pic_path('FluxProfile', run), width=800, zoom=104)
-        self.Body += embed_pdf(self.get_pic_path('PulserRate', run), width=800, zoom=104)
+        self.Body += embed_png(self.get_pic_path('FluxProfile', run), width=800)
+        self.Body += embed_png(self.get_pic_path('PulserRate', run), width=800)
         self.Body += make_lines(1)
         self.Body += head(bold('Current and Event Alignment'))
-        self.Body += embed_pdf(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, run, self.DiaScan.Channel), run), width=800, zoom=104)
-        self.Body += embed_pdf(self.get_pic_path('EventAlignment', run))
+        self.Body += embed_png(self.get_pic_path('Currents{}_{}_{}'.format(self.DiaScan.TestCampaign, run, self.DiaScan.Channel), run), width=800)
+        self.Body += embed_png(self.get_pic_path('EventAlignment', run))
 
     def make_timing(self, run):
         self.Body += make_lines(1)
         self.Body += head(bold('Timing'))
         for pic in ['OriPeakPosVsTriggerCell', 'TimingComparison', 'FinePeakPosFit', 'FineCorrection']:
-            self.Body += embed_pdf(self.get_pic_path(pic, run))
+            self.Body += embed_png(self.get_pic_path(pic, run))
 
     def make_run_maps(self, run):
         self.Body += make_lines(1)
         self.Body += head(bold('Maps'))
-        self.Body += embed_pdf(self.get_pic_path('HitMap', run))
-        self.Body += embed_pdf(self.get_pic_path('SignalMap2D', run))
+        self.Body += embed_png(self.get_pic_path('HitMap', run))
+        self.Body += embed_png(self.get_pic_path('SignalMap2D', run))
 
     def make_run_signal(self, run):
         self.Body += make_lines(1)
         self.Body += head(bold('Pulse Height'))
-        self.Body += embed_pdf(self.get_pic_path('SignalDistribution', run))
-        self.Body += embed_pdf(self.get_pic_path('PulseHeight10000', run))
-        self.Body += embed_pdf(self.get_pic_path('PedestalDistributionFitAllCuts', run))
+        self.Body += embed_png(self.get_pic_path('SignalDistribution', run))
+        self.Body += embed_png(self.get_pic_path('PulseHeight10000', run))
+        self.Body += embed_png(self.get_pic_path('PedestalDistributionFitAllCuts', run))
 
     def make_run_pulser(self, run):
         self.Body += make_lines(1)
         self.Body += head(bold('Pulser Pulser Height'))
-        self.Body += embed_pdf(self.get_pic_path('PulserDistributionFit', run))
-        self.Body += embed_pdf(self.get_pic_path('PedestalDistributionFitPulserBeamOn', run))
+        self.Body += embed_png(self.get_pic_path('PulserDistributionFit', run))
+        self.Body += embed_png(self.get_pic_path('PedestalDistributionFitPulserBeamOn', run))
 
 # endregion
 
-    def get_pic_path(self, name, run=None):
-        return abs_html_path(join(self.DiaScan.Path if run is None else self.DiaScan.get_run_path(run), '{}.pdf'.format(name)))
+    def get_pic_path(self, name, run=None, descriptor=False):
+        return abs_html_path(join(self.DiaScan.Path if run is None else self.DiaScan.get_run_path(run), '{}{}'.format(name, '.pdf' if descriptor else '')))
 
 
 if __name__ == '__main__':
