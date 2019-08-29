@@ -100,8 +100,7 @@ class RunPlanTable(Table):
                   '#rs2#Start',
                   '#rs2#Duration']
         rows = [[center_txt(txt) for txt in ['Type', 'Mean', 'Corr.', 'Ped.', 'Pulse Height', 'Corr', 'Ped.', 'Noise [&sigma;]']]]  # sub header
-        path = dirname(dia_scans[0].Path)
-        create_dir(join(self.Dir, path))
+        create_dir(join(self.Dir, dirname(dia_scans[0].Path)))
 
         def make_pic_link(pic_name, text, use_name=True, ftype='pdf'):
             return [make_abs_link(join(dc.Path, '{}.{}'.format(pic_name, ftype)), text, center=True, use_name=use_name, warn=dc.Diamond not in self.Exclude)]

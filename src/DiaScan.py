@@ -251,5 +251,5 @@ class DiaScan:
 
 if __name__ == '__main__':
     t = time()
-    z = DiaScan('201807', '07', '1')
+    z = DiaScan('201908', '02', '2')
     print time() - t

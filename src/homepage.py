@@ -9,6 +9,7 @@ from os.path import realpath, dirname, basename
 from ConfigParser import ConfigParser
 from glob import glob
 from json import loads
+from commands import getstatusoutput
 
 
 class HomePage:
@@ -22,6 +23,7 @@ class HomePage:
         self.TextSize = self.Config.get('Home Page', 'text size')
         self.Color = self.Config.get('Home Page', 'color')
         self.BackgroundColor = self.Config.get('Home Page', 'background color')
+        self.TestCampaigns = self.get_testcampaigns()
 
         self.FilePath = join('Overview', '{}.html'.format(filename))
         self.Body = ''
@@ -52,11 +54,13 @@ class HomePage:
         old = [join('Overview', 'Old.html')]
         return old + [join('Overview', '{}.html'.format(year)) for year in self.get_years()[1:]]
 
-    def get_testcampaigns(self):
-        return sorted(basename(name).strip('run_log.json') for name in glob(join(self.Dir, 'data', 'run_log*')))
+    @staticmethod
+    def get_testcampaigns():
+        words = ' '.join(getstatusoutput('ssh -tY mutter ls {}'.format(join('/scratch2', 'psi')))[-1].split('\r\n')[:-1])
+        return sorted(tc.replace('psi_', '').replace('_', '').strip('\t') for tc in words.split())
 
     def get_tc_htmls(self, runs=False):
-        return [join('BeamTests', tc_to_str(tc), '{}.html'.format('index' if runs else 'RunPlans')) for tc in self.get_testcampaigns()]
+        return [join('BeamTests', tc_to_str(tc), '{}.html'.format('index' if runs else 'RunPlans')) for tc in self.TestCampaigns]
 
     def get_sccvd_dias(self):
         dias = [dia for dia in loads(self.Config.get('General', 'single_crystal')) if dia not in self.Excluded]
@@ -82,8 +86,8 @@ class HomePage:
         f.write('    {}\n'.format(make_abs_link(join('Overview', 'HomePage.html'), 'Home', active='HomePage' in self.FilePath, colour=False)))
         f.write('    {}\n'.format(make_abs_link(join('Overview', 'Location.html'), 'Location', active='Location' in self.FilePath, colour=False)))
         f.write(make_dropdown('Years', self.get_years(), self.get_year_htmls(), n=0, active='20' in self.FilePath))
-        f.write(make_dropdown('Diamond Scans', self.get_testcampaigns(), self.get_tc_htmls(), n=1))
-        f.write(make_dropdown('Single Runs', self.get_testcampaigns(), self.get_tc_htmls(runs=True), n=2))
+        f.write(make_dropdown('Diamond Scans', self.TestCampaigns, self.get_tc_htmls(), n=1))
+        f.write(make_dropdown('Single Runs', self.TestCampaigns, self.get_tc_htmls(runs=True), n=2))
         f.write(make_dropdown('scCVD', self.get_sccvd_dias(), [join('Diamonds', dia, 'index.html') for dia in self.get_sccvd_dias()], n=3))
         f.write(make_dropdown('pCVD', self.get_pcvd_dias(), [join('Diamonds', dia, 'index.html') for dia in self.get_pcvd_dias()], n=4))
         f.write(make_dropdown('Silicon', self.get_si_detectors(), [join('Diamonds', dia, 'index.html') for dia in self.get_si_detectors()], n=5))
