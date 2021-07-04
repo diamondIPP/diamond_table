@@ -5,15 +5,20 @@
 
 from datetime import datetime
 from termcolor import colored
-import os
-from ConfigParser import ConfigParser
-from json import load
-from os.path import join, dirname, realpath, basename
+from configparser import ConfigParser, NoOptionError, NoSectionError
+from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar, SimpleProgress, Widget
+from json import load, loads
+from os.path import join, dirname, realpath, basename, isdir, isfile
+from os import _exit, mkdir, listdir
 from re import sub
-from uncertainties import ufloat
+from uncertainties import ufloat, ufloat_fromstr
 from uncertainties.core import Variable
-from numpy import array, sqrt, average, mean
+from numpy import array, sqrt, average, mean, log10
 from pytz import timezone, utc
+from time import time
+from functools import wraps
+from copy import deepcopy
+from pickle import load as pload, dump as pdump
 
 
 Dir = dirname(dirname(realpath(__file__)))
@@ -22,21 +27,57 @@ Dir = dirname(dirname(realpath(__file__)))
 # ==============================================
 # UTILITY FUNCTIONS
 # ==============================================
+def get_base_dir():
+    return dirname(dirname(realpath(__file__)))
+
+
 def get_t_str():
     return datetime.now().strftime('%H:%M:%S')
 
 
-def warning(msg, color='yellow'):
-    print '{head} {t} --> {msg}'.format(t=get_t_str(), msg=msg, head=colored('WARNING:', color))
-
-
-def info(msg):
-    print '{head} {t} --> {msg}'.format(t=get_t_str(), msg=msg, head=colored('INFO:', 'cyan'))
+def warning(msg, prnt=True):
+    if prnt:
+        print(prepare_msg(msg, 'WARNING', 'yellow'))
 
 
 def critical(msg):
-    print '{head} {t} --> {msg}\n'.format(t=get_t_str(), msg=msg, head=colored('CRITICAL:', 'red'))
-    os._exit(1)
+    print(prepare_msg(msg, 'CRITICAL', 'red'))
+    _exit(1)
+
+
+def prepare_msg(msg, header, color=None, attrs=None, blank_lines=0):
+    return '{}\r{} {} --> {}'.format('\n' * blank_lines, colored(header, color, attrs=choose(make_list(attrs), None, attrs)), get_t_str(), msg)
+
+
+def info(msg, endl=True, blank_lines=0, prnt=True):
+    if prnt:
+        print(prepare_msg(msg, 'INFO', 'cyan', 'dark', blank_lines), flush=True, end='\n' if endl else ' ')
+    return time()
+
+
+def add_to_info(t, msg='Done', prnt=True):
+    if prnt:
+        print('{m} ({t:2.2f} s)'.format(m=msg, t=time() - t))
+
+
+def print_banner(msg, symbol='~', new_lines=1, color=None):
+    msg = '{} |'.format(msg)
+    print(colored('{n}{delim}\n{msg}\n{delim}{n}'.format(delim=len(str(msg)) * symbol, msg=msg, n='\n' * new_lines), color))
+
+
+def print_small_banner(msg, symbol='-', color=None):
+    print(colored('\n{delim}\n{msg}\n'.format(delim=len(str(msg)) * symbol, msg=msg), color))
+
+
+def choose(v, default, decider='None', *args, **kwargs):
+    use_default = decider is None if decider != 'None' else v is None
+    if callable(default) and use_default:
+        default = default(*args, **kwargs)
+    return default if use_default else v(*args, **kwargs) if callable(v) else v
+
+
+def make_list(value):
+    return array([value], dtype=object).flatten()
 
 
 def untitle(string):
@@ -55,16 +96,8 @@ def round_up_to(num, val):
     return int(num) / val * val + val
 
 
-def print_banner(msg, symbol='='):
-    print '\n{delim}\n{msg}\n{delim}\n'.format(delim=len(str(msg)) * symbol, msg=msg)
-
-
-def print_small_banner(msg, symbol='-'):
-    print '\n{delim}\n{msg}\n'.format(delim=len(str(msg)) * symbol, msg=msg)
-
-
 def list_dirs(path):
-    return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
+    return [d for d in listdir(path) if isdir(join(path, d))]
 
 
 def make_link(target, name='Results', new_tab=False, path='', use_name=True, center=False):
@@ -79,6 +112,11 @@ def make_lines(n):
     return '<br/>' * n
 
 
+def get_elapsed_time(start):
+    t = datetime.fromtimestamp(time() - start)
+    return '{}.{:02.0f}'.format(t.strftime('%M:%S'), t.microsecond / 10000)
+
+
 def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour='red', warn=True):
     active = 'class="active" ' if active else ''
     new_tab = ' target="_blank"' if new_tab else ''
@@ -86,7 +124,7 @@ def make_abs_link(target, name, active=False, center=False, new_tab=False, use_n
     style = ' style="color:{}"'.format(colour) if colour else ''
     if file_exists(join(Dir, target)) or 'http' in target:
         return '<a {act}href={tar}{tab}{s}>{name}</a>'.format(act=active, tar=abs_html_path(target), tab=new_tab, name=name, s=style)
-    warning('The file {} does not exist!'.format(target), color='magenta') if warn else do_nothing()
+    warning('The file {} does not exist!'.format(target), prnt=warn)
     return name if use_name else ''
 
 
@@ -132,17 +170,27 @@ def head(txt, size=1):
 
 
 def folder_exists(path):
-    return os.path.isdir(path)
+    return isdir(path)
 
 
 def file_exists(path):
-    return os.path.isfile(path)
+    return isfile(path)
 
 
-def create_dir(path):
-    if not folder_exists(path):
-        info('creating directory: {}'.format(path))
-        os.mkdir(path)
+def create_dir(*path):
+    path = join(*path)
+    if not isdir(path):
+        info(f'creating directory: {path}')
+        mkdir(path)
+    return path
+
+
+def prep_kw(dic, **default):
+    d = deepcopy(dic)
+    for kw, value in default.items():
+        if kw not in d:
+            d[kw] = value
+    return d
 
 
 def write_html_header(f, name, bkg=None):
@@ -152,6 +200,10 @@ def write_html_header(f, name, bkg=None):
     f.write('<title> {tit} </title>\n'.format(tit=name))
     f.write('</head>\n<body{bkg}>\n\n\n'.format(bkg='' if bkg is None else ' bgcolor=' + bkg))
     f.write('<h1>{tit}</h1>\n'.format(tit=name))
+
+
+def add_spaces(txt):
+    return ''.join(f' {txt[i]}' if i and (txt[i].isupper() or txt[i].isdigit()) and not txt[i - 1].isdigit() and not txt[i - 1].isupper() else txt[i] for i in range(len(txt)))
 
 
 def make_rp_string(string, directory=False):
@@ -169,30 +221,26 @@ def str_to_tc(tc, short=True):
     return '{tc}{s}'.format(tc=datetime.strptime(tc_str, '%b%y').strftime('%Y%m' if short else '%B %Y'), s=sub_str)
 
 
-def tc_to_str(tc, short=True):
+def tc2str(tc, short=True):
     tc_str = str(tc).split('-')[0]
     sub_str = '-{}'.format(tc.split('-')[-1]) if '-' in str(tc) else ''
     return '{tc}{s}'.format(tc=datetime.strptime(tc_str, '%Y%m').strftime('%b%y' if short else '%B %Y'), s=sub_str)
 
 
-def make_bias_str(biases):
-    if type(biases) is not list:
-        return '{v:+2.0f}'.format(v=float(biases))
-    if len(biases) == 1:
-        return '{v:+2.0f}'.format(v=biases[0])
-    elif len(biases) < 4:
-        return ' &#8594; '.join('{v:+2.0f}'.format(v=bias) for bias in sorted(biases, reverse=True, key=abs))
-    else:
-        return '{min:+4.0f} ... {max:+4.0f}'.format(min=biases[0], max=biases[-1])
+def make_bias_str(v):
+    v = [f'{float(bias):.0f}' for bias in set(make_list(v))]
+    return v[0] if len(v) == 1 else ' &#8594; '.join(sorted(v, reverse=True, key=lambda x: abs(float(x)))) if len(v) < 4 else f'{v[0]} ... {v[-1]}'
 
 
-def make_irr_string(val):
-    if val == '?':
-        return val
-    if not val or val == '0':
-        return 'unirr.'
-    val, power = [float(i) for i in val.split('e')]
-    return '{v:1.1f} &middot 10<sup>{p}</sup>'.format(v=val, p=int(power))
+def irr2str(val, unit=False):
+    return val if val == '?' else 'nonirr' if not val or val == '0' else '{} &middot 10<sup>{}</sup>{}'.format(*val.split('e'), f' n/cm{sup(2)}' if unit else '')
+
+
+def make_ev_str(v):
+    if not v:
+        return '?'
+    n = int(log10(v) // 3)
+    return f'{v / 10 ** (3 * n):.{1 if n > 1 else 0}f}{["", "k", "M"][n]}'
 
 
 def make_runs_str(runs):
@@ -330,6 +378,14 @@ def make_ufloat(tup, par=0):
     return ufloat(tup[0], tup[1])
 
 
+def isiter(v):
+    try:
+        iter(v)
+        return False if type(v) is str else True
+    except TypeError:
+        return False
+
+
 def calc_flux(run_info):
     if 'for1' not in run_info or run_info['for1'] == 0:
         if 'measuredflux' in run_info:
@@ -353,15 +409,148 @@ def calc_flux(run_info):
                 data[roc][line[0]] = (int(line[2]), int(line[3]))
         f.close()
         try:
-            area = [(dic['cornTop'][1] - dic['cornBot'][1] + 1) * (dic['cornTop'][0] - dic['cornBot'][0] + 1) * pixel_size for dic in data.itervalues()]
+            area = [(dic['cornTop'][1] - dic['cornBot'][1] + 1) * (dic['cornTop'][0] - dic['cornBot'][0] + 1) * pixel_size for dic in data.values()]
         except KeyError:
-            area = [dic['col'][1] - dic['col'][0] + 1 * dic['row'][1] - dic['row'][0] + 1 * pixel_size for dic in data.itervalues()]
+            area = [dic['col'][1] - dic['col'][0] + 1 * dic['row'][1] - dic['row'][0] + 1 * pixel_size for dic in data.values()]
     except IOError:
         warning('Could not find mask file "{f}"! Not taking any mask!'.format(f=file_name))
     except UserWarning:
         pass
-    flux = [run_info['for{0}'.format(i + 1)] / area[i] / 1000. for i in xrange(len(area))]
+    flux = [run_info['for{0}'.format(i + 1)] / area[i] / 1000. for i in range(len(area))]
     return '{0:1.0f}'.format(mean(flux))
+
+
+def pickle(*rel_path, print_dur=False):
+    def inner(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            pickle_path = f'{join(Dir, *rel_path)}.pickle'
+            redo = kwargs['_redo'] if '_redo' in kwargs else False
+            if file_exists(pickle_path) and not redo:
+                with open(pickle_path, 'rb') as f:
+                    return pload(f)
+            prnt = print_dur and (kwargs['prnt'] if 'prnt' in kwargs else True)
+            t = (args[0].info if hasattr(args[0], 'info') else info)(f'{args[0].__class__.__name__}: {func.__name__.replace("_", " ")} ...', endl=False, prnt=prnt)
+            value = func(*args, **kwargs)
+            with open(pickle_path, 'wb') as f:
+                pdump(value, f)
+            (args[0].add_to_info if hasattr(args[0], 'add_to_info') else add_to_info)(t, prnt=prnt)
+            return value
+        return wrapper
+    return inner
+
+
+def quiet(func):
+    @wraps(func)
+    def wrapper(cls, *args, **kwargs):
+        old = cls.Verbose
+        cls.set_verbose(False)
+        value = func(cls, *args, **kwargs)
+        cls.set_verbose(old)
+        return value
+    return wrapper
+
+# ----------------------------------------
+# region CLASSES
+def update_pbar(func):
+    @wraps(func)
+    def my_func(*args, **kwargs):
+        value = func(*args, **kwargs)
+        if args[0].PBar is not None and args[0].PBar.PBar is not None and not args[0].PBar.is_finished():
+            args[0].PBar.update()
+        return value
+    return my_func
+
+
+class PBar(object):
+    def __init__(self, start=None, counter=False, t=None):
+        self.PBar = None
+        self.Widgets = self.init_widgets(counter, t)
+        self.Step = 0
+        self.N = 0
+        self.start(start)
+
+    def __reduce__(self):
+        return self.__class__, (None, False, None), (self.Widgets, self.Step, self.N)
+
+    def __setstate__(self, state):
+        self.Widgets, self.Step, self.N = state
+        if self.N:
+            self.PBar = ProgressBar(widgets=self.Widgets, maxval=self.N).start()
+            self.update(self.Step) if self.Step > 0 else do_nothing()
+
+    @staticmethod
+    def init_widgets(counter, t):
+        return ['Progress: ', SimpleProgress('/') if counter else Percentage(), ' ', Bar(marker='>'), ' ', ETA(), ' ', FileTransferSpeed() if t is None else EventSpeed(t)]
+
+    def start(self, n, counter=None, t=None):
+        if n is not None:
+            self.Step = 0
+            self.PBar = ProgressBar(widgets=self.Widgets if t is None and counter is None else self.init_widgets(counter, t), maxval=n).start()
+            self.N = n
+
+    def update(self, i=None):
+        i = self.Step if i is None else i
+        if i >= self.PBar.maxval:
+            return
+        self.PBar.update(i + 1)
+        self.Step += 1
+        if i == self.PBar.maxval - 1:
+            self.finish()
+
+    def finish(self):
+        self.PBar.finish()
+
+    def is_finished(self):
+        return self.PBar.currval == self.N
+
+
+class EventSpeed(Widget):
+    """Widget for showing the event speed (useful for slow updates)."""
+
+    def __init__(self, t='s'):
+        self.unit = t
+        self.factor = {'s': 1, 'min': 60, 'h': 60 * 60}[t]
+
+    def update(self, pbar):
+        value = 0
+        if pbar.seconds_elapsed > 2e-6 and pbar.currval > 2e-6:
+            value = pbar.currval / pbar.seconds_elapsed * self.factor
+        return f'{value:4.1f} E/{self.unit}'
+
+
+class Configuration(ConfigParser):
+
+    def __init__(self, file_name, **kwargs):
+        super(Configuration, self).__init__(**kwargs)
+        self.FileName = file_name
+        self.read(file_name) if type(file_name) is not list else self.read_file(file_name)
+
+    def get_value(self, section, option, dtype=str, default=None):
+        dtype = type(default) if default is not None else dtype
+        try:
+            if dtype is bool:
+                return self.getboolean(section, option)
+            v = self.get(section, option)
+            return loads(v) if dtype == list or '[' in v and dtype is not str else dtype(v)
+        except (NoOptionError, NoSectionError):
+            return default
+
+    def get_values(self, section):
+        return [j for i, j in self.items(section)]
+
+    def get_list(self, section, option, default=None):
+        return self.get_value(section, option, list, choose(default, []))
+
+    def get_ufloat(self, section, option, default=None):
+        return ufloat_fromstr(self.get_value(section, option, default=default))
+
+    def show(self):
+        for key, section in self.items():
+            print(colored('[{}]'.format(key), 'yellow'))
+            for option in section:
+                print('{} = {}'.format(option, self.get(key, option)))
+            print()
 
 
 class FitRes:
@@ -397,6 +586,8 @@ class FitRes:
         if arg >= len(self.Errors):
             return ''
         return self.Errors[arg] if not self.Format else dig_str(self.Errors[arg], self.Format)
+# endregion CLASSES
+# ----------------------------------------
 
 
 def do_nothing():
