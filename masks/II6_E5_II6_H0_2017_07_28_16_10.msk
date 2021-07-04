@@ -1,9 +1,0 @@
-# roc number is the readout position. x is col, y is row
-#      roc x y
-cornBot 1 6 15
-cornTop 1 45 74
-
-cornBot 2 6 5
-cornTop 2 45 64
-
-
