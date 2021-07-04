@@ -17,11 +17,9 @@ from src.dut_table import DUTTable
 
 class Website(html.File):
 
-    def __init__(self, dia=None, tc=None, config='main.ini'):
+    def __init__(self, config='main.ini'):
 
         super().__init__()
-        self.Dia = dia
-        self.TC = tc
 
         self.Title = 'PSI Diamonds'
         self.Config = Configuration(join(Dir, 'config', config))
@@ -105,8 +103,7 @@ if __name__ == '__main__':
     p.add_argument('-tc', nargs='?', default=None)
     args = p.parse_args()
 
-    z = Website(args.d, args.tc)
+    z = Website()
     r = DUTRunPlan('08.2', '201510', '1')
-    # if not args.t:
-    #     # w.update()
-    #     z.build()
+    if not args.t:
+        z.build()
