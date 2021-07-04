@@ -1,3 +1,0 @@
-1 -nov-10  run 10403     full chg@0.2 V/micron  side A  0.9 nA @900V dist OK
-3 -nov-10  run 10404     full chg@0.2 V/micron  side B  <20 pA @1 KV dist OK
-25-jan-11 At RU for Pixel testing
