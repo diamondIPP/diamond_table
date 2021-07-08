@@ -5,7 +5,7 @@
 # --------------------------------------------------------
 
 from src.utils import *
-from subprocess import getstatusoutput, check_output
+from subprocess import getstatusoutput, check_output, CalledProcessError
 from datetime import timedelta
 import h5py
 from glob import glob
@@ -124,10 +124,13 @@ class Data:
         return [self.copy_runlog(tc) for tc in self.TestCampaigns]
 
     def update(self):
-        self.copy_runplans()
-        self.copy_diamond_info()
-        self.copy_diamond_aliases()
-        self.copy_runlogs()
+        try:
+            self.copy_runplans()
+            self.copy_diamond_info()
+            self.copy_diamond_aliases()
+            self.copy_runlogs()
+        except CalledProcessError:
+            warning('cannot connect to server ... ')
 
     @staticmethod
     def fill_empty():
@@ -258,6 +261,9 @@ class DUTRunPlan(RunPlan):
 
     def calc_duration(self):
         return timedelta(seconds=sum(run.Duration.seconds for run in self.Runs))
+
+    def get_bias_str(self, *args):
+        return super(DUTRunPlan, self).get_bias_str(self.DUTNr)
 
 
 class Run:
