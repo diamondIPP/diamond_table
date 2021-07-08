@@ -18,15 +18,16 @@ class RunTable(html.File):
 
     @staticmethod
     def header():
-        main = [(n, *html.opts(rs=2)) for n in ['Run', f'HV {html.small("[V]")}', f'Current {html.small("[nA]")}', 'Hit Map']]
+        main = [(n, *html.opts(rs=2)) for n in ['Run', f'HV {html.small("[V]")}', f'Flux {html.small(f"[kHz/cm{html.sup(2)}]", html.style(transform="none"))}',
+                                                f'Current {html.small("[nA]", html.style(transform="none"))}', 'Hit Map']]
         main += [('Signal', *html.opts(cs=5)), ('Pulser', *html.opts(cs=4))]
         main += [(n, *html.opts(rs=2)) for n in ['Good Events', 'Start Time', 'Duration', 'Comment']]
         aux = ['Distr.', '2DMap', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma', 'Pedestal [au]', 'Noise [1&sigma;]']
         return [main, aux]
 
-    @staticmethod
-    def title(rp: DUTRunPlan):
-        return f'{rp.Name} ({rp.TCString}): {rp.Type.title()} of {rp.DUT.Name}, Irradiation: {irr2str(rp.Irradiation, unit=True)}, Position: {rp.Position.title()}'
+    def title(self, rp: DUTRunPlan):
+        return f'{rp.Name} ({self.link(dirname(rp.RelDir), rp.TCString)}): {rp.Type.title()} of {self.link(dirname(dirname(rp.RelDir)), rp.DUT.Name)}, ' \
+               f'Irradiation: {irr2str(rp.Irradiation, unit=True)}, Position: {rp.Position.title()}'
 
     @staticmethod
     def prep_figures(run: Run, redo=False):
