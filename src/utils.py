@@ -228,7 +228,7 @@ def tc2str(tc, short=True):
 
 
 def make_bias_str(v):
-    v = [f'{float(bias):.0f}' for bias in set(make_list(v))]
+    v = [f'{float(bias):+.0f}' for bias in set(make_list(v))]
     return v[0] if len(v) == 1 else ' &#8594; '.join(sorted(v, reverse=True, key=lambda x: abs(float(x)))) if len(v) < 4 else f'{v[0]} ... {v[-1]}'
 
 
