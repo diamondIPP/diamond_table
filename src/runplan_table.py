@@ -37,13 +37,13 @@ class RunPlanTable(html.File):
         main += [(f'DUT {i}', *html.opts(cs=3)) for i in range(1, max_duts + 1)]
         return [main, ['Data', 'Name', 'Bias [V]'] * max_duts]
 
-    @staticmethod
-    def body(tc):
+    def body(self, tc):
         rows = []
         for rp in Data.RunPlans[tc]:
             row = [(v, *html.opts(rs=rp.get_n_sub())) for v in [rp.Tag, rp.Digitiser, rp.Amplifier, rp.DUTs[0].get_type(tc)]] if rp.is_main() else []
             row += [rp.Tag.lstrip('0'), rp.Type, rp.get_runs_str(), rp.get_ev_str()]
-            rows.append(row + [word for i, dut in enumerate(rp.DUTs, 1) for word in [html.link(rp.get_dir(dut), html.LinkIcon), dut.Name, rp.get_bias_str(i)]])
+            row += [w for i, dut in enumerate(rp.DUTs, 1) for w in [self.link(rp.get_dir(dut), html.LinkIcon), self.link(join(dut.RelDir, tc), dut.Name), rp.get_bias_str(i)]]
+            rows.append(row)
         return rows
 
 
@@ -65,24 +65,24 @@ class DiaRunPlanTable(html.File):
         self.set_filename(dut.Dir, tc, 'index.html')
         self.set_header(self.Website.get_header(f'Run Plans - {dut.Name} ({tc})'))
         body = self.tc_body(tc, dut)
-        self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.tc_title(tc, dut), self.tc_header(), body)]))
+        self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.tc_title(tc, dut), self.tc_header(), body, html.style(nowrap=True))]))
         self.save()
         return body
 
     @quiet
     def build_all(self):
         info('creating runplan tables for DUTs ...')
-        self.PBar.start(len(Data.DUTs), counter=True)
-        for dut in Data.DUTs.values():
+        duts = [Data.DUTs[dut] for dut in self.Website.NavBar.used(Data.DUTs)]
+        self.PBar.start(len(duts), counter=True)
+        for dut in duts:
             self.build(dut)
 
     @staticmethod
     def prep_figures(rp: DUTRunPlan, redo=False):
         html.prep_figures(rp.RelDir, rp.ShortName, redo)
 
-    @staticmethod
-    def tc_title(tc, dut: DUT):
-        return f'Run Plans for {dut.Name} in {tc2str(tc, short=False)}'
+    def tc_title(self, tc, dut: DUT):
+        return f'Run Plans for {self.link(dut.RelDir, dut.Name)} in {tc2str(tc, short=False)}'
 
     @staticmethod
     def title(dut: DUT):
@@ -95,7 +95,7 @@ class DiaRunPlanTable(html.File):
 
     @staticmethod
     def tc_header():
-        main = [(n, *html.opts(rs=2)) for n in ['Nr.', 'Pos.', 'Digitiser', 'Amp']] + [('Attenuators', *html.opts(cs=2))]
+        main = [(n, *html.opts(rs=2)) for n in ['Nr.', 'Pos.', 'Digi-tiser', 'Amp']] + [('Attenuators', *html.opts(cs=2))] + [('HV [V]', *html.opts(rs=2))]
         main += [(n, *html.opts(rs=2)) for n in ['Sub Plan', 'Runs', f'Flux {html.small(f"[kHz/cm{html.sup(2)}]")}', 'Current']]
         main += [('Signal', *html.opts(cs=3)), ('Pulser', *html.opts(cs=2))] + [(n, *html.opts(rs=2)) for n in ['Good Events', 'Start Time', 'Duration']]
         return [main, ['DUT', 'Pulser', 'PH', 'Ped', '&sigma;', 'PH', '&sigma;']]
@@ -104,7 +104,7 @@ class DiaRunPlanTable(html.File):
         rows = []
         for rp in [r for r in Data.DUTRunPlans[tc] if r.DUT.Name == dut.Name]:
             self.prep_figures(rp)
-            row = [(v, *html.opts(rs=rp.get_n_sub())) for v in [rp.Tag, rp.Position, rp.Digitiser, rp.Amplifier] + rp.get_attenuators()] if rp.is_main() else []
+            row = [(v, *html.opts(rs=rp.get_n_sub())) for v in [rp.Tag, rp.Position, rp.Digitiser, rp.Amplifier] + rp.get_attenuators() + [rp.get_bias_str()]] if rp.is_main() else []
             row += [self.link(rp.RelDir, rp.Tag.lstrip('0')), rp.get_runs_str(), self.rplink(rp, 'FluxProfile', rp.get_flux_str())]
             row += [self.rplink(rp, n, rp.get_mean(i)) for i, n in enumerate(['Currents', 'PulseHeightFlux', 'PedestalFlux', 'NoiseFlux', 'PulserPH', 'PulserSigma'], 1)]
             row += [rp.get_ev_str(), rp.StartTime, rp.Duration]
