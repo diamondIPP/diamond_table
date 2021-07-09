@@ -3,7 +3,7 @@
 # created on May 19th 2016 by M. Reichmann
 # --------------------------------------------------------
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from termcolor import colored
 from configparser import ConfigParser, NoOptionError, NoSectionError
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar, SimpleProgress, Widget
@@ -112,9 +112,9 @@ def make_lines(n):
     return '<br/>' * n
 
 
-def get_elapsed_time(start):
-    t = datetime.fromtimestamp(time() - start)
-    return '{}.{:02.0f}'.format(t.strftime('%M:%S'), t.microsecond / 10000)
+def get_elapsed_time(start, hrs=False):
+    t = str(timedelta(seconds=round(time() - start, 0 if hrs else 2)))
+    return t if hrs else t[2:-4]
 
 
 def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour='red', warn=True):
