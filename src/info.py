@@ -129,6 +129,7 @@ class Data:
             self.copy_diamond_info()
             self.copy_diamond_aliases()
             self.copy_runlogs()
+            self.reload_dut_runplans()
         except CalledProcessError:
             warning('cannot connect to server ... ')
 
