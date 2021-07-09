@@ -26,6 +26,8 @@ class Website(html.File):
         self.Icon = html.path('figures', self.Config.get('Home Page', 'icon'))
         self.TextSize = self.Config.get('Home Page', 'text size')
         self.Color = self.Config.get('Home Page', 'color')
+        self.Count = 0
+        self.StartTime = time()
 
         # MODULES
         self.Data = Data()
@@ -36,6 +38,12 @@ class Website(html.File):
         self.FullRunTable = FullRunTable(self)
         self.RunPlanTable = RunPlanTable(self)
         self.DiaRunPlanTable = DiaRunPlanTable(self)
+
+    def run(self, tc=None):
+        while True:
+            print_banner(f'starting iteration ({self.Count:04d}), running for {get_elapsed_time(self.StartTime, hrs=True)}', color='red')
+            self.build() if tc is None else self.build_tc(tc)
+            self.Count += 1
 
     def build(self):
         t = info('building website ...')
@@ -48,6 +56,12 @@ class Website(html.File):
         self.DUTTable.build_all()
         self.NavBar.build()
         print(f'Done! ({get_elapsed_time(t)})')
+
+    def build_tc(self, tc):
+        self.RunTable.build_tc(tc)
+        self.RunPlanTable.build(tc)
+        self.DiaRunPlanTable.build_all_tc(tc)
+        self.NavBar.build()
 
     def get_header(self, title=None, icon=None):
         f = html.File()
@@ -106,4 +120,4 @@ if __name__ == '__main__':
     z = Website()
     r = DUTRunPlan('08.2', '201510', '1')
     if not args.t:
-        z.build()
+        z.run(args.tc)

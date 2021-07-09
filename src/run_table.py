@@ -46,6 +46,10 @@ class RunTable(html.File):
         self.PBar.start(sum(len(rps) for rps in Data.DUTRunPlans.values()), counter=True)
         [self.build(rp) for rps in Data.DUTRunPlans.values() for rp in rps]
 
+    @quiet
+    def build_tc(self, tc):
+        [self.build(rp) for rp in Data.DUTRunPlans[tc]]
+
     def body(self, rp: DUTRunPlan):
         rows = []
         for run in rp.Runs:

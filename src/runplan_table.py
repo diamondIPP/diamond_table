@@ -70,6 +70,10 @@ class DiaRunPlanTable(html.File):
         return body
 
     @quiet
+    def build_all_tc(self, tc):
+        [self.build_tc(tc, Data.DUTs[name]) for name in Data.TCDUTs[tc]]
+
+    @quiet
     def build_all(self):
         info('creating runplan tables for DUTs ...')
         duts = [Data.DUTs[dut] for dut in self.Website.NavBar.used(Data.DUTs)]
@@ -95,8 +99,9 @@ class DiaRunPlanTable(html.File):
 
     @staticmethod
     def tc_header():
-        main = [(n, *html.opts(rs=2)) for n in ['Nr.', 'Pos.', 'Digi-tiser', 'Amp']] + [('Attenuators', *html.opts(cs=2))] + [('HV [V]', *html.opts(rs=2))]
-        main += [(n, *html.opts(rs=2)) for n in ['Sub Plan', 'Runs', f'Flux {html.small(f"[kHz/cm{html.sup(2)}]")}', 'Current']]
+        main = [(n, *html.opts(rs=2)) for n in ['Nr.', 'Pos.', 'Digi-tiser', 'Amp']] + [('Atte-nuators', *html.opts(cs=2))] + [('HV [V]', *html.opts(rs=2))]
+        main += [(n, *html.opts(rs=2)) for n in ['Sub Plan', 'Runs', f'Flux {html.small(f"[kHz/cm{html.sup(2)}]", html.style(transform="none"))}',
+                                                 f'Cur. {html.small("[nA]", html.style(transform="none"))}']]
         main += [('Signal', *html.opts(cs=3)), ('Pulser', *html.opts(cs=2))] + [(n, *html.opts(rs=2)) for n in ['Good Events', 'Start Time', 'Duration']]
         return [main, ['DUT', 'Pulser', 'PH', 'Ped', '&sigma;', 'PH', '&sigma;']]
 
