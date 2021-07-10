@@ -233,3 +233,12 @@ class File:
 
     def info(self, txt, endl=True, prnt=True):
         return info(txt, endl, prnt=prnt and self.Verbose)
+
+    def check_content(self):
+        if file_exists(self.FileName):
+            with open(self.FileName) as f:
+                return self.T == ''.join(f.readlines())
+        return False
+
+    def clear(self):
+        self.T = self.Header = self.Body = self.Scripts = ''
