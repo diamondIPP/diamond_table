@@ -16,6 +16,7 @@ class NavBar(html.File):
         self.DUTs = list(Data.DUTs.keys())
 
     def build(self):
+        self.clear()
         self.add_line('<div class="navbar">')
         self.add_line()
         self.add_line(html.link('content', 'Home', colour=None), ind=1)
