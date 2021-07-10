@@ -44,7 +44,7 @@ def fig_icon(symbol=9736):
     return big(f'&#{symbol}')
 
 
-def lines(n=1):
+def empty_line(n=1):
     return '<br/>' * n
 
 

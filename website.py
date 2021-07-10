@@ -90,13 +90,13 @@ class Website(html.File):
     def create_home(self):
         self.set_filename(Dir, 'content', 'index.html')
         self.set_header(self.get_header(f'Home'))
-        self.set_body('\n'.join([self.NavBar.get(), html.lines(2), html.heading('Complete Set of Data Taken at Beam Tests at PSI ... <br> What should go here?')]))
+        self.set_body('\n'.join([self.NavBar.get(), html.empty_line(2), html.heading('Complete Set of Data Taken at Beam Tests at PSI ... <br> What should go here?')]))
         self.save()
 
     def create_location(self):
         self.set_filename(Dir, 'content', 'Location.html')
         self.set_header(self.get_header(f'Location'))
-        self.set_body('\n'.join([self.NavBar.get(), html.lines(2), html.heading('Paul Scherrer Institut (PSI)'), html.image(join('figures', 'PSIAir.jpg'), w=1200)]))
+        self.set_body('\n'.join([self.NavBar.get(), html.empty_line(2), html.heading('Paul Scherrer Institut (PSI)'), html.image(join('figures', 'PSIAir.jpg'), w=1200)]))
         self.save()
 
     def create_boards(self):
