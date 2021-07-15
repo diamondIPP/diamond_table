@@ -13,6 +13,7 @@ from src.structure import Structure
 from src.run_table import RunTable, FullRunTable
 from src.runplan_table import RunPlanTable, DiaRunPlanTable
 from src.dut_table import DUTTable
+from src.home import Home
 
 
 class Website(html.File):
@@ -24,7 +25,7 @@ class Website(html.File):
         self.Title = 'PSI Diamonds'
         self.Header = self.make_header()
         self.Config = Configuration(join(Dir, 'config', config))
-        self.Icon = html.path('figures', self.Config.get('Home Page', 'icon'))
+        self.Icon = self.Config.get('Home Page', 'icon')
         self.TextSize = self.Config.get('Home Page', 'text size')
         self.Color = self.Config.get('Home Page', 'color')
         self.Count = 0
@@ -34,6 +35,7 @@ class Website(html.File):
         self.Data = Data()
         self.Structure = Structure()
         self.NavBar = NavBar()
+        self.Home = Home(self)
         self.RunTable = RunTable(self)
         self.DUTTable = DUTTable(self)
         self.FullRunTable = FullRunTable(self)
@@ -89,13 +91,7 @@ class Website(html.File):
         return f.get_text()
 
     def get_header(self, title=None, icon=None):
-        return self.Header.format(icon=choose(icon, self.Icon), title=choose(title, self.Title))
-
-    def create_home(self):
-        self.set_filename(Dir, 'content', 'index.html')
-        self.set_header(self.get_header(f'Home'))
-        self.set_body('\n'.join([self.NavBar.get(), html.empty_line(2), html.heading('Complete Set of Data Taken at Beam Tests at PSI ... <br> What should go here?')]))
-        self.save()
+        return self.Header.format(icon=html.path('figures', choose(icon, self.Icon)), title=choose(title, self.Title))
 
     def create_location(self):
         self.set_filename(Dir, 'content', 'Location.html')
