@@ -98,7 +98,8 @@ class Data:
 
     @staticmethod
     def find_dut_types(tc):
-        return sorted(set(Data.DUTs[dut].get_type(tc) for dut in Data.TCDUTs[tc]))
+        types = [Data.DUTs[dut].get_type(tc) for dut in Data.TCDUTs[tc]]
+        return sorted(set('bcm\'' if t.startswith('pad') and t.endswith(')') else t for t in types))
 
     # ----------------------------------------
     # region UPDATE
