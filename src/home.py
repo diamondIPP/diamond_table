@@ -30,7 +30,7 @@ class Home(html.File):
         for tc in Data.TestCampaigns:
             row = [self.link(join('content', 'beamtests', tc, 'RunPlans.html'), tc2str(tc, short=False))]
             row += [(', '.join(Data.find_dut_types(tc)), html.style(left=True))]
-            row += [(', '.join(self.link(Data.DUTs[dut].RelDir, dut) for dut in Data.TCDUTs[tc]), html.style(left=True)), html.NoIcon]
+            row += [(', '.join(self.link(join(Data.DUTs[dut].RelDir, tc), dut) for dut in Data.TCDUTs[tc]), html.style(left=True)), html.NoIcon]
             rows.append(row)
         return rows
 

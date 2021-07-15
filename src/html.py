@@ -83,7 +83,7 @@ def path(*dirs):
 
 
 def link(target, name, active=False, center=False, new_tab=False, use_name=True, colour: Any = None, right=False, warn=True):
-    target = join(target, '') if isdir(target) else target
+    target = join(target, '') if isdir(join(Dir, target)) else target
     if file_exists(join(Dir, target)) or file_exists(join(Dir, target, 'index.html')) and target.endswith('/') or 'http' in target:
         return a(name, style(center, right, colour=colour), *opts(active=active, new_tab=new_tab), *make_opt('href', path(target)))
     warning('The file {} does not exist!'.format(target), prnt=warn)
