@@ -156,6 +156,7 @@ def prep_figures(rel_dir, title='', redo=False):
 
 
 LinkIcon = fig_icon(8635)
+NoIcon = fig_icon(128561)
 
 
 class File:
