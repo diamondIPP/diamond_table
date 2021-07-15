@@ -22,6 +22,7 @@ class Website(html.File):
         super().__init__()
 
         self.Title = 'PSI Diamonds'
+        self.Header = self.make_header()
         self.Config = Configuration(join(Dir, 'config', config))
         self.Icon = html.path('figures', self.Config.get('Home Page', 'icon'))
         self.TextSize = self.Config.get('Home Page', 'text size')
@@ -63,14 +64,14 @@ class Website(html.File):
         self.DiaRunPlanTable.build_all_tc(tc)
         self.NavBar.build()
 
-    def get_header(self, title=None, icon=None):
+    @staticmethod
+    def make_header():
         f = html.File()
         f.add_comment('Required meta tags')
         f.add_line('<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">')
         f.add_line('<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">')
         f.add_line()
-        f.add_line('<link rel="stylesheet" href="/css-t16/fonts/icomoon/style.css">')
-        f.add_line('<link rel="stylesheet" href="/css-t16/css/owl.carousel.min.css">')
+        f.add_lines([f'<link rel="stylesheet" href="{join("/css-t16", n)}">' for n in [join('fonts', 'icomoon', 'style.css'), join('css', 'owl.carousel.min.css')]])
         f.add_line()
         f.add_comment('Bootstrap CSS')
         f.add_line('<link rel="stylesheet" href="/psi2/config/bootstrap.min.css">')
@@ -83,9 +84,12 @@ class Website(html.File):
         f.add_lines([html.script(f'/css-t16/js/{s}') for s in ['jquery-3.3.1.min.js', 'popper.min.js', 'bootstrap.min.js', 'main.js']])
         f.add_line(html.script('/psi2/config/nav.js'))
         f.add_line()
-        f.add_line(f'<link rel="icon" href="{choose(icon, self.Icon)}">')
-        f.add_line(f'<title> {choose(title, self.Title)} </title>')
+        f.add_line('<link rel="icon" href="{icon}">')
+        f.add_line('<title> {title} </title>')
         return f.get_text()
+
+    def get_header(self, title=None, icon=None):
+        return self.Header.format(icon=choose(icon, self.Icon), title=choose(title, self.Title))
 
     def create_home(self):
         self.set_filename(Dir, 'content', 'index.html')
@@ -118,6 +122,6 @@ if __name__ == '__main__':
     args = p.parse_args()
 
     z = Website()
-    r = DUTRunPlan('08.2', '201510', '1')
+    r = DUTRunPlan('03', '201508', '2')
     if not args.t:
         z.run(args.tc)
