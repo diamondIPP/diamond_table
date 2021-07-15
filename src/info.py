@@ -54,7 +54,7 @@ class Data:
         self.PBar = PBar(counter=True)
         Data.DUTs = Data.load_duts()
         Data.RunPlans = {tc: [RunPlan(tag, tc) for tag in Data.RPDic[tc]] for tc in Data.TestCampaigns}
-        Data.TCDUTs = {tc: list(set(dut.Name for rp in Data.RunPlans[tc] for dut in rp.DUTs)) for tc in Data.TestCampaigns}
+        Data.TCDUTs = {tc: sorted(list(set(dut.Name for rp in Data.RunPlans[tc] for dut in rp.DUTs))) for tc in Data.TestCampaigns}
         Data.DUTRunPlans = self.load_dut_runplans()
 
     def __getitem__(self, args):
