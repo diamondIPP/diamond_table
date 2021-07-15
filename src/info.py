@@ -96,6 +96,10 @@ class Data:
         keys = set([j for i in Data.RunInfos[tc].values() for j in i.keys()])
         return next(i for i in range(4, 0, -1) if f'dia{i}' in keys)
 
+    @staticmethod
+    def find_dut_types(tc):
+        return sorted(set(Data.DUTs[dut].get_type(tc) for dut in Data.TCDUTs[tc]))
+
     # ----------------------------------------
     # region UPDATE
     @staticmethod
