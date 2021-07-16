@@ -121,7 +121,7 @@ class DiaRunPlanTable(html.File):
         for tc, body in tc_bodies.items():
             a = self.tc_body(tc, dut)
             tc_info = f'{html.link(join(dut.RelDir, tc), tc2str(tc, short=False))}<br><br>({dut.get_type(tc)}{f",<br>pulser: {dut.get_pulser(tc)})" if dut.get_pulser(tc) else ")"}'
-            a[0] = [(n, *html.opts(rs=len(a))) for n in [tc_info, irr2str(dut.get_irradiation(tc))]] + a[0]
+            a[0] = [(n, *html.opts(rs=len(a))) for n in [tc_info, html.irr2str(dut.get_irradiation(tc))]] + a[0]
             rows += a
         return rows
 

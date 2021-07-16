@@ -11,6 +11,7 @@ import h5py
 from glob import glob
 from numpy import zeros
 from os import environ
+from src.html import conv_time, irr2str, basename
 
 
 Config = Configuration(join(Dir, 'config', 'main.ini'))
@@ -296,7 +297,7 @@ class Run:
 
     @staticmethod
     def calc_duration(log):
-        dur = conv_time(log['endtime'], strg=False) - conv_time(log['starttime0'], strg=False)
+        dur = conv_time(log['endtime'], to_string=False) - conv_time(log['starttime0'], to_string=False)
         return dur + timedelta(days=1 if dur.days < 0 else 0)
 
     def prep_data(self):

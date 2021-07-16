@@ -8,13 +8,12 @@ from termcolor import colored
 from configparser import ConfigParser, NoOptionError, NoSectionError
 from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar, SimpleProgress, Widget
 from json import load, loads
-from os.path import join, dirname, realpath, basename, isdir, isfile
-from os import _exit, mkdir, listdir
+from os.path import join, dirname, realpath, isdir, isfile
+from os import _exit, mkdir
 from re import sub
 from uncertainties import ufloat, ufloat_fromstr
-from uncertainties.core import Variable
-from numpy import array, sqrt, average, mean, log10
-from pytz import timezone, utc
+from uncertainties.core import Variable, AffineScalarFunc
+from numpy import array, sqrt, average, log10
 from time import time
 from functools import wraps
 from copy import deepcopy
@@ -22,13 +21,6 @@ from pickle import load as pload, dump as pdump
 
 
 Dir = dirname(dirname(realpath(__file__)))
-
-
-# ==============================================
-# UTILITY FUNCTIONS
-# ==============================================
-def get_base_dir():
-    return dirname(dirname(realpath(__file__)))
 
 
 def get_t_str():
@@ -80,101 +72,9 @@ def make_list(value):
     return array([value], dtype=object).flatten()
 
 
-def untitle(string):
-    s = ''
-    for word in string.split(' '):
-        if word:
-            s += word[0].lower() + word[1:] + ' '
-    return s.strip(' ')
-
-
-def round_down_to(num, val):
-    return int(num) / val * val
-
-
-def round_up_to(num, val):
-    return int(num) / val * val + val
-
-
-def list_dirs(path):
-    return [d for d in listdir(path) if isdir(join(path, d))]
-
-
-def make_link(target, name='Results', new_tab=False, path='', use_name=True, center=False):
-    tab = ' target="_blank"' if new_tab else ''
-    name = center_txt(name) if center else name
-    if file_exists(join(path, target.strip('./'))) or not path:
-        return '<a href={tar}{tab}>{nam}</a>'.format(tar=target, nam=name, tab=tab)
-    return name if use_name else ''
-
-
-def make_lines(n):
-    return '<br/>' * n
-
-
 def get_elapsed_time(start, hrs=False):
     t = str(timedelta(seconds=round(time() - start, 0 if hrs else 2)))
     return t if hrs else t[2:-4]
-
-
-def make_abs_link(target, name, active=False, center=False, new_tab=False, use_name=True, colour='red', warn=True):
-    active = 'class="active" ' if active else ''
-    new_tab = ' target="_blank"' if new_tab else ''
-    name = center_txt(name) if center else name
-    style = ' style="color:{}"'.format(colour) if colour else ''
-    if file_exists(join(Dir, target)) or 'http' in target:
-        return '<a {act}href={tar}{tab}{s}>{name}</a>'.format(act=active, tar=abs_html_path(target), tab=new_tab, name=name, s=style)
-    warning('The file {} does not exist!'.format(target), prnt=warn)
-    return name if use_name else ''
-
-
-def make_figure(path, name='', width=None, height=None):
-    width = ' width="{}"'.format(width) if width is not None else ''
-    height = ' height="{}"'.format(height) if height is not None else ''
-    return '<img src="{path}" alt="{name}"{w}{h}>'.format(path=abs_html_path(path), name=name, w=width, h=height)
-
-
-def embed_google_pdf(path, width=None, height=None):
-    width = ' width="{}"'.format(width) if width is not None else ''
-    height = ' height="{}"'.format(height) if height is not None else ''
-    return '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={}"{}{}>\n'.format(path, width, height)
-
-
-def embed_pdf(path, width=400, height=390, zoom=52):
-    width = ' width="{}"'.format(width) if width is not None else ''
-    height = ' height="{}"'.format(height) if height is not None else ''
-    error = 'pdf {} does not exist'.format(basename(path))
-    zoom = 'view=FitH' if zoom is None else 'zoom={}'.format(zoom)
-    html = '  <a href="{}" target="_blank" class="pdf">\n'.format(path)
-    html += '    <object {h}{w} type="application/pdf" data="{p}?#{z}&scrollbar=0&toolbar=0&navpanes=0&statusbar=0"><p>{e}</p></object>\n'.format(h=height, w=width, p=path, e=error, z=zoom)
-    return html + '  </a>\n'
-
-
-def embed_png(path, width=400, height=390):
-    width = ' width="{}"'.format(width) if width is not None else ''
-    height = ' height="{}"'.format(height) if height is not None else ''
-    return '  <a href="{0}.pdf" target="_blank">\n    <img {1} {2} src="{0}.png"\n  </a>\n'.format(path, width, height)
-
-
-def indent(txt, n_spaces=2):
-    lines = txt.split('\n')
-    return '\n'.join('{}{}'.format(n_spaces * ' ', line) for line in lines)
-
-
-def bold(txt):
-    return '<b>{}</b>'.format(txt)
-
-
-def head(txt, size=1):
-    return '<h{0}>{1}</h{0}>\n'.format(size, txt)
-
-
-def folder_exists(path):
-    return isdir(path)
-
-
-def file_exists(path):
-    return isfile(path)
 
 
 def create_dir(*path):
@@ -193,32 +93,8 @@ def prep_kw(dic, **default):
     return d
 
 
-def write_html_header(f, name, bkg=None):
-    f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n')
-    f.write('<html>\n<head>\n<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">\n')
-    f.write('<link rel="icon" href="http://pngimg.com/uploads/diamond/diamond_PNG6684.png">\n')
-    f.write('<title> {tit} </title>\n'.format(tit=name))
-    f.write('</head>\n<body{bkg}>\n\n\n'.format(bkg='' if bkg is None else ' bgcolor=' + bkg))
-    f.write('<h1>{tit}</h1>\n'.format(tit=name))
-
-
 def add_spaces(txt):
     return ''.join(f' {txt[i]}' if i and (txt[i].isupper() or txt[i].isdigit()) and not txt[i - 1].isdigit() and not txt[i - 1].isupper() else txt[i] for i in range(len(txt)))
-
-
-def make_rp_string(string, directory=False):
-    return '{}{}'.format('RunPlan' if directory else '', string[1:] if string[0] == '0' else string)
-
-
-def make_runplan_string(nr):
-    nr = str(nr)
-    return nr.zfill(2) if len(nr) <= 2 else nr.zfill(4)
-
-
-def str_to_tc(tc, short=True):
-    tc_str = tc.split('-')[0]
-    sub_str = '-{}'.format(tc.split('-')[-1]) if '-' in str(tc) else ''
-    return '{tc}{s}'.format(tc=datetime.strptime(tc_str, '%b%y').strftime('%Y%m' if short else '%B %Y'), s=sub_str)
 
 
 def tc2str(tc, short=True):
@@ -231,10 +107,6 @@ def make_bias_str(v):
     v = make_list(v)
     v = [f'{float(bias):+.0f}' for bias in (v if len(set(v)) > 3 else set(v))]
     return v[0] if len(v) == 1 else ' &#8594; '.join(sorted(v, reverse=True, key=lambda x: abs(float(x)))) if len(v) < 4 else f'{v[0]} ... {v[-1]}'
-
-
-def irr2str(val, unit=False):
-    return val if val == '?' else 'nonirr' if not val or val == '0' else '{} &middot 10<sup>{}</sup>{}'.format(*val.split('e'), f' n/cm{sup(2)}' if unit else '')
 
 
 def make_ev_str(v):
@@ -259,90 +131,13 @@ def load_parser(path):
 
 
 def load_json(path):
-    if file_exists(path):
+    if isfile(path):
         f = open(path)
         j = load(f)
         f.close()
         return j
     else:
         return {}
-
-
-def conv_time(time_str, strg=True):
-    t = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc).astimezone(timezone('Europe/Zurich'))
-    return t.strftime('%b %d{} %H:%M:%S').format(nth(t.day)) if strg else t
-
-
-def t_to_str(time):
-    return time.strftime('%b %d{} %H:%M:%S').format(nth(time.day))
-
-
-def dig_str(value, form='5.1f'):
-    return ('{0:' + form + '}').format(value) if value is not None else ''
-
-
-def nth(d):
-    nth.ext = ['th', 'st', 'nd', 'rd'] + ['th'] * 16
-    return sup(nth.ext[int(d) % 20])
-
-
-def sup(txt):
-    return '<sup>{0}</sup>'.format(txt)
-
-
-def center_txt(txt):
-    return '<div align="center">{0}</div>'.format(txt)
-
-
-def right_txt(txt):
-    return '<div align="right">{0}</div>'.format(txt)
-
-
-def add_spacings(txt, n=1):
-    return '{s}{txt}{s}'.format(txt=txt, s=' &nbsp ' * n)
-
-
-def add_bkg(table, color='black'):
-    lines = table.split('\n')
-    for i, line in enumerate(lines):
-        if ('&n' in line or '"></TD>' in line) and len(line) < 24:
-            lines[i] = line.replace('<TD>&n', '<TD bgcolor={col}>&n'.format(col=color))
-        elif color in line:
-            line = line.replace(color, '')
-            lines[i] = line.replace('<TD', '<TD bgcolor={col} '.format(col=color))
-            lines[i] = line.replace('<TH', '<TH bgcolor={col} '.format(col=color))
-        else:
-            lines[i] = line.replace('<TD', '<TD bgcolor=white ')
-        if 'bgcolor' not in lines[i]:
-            lines[i] = lines[i].replace('<TH', '<TH bgcolor=white ')
-    return '\n'.join(lines)
-
-
-def abs_html_path(*paths):
-    paths = list(paths) if type(paths) is not list else paths
-    return join('https://diamond.ethz.ch', 'psi', *paths) if 'http' not in paths[0] else paths[0]
-
-
-def make_dropdown(name, items, targets, n, active=False):
-    s = ''
-    s += '    <div class="dropdown">\n'
-    s += '      <button class="dropbtn{}" onclick="f{}()">{}\n'.format(' active' if active else '', n, name)
-    s += '        <i class="fa fa-caret-down"></i>\n'
-    s += '      </button>\n'
-    s += '      <div class="dropdown-content" id="drop{}">\n'.format(n)
-    for item, target in zip(items, targets):
-        s += '        {}\n'.format(make_abs_link(target, item, colour=''))
-    s += '      </div>\n'
-    s += '    </div>\n'
-    return s
-
-
-def calc_mean(lst):
-    lst = [float(i) for i in lst]
-    mean_ = sum(lst) / len(lst)
-    mean2 = sum(map(lambda x: x ** 2, lst)) / len(lst)
-    sigma = sqrt(mean2 - mean_ ** 2)
-    return mean_, sigma
 
 
 def mean_sigma(values, weights=None):
@@ -361,22 +156,14 @@ def mean_sigma(values, weights=None):
     return avrg, sqrt(variance)
 
 
-def get_dia_channels(dic):
-    return sorted(key.strip('dia') for key in dic if key.startswith('dia') and len(key) < 5)
+def is_ufloat(value):
+    return type(value) in [Variable, AffineScalarFunc]
 
 
-def get_max_channels(dic):
-    return max(len(get_dia_channels(data)) for data in dic.itervalues())
-
-
-def make_ufloat(tup, par=0):
-    if tup is None:
-        return
-    if type(tup) is Variable:
-        return tup
-    if isinstance(tup, FitRes):
-        return ufloat(tup.Parameter(par), tup.ParError(par))
-    return ufloat(tup[0], tup[1])
+def make_ufloat(n, s=0):
+    if isiter(n):
+        return array([ufloat(*v) for v in array([n, s]).T])
+    return n if is_ufloat(n) else ufloat(n, s)
 
 
 def isiter(v):
@@ -387,47 +174,13 @@ def isiter(v):
         return False
 
 
-def calc_flux(run_info):
-    if 'for1' not in run_info or run_info['for1'] == 0:
-        if 'measuredflux' in run_info:
-            return str('{0:5.0f}'.format(run_info['measuredflux'] * 2.48))
-    pixel_size = 0.01 * 0.015
-    area = [52 * 80 * pixel_size] * 2
-    file_name = basename(run_info['maskfile']).strip('"')
-    try:
-        if file_name.lower() in ['none.msk', 'none', 'no mask', 'pump.msk']:
-            raise UserWarning
-        f = open(join(Dir, 'masks', file_name), 'r')
-        data = {}
-        for line in f:
-            if line.startswith('#'):
-                continue
-            if len(line) > 3:
-                line = line.split()
-                roc = int(line[1])
-                if roc not in data:
-                    data[roc] = {}
-                data[roc][line[0]] = (int(line[2]), int(line[3]))
-        f.close()
-        try:
-            area = [(dic['cornTop'][1] - dic['cornBot'][1] + 1) * (dic['cornTop'][0] - dic['cornBot'][0] + 1) * pixel_size for dic in data.values()]
-        except KeyError:
-            area = [dic['col'][1] - dic['col'][0] + 1 * dic['row'][1] - dic['row'][0] + 1 * pixel_size for dic in data.values()]
-    except IOError:
-        warning('Could not find mask file "{f}"! Not taking any mask!'.format(f=file_name))
-    except UserWarning:
-        pass
-    flux = [run_info['for{0}'.format(i + 1)] / area[i] / 1000. for i in range(len(area))]
-    return '{0:1.0f}'.format(mean(flux))
-
-
 def pickle(*rel_path, print_dur=False):
     def inner(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             pickle_path = f'{join(Dir, *rel_path)}.pickle'
             redo = kwargs['_redo'] if '_redo' in kwargs else False
-            if file_exists(pickle_path) and not redo:
+            if isfile(pickle_path) and not redo:
                 with open(pickle_path, 'rb') as f:
                     return pload(f)
             prnt = print_dur and (kwargs['prnt'] if 'prnt' in kwargs else True)
@@ -450,6 +203,7 @@ def quiet(func):
         cls.set_verbose(old)
         return value
     return wrapper
+
 
 # ----------------------------------------
 # region CLASSES
@@ -581,12 +335,12 @@ class FitRes:
     def Parameter(self, arg):
         if arg >= len(self.Pars):
             return ''
-        return self.Pars[arg] if not self.Format else dig_str(self.Pars[arg], self.Format)
+        return self.Pars[arg] if not self.Format else f'{self.Pars[arg]:f"{self.Format}}'
 
     def ParError(self, arg):
         if arg >= len(self.Errors):
             return ''
-        return self.Errors[arg] if not self.Format else dig_str(self.Errors[arg], self.Format)
+        return self.Errors[arg] if not self.Format else f'{self.Errors[arg]:f"{self.Format}}'
 # endregion CLASSES
 # ----------------------------------------
 

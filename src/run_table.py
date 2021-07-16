@@ -27,7 +27,7 @@ class RunTable(html.File):
 
     def title(self, rp: DUTRunPlan):
         return f'{rp.Name} ({self.link(dirname(rp.RelDir), rp.TCString)}): {rp.Type.title()} of {self.link(dirname(dirname(rp.RelDir)), rp.DUT.Name)}, ' \
-               f'Irradiation: {irr2str(rp.Irradiation, unit=True)}, Position: {rp.Position.title()}'
+               f'Irradiation: {html.irr2str(rp.Irradiation, unit=True)}, Position: {rp.Position.title()}'
 
     @staticmethod
     def prep_figures(run: Run, redo=False):

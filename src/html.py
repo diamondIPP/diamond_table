@@ -3,7 +3,9 @@
 # created on June 24th 2021 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from src.utils import file_exists, join, Dir, warning, basename, info, choose, do_nothing, isdir, PBar, add_spaces, isiter
+from src.utils import isfile, join, Dir, warning, info, choose, do_nothing, isdir, PBar, add_spaces, isiter, datetime
+from os.path import basename
+from pytz import timezone, utc
 from glob import glob
 from typing import Any
 
@@ -14,6 +16,20 @@ def tag(name, txt, *opts_):
 
 def sup(txt):
     return tag('sup', txt)
+
+
+def nth(d):
+    nth.ext = ['th', 'st', 'nd', 'rd'] + ['th'] * 16
+    return sup(nth.ext[int(d) % 20])
+
+
+def irr2str(val, unit=False):
+    return val if val == '?' else 'nonirr' if not val or val == '0' else '{} &middot 10<sup>{}</sup>{}'.format(*val.split('e'), f' n/cm{sup(2)}' if unit else '')
+
+
+def conv_time(time_str, to_string=True):
+    t = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc).astimezone(timezone('Europe/Zurich'))
+    return t.strftime(f'%b %d{nth(t.day)} %H:%M:%S') if to_string else t
 
 
 def div(txt, *opts_):
@@ -84,7 +100,7 @@ def path(*dirs):
 
 def link(target, name, active=False, center=False, new_tab=False, use_name=True, colour: Any = None, right=False, warn=True):
     target = join(target, '') if isdir(join(Dir, target)) else target
-    if file_exists(join(Dir, target)) or file_exists(join(Dir, target, 'index.html')) and target.endswith('/') or 'http' in target:
+    if isfile(join(Dir, target)) or isfile(join(Dir, target, 'index.html')) and target.endswith('/') or 'http' in target:
         return a(name, style(center, right, colour=colour), *opts(active=active, new_tab=new_tab), *make_opt('href', path(target)))
     warning('The file {} does not exist!'.format(target), prnt=warn)
     return name if use_name else ''
@@ -150,7 +166,7 @@ def table(title, header, rows, *row_opts):
 
 def prep_figures(rel_dir, title='', redo=False):
     for name in glob(join(Dir, rel_dir, '*.root')):
-        if not file_exists(name.replace('.root', '.html')) or redo:
+        if not isfile(name.replace('.root', '.html')) or redo:
             pal = 53 if 'SignalMap' in name else 55 if 'HitMap' in name else None
             make_root(name, f'{add_spaces(basename(name).replace(".root", ""))} {title}', pal=pal)
 
@@ -180,7 +196,7 @@ class File:
         return f'{self.__class__.__name__}: {None if self.FileName is None else basename(self.FileName)}'
 
     def set_filename(self, *name):
-        self.FileName = join(*name)
+        self.FileName = join(*name) if name[0].startswith('/scratch') else join(Dir, *name)
 
     def set_header(self, txt, *opts_):
         self.Header = self.add_tag(txt, 'head', *opts_)
@@ -237,7 +253,7 @@ class File:
         return info(txt, endl, prnt=prnt and self.Verbose)
 
     def check_content(self):
-        if file_exists(self.FileName):
+        if isfile(self.FileName):
             with open(self.FileName) as f:
                 return self.T == ''.join(f.readlines())
         return False
