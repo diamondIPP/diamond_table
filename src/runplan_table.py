@@ -41,7 +41,7 @@ class RunPlanTable(html.File):
         rows = []
         for rp in Data.RunPlans[tc]:
             row = [(v, *html.opts(rs=rp.get_n_sub())) for v in [rp.Tag, rp.Digitiser, rp.Amplifier, rp.DUTs[0].get_type(tc)]] if rp.is_main() else []
-            row += [rp.Tag.lstrip('0'), rp.Type, rp.get_runs_str(), rp.get_ev_str()]
+            row += [(rp.Tag.lstrip('0'), html.style(colour=html.Good if rp.is_complete() else None)), rp.Type, rp.get_runs_str(), rp.get_ev_str()]
             row += [w for i, dut in enumerate(rp.DUTs, 1) for w in [self.link(rp.get_dir(dut), html.LinkIcon), self.link(join(dut.RelDir, tc), dut.Name), rp.get_bias_str(i)]]
             rows.append(row)
         return rows

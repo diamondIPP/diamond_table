@@ -219,6 +219,10 @@ class RunPlan:
     def get_dut_names(self):
         return [dut.Name for dut in self.DUTs]
 
+    def is_complete(self):
+        names = ['Currents', 'FluxProfile', 'NoiseFlux', 'PedestalFlux', 'PulseHeightFlux', 'PulserPH', 'PulserSigma']
+        return all(isfile(join(self.get_dir(dut), f'{n}.root')) for n in names for dut in self.DUTs)
+
 
 class DUTRunPlan(RunPlan):
 
