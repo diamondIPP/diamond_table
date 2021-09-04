@@ -5,41 +5,46 @@
 # --------------------------------------------------------
 
 
-from src.info import Data, RunPlan
-from src.utils import create_dir, Dir, join
+from src.info import TestCampaigns
+from src.utils import create_dir, BaseDir, join, isfile, PBar, info
+from pathlib import Path
+from glob import glob
+import src.html as html
 
 
-class Structure:
+SDir = join(BaseDir, 'content')
 
-    Dir = join(Dir, 'content')
 
-    @staticmethod
-    def make_diamond_dirs():
-        d1 = create_dir(Structure.Dir, 'diamonds')
-        for dut in Data.DUTs.keys():
+def make_diamond_dirs():
+    d1 = create_dir(SDir, 'diamonds')
+    for tc in TestCampaigns.values():
+        for dut in tc.DUTs:
             d2 = create_dir(d1, dut)
-            for tc in Data.find_tcs(dut):
-                d3 = create_dir(d2, tc)
-                rps = Data.find_runplans(dut, tc)
-                for rp in rps:
-                    create_dir(d3, RunPlan.make_str(rp))
-                for run in Data.find_runs(rps, tc):
-                    create_dir(d3, str(run))
-
-    @staticmethod
-    def make_beamtest_dirs():
-        d1 = create_dir(Structure.Dir, 'beamtests')
-        for tc in Data.TestCampaigns:
-            create_dir(d1, tc)
-
-    @staticmethod
-    def make_dirs():
-        create_dir(Structure.Dir, 'duts')
-        Structure.make_beamtest_dirs()
-        Structure.make_diamond_dirs()
+            d3 = create_dir(d2, tc.ID)
+            for run in tc.get_dut_runs(dut):
+                create_dir(d3, str(run))
+            for rp in tc.get_dut_runplans(dut):
+                create_dir(d3, str(rp))
 
 
-if __name__ == '__main__':
+def make_beamtest_dirs():
+    d1 = create_dir(SDir, 'beamtests')
+    for tc in TestCampaigns:
+        create_dir(d1, tc)
 
-    d = Data()
-    z = Structure()
+
+def make_dirs():
+    create_dir(SDir, 'duts')
+    make_beamtest_dirs()
+    make_diamond_dirs()
+
+
+def create_root_htmls():
+    names = glob(join(SDir, 'diamonds', '**', '*.root'), recursive=True)
+    info('creating ROOT html files ...')
+    pbar = PBar(len(names), counter=True)
+    for rf in glob(join(SDir, 'diamonds', '**', '*.root'), recursive=True):
+        if not isfile(rf.replace('.root', '.html')):
+            p = Path(rf)
+            html.create_root(p, title=p.parent.name, pal=53 if 'SignalMap' in rf else 55)
+        pbar.update()

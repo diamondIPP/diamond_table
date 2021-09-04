@@ -5,15 +5,15 @@
 # --------------------------------------------------------
 
 
-from src.utils import *
-from src.nav_bar import NavBar
 import src.html as html
-from src.info import Data, DUTRunPlan
-from src.structure import Structure
-from src.run_table import RunTable, FullRunTable
-from src.runplan_table import RunPlanTable, DiaRunPlanTable
+import src.info as data
+import src.structure as structure
 from src.dut_table import DUTTable
 from src.home import Home
+from src.nav_bar import NavBar
+from src.run_table import RunTable, FullRunTable
+from src.runplan_table import RunPlanTable, DiaRunPlanTable
+from src.utils import *
 
 
 class Website(html.File):
@@ -24,7 +24,7 @@ class Website(html.File):
 
         self.Title = 'PSI Diamonds'
         self.Header = self.make_header()
-        self.Config = Configuration(join(Dir, 'config', config))
+        self.Config = Configuration(join(BaseDir, 'config', config))
         self.Icon = self.Config.get('Home Page', 'icon')
         self.TextSize = self.Config.get('Home Page', 'text size')
         self.Color = self.Config.get('Home Page', 'color')
@@ -32,8 +32,6 @@ class Website(html.File):
         self.StartTime = time()
 
         # MODULES
-        self.Data = Data()
-        self.Structure = Structure()
         self.NavBar = NavBar()
         self.Home = Home(self)
         self.RunTable = RunTable(self)
@@ -50,20 +48,23 @@ class Website(html.File):
 
     def build(self):
         t = info('building website ...')
-        self.Data.update()
-        self.Structure.make_dirs()
-        self.FullRunTable.build_all()
-        self.RunTable.build_all()
-        self.RunPlanTable.build_all()
-        self.DiaRunPlanTable.build_all()
-        self.DUTTable.build_all()
-        self.NavBar.build()
+        if data.update():
+            structure.make_dirs()
+            self.FullRunTable.build_all()
+            self.RunTable.build_all()
+            self.RunPlanTable.build_all()
+            self.DiaRunPlanTable.build_all()
+            self.DUTTable.build_all()
+            self.Home.build()
+            self.NavBar.build()
+        structure.create_root_htmls()
         print(f'Done! ({get_elapsed_time(t)})')
 
     def build_tc(self, tc):
         self.RunTable.build_tc(tc)
+        self.FullRunTable.build(tc)
         self.RunPlanTable.build(tc)
-        self.DiaRunPlanTable.build_all_tc(tc)
+        self.DiaRunPlanTable.build_tc(tc)
         self.NavBar.build()
 
     @staticmethod
@@ -94,13 +95,13 @@ class Website(html.File):
         return self.Header.format(icon=html.path('figures', choose(icon, self.Icon)), title=choose(title, self.Title))
 
     def create_location(self):
-        self.set_filename(Dir, 'content', 'Location.html')
+        self.set_filename(BaseDir, 'content', 'Location.html')
         self.set_header(self.get_header(f'Location'))
         self.set_body('\n'.join([self.NavBar.get(), html.empty_line(3), html.heading('Paul Scherrer Institut (PSI)', 2), html.image(join('figures', 'PSIAir.jpg'), w=1200)]))
         self.save()
 
     def create_boards(self):
-        self.set_filename(Dir, 'content', 'AmpBoards.html')
+        self.set_filename(BaseDir, 'content', 'AmpBoards.html')
         self.set_header(self.get_header(f'Amplifier Boards'))
         rows = sorted([[str(nr), option] for option in self.Config.options('Boards') for nr in self.Config.get_list('Boards', option)])
         self.set_body('\n'.join([self.NavBar.get(), html.table('Pad Amplifier Boards', ['Nr.', 'Pulser Type'], rows, html.style(left=True))]))
@@ -118,6 +119,6 @@ if __name__ == '__main__':
     args = p.parse_args()
 
     z = Website()
-    r = DUTRunPlan('03', '201508', '2')
+    r = data.RunPlan('03', '201508')
     if not args.t:
         z.run(args.tc)

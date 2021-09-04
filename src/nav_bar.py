@@ -5,7 +5,7 @@
 
 from src.utils import join, remove_letters
 import src.html as html
-from src.info import Data, Config
+import src.info as data
 
 
 class NavBar(html.File):
@@ -13,7 +13,7 @@ class NavBar(html.File):
     def __init__(self):
 
         super().__init__(join('content', 'nav.html'))
-        self.DUTs = list(Data.DUTs.keys())
+        self.DUTs = list(data.DUTs.keys())
 
     def build(self):
         self.clear()
@@ -23,8 +23,8 @@ class NavBar(html.File):
         self.add_line(html.link(join('content', 'Location.html'), 'Location', colour=None), ind=1)
         self.add_line()
         self.add_line(html.dropdown('DUTs', *self.get_dut_htmls(), n=0))
-        self.add_line(html.dropdown('Beamtests', Data.TestCampaigns, self.get_tc_htmls(), n=1))
-        self.add_line(html.dropdown('Single Runs', Data.TestCampaigns, self.get_tc_htmls(runs=True), n=2))
+        self.add_line(html.dropdown('Beamtests', data.get_rp_tcs(), self.get_tc_htmls(), n=1))
+        self.add_line(html.dropdown('Single Runs', data.TCStrings, self.get_tc_htmls(runs=True), n=2))
         self.add_line(html.dropdown('scCVD', *self.get_dut_links(self.used(self.get_sccvd_dias())), n=3))
         self.add_line(html.dropdown('pCVD', *self.get_dut_links(self.used(self.get_pcvd_dias())), n=4))
         self.add_line(html.dropdown('Diodes', *self.get_dut_links(self.used(self.get_si_detectors())), n=5))
@@ -47,29 +47,29 @@ class NavBar(html.File):
 
     @staticmethod
     def get_tc_htmls(runs=False):
-        return [join('content', 'beamtests', tc, f'{"index" if runs else "RunPlans"}.html') for tc in Data.TestCampaigns]
+        return [join('content', 'beamtests', tc, f'{"index" if runs else "RunPlans"}.html') for tc in data.TCStrings]
 
     @staticmethod
     def get_dut_links(duts):
         return duts, [join('content', 'diamonds', dia) for dia in duts]
 
     def get_sccvd_dias(self):
-        sccvd = Config.get_list('General', 'single crystal')
-        dias = [dut for dut in self.DUTs if (dut in sccvd or dut.startswith('S') and dut[1].isdigit()) and dut not in Data.Excluded]
+        sccvd = data.Config.get_list('General', 'single crystal')
+        dias = [dut for dut in self.DUTs if (dut in sccvd or dut.startswith('S') and dut[1].isdigit()) and dut not in data.Excluded]
         s_dias = [dia for dia in dias if dia.startswith('S') and dia[1].isdigit()]
-        return [Data.translate(dut) for dut in sorted(s_dias, key=lambda x: int(remove_letters(x))) + sorted(dia for dia in dias if dia not in s_dias)]
+        return [data.DUT.translate(dut) for dut in sorted(s_dias, key=lambda x: int(remove_letters(x))) + sorted(dia for dia in dias if dia not in s_dias)]
 
     def get_si_detectors(self):
-        sil = Config.get_list('General', 'si-diodes')
-        return sorted(Data.translate(dut) for dut in self.DUTs if dut in sil if dut not in Data.Excluded)
+        sil = data.Config.get_list('General', 'si-diodes')
+        return sorted(data.DUT.translate(dut) for dut in self.DUTs if dut in sil if dut not in data.Excluded)
 
     def get_pcvd_dias(self):
         other = self.get_sccvd_dias() + self.get_si_detectors()
-        return sorted(Data.translate(dut) for dut in self.DUTs if dut not in Data.Excluded and dut not in other)
+        return sorted(data.DUT.translate(dut) for dut in self.DUTs if dut not in data.Excluded and dut not in other)
 
     @staticmethod
     def used(duts):
-        return [dut for dut in duts if Data.DUTs[dut].get_tcs()]
+        return [dut for dut in duts if data.DUTs[dut].rp_tcs]
 
 
 if __name__ == '__main__':

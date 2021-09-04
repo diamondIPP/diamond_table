@@ -4,8 +4,8 @@
 # --------------------------------------------------------
 
 import src.html as html
-from src.utils import Dir, join
-from src.info import DUT, Data
+from src.utils import BaseDir, join
+from src.info import DUT, DUTs
 from typing import List
 
 
@@ -18,15 +18,15 @@ class DUTTable(html.File):
         self.NavBar = self.Website.NavBar
 
     def build(self, duts: List[DUT], filename, type_=''):
-        self.set_filename(Dir, 'content', 'duts', f'{filename}.html')
+        self.set_filename(BaseDir, 'content', 'duts', f'{filename}.html')
         self.set_header(self.Website.get_header(f'{filename} Detectors'))
         self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.title(f'{filename} {type_}s'), self.header(), self.body(duts))]))
         self.save()
 
     def build_all(self):
-        self.build([Data.DUTs[n] for n in self.NavBar.get_sccvd_dias()], 'scCVD', 'Diamond')
-        self.build([Data.DUTs[n] for n in self.NavBar.get_pcvd_dias()], 'pCVD', 'Diamond')
-        self.build([Data.DUTs[n] for n in self.NavBar.get_si_detectors()], 'Si', 'Diode')
+        self.build([DUTs[n] for n in self.NavBar.get_sccvd_dias()], 'scCVD', 'Diamond')
+        self.build([DUTs[n] for n in self.NavBar.get_pcvd_dias()], 'pCVD', 'Diamond')
+        self.build([DUTs[n] for n in self.NavBar.get_si_detectors()], 'Si', 'Diode')
 
     @staticmethod
     def header():
@@ -49,4 +49,4 @@ class DUTTable(html.File):
         return self.link(self.Website.Config.get_value('Manufacturers', man, default=man), man, new_tab=True)
 
     def link_tcs(self, dut: DUT):
-        return ', '.join(self.link(join(dut.RelDir, tc), tc) for tc in dut.get_tcs())
+        return ', '.join(self.link(join(dut.RelDir, tc), tc) for tc in dut.rp_tcs)

@@ -3,10 +3,10 @@
 # created on June 24th 2021 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from src.utils import isfile, join, Dir, warning, info, choose, do_nothing, isdir, PBar, add_spaces, isiter, datetime
+from src.utils import isfile, join, BaseDir, warning, info, isdir, PBar, add_spaces, isiter, datetime
 from os.path import basename
 from pytz import timezone, utc
-from glob import glob
+from pathlib import Path
 from typing import Any
 
 
@@ -64,23 +64,22 @@ def empty_line(n=1):
     return '<br/>' * n
 
 
-def make_root(filename, title=None, draw_opt='colz', pal=None):
-    f = File(filename.replace('.root', '.html'))
+def make_root_html():
+    f = File()
     h = File()
     h.add_line('<meta charset="UTF-8">')
     h.add_line('<link rel="icon" href="/psi2/figures/pic.png">')
-    h.add_line(f'<title>{choose(title, basename(filename).split(".")[0].title())}</title>')
-    '   <script src="/jsroot/scripts/JSRoot.core.min.js" type="'
+    h.add_line('<title>{title}</title>')
     h.add_line(script('/jsroot/scripts/JSRoot.core.min.js', 'type="text/javascript"'))
     f.set_header(h.get_text())
     b = File()
-    b.add_line(f'JSROOT.settings.Palette = {pal}') if pal is not None else do_nothing()
-    b.add_line(f'JSROOT.openFile("{basename(filename)}")')
+    b.add_line('JSROOT.settings.Palette = {pal}')
+    b.add_line('JSROOT.openFile("{filename}")')
     b.add_line('.then(file => file.readObject("c;1"))', ind=1)
-    b.add_line(f'.then(obj => JSROOT.draw("drawing", obj, "{draw_opt}"));', ind=1)
+    b.add_line('.then(obj => JSROOT.draw("drawing", obj, "{draw_opt}"));', ind=1)
     b = File.add_tag(b.get_text(), 'script', 'type="text/javascript"')
     f.set_body('\n'.join([div('', 'id="drawing"'), b]))
-    f.save()
+    return f
 
 
 def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None):
@@ -99,8 +98,8 @@ def path(*dirs):
 
 
 def link(target, name, active=False, center=False, new_tab=False, use_name=True, colour: Any = None, right=False, warn=True):
-    target = join(target, '') if isdir(join(Dir, target)) else target
-    if isfile(join(Dir, target)) or isfile(join(Dir, target, 'index.html')) and target.endswith('/') or 'http' in target:
+    target = join(target, '') if isdir(join(BaseDir, target)) else target
+    if isfile(join(BaseDir, target)) or isfile(join(BaseDir, target, 'index.html')) and target.endswith('/') or 'http' in target:
         return a(name, style(center, right, colour=colour), *opts(active=active, new_tab=new_tab), *make_opt('href', path(target)))
     warning('The file {} does not exist!'.format(target), prnt=warn)
     return name if use_name else ''
@@ -164,13 +163,6 @@ def table(title, header, rows, *row_opts):
     return File.add_tag(t, 'div', 'class="content"')
 
 
-def prep_figures(rel_dir, title='', redo=False):
-    for name in glob(join(Dir, rel_dir, '*.root')):
-        if not isfile(name.replace('.root', '.html')) or redo:
-            pal = 53 if 'SignalMap' in name else 55 if 'HitMap' in name else None
-            make_root(name, f'{add_spaces(basename(name).replace(".root", ""))} {title}', pal=pal)
-
-
 LinkIcon = fig_icon(8635)
 NoIcon = fig_icon(128561)
 Good = '#5EA85E'
@@ -178,8 +170,8 @@ Good = '#5EA85E'
 
 class File:
 
-    def __init__(self, filename=None, ind_width=2):
-        self.FileName = None if filename is None else filename if filename.startswith('/scratch') else join(Dir, filename)
+    def __init__(self, filename=None, ind_width=2, verbose=True):
+        self.FileName = None if filename is None else filename if filename.startswith('/scratch') else join(BaseDir, filename)
         self.T = ''
         self.Header = ''
         self.Body = ''
@@ -187,7 +179,7 @@ class File:
         self.W = ind_width
 
         self.PBar = PBar()
-        self.Verbose = True
+        self.Verbose = verbose
 
     def __str__(self):
         return self.T if self.Header is None else f'{self.Header}\n{self.Body}'
@@ -196,7 +188,7 @@ class File:
         return f'{self.__class__.__name__}: {None if self.FileName is None else basename(self.FileName)}'
 
     def set_filename(self, *name):
-        self.FileName = join(*name) if name[0].startswith('/scratch') else join(Dir, *name)
+        self.FileName = join(*name) if name[0].startswith('/scratch') else join(BaseDir, *name)
 
     def set_header(self, txt, *opts_):
         self.Header = self.add_tag(txt, 'head', *opts_)
@@ -260,3 +252,13 @@ class File:
 
     def clear(self):
         self.T = self.Header = self.Body = self.Scripts = ''
+
+
+ROOTHTML = make_root_html()
+
+
+def create_root(file_path: Path, title='', draw_opt='colz', pal=55):
+    f = File(str(file_path.with_suffix('.html')))
+    f.set_body(ROOTHTML.Body.format(pal=pal, filename=file_path.name, draw_opt=draw_opt))
+    f.set_header(ROOTHTML.Header.format(title=f'{add_spaces(file_path.stem.title())} {title}'))
+    f.save()

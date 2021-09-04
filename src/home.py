@@ -5,7 +5,8 @@
 # --------------------------------------------------------
 
 import src.html as html
-from src.info import Data, join, tc2str
+import src.info as data
+from src.utils import join, quiet
 
 
 class Home(html.File):
@@ -25,12 +26,13 @@ class Home(html.File):
     def header():
         return ['Beam Test', 'DUT Types', 'DUTs', 'Important Results']
 
+    @quiet
     def body(self):
         rows = []
-        for tc in Data.TestCampaigns:
-            row = [self.link(join('content', 'beamtests', tc, 'RunPlans.html'), tc2str(tc, short=False))]
-            row += [(', '.join(Data.find_dut_types(tc)), html.style(left=True))]
-            row += [(', '.join(self.link(join(Data.DUTs[dut].RelDir, tc), dut) for dut in Data.TCDUTs[tc]), html.style(left=True)), html.NoIcon]
+        for tc in data.TestCampaigns.values():
+            row = [(self.link(join('content', 'beamtests', tc.ID, 'RunPlans.html'), tc.LongName), html.style(nowrap=True))]
+            row += [(', '.join(tc.dut_types), html.style(left=True))]
+            row += [(', '.join(self.link(join(data.DUTs[data.DUT.to_main(dut)].RelDir, tc.ID), dut) for dut in tc.DUTs), html.style(left=True)), html.NoIcon]
             rows.append(row)
         return rows
 

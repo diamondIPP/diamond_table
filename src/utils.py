@@ -3,24 +3,23 @@
 # created on May 19th 2016 by M. Reichmann
 # --------------------------------------------------------
 
-from datetime import datetime, timedelta
-from termcolor import colored
 from configparser import ConfigParser, NoOptionError, NoSectionError
-from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar, SimpleProgress, Widget
+from copy import deepcopy
+from datetime import datetime, timedelta
+from functools import wraps
 from json import load, loads
-from os.path import join, dirname, realpath, isdir, isfile
 from os import _exit, mkdir
-from re import sub
+from os.path import join, dirname, realpath, isdir, isfile
+from pickle import load as pload, dump as pdump
+from time import time
+
+from numpy import array, sqrt, average
+from progressbar import Bar, ETA, FileTransferSpeed, Percentage, ProgressBar, SimpleProgress, Widget
+from termcolor import colored
 from uncertainties import ufloat, ufloat_fromstr
 from uncertainties.core import Variable, AffineScalarFunc
-from numpy import array, sqrt, average, log10
-from time import time
-from functools import wraps
-from copy import deepcopy
-from pickle import load as pload, dump as pdump
 
-
-Dir = dirname(dirname(realpath(__file__)))
+BaseDir = dirname(dirname(realpath(__file__)))
 
 
 def get_t_str():
@@ -93,51 +92,19 @@ def prep_kw(dic, **default):
     return d
 
 
-def add_spaces(txt):
-    return ''.join(f' {txt[i]}' if i and (txt[i].isupper() or txt[i].isdigit()) and not txt[i - 1].isdigit() and not txt[i - 1].isupper() else txt[i] for i in range(len(txt)))
+def add_spaces(s):
+    return ''.join(f' {s[i]}' if i and (s[i].isupper() or s[i].isdigit()) and not s[i - 1].isdigit() and not s[i - 1].isupper() else s[i] for i in range(len(s)))
 
 
-def tc2str(tc, short=True):
-    tc_str = str(tc).split('-')[0]
-    sub_str = '-{}'.format(tc.split('-')[-1]) if '-' in str(tc) else ''
-    return '{tc}{s}'.format(tc=datetime.strptime(tc_str, '%Y%m').strftime('%b%y' if short else '%B %Y'), s=sub_str)
-
-
-def make_bias_str(v):
-    v = make_list(v)
-    v = [f'{float(bias):+.0f}' for bias in (v if len(set(v)) > 3 else set(v))]
-    return v[0] if len(v) == 1 else ' &#8594; '.join(sorted(v, reverse=True, key=lambda x: abs(float(x)))) if len(v) < 4 else f'{v[0]} ... {v[-1]}'
-
-
-def make_ev_str(v):
-    if not v:
-        return '?'
-    n = int(log10(v) // 3)
-    return f'{v / 10 ** (3 * n):.{1 if n > 1 else 0}f}{["", "k", "M"][n]}'
-
-
-def make_runs_str(runs):
-    return '{b:03d}-{e:03d}'.format(b=runs[0], e=runs[-1])
-
-
-def remove_letters(string):
-    return sub('\D', '', string)
-
-
-def load_parser(path):
-    p = ConfigParser()
-    p.read(path)
-    return p
+def remove_letters(s):
+    return ''.join(filter(str.isdigit, s))
 
 
 def load_json(path):
-    if isfile(path):
-        f = open(path)
-        j = load(f)
-        f.close()
-        return j
-    else:
+    if not isfile(path):
         return {}
+    with open(path) as f:
+        return load(f)
 
 
 def mean_sigma(values, weights=None):
@@ -174,21 +141,22 @@ def isiter(v):
         return False
 
 
-def pickle(*rel_path, print_dur=False):
+def pickle(*rel_path, print_dur=False, use_args=False):
     def inner(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            pickle_path = f'{join(Dir, *rel_path)}.pickle'
+            file_name = ['_'.join(str(arg) for arg in args)] if use_args else ()
+            pickle_path = f'{join(BaseDir, "data", "metadata", *rel_path, *file_name)}.pickle'
             redo = kwargs['_redo'] if '_redo' in kwargs else False
             if isfile(pickle_path) and not redo:
                 with open(pickle_path, 'rb') as f:
                     return pload(f)
             prnt = print_dur and (kwargs['prnt'] if 'prnt' in kwargs else True)
-            t = (args[0].info if hasattr(args[0], 'info') else info)(f'{args[0].__class__.__name__}: {func.__name__.replace("_", " ")} ...', endl=False, prnt=prnt)
+            t = (args[0].info if len(args) and hasattr(args[0], 'info') else info)(f'{args[0].__class__.__name__ if args else ""}: {func.__name__.replace("_", " ")} ...', endl=False, prnt=prnt)
             value = func(*args, **kwargs)
             with open(pickle_path, 'wb') as f:
                 pdump(value, f)
-            (args[0].add_to_info if hasattr(args[0], 'add_to_info') else add_to_info)(t, prnt=prnt)
+            (args[0].add_to_info if args and hasattr(args[0], 'add_to_info') else add_to_info)(t, prnt=prnt)
             return value
         return wrapper
     return inner
@@ -207,16 +175,6 @@ def quiet(func):
 
 # ----------------------------------------
 # region CLASSES
-def update_pbar(func):
-    @wraps(func)
-    def my_func(*args, **kwargs):
-        value = func(*args, **kwargs)
-        if args[0].PBar is not None and args[0].PBar.PBar is not None and not args[0].PBar.is_finished():
-            args[0].PBar.update()
-        return value
-    return my_func
-
-
 class PBar(object):
     def __init__(self, start=None, counter=False, t=None):
         self.PBar = None
@@ -245,13 +203,14 @@ class PBar(object):
             self.N = n
 
     def update(self, i=None):
-        i = self.Step if i is None else i
-        if i >= self.PBar.maxval:
-            return
-        self.PBar.update(i + 1)
-        self.Step += 1
-        if i == self.PBar.maxval - 1:
-            self.finish()
+        if self.PBar and not self.PBar.finished:
+            i = self.Step if i is None else i
+            if i >= self.PBar.maxval:
+                return
+            self.PBar.update(i + 1)
+            self.Step += 1
+            if i == self.PBar.maxval - 1:
+                self.finish()
 
     def finish(self):
         self.PBar.finish()
@@ -281,7 +240,7 @@ class Configuration(ConfigParser):
         self.FileName = file_name
         self.read(file_name) if type(file_name) is not list else self.read_file(file_name)
 
-    def get_value(self, section, option, dtype=str, default=None):
+    def get_value(self, section, option, dtype: type = str, default=None):
         dtype = type(default) if default is not None else dtype
         try:
             if dtype is bool:
@@ -332,12 +291,12 @@ class FitRes:
         else:
             return list(fit_obj.Errors())
 
-    def Parameter(self, arg):
+    def Parameter(self, arg):  # noqa
         if arg >= len(self.Pars):
             return ''
         return self.Pars[arg] if not self.Format else f'{self.Pars[arg]:f"{self.Format}}'
 
-    def ParError(self, arg):
+    def ParError(self, arg):  # noqa
         if arg >= len(self.Errors):
             return ''
         return self.Errors[arg] if not self.Format else f'{self.Errors[arg]:f"{self.Format}}'
@@ -347,3 +306,15 @@ class FitRes:
 
 def do_nothing():
     pass
+
+
+PBAR = PBar()
+
+
+def update_pbar(f):
+    @wraps(f)
+    def inner(*args, **kwargs):
+        value = f(*args, **kwargs)
+        PBAR.update()
+        return value
+    return inner
