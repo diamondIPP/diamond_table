@@ -1679,7 +1679,6 @@
     "runtype": "dia-shadow",
     "starttime0": "2016-08-09T14:23:33Z"
   },
-
   "419": {
     "comments": "dia shadow S1D1",
     "config_file": "DRS4_201608_50k.conf",
@@ -6768,7 +6767,7 @@
     "att_dia2": "None",
     "att_pul1": "6dB_1",
     "att_pul2": "6dB_1",
-    "comments": "",
+    "comments": "TU rates broken",
     "config_file": "DRS4_201608_1000k.conf",
     "dia1": "II6-B2",
     "dia1hv": 1000.0,
@@ -6794,7 +6793,7 @@
     "att_dia2": "None",
     "att_pul1": "6dB_1",
     "att_pul2": "6dB_1",
-    "comments": "",
+    "comments": "TU rates broken",
     "config_file": "DRS4_201608_50k.conf",
     "dia1": "II6-B2",
     "dia1hv": 1000.0,
@@ -6820,7 +6819,7 @@
     "att_dia2": "None",
     "att_pul1": "6dB_1",
     "att_pul2": "6dB_1",
-    "comments": "",
+    "comments": "TU rates broken",
     "config_file": "DRS4_201608_400k.conf",
     "dia1": "II6-B2",
     "dia1hv": 1000.0,
@@ -6846,7 +6845,7 @@
     "att_dia2": "None",
     "att_pul1": "6dB_1",
     "att_pul2": "6dB_1",
-    "comments": "",
+    "comments": "TU rates broken",
     "config_file": "DRS4_201608_2500k.conf",
     "dia1": "II6-B2",
     "dia1hv": 1000.0,
