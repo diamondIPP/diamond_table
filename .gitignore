@@ -8,4 +8,5 @@
 !*.js
 !*.json
 !*.hdf5
-!figures/
+!figures/*.png
+!figures/*.jpg
