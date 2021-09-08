@@ -37,14 +37,3 @@ def make_dirs():
     create_dir(SDir, 'duts')
     make_beamtest_dirs()
     make_diamond_dirs()
-
-
-def create_root_htmls():
-    names = glob(join(SDir, 'diamonds', '**', '*.root'), recursive=True)
-    info('creating ROOT html files ...')
-    pbar = PBar(len(names), counter=True)
-    for rf in glob(join(SDir, 'diamonds', '**', '*.root'), recursive=True):
-        if not isfile(rf.replace('.root', '.html')):
-            p = Path(rf)
-            html.create_root(p, title=p.parent.name, pal=53 if 'SignalMap' in rf else 55)
-        pbar.update()

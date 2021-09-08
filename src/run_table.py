@@ -54,7 +54,7 @@ class RunTable(html.File):
     def row(self, run: Run, dut_nr):
         d = run.RelDirs[dut_nr]
         data = run.FullData[dut_nr]
-        row = [run.Number, run.Biases[dut_nr]]
+        row = [self.rlink(d, 'plots', run.Number), run.Biases[dut_nr]]
         row += [self.rlink(d, name, data[i]) for i, name in enumerate(['FluxProfile', 'Current'])]
         row += [self.rlink(d, n, html.fig_icon()) for n in ['HitMap', 'SignalDistribution', 'SignalMap2D']]
         row += [self.rlink(d, name, data[i]) for i, name in enumerate(['PulseHeight5000', 'PedestalDistributionFitAllCuts'], 2)] + [data[4]]
@@ -98,16 +98,14 @@ class FullRunTable(html.File):
 
     @property
     def header(self):
-        return ['Runs', 'Type', 'FS11', 'FS13', 'Total Events', 'Start Time', 'Duration', 'DUT', f'HV {html.small("[V]")}', f'I {html.small("[nA]", html.style(transform="none"))}',
+        return ['Runs', 'Type', 'FS11', 'FS13', 'Total Events', 'Start Time', 'Duration', 'DUT', 'Data', f'HV {html.small("[V]")}', f'I {html.small("[nA]", html.style(transform="none"))}',
                 f'Flux {html.small(f"[kHz/cm{html.sup(2)}]", html.style(transform="none"))}', f'Pulse Height {html.small("[mV]", html.style(transform="none"))}', 'Ped', 'Good Events', 'Comments']
 
-    @staticmethod
-    def body(tc: TestCampaign):
+    def body(self, tc: TestCampaign):
         rows = []
         for run in tc.Runs.values():
             for i in range(run.NDUTs):
-                # html.prep_figures(run.RelDirs[i], run.Number)
                 row = [] if i else [(v, *html.opts(rs=run.NDUTs)) for v in [run.Number, run.Type, run.FS11, run.FS13, run.EventStr[i], run.StartTime, run.Duration]]
-                row += [(run.DUTs[i], html.style(nowrap=True)), make_bias_str(run.Biases[i])] + run.get_short_data(i)
+                row += [(run.DUTs[i], html.style(nowrap=True)), self.link(join(run.RelDirs[i], 'plots.html'), html.LinkIcon, use_name=False), make_bias_str(run.Biases[i])] + run.get_short_data(i)
                 rows.append(row + ([] if i else [(run.Comment, html.style(left=True), *html.opts(rs=run.NDUTs))]))
         return rows

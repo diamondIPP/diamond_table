@@ -57,7 +57,6 @@ class Website(html.File):
             self.DUTTable.build_all()
             self.Home.build()
             self.NavBar.build()
-        structure.create_root_htmls()
         print(f'Done! ({get_elapsed_time(t)})')
 
     def build_tc(self, tc):
