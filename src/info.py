@@ -425,8 +425,11 @@ TestCampaigns = load_tcs()
 # ----------------------------------------
 # region UPDATE
 def update():
-    reload_config()
-    return update_logs()
+    try:
+        reload_config()
+        return update_logs()
+    except CalledProcessError:
+        return warning('cannot connect to server ... ')
 
 
 def reload_config():
@@ -437,21 +440,18 @@ def reload_config():
 
 
 def update_logs():
-    try:
-        global TCStrings, TestCampaigns, RPDic, RunLogs, DUTs
-        TCStrings = find_testcampaigns()
-        new_runplans = copy_runplans()
-        RPDic = load_runplans()
-        new_runlogs = copy_runlogs()
-        RunLogs = load_runlogs()
-        new_duts = copy_diamond_info()
-        DUTs = load_duts()
-        reload_tcs = {tc: new_duts or new_runplans or new_runlog or (TestCampaigns[tc].has_new_data if tc in TestCampaigns else False) for tc, new_runlog in new_runlogs.items()}
-        if any(reload_tcs.values()):
-            TestCampaigns = load_tcs(reload_tcs)
-        return any(reload_tcs.values())
-    except CalledProcessError:
-        return warning('cannot connect to server ... ')
+    global TCStrings, TestCampaigns, RPDic, RunLogs, DUTs
+    TCStrings = find_testcampaigns()
+    new_runplans = copy_runplans()
+    RPDic = load_runplans()
+    new_runlogs = copy_runlogs()
+    RunLogs = load_runlogs()
+    new_duts = copy_diamond_info()
+    DUTs = load_duts()
+    reload_tcs = {tc: new_duts or new_runplans or new_runlog or (TestCampaigns[tc].has_new_data if tc in TestCampaigns else False) for tc, new_runlog in new_runlogs.items()}
+    if any(reload_tcs.values()):
+        TestCampaigns = load_tcs(reload_tcs)
+    return any(reload_tcs.values())
 
 
 def copy_from_server(server_file, local_file=None):
