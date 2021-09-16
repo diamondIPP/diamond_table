@@ -5,11 +5,8 @@
 # --------------------------------------------------------
 
 
-from src.info import TestCampaigns
-from src.utils import create_dir, BaseDir, join, isfile, PBar, info
-from pathlib import Path
-from glob import glob
-import src.html as html
+import src.info as data
+from src.utils import create_dir, BaseDir, join
 
 
 SDir = join(BaseDir, 'content')
@@ -17,7 +14,7 @@ SDir = join(BaseDir, 'content')
 
 def make_diamond_dirs():
     d1 = create_dir(SDir, 'diamonds')
-    for tc in TestCampaigns.values():
+    for tc in data.TestCampaigns.values():
         for dut in tc.DUTs:
             d2 = create_dir(d1, dut)
             d3 = create_dir(d2, tc.ID)
@@ -29,7 +26,7 @@ def make_diamond_dirs():
 
 def make_beamtest_dirs():
     d1 = create_dir(SDir, 'beamtests')
-    for tc in TestCampaigns:
+    for tc in data.TestCampaigns:
         create_dir(d1, tc)
 
 
