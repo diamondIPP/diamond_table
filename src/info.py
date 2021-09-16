@@ -236,7 +236,6 @@ class RunPlan:
         self.Digitiser = rp['digitiser'] if 'digitiser' in rp else 'PSI46' if 'pixel' in self.DUTs[0].get_type(tc) else 'DRS4'
         self.Amplifier = self.load_amp(rp)
         self.RelDirs = [join(dut.RelDir, self.TC, str(self)) for dut in self.DUTs]
-        self.IsComplete = self.is_complete()
         self.Positions = ['front' if dut_nr == 1 else 'middle' if len(self.DUTNrs) == 3 and dut_nr == 2 else 'back' for dut_nr in self.DUTNrs]
 
         # STRINGS
@@ -275,9 +274,10 @@ class RunPlan:
     def get_dut_nr(self, dut):
         return self.DUTs.index(dut)
 
+    @property
     def is_complete(self):
         names = ['FluxProfile', 'NoiseFlux', 'PedestalFlux', 'PulseHeightFlux', 'PulserPH', 'PulserSigma']
-        return all(isfile(join(d, f'{n}.root')) for n in names for d in self.RelDirs)
+        return all(isfile(join(BaseDir, d, f'{n}.root')) for n in names for d in self.RelDirs)
 
     def load_attenuators(self, log, rp, pulser=False):
         if 'pixel' in self.DUTs[0].get_type(self.TC):
