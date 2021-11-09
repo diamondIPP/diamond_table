@@ -86,7 +86,7 @@ class DiaRunPlanTable(html.File):
         if tc_bodies and sum(len(r) for r in tc_bodies.values()):
             self.set_filename(dut.Dir, 'index.html')
             self.set_header(self.Website.get_header(f'Run Plans - {dut.Name}'))
-            self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.title(dut), self.MainHeader, self.body(dut, tc_bodies))])) if len(tc_bodies) else do_nothing()
+            self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.title(dut), self.MainHeader, self.body(dut, tc_bodies))]))
             self.save()
 
     def build_dut_tc(self, tc: data.TestCampaign, dut: data.DUT):
