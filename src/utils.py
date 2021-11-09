@@ -164,9 +164,12 @@ class Latex(object):
         return Latex.f('unit', '' if custom else "\\" + txt)
 
     @staticmethod
-    def si(v, f='.1f', unit=None):
-        unit = '' if unit is None else f'\\{unit}'
-        return f'\\SI{{{v:{f}}}}{{{unit}}}'.replace('/', '')
+    def si(v, f='.1f', unit=''):
+        return Latex.f('SI', f'{v:{f}}', f'\\{unit}' if unit else unit).replace('/', '')
+
+    @staticmethod
+    def si_range(v0, v1,  f='.0f', unit=''):
+        return Latex.f('SIrange', f'{float(v0):{f}}', f'{float(v1):{f}}', f'\\{unit}' if unit else unit)
 
     @staticmethod
     def hline(word):
