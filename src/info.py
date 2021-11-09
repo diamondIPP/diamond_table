@@ -4,7 +4,7 @@
 # created on December 20th 2018 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from src.utils import Configuration, BaseDir, join, load_json, info, warning, critical, datetime, loads, make_list, isfile, ufloat, pickle, update_pbar, PBAR, choose
+from src.utils import Configuration, BaseDir, join, load_json, info, warning, critical, datetime, loads, make_list, isfile, ufloat, pickle, update_pbar, PBAR, choose, Latex
 from subprocess import getstatusoutput, check_output, CalledProcessError
 from datetime import timedelta
 import h5py
@@ -124,6 +124,20 @@ class DUT:
     @staticmethod
     def to_main(name):
         return name.split('_')[0]
+
+    def latex_table(self, rate=True):
+        header = [Latex.bold(Latex.makecell('Beam', 'Test')), Latex.makecell(Latex.bold('Irradiation'), Latex.unit('ncm')), Latex.bold(Latex.makecell('Run', 'Plan')), Latex.bold('Type'),
+                  Latex.makecell(Latex.bold('Bias'), Latex.unit('V')), Latex.bold(Latex.makecell('Good', 'Events')), Latex.makecell(Latex.bold('Max Flux'), Latex.unit('mhzcm'))]
+        rows = []
+        for tc in self.tcs:
+            tc = TestCampaigns[tc]
+            rps = [rp for rp in tc.get_dut_runplans(self) if rp.IsMain and (not rate or any(t in rp.Type for t in ['rate', 'random', 'up scan']))]
+            for i, rp in enumerate(rps):
+                row = [Latex.multirow(tc.Name, -len(rps)), Latex.multirow(Latex.si(self.get_irradiation(tc.ID), ''), -len(rps))] if i == len(rps) - 1 else ['', '']
+                dut_nr = rp.get_dut_nr(self)
+                tag, typ, bias, ev, flux = rp.Tag.lstrip('0'), rp.Type.replace(' scan', ''), rp.BiasStr[dut_nr].split('&')[0], rp.DataStr[dut_nr][-1], Latex.si(rp.get_max_flux()[dut_nr] / 1000)
+                rows.append(row + [tag, typ, bias, ev] + [Latex.hline(flux) if i == len(rps) - 1 else flux])
+        print(Latex.table(header, rows))
 
 
 class TestCampaign:
@@ -295,6 +309,9 @@ class RunPlan:
 
     def calc_duration(self):
         return sum([Run.calc_duration(RunLogs[self.TC][str(run)]) for run in self.RunNumbers], timedelta())
+
+    def get_max_flux(self):
+        return [max(array(File[self.TC][str(i)][self.RunNumbers][:, 0, 0])) for i in self.DUTNrs]
 
     def get_data_str(self, data=None):
         """:returns:
