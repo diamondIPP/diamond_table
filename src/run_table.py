@@ -7,14 +7,24 @@ from src.utils import *
 import src.html as html
 import src.info as data
 from operator import itemgetter
+from typing import Any
 
 
-class RunTable(html.File):
+class RunTables(html.File):
 
     def __init__(self, website):
-
         super().__init__()
         self.Website = website
+        self.PixRT = PixRunTable(self.Website)
+        self.PadRT = PadRunTable(self.Website)
+
+    def set_verbose(self, status):
+        super().set_verbose(status)
+        self.PixRT.set_verbose(status)
+        self.PadRT.set_verbose(status)
+
+    def get_run_table(self, rp: data.RunPlan):
+        return self.PixRT if 'pixel' in rp.DUTType else self.PadRT
 
     @quiet
     def build_all(self):
@@ -22,44 +32,65 @@ class RunTable(html.File):
         PBAR.start(len(data.TestCampaigns), counter=True)
         [self.build_tc(tc) for tc in data.TestCampaigns]
 
-    def build(self, rp: data.RunPlan, dut_nr, rows):
-        self.set_filename(rp.RelDirs[dut_nr], 'index.html')
-        self.set_header(self.Website.get_header(f'{rp.DUTs[dut_nr].Name} {rp.ShortName}'))
-        self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.title(rp, dut_nr), self.header, rows)]))
-        self.save()
-
     @update_pbar
     @quiet
     def build_tc(self, tc):
         tc = data.TestCampaigns[tc]
-        rows = {run.Number: [self.row(run, i) for i in range(run.NDUTs)] for run in tc.runplan_runs}
+        run_table = lambda run, i: PixRunTable if 'pixel' in tc.DUTTypes[run.DUTs[i]] else PadRunTable
+        rows = {run.Number: [run_table(run, i).row(self.rlink, run, i) for i in range(run.NDUTs)] for run in tc.runplan_runs}  # only create rows once ...
         for rp in tc.RunPlans:
             for i in range(rp.NDUTs):
-                self.build(rp, i, RunTable.rowgetter(rp, i)(rows))
+                self.get_run_table(rp).build(rp, i, rows=RunTable.rowgetter(rp, i)(rows))
+
+    def rlink(self, d, htmlname, target, **kwargs):
+        return self.link(join(d, f'{htmlname}.html'), target, **prep_kw(kwargs, new_tab=True, colour=None))
+
+
+class RunTable(html.File):
+
+    Add2Header = []
+    Add2SubHeader = []
+
+    def __init__(self, website):
+        super().__init__()
+        self.Website = website
+
+    def build(self, rp: data.RunPlan, dut_nr, rows: Any = None):
+        self.set_filename(rp.RelDirs[dut_nr], 'index.html')
+        self.set_header(self.Website.get_header(f'{rp.DUTs[dut_nr].Name} {rp.ShortName}'))
+        rows = self.rows(self.rlink, rp, dut_nr) if rows is None else rows
+        self.set_body('\n'.join([self.Website.NavBar.get(), html.table(self.title(rp, dut_nr), self.header, rows)]))
+        self.save()
 
     @property
     def header(self):
         main = [(n, *html.opts(rs=2)) for n in ['Run', f'HV {html.small("[V]")}', f'Flux {html.small(f"[kHz/cm{html.sup(2)}]", html.style(transform="none"))}',
                                                 f'Current {html.small("[nA]", html.style(transform="none"))}', 'Hit Map']]
-        main += [('Signal', *html.opts(cs=5)), ('Pulser', *html.opts(cs=4))]
-        main += [(n, *html.opts(rs=2)) for n in ['Good Events', 'Start Time', 'Duration', 'Comment']]
-        aux = ['Distr.', '2DMap', 'Pulse Height [au]', 'Pedestal [au]', 'Noise [1&sigma;]', 'Pulse Height [au]', 'Sigma', 'Pedestal [au]', 'Noise [1&sigma;]']
-        return [main, aux]
+        main += self.Add2Header + [(n, *html.opts(rs=2)) for n in ['Good Events', 'Start Time', 'Duration', 'Comment']]
+        return [main, ['Distr.', '2DMap'] + self.Add2SubHeader]
 
     def title(self, rp: data.RunPlan, dut_nr):
         d = dirname(rp.RelDirs[dut_nr])
         return f'{rp.Name} ({self.link(d, rp.TCString)}): {rp.Type.title()} of {self.link(dirname(d), rp.DUTs[dut_nr].Name)}, ' \
                f'Irradiation: {html.irr2str(rp.get_irradiation(dut_nr), unit=True)}, Position: {rp.Positions[dut_nr].title()}'
 
-    def row(self, run: data.Run, dut_nr):
+    @classmethod
+    def row(cls, f, run: data.Run, dut_nr):
         d = run.RelDirs[dut_nr]
         values = run.FullData[dut_nr]
-        row = [self.rlink(d, 'plots', run.Number), run.Biases[dut_nr]]
-        row += [self.rlink(d, name, values[i]) for i, name in enumerate(['FluxProfile', 'Current'])]
-        row += [self.rlink(d, n, html.fig_icon()) for n in ['HitMap', 'SignalDistribution', 'SignalMap2D']]
-        row += [self.rlink(d, name, values[i]) for i, name in enumerate(['PulseHeight5000', 'PedestalDistributionFitAllCuts'], 2)] + [values[4]]
-        row += [self.rlink(d, name, values[i]) for i, name in enumerate(['PulserPulseHeight', 'PulserDistributionFit', 'PedestalDistributionFitPulserBeamOn'], 5)]
-        return row + [*values[8:], run.StartTime, run.Duration, (run.Comment[:10], html.style(left=True))]
+        row = [f(d, 'plots', run.Number), run.Biases[dut_nr]]
+        row += [f(d, name, values[i]) for i, name in enumerate(['FluxProfile', 'Current'])]
+        row += [f(d, n, html.fig_icon()) for n in ['HitMap', 'SignalDistribution', 'SignalMap2D']]
+        return row + cls.add2row(f, d, values) + [values[9], run.StartTime, run.Duration, (run.Comment[:10], html.style(left=True))]
+
+    @staticmethod
+    def add2row(f, d, values):
+        return []
+
+    @classmethod
+    def rows(cls, f, run_plan: data.RunPlan, dut_nr):
+        tc = data.TestCampaigns[run_plan.TC]
+        return [cls.row(f, tc.Runs[run], dut_nr) for run in run_plan.RunNumbers]
 
     @staticmethod
     def rowgetter(rp: data.RunPlan, dut_nr):
@@ -67,6 +98,27 @@ class RunTable(html.File):
 
     def rlink(self, d, htmlname, target, **kwargs):
         return self.link(join(d, f'{htmlname}.html'), target, **prep_kw(kwargs, new_tab=True, colour=None))
+
+
+class PadRunTable(RunTable):
+
+    Add2Header = [('Signal', *html.opts(cs=5)), ('Pulser', *html.opts(cs=4))]
+    Add2SubHeader = ['Pulse Height [mV]', 'Pedestal [mV]', 'Noise [1&sigma;]', 'Pulse Height [mV]', 'Sigma', 'Pedestal [mV]', 'Noise [1&sigma;]']
+
+    @staticmethod
+    def add2row(f, d, values):
+        row = [f(d, name, values[i]) for i, name in enumerate(['PulseHeight5000', 'PedestalDistributionFitAllCuts'], 2)] + [values[4]]
+        return row + [f(d, name, values[i]) for i, name in enumerate(['PulserPulseHeight', 'PulserDistributionFit', 'PedestalDistributionFitPulserBeamOn'], 5)] + [values[8]]
+
+
+class PixRunTable(RunTable):
+
+    Add2Header = [('Pulse Height', *html.opts(cs=3)), ('Efficiency', *html.opts(rs=2))]
+    Add2SubHeader = ['Value [mV]']
+
+    @staticmethod
+    def add2row(f, d, values):
+        return [f(d, name, values[i]) for i, name in [(2, 'PulseHeightNone'), (5, 'HitEff')]]
 
 
 class FullRunTable(html.File):
@@ -99,7 +151,8 @@ class FullRunTable(html.File):
     @property
     def header(self):
         return ['Runs', 'Type', 'FS11', 'FS13', 'Total Events', 'Start Time', 'Duration', 'DUT', 'Data', f'HV {html.small("[V]")}', f'I {html.small("[nA]", html.style(transform="none"))}',
-                f'Flux {html.small(f"[kHz/cm{html.sup(2)}]", html.style(transform="none"))}', f'Pulse Height {html.small("[mV]", html.style(transform="none"))}', 'Ped', 'Good Events', 'Comments']
+                f'Flux {html.small(f"[kHz/cm{html.sup(2)}]", html.style(transform="none"))}', f'Pulse Height {html.small("[mV]", html.style(transform="none"))}', 'Ped / Eff', 'Good Events',
+                'Comments']
 
     def body(self, tc: data.TestCampaign):
         rows = []

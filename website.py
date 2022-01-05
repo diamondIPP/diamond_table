@@ -11,7 +11,7 @@ import src.structure as structure
 from src.dut_table import DUTTable
 from src.home import Home
 from src.nav_bar import NavBar
-from src.run_table import RunTable, FullRunTable
+from src.run_table import RunTables, FullRunTable
 from src.runplan_table import RunPlanTable, DiaRunPlanTable
 from src.utils import *
 
@@ -34,7 +34,7 @@ class Website(html.File):
         # MODULES
         self.NavBar = NavBar()
         self.Home = Home(self)
-        self.RunTable = RunTable(self)
+        self.RunTables = RunTables(self)
         self.DUTTable = DUTTable(self)
         self.FullRunTable = FullRunTable(self)
         self.RunPlanTable = RunPlanTable(self)
@@ -46,12 +46,12 @@ class Website(html.File):
             self.build() if tc is None else self.build_tc(tc)
             self.Count += 1
 
-    def build(self):
+    def build(self, redo=False):
         t = info('building website ...')
-        if data.update():
+        if data.update() or redo:
             structure.make_dirs()
             self.FullRunTable.build_all()
-            self.RunTable.build_all()
+            self.RunTables.build_all()
             self.RunPlanTable.build_all()
             self.DiaRunPlanTable.build_all()
             self.DUTTable.build_all()
@@ -60,7 +60,7 @@ class Website(html.File):
         print(f'Done! ({get_elapsed_time(t)})')
 
     def build_tc(self, tc):
-        self.RunTable.build_tc(tc)
+        self.RunTables.build_tc(tc)
         self.FullRunTable.build(tc)
         self.RunPlanTable.build(tc)
         self.DiaRunPlanTable.build_tc(tc)
@@ -118,6 +118,8 @@ if __name__ == '__main__':
     args = p.parse_args()
 
     z = Website()
-    r = data.RunPlan('03', '201508')
+    r = data.RunPlan('08', '201708')
+    c = data.TestCampaigns['201708']
+    run = c.runplan_runs[-18]
     if not args.t:
         z.run(args.tc)
