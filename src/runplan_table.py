@@ -115,7 +115,8 @@ class DiaRunPlanTable(html.File):
     def row(self, rp: data.RunPlan, i):
         figs = ['FluxProfile', 'Currents', 'PulseHeightFlux', 'PedestalFlux', 'NoiseFlux', 'PulserPH', 'PulserSigma']
         row = [(v, *html.opts(rs=rp.NSub)) for v in [rp.Tag, rp.Positions[i], rp.Digitiser, rp.Amplifier, *rp.get_attenuators(i), rp.BiasStr[i]]] if rp.IsMain else []
-        row += [self.link(rp.RelDirs[i], rp.Tag.lstrip('0')), rp.RunStr] + [self.rplink_(rp.RelDirs[i], fig, rp.DataStr[i][j]) for j, fig in enumerate(figs)]
+        row += [self.link(join(rp.RelDirs[i], 'plots.html'), rp.Tag.lstrip('0')), self.link(rp.RelDirs[i], rp.RunStr)]
+        row += [self.rplink_(rp.RelDirs[i], fig, rp.DataStr[i][j]) for j, fig in enumerate(figs)]
         return row + [rp.DataStr[i][-1], rp.StartTime, rp.Duration]
 
     @staticmethod
