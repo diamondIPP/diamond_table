@@ -160,6 +160,7 @@ class TestCampaign:
 
         self.Runs = {int(nr): Run(name, nr, log, data) for nr, log in self.Log.items() if log['runtype'] not in TestCampaign.BadTypes}
         self.DUTs = self.load_duts()
+        self.DUTTypes = {dut: DUTs[dut].get_type(self.ID) for dut in self.DUTs if dut in DUTs}
         self.RunPlans = [RunPlan(tag, name) for tag in RPDic[name]]
         self.Hash = md5(data).hexdigest()
 
@@ -418,6 +419,11 @@ def load_tcs(redos=None):
     return {tc: load_tc(tc, _redo=redo) for tc, redo in redos.items()}
 
 
+def reload_tcs():
+    global TestCampaigns
+    TestCampaigns = load_tcs({tc: True for tc in TCStrings})
+
+
 def make_bias_str(v):
     v = make_list(v)
     v = [f'{float(bias):+.0f}' for bias in (v if len(set(v)) > 3 else set(v))]
@@ -466,10 +472,10 @@ def update_logs():
     RunLogs = load_runlogs()
     new_duts = copy_diamond_info()
     DUTs = load_duts()
-    reload_tcs = {tc: new_duts or new_runplans or new_runlog or (TestCampaigns[tc].has_new_data if tc in TestCampaigns else False) for tc, new_runlog in new_runlogs.items()}
-    if any(reload_tcs.values()):
-        TestCampaigns = load_tcs(reload_tcs)
-    return any(reload_tcs.values())
+    reload = {tc: new_duts or new_runplans or new_runlog or (TestCampaigns[tc].has_new_data if tc in TestCampaigns else False) for tc, new_runlog in new_runlogs.items()}
+    if any(reload.values()):
+        TestCampaigns = load_tcs(reload)
+    return any(reload.values())
 
 
 def copy_from_server(server_file, local_file=None):
