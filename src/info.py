@@ -291,9 +291,13 @@ class RunPlan:
         return self.DUTs.index(dut)
 
     @property
+    def is_pixel(self):
+        return 'pixel' in self.DUTType
+
+    @property
     def is_complete(self):
-        names = ['FluxProfile', 'NoiseFlux', 'PedestalFlux', 'PulseHeightFlux', 'PulserPH', 'PulserSigma']
-        return all(isfile(join(BaseDir, d, f'{n}.root')) for n in names for d in self.RelDirs)
+        names = ['FluxProfile', 'PulseHeightFlux'] + (['Efficiencies'] if self.is_pixel else ['NoiseFlux', 'PedestalFlux', 'PulserPH', 'PulserSigma'])
+        return all(isfile(join(BaseDir, d, f'{n}.html')) for n in names for d in self.RelDirs)
 
     def load_attenuators(self, log, rp, pulser=False):
         if 'pixel' in self.DUTs[0].get_type(self.TC):

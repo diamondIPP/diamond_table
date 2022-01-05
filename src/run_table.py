@@ -24,7 +24,7 @@ class RunTables(html.File):
         self.PadRT.set_verbose(status)
 
     def get_run_table(self, rp: data.RunPlan):
-        return self.PixRT if 'pixel' in rp.DUTType else self.PadRT
+        return self.PixRT if rp.is_pixel else self.PadRT
 
     @quiet
     def build_all(self):
