@@ -229,8 +229,10 @@
       "201810": "3D-pixel"
     },
     "thickness": "None", 
-    "size": "None",
-    "manufacturer": "II-VI"
+    "size": "[20, 30]",
+    "column diameter": "2.6",
+    "manufacturer": "II-VI",
+    "pixel size": "[150, 100]"
   }, 
   "II6-A7": {
     "irradiation": {
@@ -287,8 +289,10 @@
       "201810": "3D-pixel"
     },
     "thickness": "None", 
-    "size": "None",
-    "manufacturer": "II-VI"
+    "size": "[20, 30]",
+    "column diameter": "2.6",
+    "manufacturer": "II-VI",
+    "pixel size": "[50, 50]"
   }, 
   "II6-E5-3": {
     "irradiation": {
