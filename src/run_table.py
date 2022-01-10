@@ -158,7 +158,7 @@ class FullRunTable(html.File):
         rows = []
         for run in tc.Runs.values():
             for i in range(run.NDUTs):
-                row = [] if i else [(v, *html.opts(rs=run.NDUTs)) for v in [run.Number, run.Type, run.FS11, run.FS13, run.EventStr[i], run.StartTime, run.Duration]]
+                row = [] if i else [(v, *html.opts(rs=run.NDUTs)) for v in [run.Number, run.Type, run.FS11, run.FS13, run.EventStr, run.StartTime, run.Duration]]
                 row += [(run.DUTs[i], html.style(nowrap=True)), self.link(join(run.RelDirs[i], 'plots.html'), html.LinkIcon, use_name=False), data.make_bias_str(run.Biases[i])] + run.get_short_data(i)
                 rows.append(row + ([] if i else [(run.Comment, html.style(left=True), *html.opts(rs=run.NDUTs))]))
         return rows
