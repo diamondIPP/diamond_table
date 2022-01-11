@@ -78,6 +78,12 @@ class DUT:
     def __eq__(self, other):
         return self.Name == (other.Name if isinstance(other, DUT) else other)
 
+    def __lt__(self, other):
+        return self.Name < other.Name
+
+    def __hash__(self):
+        return self.Name.__hash__()
+
     def get_names(self):
         return [f'{self.Name}_{t}' for t in self.load_spec('types')] if 'types' in self.Specs else [self.Name]
 
@@ -214,6 +220,9 @@ class TestCampaign:
 
     def get_dut_runplans(self, dut):
         return [rp for rp in self.RunPlans if dut in rp.DUTs]
+
+    def get_runplan(self, name):
+        return self.RunPlans[[rp.Tag for rp in self.RunPlans].index(name)]
 
     @staticmethod
     def to_str(tc, short=True):
