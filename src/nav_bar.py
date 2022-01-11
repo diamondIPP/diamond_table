@@ -28,6 +28,7 @@ class NavBar(html.File):
         self.add_line(html.dropdown('scCVD', *self.get_dut_links(self.used(self.get_sccvd_dias())), n=3))
         self.add_line(html.dropdown('pCVD', *self.get_dut_links(self.used(self.get_pcvd_dias())), n=4))
         self.add_line(html.dropdown('Diodes', *self.get_dut_links(self.used(self.get_si_detectors())), n=5))
+        self.add_line(html.link(join('content', 'selections'), 'Selections', colour=None), ind=1)
         self.add_line(html.link(join('content', 'AmpBoards.html'), 'Amplifier Boards', colour=None), ind=1)
         self.add_line('</div>')
         self.save(add_root=False)

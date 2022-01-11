@@ -13,6 +13,7 @@ from src.home import Home
 from src.nav_bar import NavBar
 from src.run_table import RunTables, FullRunTable
 from src.runplan_table import RunPlanTable, DiaRunPlanTable
+from src.selection import Selection
 from src.utils import *
 
 
@@ -39,6 +40,7 @@ class Website(html.File):
         self.FullRunTable = FullRunTable(self)
         self.RunPlanTable = RunPlanTable(self)
         self.DiaRunPlanTable = DiaRunPlanTable(self)
+        self.Selection = Selection(self)
 
     def run(self, tc=None):
         while True:
@@ -57,6 +59,7 @@ class Website(html.File):
             self.DUTTable.build_all()
             self.Home.build()
             self.NavBar.build()
+        self.Selection.build(redo)
         print(f'Done! ({get_elapsed_time(t)})')
 
     def build_tc(self, tc):
