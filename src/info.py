@@ -222,7 +222,7 @@ class TestCampaign:
         return [rp for rp in self.RunPlans if dut in rp.DUTs]
 
     def get_runplan(self, name):
-        return self.RunPlans[[rp.Tag for rp in self.RunPlans].index(name)]
+        return self.RunPlans[[rp.Tag for rp in self.RunPlans].index(RunPlan.make_tag(name))]
 
     @staticmethod
     def to_str(tc, short=True):
@@ -336,6 +336,10 @@ class RunPlan:
         with errstate(divide='ignore', invalid='ignore'):  # catch zero divide errors
             values, events = average(d[:, :, 1:7, 0], axis=1, weights=1 / d[:, :, 1:7, 1]), npsum(d[:, :, -1, 0], axis=1)
         return [[RunPlan.flux2str(d[i, :, 0, 0])] + ['-' if isnan(v) else f'{v:{f}f}' for v, f in zip(values[i], form)] + [make_ev_str(events[i])] for i in range(self.NDUTs)]
+
+    @staticmethod
+    def make_tag(name):
+        return f'{name:>04}' if '.' in str(name) else f'{name:>02}'
 
 
 class Run:
