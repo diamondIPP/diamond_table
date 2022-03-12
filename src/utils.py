@@ -141,54 +141,6 @@ def isiter(v):
         return False
 
 
-class Latex(object):
-
-    @staticmethod
-    def f(name, *args):
-        return f'\\{name}' + ''.join(f'{{{i}}}' for i in args)
-
-    @staticmethod
-    def multirow(txt, n, pos='*'):
-        return Latex.f('multirow', n, pos, txt)
-
-    @staticmethod
-    def makecell(*txt):
-        return Latex.f('makecell', '\\\\'.join(txt))
-
-    @staticmethod
-    def bold(txt):
-        return Latex.f('textbf', txt)
-
-    @staticmethod
-    def unit(txt, custom=False):
-        return Latex.f('unit', '' if custom else "\\" + txt)
-
-    @staticmethod
-    def si(v, f='.1f', unit=''):
-        return Latex.f('SI', f'{v:{f}}', f'\\{unit}' if unit else unit).replace('/', '')
-
-    @staticmethod
-    def si_range(v0, v1,  f='.0f', unit=''):
-        return Latex.f('SIrange', f'{float(v0):{f}}', f'{float(v1):{f}}', f'\\{unit}' if unit else unit)
-
-    @staticmethod
-    def hline(word):
-        return word + ' \\\\' + Latex.f('hline') if 'hline' not in word else word
-
-    @staticmethod
-    def table_row(*words, hline=False):
-        row = f'  { " & ".join(words)}'
-        return Latex.hline(row) if hline or 'hline' in row else f'{row} \\\\'
-
-    @staticmethod
-    def table(header, rows, hlines=False):
-        cols = array(rows, str).T
-        max_width = [len(max(col, key=len).replace(' \\\\\\hline', '')) for col in cols]  # noqa
-        rows = array([[f'{word:<{w}}' for word in col] for col, w in zip(cols, max_width)]).T
-        rows = '\n'.join(Latex.table_row(*row, hline=hlines) for row in rows)
-        return f'{Latex.table_row(*header, hline=True)}\n{rows}'
-
-
 def pickle(*rel_path, print_dur=False, use_args=False):
     def inner(func):
         @wraps(func)
