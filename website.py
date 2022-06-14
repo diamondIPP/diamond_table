@@ -122,7 +122,7 @@ if __name__ == '__main__':
 
     z = Website()
     r = data.RunPlan('08', '201708')
-    c = data.TestCampaigns['201708']
+    c = data.TestCampaigns['201608']
     run = c.runplan_runs[-18]
     if not args.t:
         z.run(args.tc)

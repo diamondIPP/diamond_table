@@ -76,7 +76,7 @@ class DiaRunPlanTable(html.File):
     def build_all(self):
         info('creating runplan tables for DUTs ...')
         duts = [dut for dut in data.DUTs.values() if dut.rp_tcs]
-        self.PBar.start(len(duts), counter=True)
+        PBAR.start(len(duts), counter=True)
         for dut in duts:
             self.build(dut)
 
@@ -127,6 +127,7 @@ class DiaRunPlanTable(html.File):
             if rows:
                 tc_info = f'{html.link(join(dut.RelDir, tc), data.TestCampaign.to_str(tc, short=False))}<br><br>({dut.get_type(tc)}{f",<br>pulser: {dut.get_pulser(tc)})" if dut.get_pulser(tc) else ")"}'
                 rows[0] = [(n, *html.opts(rs=len(rows))) for n in [tc_info, html.irr2str(dut.get_irradiation(tc))]] + rows[0]
+                rows[-1] = (rows[-1], html.style(hline='1px solid'))
                 all_rows += rows
         return all_rows
 
