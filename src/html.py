@@ -82,14 +82,15 @@ def make_root_html():
     return f
 
 
-def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None):
+def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None, hline=None):
     align = f'text-align: {"center" if center else "right" if right else "left"}' if any([center, right, left]) else ''
     valign = f'vertical-align: middle' if vcenter else ''
     colour = f'color: {colour}' if colour else ''
     tf = f'text-transform: {transform}' if transform else ''
     fs = f'font-size: {"smaller" if smaller else fontsize}' if fontsize is not None or smaller else ''
     wrp = 'white-space: nowrap' if nowrap is not None else ''
-    sargs = [sarg for sarg in [align, colour, valign, fs, tf, wrp] if sarg]
+    hline = f'border-bottom: {hline}' if hline is not None else ''
+    sargs = [sarg for sarg in [align, colour, valign, fs, tf, wrp, hline] if sarg]
     return f'style="{"; ".join(sargs)}"' if sargs else ''
 
 
