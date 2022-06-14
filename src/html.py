@@ -145,6 +145,10 @@ def make_opt(name, value):
     return [] if value is None else [f'{name}="{value}"']
 
 
+def make_tup(*v):
+    return [i if type(i) is tuple else (i, '') for i in v]
+
+
 def table(title, header, rows, *row_opts):
     title = heading(title, 2, 'class="mb-5"')
     h1, h2 = (header, None) if type(header[0]) in [tuple, str] else header
@@ -155,8 +159,8 @@ def table(title, header, rows, *row_opts):
         h2 = File.add_tag(h2, 'tr')
         h1 = f'{h1}\n{h2}'
     h1 = File.add_tag(h1, 'thead')
-    rows = [File().add_lines([tag('td', *txt if type(txt) is tuple else [txt]) for txt in row]).get_text() for row in rows]
-    rows = '\n'.join(File.add_tag(row, 'tr', 'scope="row"', *row_opts) for row in rows)
+    rows = [(File().add_lines([tag('td', *make_tup(txt)) for txt in row[0]]).get_text(), *row[1:]) for row in make_tup(*rows)]
+    rows = '\n'.join(File.add_tag(row[0], 'tr', 'scope="row"', *row[1:] + row_opts) for row in rows)
     rows = File.add_tag(rows, 'tbody')
     t = File.add_tag(f'{h1}\n{rows}', 'table', 'class="table table-striped custom-table"')
     t = '\n'.join([title, File.add_tag(t, 'div', 'class="table-responsive"')])
