@@ -70,8 +70,8 @@ class RunTable(html.File):
         return [main, ['Distr.', '2DMap'] + self.Add2SubHeader]
 
     def title(self, rp: data.RunPlan, dut_nr):
-        d = dirname(rp.RelDirs[dut_nr])
-        return f'{rp.Name} ({self.link(d, rp.TCString)}): {rp.Type.title()} of {self.link(dirname(d), rp.DUTs[dut_nr].Name)}, ' \
+        d = Path(rp.RelDirs[dut_nr]).parent
+        return f'{rp.Name} ({self.link(d, rp.TCString)}): {rp.Type.title()} of {self.link(d.parent, rp.DUTs[dut_nr].Name)}, ' \
                f'Irradiation: {html.irr2str(rp.get_irradiation(dut_nr), unit=True)}, Position: {rp.Positions[dut_nr].title()}'
 
     @classmethod

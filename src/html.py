@@ -3,7 +3,7 @@
 # created on June 24th 2021 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from src.utils import isfile, join, BaseDir, warning, info, isdir, PBar, add_spaces, isiter, datetime
+from src.utils import isfile, join, BaseDir, warning, info, PBar, add_spaces, isiter, datetime
 from os.path import basename
 from pytz import timezone, utc
 from pathlib import Path
@@ -95,14 +95,14 @@ def style(center=False, right=False, left=False, colour=None, vcenter=False, fon
 
 
 def path(*dirs):
-    return join('/psi2', *dirs) if 'http' not in dirs[0] else dirs[0]
+    return Path(*dirs) if 'http' in str(Path(*dirs)) else Path('/psi2', *dirs)
 
 
 def link(target, name, active=False, center=False, new_tab=False, use_name=True, colour: Any = None, right=False, warn=True):
-    target = join(target, '') if isdir(join(BaseDir, target)) else target
-    if isfile(join(BaseDir, target)) or isfile(join(BaseDir, target, 'index.html')) and target.endswith('/') or 'http' in target:
+    fpath = BaseDir.joinpath(target)
+    if fpath.exists() or fpath.is_dir() and fpath.joinpath('index.html').exists() or 'http' in str(target):
         return a(name, style(center, right, colour=colour), *opts(active=active, new_tab=new_tab), *make_opt('href', path(target)))
-    warning('The file {} does not exist!'.format(target), prnt=warn)
+    warning(f'The file {target} does not exist!', prnt=warn)
     return name if use_name else ''
 
 
@@ -198,7 +198,7 @@ class File:
         return f'{self.__class__.__name__}: {None if self.FileName is None else basename(self.FileName)}'
 
     def set_filename(self, *name):
-        self.FileName = join(*name) if name[0].startswith('/scratch') else join(BaseDir, *name)
+        self.FileName = Path(*name) if str(name[0]).startswith('/scratch') else BaseDir.joinpath(*name)
 
     def set_header(self, txt, *opts_):
         self.Header = self.add_tag(txt, 'head', *opts_)

@@ -121,7 +121,7 @@ if __name__ == '__main__':
     args = p.parse_args()
 
     z = Website()
-    r = data.RunPlan('08', '201708')
+    r = data.RunPlan('03.3', '201708-2')
     c = data.TestCampaigns['201508']
     run = c.runplan_runs[-18]
     dut = data.DUTs['II6-B2']

@@ -9,7 +9,8 @@ from datetime import datetime, timedelta
 from functools import wraps
 from json import load, loads
 from os import _exit, mkdir
-from os.path import join, dirname, realpath, isdir, isfile
+from os.path import join, isdir, isfile
+from pathlib import Path
 from pickle import load as pload, dump as pdump
 from time import time
 
@@ -19,7 +20,7 @@ from termcolor import colored
 from uncertainties import ufloat, ufloat_fromstr
 from uncertainties.core import Variable, AffineScalarFunc
 
-BaseDir = dirname(dirname(realpath(__file__)))
+BaseDir = Path(__file__).resolve().parent.parent
 
 
 def get_t_str():
