@@ -113,7 +113,7 @@ class DiaRunPlanTable(html.File):
         return f'Run Plans for {dut}'
 
     def row(self, rp: data.RunPlan, i):
-        figs = ['FluxProfile', 'Currents', 'PulseHeightFlux', 'PedestalFlux', 'NoiseFlux', 'PulserPH', 'PulserSigma']
+        figs = ['FluxProfile', 'Currents', ('PH', 'PulseHeightFlux'), ('Ped', 'PedestalFlux'), ('Noise', 'NoiseFlux'), 'PulserPH', 'PulserSigma']
         row = [(v, *html.opts(rs=rp.NSub)) for v in [rp.Tag, rp.Positions[i], rp.Digitiser, rp.Amplifier, *rp.get_attenuators(i), rp.BiasStr[i]]] if rp.IsMain else []
         row += [self.link(join(rp.RelDirs[i], 'plots.html'), rp.Tag.lstrip('0')), self.link(rp.RelDirs[i], rp.RunStr)]
         row += [self.rplink_(rp.RelDirs[i], fig, rp.DataStr[i][j]) for j, fig in enumerate(figs)]
@@ -132,7 +132,8 @@ class DiaRunPlanTable(html.File):
         return all_rows
 
     def rplink_(self, d, htmlname, target, **kwargs):
-        return self.link(join(d, f'{htmlname}.html'), target, **prep_kw(kwargs, new_tab=True, colour=None))
+        n = [Path(d).joinpath(i).with_suffix('.html') for i in make_list(htmlname)]
+        return self.link(next(filter(lambda x: BaseDir.joinpath(x).exists(), n), n[-1]), target, **prep_kw(kwargs, new_tab=True, colour=None))
 
 
 if __name__ == '__main__':
