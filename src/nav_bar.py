@@ -40,7 +40,7 @@ class NavBar(html.File):
         f.add_line('<div id="nav-placeholder">', ind)
         f.add_line('</div>', ind)
         f.add_comment('End Navigation Bar', ind)
-        return f.get_text()
+        return f.text
 
     @staticmethod
     def get_dut_htmls():

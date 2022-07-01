@@ -91,7 +91,7 @@ class Website(html.File):
         f.add_line()
         f.add_line('<link rel="icon" href="{icon}">')
         f.add_line('<title> {title} </title>')
-        return f.get_text()
+        return f.text
 
     def get_header(self, title=None, icon=None):
         return self.Header.format(icon=html.path('figures', choose(icon, self.Icon)), title=choose(title, self.Title))
@@ -122,7 +122,8 @@ if __name__ == '__main__':
 
     z = Website()
     r = data.RunPlan('08', '201708')
-    c = data.TestCampaigns['201608']
+    c = data.TestCampaigns['201508']
     run = c.runplan_runs[-18]
+    dut = data.DUTs['II6-B2']
     if not args.t:
         z.run(args.tc)

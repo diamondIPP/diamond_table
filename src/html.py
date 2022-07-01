@@ -71,13 +71,13 @@ def make_root_html():
     h.add_line('<link rel="icon" href="/psi2/figures/pic.png">')
     h.add_line('<title>{title}</title>')
     h.add_line(script('/jsroot/scripts/JSRoot.core.min.js', 'type="text/javascript"'))
-    f.set_header(h.get_text())
+    f.set_header(h.text)
     b = File()
     b.add_line('JSROOT.settings.Palette = {pal}')
     b.add_line('JSROOT.openFile("{filename}")')
     b.add_line('.then(file => file.readObject("c;1"))', ind=1)
     b.add_line('.then(obj => JSROOT.draw("drawing", obj, "{draw_opt}"));', ind=1)
-    b = File.add_tag(b.get_text(), 'script', 'type="text/javascript"')
+    b = File.add_tag(b.text, 'script', 'type="text/javascript"')
     f.set_body('\n'.join([div('', 'id="drawing"'), b]))
     return f
 
@@ -107,7 +107,7 @@ def link(target, name, active=False, center=False, new_tab=False, use_name=True,
 
 
 def prep_opts(*opts_):
-    return f' {" ".join(opts_)}' if len(opts_) else ''
+    return f' {" ".join(filter(bool, opts_))}' if len(opts_) else ''
 
 
 def heading(txt, size=1, *opts_):
@@ -129,7 +129,7 @@ def dropdown(name, items, targets, n, active=False, ind=1):
         s.add_line(link(target, item, colour=None), ind + 2)
     s.add_line('</div>', ind + 1)
     s.add_line('</div>', ind)
-    return s.get_text()
+    return s.text
 
 
 def opts(rs=None, cs=None, src=None, h=None, w=None, active=None, new_tab=None):
@@ -145,27 +145,32 @@ def make_opt(name, value):
     return [] if value is None else [f'{name}="{value}"']
 
 
-def make_tup(*v):
-    return [i if type(i) is tuple else (i, '') for i in v]
+def make_tup(v):
+    return v if type(v) is tuple else (v, '')
 
 
 def table(title, header, rows, *row_opts):
     title = heading(title, 2, 'class="mb-5"')
     h1, h2 = (header, None) if type(header[0]) in [tuple, str] else header
-    h1 = File().add_lines([tag('th', *txt if isiter(txt) else [txt], 'scope="col"') for txt in h1]).get_text()
+    h1 = File().add_lines([tag('th', *txt if isiter(txt) else [txt], 'scope="col"') for txt in h1]).text
     h1 = File.add_tag(h1, 'tr')
     if h2 is not None:
-        h2 = File().add_lines([tag('th', small(txt), 'scope="col"', style(transform='none')) for txt in h2]).get_text()
+        h2 = File().add_lines([tag('th', small(txt), 'scope="col"', style(transform='none')) for txt in h2]).text
         h2 = File.add_tag(h2, 'tr')
         h1 = f'{h1}\n{h2}'
     h1 = File.add_tag(h1, 'thead')
-    rows = [(File().add_lines([tag('td', *make_tup(txt)) for txt in row[0]]).get_text(), *row[1:]) for row in make_tup(*rows)]
-    rows = '\n'.join(File.add_tag(row[0], 'tr', 'scope="row"', *row[1:] + row_opts) for row in rows)
-    rows = File.add_tag(rows, 'tbody')
+    rows = File.add_tag(File().add_lines([table_row(row, *row_opts) for row in rows]).text, 'tbody')
     t = File.add_tag(f'{h1}\n{rows}', 'table', 'class="table table-striped custom-table"')
     t = '\n'.join([title, File.add_tag(t, 'div', 'class="table-responsive"')])
     t = File.add_tag(t, 'div', 'class="container"')
     return File.add_tag(t, 'div', 'class="content"')
+
+
+def table_row(row, *o):
+    """ style: ([(txt, *fmt), txt, ...], *gen_fmt) or [(txt, *fmt), txt, ...]"""
+    row = make_tup(row)  # make tuple if no general fmt for all items is given
+    row, fmt = row[0], row[1:]
+    return File.add_tag(File().add_lines([tag('td', *make_tup(txt)) for txt in row]).text, 'tr', 'scope="row"', *o, *fmt)
 
 
 LinkIcon = fig_icon(8635)
@@ -232,7 +237,7 @@ class File:
         return f'<!doctype html>\n{t}'
 
     def save(self, add_root=True):
-        t = self.get_text() if not self.Header else f'{self.Header}\n{self.Body}' 
+        t = self.text if not self.Header else f'{self.Header}\n{self.Body}' 
         if add_root:
             t = self.add_root(t)
         with open(self.FileName, 'w+') as f:
@@ -240,11 +245,12 @@ class File:
             f.truncate()
         self.info(f'wrote file {self.FileName}')
 
-    def get_text(self):
+    @property
+    def text(self):
         return self.T
 
     def show(self):
-        print(self.get_text())
+        print(self.text)
 
     def info(self, txt, endl=True, prnt=True):
         return info(txt, endl, prnt=prnt and self.Verbose)
