@@ -13,7 +13,7 @@ from src.home import Home
 from src.nav_bar import NavBar
 from src.run_table import RunTables, FullRunTable
 from src.runplan_table import RunPlanTable, DiaRunPlanTable
-from src.selection import Selection
+from src.selection import Selections
 from src.utils import *
 
 
@@ -40,7 +40,7 @@ class Website(html.File):
         self.FullRunTable = FullRunTable(self)
         self.RunPlanTable = RunPlanTable(self)
         self.DiaRunPlanTable = DiaRunPlanTable(self)
-        self.Selection = Selection(self)
+        self.Selection = Selections(self)
 
     def run(self, tc=None):
         while True:
