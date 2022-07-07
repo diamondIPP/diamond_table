@@ -82,7 +82,7 @@ def make_root_html():
     return f
 
 
-def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None, hline=None):
+def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None, hline=None, w=None, wmin=None, wmax=None):
     align = f'text-align: {"center" if center else "right" if right else "left"}' if any([center, right, left]) else ''
     valign = f'vertical-align: middle' if vcenter else ''
     colour = f'color: {colour}' if colour else ''
@@ -90,7 +90,10 @@ def style(center=False, right=False, left=False, colour=None, vcenter=False, fon
     fs = f'font-size: {"smaller" if smaller else fontsize}' if fontsize is not None or smaller else ''
     wrp = 'white-space: nowrap' if nowrap is not None else ''
     hline = f'border-bottom: {hline}' if hline is not None else ''
-    sargs = [sarg for sarg in [align, colour, valign, fs, tf, wrp, hline] if sarg]
+    w = f'width: {w}' if w is not None else ''
+    wmin = f'min-width: {wmin}' if wmin is not None else ''
+    wmax = f'max-width: {wmax}' if wmax is not None else ''
+    sargs = [sarg for sarg in [align, colour, valign, fs, tf, wrp, hline, w, wmin, wmax] if sarg]
     return f'style="{"; ".join(sargs)}"' if sargs else ''
 
 
@@ -149,7 +152,7 @@ def make_tup(v):
     return v if type(v) is tuple else (v, '')
 
 
-def table(title, header, rows, *row_opts):
+def table(title, header, rows, *row_opts, w=None):
     title = heading(title, 2, 'class="mb-5"')
     h1, h2 = (header, None) if type(header[0]) in [tuple, str] else header
     h1 = File().add_lines([tag('th', *txt if isiter(txt) else [txt], 'scope="col"') for txt in h1]).text
@@ -160,7 +163,7 @@ def table(title, header, rows, *row_opts):
         h1 = f'{h1}\n{h2}'
     h1 = File.add_tag(h1, 'thead')
     rows = File.add_tag(File().add_lines([table_row(row, *row_opts) for row in rows]).text, 'tbody')
-    t = File.add_tag(f'{h1}\n{rows}', 'table', 'class="table table-striped custom-table"')
+    t = File.add_tag(f'{h1}\n{rows}', 'table', f'class="table table-striped custom-table" {style(wmax=w, wmin=w)}')
     t = '\n'.join([title, File.add_tag(t, 'div', 'class="table-responsive"')])
     t = File.add_tag(t, 'div', 'class="container"')
     return File.add_tag(t, 'div', 'class="content"')
