@@ -4244,7 +4244,8 @@
     "pulser": "extern",
     "runnr": 318,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T12:24:58Z"
+    "starttime0": "2017-05-20T12:24:58Z",
+    "events": 35135
   },
   "319": {
     "comments": "",
@@ -4266,7 +4267,8 @@
     "pulser": "extern",
     "runnr": 319,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T12:58:51Z"
+    "starttime0": "2017-05-20T12:58:51Z",
+    "events": 719430
   },
   "320": {
     "comments": "",
@@ -4288,7 +4290,8 @@
     "pulser": "extern",
     "runnr": 320,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T13:21:06Z"
+    "starttime0": "2017-05-20T13:21:06Z",
+    "events": 759977
   },
   "321": {
     "comments": "",
@@ -4310,7 +4313,8 @@
     "pulser": "extern",
     "runnr": 321,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T13:43:10Z"
+    "starttime0": "2017-05-20T13:43:10Z",
+    "events": 761353
   },
   "323": {
     "comments": "",
@@ -4332,7 +4336,8 @@
     "pulser": "extern",
     "runnr": 323,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T14:11:42Z"
+    "starttime0": "2017-05-20T14:11:42Z",
+    "events": 818792
   },
   "324": {
     "comments": "",
@@ -4354,7 +4359,8 @@
     "pulser": "extern",
     "runnr": 324,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T14:33:01Z"
+    "starttime0": "2017-05-20T14:33:01Z",
+    "events": 678159
   },
   "325": {
     "comments": "",
@@ -4376,7 +4382,8 @@
     "pulser": "extern",
     "runnr": 325,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T14:51:36Z"
+    "starttime0": "2017-05-20T14:51:36Z",
+    "events": 754076
   },
   "326": {
     "comments": "",
@@ -4398,7 +4405,8 @@
     "pulser": "extern",
     "runnr": 326,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T15:10:44Z"
+    "starttime0": "2017-05-20T15:10:44Z",
+    "events": 744225
   },
   "327": {
     "comments": "",
@@ -4434,7 +4442,7 @@
     "dia2hv": -250.0,
     "dia2supply": "7-5",
     "endtime": "2017-05-20T16:30:11Z",
-    "events": 603056,
+    "events": 417091,
     "for1": 21822,
     "for2": 54171,
     "fs11": 280.0,
@@ -4466,7 +4474,8 @@
     "pulser": "extern",
     "runnr": 329,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T16:30:37Z"
+    "starttime0": "2017-05-20T16:30:37Z",
+    "events": 734477
   },
   "330": {
     "comments": "",
@@ -4488,7 +4497,8 @@
     "pulser": "extern",
     "runnr": 330,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T16:50:13Z"
+    "starttime0": "2017-05-20T16:50:13Z",
+    "events": 799049
   },
   "331": {
     "comments": "",
@@ -4510,7 +4520,8 @@
     "pulser": "extern",
     "runnr": 331,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T17:11:54Z"
+    "starttime0": "2017-05-20T17:11:54Z",
+    "events": 734759
   },
   "332": {
     "comments": "",
@@ -4532,7 +4543,8 @@
     "pulser": "extern",
     "runnr": 332,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T17:30:41Z"
+    "starttime0": "2017-05-20T17:30:41Z",
+    "events": 769399
   },
   "333": {
     "comments": "",
@@ -4554,7 +4566,8 @@
     "pulser": "extern",
     "runnr": 333,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T17:50:42Z"
+    "starttime0": "2017-05-20T17:50:42Z",
+    "events": 819527
   },
   "334": {
     "comments": "",
@@ -4576,7 +4589,8 @@
     "pulser": "extern",
     "runnr": 334,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T18:13:18Z"
+    "starttime0": "2017-05-20T18:13:18Z",
+    "events": 708207
   },
   "335": {
     "comments": "",
@@ -4598,7 +4612,8 @@
     "pulser": "extern",
     "runnr": 335,
     "runtype": "rate_scan",
-    "starttime0": "2017-05-20T18:35:16Z"
+    "starttime0": "2017-05-20T18:35:16Z",
+    "events": 36555
   },
   "336": {
     "comments": "",
