@@ -3,7 +3,7 @@
 # created on June 24th 2021 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from src.utils import isfile, join, BaseDir, warning, info, isdir, PBar, add_spaces, isiter, datetime
+from src.utils import isfile, join, BaseDir, warning, info, PBar, add_spaces, isiter, datetime
 from os.path import basename
 from pytz import timezone, utc
 from pathlib import Path
@@ -71,42 +71,46 @@ def make_root_html():
     h.add_line('<link rel="icon" href="/psi2/figures/pic.png">')
     h.add_line('<title>{title}</title>')
     h.add_line(script('/jsroot/scripts/JSRoot.core.min.js', 'type="text/javascript"'))
-    f.set_header(h.get_text())
+    f.set_header(h.text)
     b = File()
     b.add_line('JSROOT.settings.Palette = {pal}')
     b.add_line('JSROOT.openFile("{filename}")')
     b.add_line('.then(file => file.readObject("c;1"))', ind=1)
     b.add_line('.then(obj => JSROOT.draw("drawing", obj, "{draw_opt}"));', ind=1)
-    b = File.add_tag(b.get_text(), 'script', 'type="text/javascript"')
+    b = File.add_tag(b.text, 'script', 'type="text/javascript"')
     f.set_body('\n'.join([div('', 'id="drawing"'), b]))
     return f
 
 
-def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None):
+def style(center=False, right=False, left=False, colour=None, vcenter=False, fontsize=None, smaller=False, transform=None, nowrap=None, hline=None, w=None, wmin=None, wmax=None):
     align = f'text-align: {"center" if center else "right" if right else "left"}' if any([center, right, left]) else ''
     valign = f'vertical-align: middle' if vcenter else ''
     colour = f'color: {colour}' if colour else ''
     tf = f'text-transform: {transform}' if transform else ''
     fs = f'font-size: {"smaller" if smaller else fontsize}' if fontsize is not None or smaller else ''
     wrp = 'white-space: nowrap' if nowrap is not None else ''
-    sargs = [sarg for sarg in [align, colour, valign, fs, tf, wrp] if sarg]
+    hline = f'border-bottom: {hline}' if hline is not None else ''
+    w = f'width: {w}' if w is not None else ''
+    wmin = f'min-width: {wmin}' if wmin is not None else ''
+    wmax = f'max-width: {wmax}' if wmax is not None else ''
+    sargs = [sarg for sarg in [align, colour, valign, fs, tf, wrp, hline, w, wmin, wmax] if sarg]
     return f'style="{"; ".join(sargs)}"' if sargs else ''
 
 
 def path(*dirs):
-    return join('/psi2', *dirs) if 'http' not in dirs[0] else dirs[0]
+    return Path(*dirs) if 'http' in str(Path(*dirs)) else Path('/psi2', *dirs)
 
 
 def link(target, name, active=False, center=False, new_tab=False, use_name=True, colour: Any = None, right=False, warn=True):
-    target = join(target, '') if isdir(join(BaseDir, target)) else target
-    if isfile(join(BaseDir, target)) or isfile(join(BaseDir, target, 'index.html')) and target.endswith('/') or 'http' in target:
+    fpath = BaseDir.joinpath(target)
+    if fpath.exists() or fpath.is_dir() and fpath.joinpath('index.html').exists() or 'http' in str(target):
         return a(name, style(center, right, colour=colour), *opts(active=active, new_tab=new_tab), *make_opt('href', path(target)))
-    warning('The file {} does not exist!'.format(target), prnt=warn)
+    warning(f'The file {target} does not exist!', prnt=warn)
     return name if use_name else ''
 
 
 def prep_opts(*opts_):
-    return f' {" ".join(opts_)}' if len(opts_) else ''
+    return f' {" ".join(filter(bool, opts_))}' if len(opts_) else ''
 
 
 def heading(txt, size=1, *opts_):
@@ -128,7 +132,7 @@ def dropdown(name, items, targets, n, active=False, ind=1):
         s.add_line(link(target, item, colour=None), ind + 2)
     s.add_line('</div>', ind + 1)
     s.add_line('</div>', ind)
-    return s.get_text()
+    return s.text
 
 
 def opts(rs=None, cs=None, src=None, h=None, w=None, active=None, new_tab=None):
@@ -144,23 +148,32 @@ def make_opt(name, value):
     return [] if value is None else [f'{name}="{value}"']
 
 
-def table(title, header, rows, *row_opts):
+def make_tup(v):
+    return v if type(v) is tuple else (v, '')
+
+
+def table(title, header, rows, *row_opts, w=None):
     title = heading(title, 2, 'class="mb-5"')
     h1, h2 = (header, None) if type(header[0]) in [tuple, str] else header
-    h1 = File().add_lines([tag('th', *txt if isiter(txt) else [txt], 'scope="col"') for txt in h1]).get_text()
+    h1 = File().add_lines([tag('th', *txt if isiter(txt) else [txt], 'scope="col"') for txt in h1]).text
     h1 = File.add_tag(h1, 'tr')
     if h2 is not None:
-        h2 = File().add_lines([tag('th', small(txt), 'scope="col"', style(transform='none')) for txt in h2]).get_text()
+        h2 = File().add_lines([tag('th', small(txt), 'scope="col"', style(transform='none')) for txt in h2]).text
         h2 = File.add_tag(h2, 'tr')
         h1 = f'{h1}\n{h2}'
     h1 = File.add_tag(h1, 'thead')
-    rows = [File().add_lines([tag('td', *txt if type(txt) is tuple else [txt]) for txt in row]).get_text() for row in rows]
-    rows = '\n'.join(File.add_tag(row, 'tr', 'scope="row"', *row_opts) for row in rows)
-    rows = File.add_tag(rows, 'tbody')
-    t = File.add_tag(f'{h1}\n{rows}', 'table', 'class="table table-striped custom-table"')
+    rows = File.add_tag(File().add_lines([table_row(row, *row_opts) for row in rows]).text, 'tbody')
+    t = File.add_tag(f'{h1}\n{rows}', 'table', f'class="table table-striped custom-table" {style(wmax=w, wmin=w)}')
     t = '\n'.join([title, File.add_tag(t, 'div', 'class="table-responsive"')])
     t = File.add_tag(t, 'div', 'class="container"')
     return File.add_tag(t, 'div', 'class="content"')
+
+
+def table_row(row, *o):
+    """ style: ([(txt, *fmt), txt, ...], *gen_fmt) or [(txt, *fmt), txt, ...]"""
+    row = make_tup(row)  # make tuple if no general fmt for all items is given
+    row, fmt = row[0], row[1:]
+    return File.add_tag(File().add_lines([tag('td', *make_tup(txt)) for txt in row]).text, 'tr', 'scope="row"', *o, *fmt)
 
 
 LinkIcon = fig_icon(8635)
@@ -188,7 +201,7 @@ class File:
         return f'{self.__class__.__name__}: {None if self.FileName is None else basename(self.FileName)}'
 
     def set_filename(self, *name):
-        self.FileName = join(*name) if name[0].startswith('/scratch') else join(BaseDir, *name)
+        self.FileName = Path(*name) if str(name[0]).startswith('/scratch') else BaseDir.joinpath(*name)
 
     def set_header(self, txt, *opts_):
         self.Header = self.add_tag(txt, 'head', *opts_)
@@ -227,7 +240,7 @@ class File:
         return f'<!doctype html>\n{t}'
 
     def save(self, add_root=True):
-        t = self.get_text() if not self.Header else f'{self.Header}\n{self.Body}' 
+        t = self.text if not self.Header else f'{self.Header}\n{self.Body}' 
         if add_root:
             t = self.add_root(t)
         with open(self.FileName, 'w+') as f:
@@ -235,11 +248,12 @@ class File:
             f.truncate()
         self.info(f'wrote file {self.FileName}')
 
-    def get_text(self):
+    @property
+    def text(self):
         return self.T
 
     def show(self):
-        print(self.get_text())
+        print(self.text)
 
     def info(self, txt, endl=True, prnt=True):
         return info(txt, endl, prnt=prnt and self.Verbose)

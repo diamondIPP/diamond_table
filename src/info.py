@@ -4,7 +4,7 @@
 # created on December 20th 2018 by M. Reichmann (remichae@phys.ethz.ch)
 # --------------------------------------------------------
 
-from src.utils import Configuration, BaseDir, join, load_json, info, warning, critical, datetime, loads, make_list, isfile, ufloat, pickle, update_pbar, PBAR, choose, Latex
+from src.utils import Configuration, BaseDir, join, load_json, info, warning, critical, datetime, loads, make_list, isfile, ufloat, pickle, update_pbar, PBAR, choose
 from subprocess import getstatusoutput, check_output, CalledProcessError
 from datetime import timedelta
 import h5py
@@ -12,6 +12,7 @@ from glob import glob
 from numpy import zeros, errstate, average, sum as npsum, isnan, array, log10, append
 from os import environ
 from src.html import conv_time, irr2str, basename
+import src.latex as latex
 from hashlib import md5
 from operator import itemgetter
 
@@ -132,19 +133,19 @@ class DUT:
         return name.split('_')[0]
 
     def latex_table(self, pad=True, rate=True):
-        header = [Latex.bold(Latex.makecell('Beam', 'Test')), Latex.makecell(Latex.bold('Irradiation'), Latex.unit('ncm')), Latex.bold(Latex.makecell('Run', 'Plan')), Latex.bold('Type'),
-                  Latex.makecell(Latex.bold('Bias'), Latex.unit('V')), Latex.bold(Latex.makecell('Good', 'Events')), Latex.makecell(Latex.bold('Max Flux'), Latex.unit('mhzcm'))]
+        header = latex.bold(latex.makecell('Beam', 'Test')) + [latex.makecell(*latex.bold('Irradiation'), latex.unit('ncm'))] + latex.bold(latex.makecell('Run', 'Plan'), 'Type') + \
+                 [latex.makecell(*latex.bold('Bias'), latex.unit('V'))] + latex.bold(latex.makecell('Good', 'Events')) + [latex.makecell(*latex.bold('Max Flux'), latex.unit('mhzcm'))]
         rows = []
         for tc in self.tcs:
             tc = TestCampaigns[tc]
             rps = [rp for rp in tc.get_dut_runplans(self) if rp.IsMain and ('pad' if pad else 'pixel') in rp.DUTType and (not rate or any(t in rp.Type for t in ['rate', 'random', 'up scan']))]
             for i, rp in enumerate(rps):
-                row = [Latex.multirow(tc.Name, -len(rps)), Latex.multirow(Latex.si(self.get_irradiation(tc.ID), ''), -len(rps))] if i == len(rps) - 1 else ['', '']
+                row = [latex.multirow(tc.Name, -len(rps)), latex.multirow(*latex.si(self.get_irradiation(tc.ID), fmt='.1e'), -len(rps))] if i == len(rps) - 1 else ['', '']
                 dut_nr = rp.get_dut_nr(self)
-                tag, typ, ev, flux = rp.Tag.lstrip('0'), rp.Type.replace(' scan', ''), rp.DataStr[dut_nr][-1], Latex.si(rp.get_max_flux()[dut_nr] / 1000)
-                bias = Latex.si_range(*rp.BiasStr[dut_nr].split('...')) if 'voltage' in rp.Type and '...' in rp.BiasStr[dut_nr] else rp.BiasStr[dut_nr].split('&')[0]
-                rows.append(row + [tag, typ, bias, ev] + [Latex.hline(flux) if i == len(rps) - 1 else flux])
-        print(Latex.table(header, rows))
+                tag, typ, ev, flux = rp.Tag.lstrip('0'), rp.Type.replace(' scan', ''), rp.DataStr[dut_nr][-1], latex.si(rp.get_max_flux()[dut_nr] / 1000)[0]
+                bias = latex.si_range(*rp.BiasStr[dut_nr].split('...')) if 'voltage' in rp.Type and '...' in rp.BiasStr[dut_nr] else rp.BiasStr[dut_nr].split('&')[0]
+                rows.append(row + [tag, typ, bias, ev] + [latex.hline(flux) if i == len(rps) - 1 else flux])
+        print(latex.table(header, rows))
 
 
 class TestCampaign:

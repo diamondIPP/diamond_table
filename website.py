@@ -13,7 +13,7 @@ from src.home import Home
 from src.nav_bar import NavBar
 from src.run_table import RunTables, FullRunTable
 from src.runplan_table import RunPlanTable, DiaRunPlanTable
-from src.selection import Selection
+from src.selection import Selections
 from src.utils import *
 
 
@@ -40,7 +40,7 @@ class Website(html.File):
         self.FullRunTable = FullRunTable(self)
         self.RunPlanTable = RunPlanTable(self)
         self.DiaRunPlanTable = DiaRunPlanTable(self)
-        self.Selection = Selection(self)
+        self.Selection = Selections(self)
 
     def run(self, tc=None):
         while True:
@@ -91,7 +91,7 @@ class Website(html.File):
         f.add_line()
         f.add_line('<link rel="icon" href="{icon}">')
         f.add_line('<title> {title} </title>')
-        return f.get_text()
+        return f.text
 
     def get_header(self, title=None, icon=None):
         return self.Header.format(icon=html.path('figures', choose(icon, self.Icon)), title=choose(title, self.Title))
@@ -121,8 +121,9 @@ if __name__ == '__main__':
     args = p.parse_args()
 
     z = Website()
-    r = data.RunPlan('08', '201708')
-    c = data.TestCampaigns['201708']
+    r = data.RunPlan('03.3', '201708-2')
+    c = data.TestCampaigns['201508']
     run = c.runplan_runs[-18]
+    dut = data.DUTs['II6-B2']
     if not args.t:
         z.run(args.tc)

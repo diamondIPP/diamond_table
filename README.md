@@ -6,9 +6,11 @@ creates html files to create a summary of the results of the PSI high rate beam 
 - numpy
 - progressbar
 - pytz
+- uncertainties
+- h5py
 
 ## Running
 
  - ./website.py (-t)
     - optional arguments:
-    - -t: test mode
+      - -t: test mode
